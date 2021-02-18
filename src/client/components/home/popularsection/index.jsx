@@ -47,7 +47,7 @@ class Popularsection extends Component{
               <h2>Book An Appointment Now!</h2>
               <p className="sub-title">We make it simple to book an appointment find a location, pick a time, get a swab and wait for results.</p>
             </div>
-            {/* by p - commented and also for continues comment removed comment line at solution widget
+            {/* by p - commented 
             <div className="row">
               <div className="col-12">
                 <div className="solution-slider slider">
