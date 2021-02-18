@@ -1,0 +1,1 @@
+export { default as CHECKMARK} from '../../../assets/images/check-mark.png';

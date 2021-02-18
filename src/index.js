@@ -1,17 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import AppRouter from "./approuter";
+// import * as serviceWorker from './client/serviceWorker';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// boostrap
+import "bootstrap/dist/css/bootstrap.min.css";
+//fontawesome
+import "../node_modules/font-awesome/css/font-awesome.min.css";
+import "react-image-lightbox/style.css";
+import "react-datepicker/dist/react-datepicker.css";
+//carousel
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+if (
+	!window.location.pathname.includes("admin") ||
+	!window.location.pathname.includes("pharmacyadmin")
+) {
+	require("./client/assets/css/all.css");
+	require("./client/assets/css/all.min.css");
+	require("./client/assets/css/fontawesome.min.css");
+	require("./client/assets/css/style.css");
+	require("./client/assets/js/script.js");
+}
+
+ReactDOM.render(<AppRouter />, document.getElementById("root"));
+
+if (module.hot) {
+	// enables hot module replacement if plugin is installed
+	module.hot.accept();
+}
