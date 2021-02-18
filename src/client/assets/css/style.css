@@ -8344,7 +8344,8 @@ box-shadow:inherit
 			
 			
 			/*Remove rounded coners*/
-			nav.sidebar.:global(navbar) {
+			/* nav.sidebar.:global(navbar) { commented by p*/
+			nav.sidebar:global(navbar) {
 				border-radius: 0px;
 			}
 			
@@ -8362,7 +8363,8 @@ box-shadow:inherit
 			
 			
 				/*Center Brand*/
-				nav.sidebar.:global(navbar).sidebar>.container :global(.navbar-brand), :global(.navbar)>:global(.container-fluid) :global(.navbar-brand)
+				/* nav.sidebar.:global(navbar).sidebar>.container :global(.navbar-brand), :global(.navbar)>:global(.container-fluid) :global(.navbar-brand) by p - original as if it was error i removed '.'*/
+				nav.sidebar:global(navbar).sidebar>.container :global(.navbar-brand), :global(.navbar)>:global(.container-fluid) :global(.navbar-brand)
 					{
 					margin-left: 0px;
 				}
