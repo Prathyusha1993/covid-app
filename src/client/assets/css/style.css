@@ -2234,10 +2234,13 @@ html.menu-opened body {
     padding: 50px 0;
 }
 .login-right {
-	background-color: #fff;
-	border: 1px solid #f0f0f0;
-	border-radius: 4px;
+	/* background-color: #fff; by p - commented*/
+	background-color: 'lightgrey';  /*added by p */
+	/* border: 1px solid #f0f0f0; */
+	border: 1px solid black;  /*added by p */
+	border-radius: 5px;
 	padding: 25px;
+	margin: 10px;   /*added by p */
 }
 .login-header {
 	margin-bottom: 20px;

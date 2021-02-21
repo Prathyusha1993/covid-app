@@ -61,7 +61,7 @@ const AppContainer = function (props) {
 
     return (
       <Router 
-      //basename={`${config.publicPath}`}
+      //basename={`${config.publicPath}`}       by p - commented
       >
         {
         url === "admin" ? (
