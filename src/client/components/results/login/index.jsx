@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 //import loginBanner from '../../assets/images/login-banner.png';
 import {Form} from 'react-bootstrap'
 //icon
-//import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom'; 
+import {authenticateAndFetchUserDetails} from '../../../../resultServices/loginService'
 
 class LoginContainer extends Component {  
 
     constructor(props) {
 		super(props);
 		this.state = {
-			dob: "",
+			dob: '',
             contactInfo: '',
-			
+			id:'',
+			isAuthenticationfailed: 'UNKNOWN'
 		};
 	}
 
@@ -42,6 +44,30 @@ class LoginContainer extends Component {
                 });
             }
     }
+
+	// handleLogin = (e) => {
+    //     e.preventDefault();
+    //     authenticateAndFetchUserDetails(this.state.contactInfo, this.state.dob)
+	// 	.then((response) => {
+	// 		this.setState({
+	// 			isAuthenticationfailed: "NO",
+	// 		});
+	// 		window.localStorage.setItem(
+	// 			"_id",
+	// 			response.data._id
+	// 		);
+	// 		window.localStorage.setItem("USER-EMAIL", response.data.email);
+	// 		window.localStorage.setItem("USER-FIRST-NAME", response.data.first_name);
+	// 		window.localStorage.setItem("USER-LAST-NAME", response.data.last_name);
+    //         window.location.href = "/results/dashboard";
+	// 	})
+	// 	.catch((err) => {
+	// 		console.log(err);
+	// 		this.setState({
+	// 			isAuthenticationfailed: 'YES'
+	// 		});
+	// 	})
+    // }
 
 	// componentDidMount(){
 	// 	document.body.classList.add('account-page');
@@ -88,20 +114,10 @@ class LoginContainer extends Component {
 											<h3>Login <span>Doccure</span></h3>
 										</div> */}
 										<form onSubmit={this.handleLogin}>
-											{/* <div className="form-group form-focus">
-												
-												<input type="text" className="form-control floating" />
-												<label className="focus-label">Email/MobileNum#</label>
-											</div> */}
 											<div className="form-group">
 												<label className="font-weight-bold" >Email/MobileNumber# <span className="text-danger">*</span></label>
 												<input type="text" name="contactInfo" value={this.state.contactInfo} onChange={this.handleChange} className="form-control" required />
 											</div>
-											{/* <div className="form-group form-focus">
-												
-												<input  className="form-control floating" />
-												<label className="focus-label">Date Of Birth</label>
-											</div> */}
 											<div className="form-group">
 												<label className="font-weight-bold" >Date Of Birth <span className="text-danger">*</span></label>
 												<input type="date" name="dob" value={this.state.dob} onChange={this.handleChange} className="form-control" required/>
