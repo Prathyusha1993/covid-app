@@ -27,31 +27,7 @@ export const DashboardSidebar = () => {
 													<span>Dashboard</span>
 												</Link>
 											</li>
-											<li>
-												<Link to="/patient/favourites">
-													<i className="fas fa-bookmark"></i>
-													<span>Favourites</span>
-												</Link>
-											</li>
-											<li>
-												<Link to="/doctor/chat-doctor">
-													<i className="fas fa-comments"></i>
-													<span>Message</span>
-													<small className="unread-msg">23</small>
-												</Link>
-											</li>
-											<li>
-												<Link to="/patient/profile">
-													<i className="fas fa-user-cog"></i>
-													<span>Profile Settings</span>
-												</Link>
-											</li>
-											<li>
-												<Link to="/patient/change-password">
-													<i className="fas fa-lock"></i>
-													<span>Change Password</span>
-												</Link>
-											</li>
+											
 											<li>
 												<Link to="/">
 													<i className="fas fa-sign-out-alt"></i>

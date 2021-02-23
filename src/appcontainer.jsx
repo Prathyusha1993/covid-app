@@ -52,6 +52,8 @@ import Terms from "./client/components/pages/terms";
 import Policy from "./client/components/pages/policy";
 import BlankPage from "./client/components/blankpage";
 import Componentss from "./client/components/pages/Components";
+//import Dashboard from "./client/components/patients/dashboard";
+import Results from "./client/components/results/index";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -74,8 +76,10 @@ const AppContainer = function (props) {
         (
           <div>
             {/* { url === "homeslider1" && <Route render={(props)=> <TopHeader {...props}/>} />} */}
-            <Route render={(props) => <Header {...props} />} />
+            {/* <Route render={(props) => <Header {...props} />} /> */}
             <Switch>
+              <Route path="/results" exact component={Results} />
+              <Route path="/results/dashboard" exact component={Dashboard} />
               <Route path="/patient/doctor-grid" exact component={DoctorGrid} />
               <Route path="/patient/doctor-list" exact component={DoctorList} />
               <Route path="/pages/video-call" exact component={VideoCall} />

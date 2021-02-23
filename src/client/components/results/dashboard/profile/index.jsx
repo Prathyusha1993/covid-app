@@ -1,8 +1,7 @@
 import React,{ Component } from 'react';
 import DashboardSidebar from '../sidebar/sidebar.jsx';
-import IMG01 from '../../../../assets/images/patients/patient.jpg';
+//import IMG01 from '../../../../assets/images/patients/patient.jpg';
 import StickyBox from "react-sticky-box";
-
 class Profile extends Component{
     render(){
         return(
@@ -42,7 +41,7 @@ class Profile extends Component{
                         <div className="form-group">
                             <div className="change-avatar">
                                 <div className="profile-img">
-                                    <img src={IMG01} alt="User" />
+                                    {/* <img src={IMG01} alt="User" /> */}
                                 </div>
                                 <div className="upload-img">
                                     <div className="change-photo-btn">

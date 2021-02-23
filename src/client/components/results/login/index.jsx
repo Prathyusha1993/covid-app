@@ -1,50 +1,76 @@
-import React, { Component } from "react";
-import { Form } from "react-bootstrap";
+import React, { Component } from 'react';
 //import loginBanner from '../../assets/images/login-banner.png';
+import {Form} from 'react-bootstrap'
 //icon
-
 //import { Link } from 'react-router-dom';
 
-class LoginContainer extends Component {
-	constructor(props) {
+class LoginContainer extends Component {  
+
+    constructor(props) {
 		super(props);
 		this.state = {
-			email: "",
 			dob: "",
+            contactInfo: '',
+			
 		};
 	}
 
-	handleChange = () => {};
+	handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
 
-	handleLogin = () => {};
+	handleLogin = (e) => {
+        e.preventDefault();
+        if((this.state.contactInfo==="johndoe@gmail.com" || this.state.contactInfo ==="8766788987") && 
+        this.state.dob==="1970-10-30")
+            {
+                this.setState({
+                        isAuthenticationfailed: "NO",
+                    });
+                    window.localStorage.setItem(
+                        "_id",
+                        "6032672222fd8c47b4d60cd3"
+                    );
+                    window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
+                    window.localStorage.setItem("Username","John Doe" );
+                    window.location.href="/results/dashboard";
+                
+            }
+            else{
+                this.setState({
+                    isAuthenticationfailed: "YES",
+                });
+            }
+    }
 
-	componentDidMount() {
-		document.body.classList.add("account-page");
-	}
-	componentWillUnmount() {
-		document.body.classList.remove("account-page");
-	}
-	render() {
-		return (
-			<div
-				className="content"
-				style={{ boxSizing: "border-box" }}
-			>
+	// componentDidMount(){
+	// 	document.body.classList.add('account-page');
+	// }
+	// componentWillUnmount(){
+	// 	document.body.classList.remove('account-page');
+	// }
+ render(){
+	return(
+		<div className="content">
 				<div className="container-fluid">
+					
 					<div className="row">
 						<div className="col-md-8 offset-md-2">
+							
+							
 							<div className="account-content">
 								<div className="row align-items-center justify-content-center">
-									<div className="col-md-7 col-lg-6 login-left">
+									{/* <div className="col-md-7 col-lg-6 login-left"> */}
+									<div className="col-md-7 col-lg-5 login-left">
 										{/* <img src={loginBanner} className="img-fluid" alt="Doccure Login" />	 */}
 										<h4>
 											Welcome to American Gene Technologies Results Portal
 											<sup>TM</sup>
 										</h4>
+										<br />
 										<p>
-											Please enter your information to access your Dashboard.
+											<h6>Please enter your information to access your Dashboard.</h6>
 										</p>
-										{/* <br/> */}
 										<p>
 											Access to the AGT Portal is restricted solely to
 											authorized users and is monitored for administrative and
@@ -57,83 +83,46 @@ class LoginContainer extends Component {
 										</p>
 										<p>&copy; 2020 American Gene Technologies</p>
 									</div>
-									<div
-										className="col-md-12 col-lg-6 login-right"
-										style={{
-											border: "1px solid white",
-											padding: "50px",
-											backgroundColor: "lightgray",
-											borderRadius: "5px",
-										}}
-									>
-										<Form onSubmit={this.handleLogin}>
-											<Form.Group
-												controlId="email"
-												className="form-group form-focus"
-											>
-												<Form.Label
-													className="font-weight-bold"
-													className="focus-label"
-												>
-													Email/Mobile Number
-												</Form.Label>
-												<Form.Control
-													className="form-control floating"
-													required
-													type="text"
-													name="email"
-													value={this.state.email}
-													onChange={this.handleChange}
-												/>
-												<Form.Control.Feedback type="invalid">
-													Please enter your email or mobile number.
-												</Form.Control.Feedback>
-											</Form.Group>
-											<Form.Group
-												controlId="dateofbirth"
-												className="form-group form-focus"
-											>
-												<Form.Label
-													className="font-weight-bold"
-													className="focus-label"
-												>
-													Date of Birth
-												</Form.Label>
-												<Form.Control
-													className="form-control floating"
-													required
-													type="date"
-													name="dateofbirth"
-													value={this.state.dob}
-													onChange={this.handleChange}
-												/>
-												<Form.Control.Feedback type="invalid">
-													Please select your date of birth.
-												</Form.Control.Feedback>
-											</Form.Group>
-											{/* {this.state.isAuthenticationfailed === "YES" && (
-                            <div style={{ color: "red", display: "flex", justifyContent: "center" }}>
-                                Invalid credentials
-                            </div>
-                        )} */}
-											<button
-												type="submit"
-												className="btn btn-primary btn-block btn-lg login-btn"
-												//style={{ background: "#4CAF50", color: 'white' }}
-												//disabled={!this.validateForm()}
-											>
-												Login
-											</button>
-										</Form>
+									<div className="col-md-12 col-lg-6 login-right">
+										{/* <div className="login-header">
+											<h3>Login <span>Doccure</span></h3>
+										</div> */}
+										<form onSubmit={this.handleLogin}>
+											{/* <div className="form-group form-focus">
+												
+												<input type="text" className="form-control floating" />
+												<label className="focus-label">Email/MobileNum#</label>
+											</div> */}
+											<div className="form-group">
+												<label className="font-weight-bold" >Email/MobileNumber# <span className="text-danger">*</span></label>
+												<input type="text" name="contactInfo" value={this.state.contactInfo} onChange={this.handleChange} className="form-control" required />
+											</div>
+											{/* <div className="form-group form-focus">
+												
+												<input  className="form-control floating" />
+												<label className="focus-label">Date Of Birth</label>
+											</div> */}
+											<div className="form-group">
+												<label className="font-weight-bold" >Date Of Birth <span className="text-danger">*</span></label>
+												<input type="date" name="dob" value={this.state.dob} onChange={this.handleChange} className="form-control" required/>
+											</div>
+											<button className="btn btn-primary btn-block btn-lg login-btn" type="submit">Login</button>
+										</form>
 									</div>
 								</div>
 							</div>
+							
+								
 						</div>
 					</div>
+
 				</div>
+
 			</div>
-		);
-	}
+
+	);
+  }
+
 }
 
 export default LoginContainer;

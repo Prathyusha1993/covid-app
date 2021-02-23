@@ -18,15 +18,16 @@ import AppResults from "./appresults";
 // if (
 // 	!window.location.pathname.includes("admin") ||
 // 	!window.location.pathname.includes("pharmacyadmin")
-// ) {
-// 	require("./client/assets/css/all.css");
-// 	require("./client/assets/css/all.min.css");
-// 	require("./client/assets/css/fontawesome.min.css");
-// 	require("./client/assets/css/style.css");
-// 	require("./client/assets/js/script.js");
-// }
+// )
+//  {
+	require("./client/assets/css/all.css");
+	require("./client/assets/css/all.min.css");
+	require("./client/assets/css/fontawesome.min.css");
+	require("./client/assets/css/style.css");
+	require("./client/assets/js/script.js");
+ //}
 
-// ReactDOM.render(<AppRouter />, document.getElementById("root"));   by p- commented as this is for appcontainer now checking for appresults page
+//   ReactDOM.render(<AppRouter />, document.getElementById("root"));   //by p- commented as this is for appcontainer now checking for appresults page
 
 
 ReactDOM.render(<AppResults />, document.getElementById("root"));

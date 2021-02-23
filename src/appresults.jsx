@@ -1,6 +1,8 @@
+import { Result } from "antd";
 import React, { Component } from "react";
 //import config from 'config';
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Dashboard from "./client/components/patients/dashboard";
 import Results from "./client/components/results/index";
 
 //login change imports later
@@ -12,19 +14,11 @@ import Results from "./client/components/results/index";
 //import AppUniversal from "./admin/app-universal";
 
 class AppResults extends Component {
-
-    render() {
-        return (
-            // <Router 
-            //basename={`${config.publicPath}`}       by p - commented
-            // >
-                <div>
-                  {/* <Route render={(props) => <Header {...props} />} /> */}
-                  <Results />
-              </div>
-            // </Router>
-          );
-    }
+	render() {
+		return (
+			<Results />
+		);
+	}
 }
 
 export default AppResults;
