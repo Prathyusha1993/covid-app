@@ -21,6 +21,7 @@ class LoginContainer extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
+	// endpoints with static data
 	handleLogin = (e) => {
         e.preventDefault();
         if((this.state.contactInfo==="johndoe@gmail.com" || this.state.contactInfo ==="8766788987") && 

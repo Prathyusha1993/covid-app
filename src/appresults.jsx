@@ -1,8 +1,8 @@
 import { Result } from "antd";
 import React, { Component } from "react";
 //import config from 'config';
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Dashboard from "./client/components/patients/dashboard";
+//import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+//import Dashboard from "./client/components/patients/dashboard";
 import Results from "./client/components/results/index";
 
 //login change imports later
