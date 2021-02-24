@@ -1,20 +1,31 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Dates extends Component {
-    constructor(props){
-        super(props);
-        this.state={
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 
-        };
-    }
+	render() {
+		console.log("date result", JSON.stringify(this.props));
+		return (
+			<div className="time-slot">
+				{/* <h6>dates</h6> */}
+				{this.props.result.map((item, index) => {
+					return (<ul className="clearfix">
+						<li>
+							<Link className="timing" to="#0">
+								<span>{item.results.result_date}</span>
+							</Link>
+						</li>
+					</ul>);
+				})}
+			</div>
+		);
+	}
 
-    render() {
-        return(
-            <div>
-                <h6>dates</h6>
-            </div>
-        );
-    }
+    
 }
 
 export default Dates;

@@ -5,6 +5,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
+import {serviceConstants} from '../../../../orderServices/constants'
 //import Header from '../../results/header/index';
 // import { Document, Page } from "react-pdf";
 // import Pdf from './pdf';
@@ -45,10 +46,12 @@ class OrderDashboard extends Component {
 			},
 			body: JSON.stringify({ patient_id: patient_id }),
 		};
-		fetch("http://3.137.173.35:6061/order/v1/search", requestOptions)
+		fetch(`http://${serviceConstants.HOST_NAME}/order/v1/search`, requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				this.setState({ result: data.data.results });
+				// console.log('server response', JSON.stringify(data));
+				console.log('server response result', JSON.stringify(data.data));
+				this.setState({ result: data.data });
 			});
 	}
 
@@ -91,19 +94,12 @@ class OrderDashboard extends Component {
 								<div className="card schedule-widget mb-0">
 									<div className="schedule-header">
 										<div className="schedule-nav">
-											<div className="time-slot">
-												{/* {this.state.result.map((date, index) => {
-													<ul className="clearfix">
-														<li>
-															<Link className="timing" to="#0">
-																{date.result_date}
-															</Link>
-														</li>
-													</ul>;
-												})} */}
-												<Dates />
-												<PdfViewer />
-											</div>
+												<Dates result = {this.state.result}
+												handleOrderDashboardData = {this.handleOrderDashboardData}/>
+												<br />
+												<PdfViewer result = {this.state.result}
+												handleOrderDashboardData = {this.handleOrderDashboardData}/>
+											
 											{/* <Tabs
 												className="tab-view"
 												activeKey={this.state.key}
@@ -183,90 +179,10 @@ class OrderDashboard extends Component {
 						</div>
 					</div>
 				</div>
-			// </div>
+			</div>
 		);
 	}
 }
 export default OrderDashboard;
 
-{/* <div className="time-slot">
-	<ul className="clearfix">
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing selected" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-		<li>
-			<Link className="timing" to="#0">
-				<span>9:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>10:00</span> <span>AM</span>
-			</Link>
-			<Link className="timing" to="#0">
-				<span>11:00</span> <span>AM</span>
-			</Link>
-		</li>
-	</ul>
-</div>; */}
+
