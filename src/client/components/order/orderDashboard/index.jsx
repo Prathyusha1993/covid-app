@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { DashboardSidebar } from "./sidebar/sidebar.jsx";
 import { Tab, Tabs } from "react-bootstrap";
 import StickyBox from "react-sticky-box";
+import Dates from "./dates/index";
+import PdfViewer from "./pdfViewer/index";
 //import Header from '../../results/header/index';
 // import { Document, Page } from "react-pdf";
 // import Pdf from './pdf';
@@ -33,7 +35,7 @@ class OrderDashboard extends Component {
 		this.setState({ key });
 	}
 
-	componentDidMount(patient_id) {
+	handleOrderDashboardData = (patient_id) => {
 		const patientId = window.localStorage.getItem("PATIENT_ID");
 		const requestOptions = {
 			method: "POST",
@@ -41,13 +43,17 @@ class OrderDashboard extends Component {
 				"Content-Type": "application/json",
 				Id: patientId,
 			},
-			body: JSON.stringify({ id: patient_id }),
+			body: JSON.stringify({ patient_id: patient_id }),
 		};
 		fetch("http://3.137.173.35:6061/order/v1/search", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
 				this.setState({ result: data.data.results });
 			});
+	}
+
+	componentDidMount() {
+		this.handleOrderDashboardData();
 	}
 
 	render() {
@@ -85,8 +91,8 @@ class OrderDashboard extends Component {
 								<div className="card schedule-widget mb-0">
 									<div className="schedule-header">
 										<div className="schedule-nav">
-											{/* <div className="time-slot">
-												{this.state.result.map((date, index) => {
+											<div className="time-slot">
+												{/* {this.state.result.map((date, index) => {
 													<ul className="clearfix">
 														<li>
 															<Link className="timing" to="#0">
@@ -95,8 +101,10 @@ class OrderDashboard extends Component {
 														</li>
 													</ul>;
 												})} */}
+												<Dates />
+												<PdfViewer />
 											</div>
-											<Tabs
+											{/* <Tabs
 												className="tab-view"
 												activeKey={this.state.key}
 												onSelect={this.handleSelect}
@@ -167,7 +175,7 @@ class OrderDashboard extends Component {
 													eventKey={1}
 													title="13 Feb 2021"
 												></Tab>
-											</Tabs>
+											</Tabs> */}
 										</div>
 									</div>
 								</div>
