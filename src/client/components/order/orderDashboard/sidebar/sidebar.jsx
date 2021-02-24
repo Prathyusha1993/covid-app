@@ -8,6 +8,7 @@ export const DashboardSidebar = () => {
 									<div className="profile-info-widget">
 										<a href="#0" className="booking-doc-img">
 											{/* <img src={IMG01} alt="User" /> */}
+											<i className="fa fa-user-circle fa-5x" style={{color:'#15558d'}} aria-hidden="true"></i>
 										</a>
 										<div className="profile-det-info">
 											<h3>Richard Wilson</h3>

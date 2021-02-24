@@ -19,17 +19,37 @@ import StickyBox from "react-sticky-box";
 //   IMG10
 //   SamplePDF
 // } from "./img";
-class Dashboard extends Component {
+class OrderDashboard extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			key: 1,
+			result: [],
 		};
 		this.handleSelect = this.handleSelect.bind(this);
 	}
+
 	handleSelect(key) {
 		this.setState({ key });
 	}
+
+	componentDidMount(patient_id) {
+		const patientId = window.localStorage.getItem("PATIENT_ID");
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Id: patientId,
+			},
+			body: JSON.stringify({ id: patient_id }),
+		};
+		fetch("http://3.137.173.35:6061/order/v1/search", requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				this.setState({ result: data.data.results });
+			});
+	}
+
 	render() {
 		return (
 			<div>
@@ -65,18 +85,29 @@ class Dashboard extends Component {
 								<div className="card schedule-widget mb-0">
 									<div className="schedule-header">
 										<div className="schedule-nav">
+											{/* <div className="time-slot">
+												{this.state.result.map((date, index) => {
+													<ul className="clearfix">
+														<li>
+															<Link className="timing" to="#0">
+																{date.result_date}
+															</Link>
+														</li>
+													</ul>;
+												})} */}
+											</div>
 											<Tabs
 												className="tab-view"
 												activeKey={this.state.key}
 												onSelect={this.handleSelect}
 												id="controlled-tab-example"
 											>
-												<Tab
+												 <Tab
 													className="nav-item"
 													eventKey={1}
 													title="01 Feb 2021"
 												>
-													{/* <Pdf></Pdf> */}
+													
 													<iframe
 														src="http://3.137.173.35:3000/files/04d4660dfd83ff.pdf"
 														height="500"
@@ -137,62 +168,97 @@ class Dashboard extends Component {
 													title="13 Feb 2021"
 												></Tab>
 											</Tabs>
-											
 										</div>
 									</div>
 								</div>
-								{/* <div className="time-slot">
-                  <ul className="clearfix">
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>1 Feb 2021</span> 
-                      </Link>
-                    
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>2 Feb 2021</span> 
-                      </Link>
-                     
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>3 Feb 2021</span> 
-                      </Link>
-                      
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>4 Feb 2021</span> 
-                      </Link>
-                      
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>5 Feb 2021</span> 
-                      </Link>
-                      
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>6 Feb 2021</span> 
-                      </Link>
-                   
-                    </li>
-                    <li>
-                      <Link className="timing" to="#0">
-                        <span>7 Feb 2021</span> 
-                      </Link>
-                      
-                    </li>
-                  </ul>
-                </div> */}
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			// </div>
 		);
 	}
 }
-export default Dashboard;
+export default OrderDashboard;
+
+{/* <div className="time-slot">
+	<ul className="clearfix">
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing selected" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+		<li>
+			<Link className="timing" to="#0">
+				<span>9:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>10:00</span> <span>AM</span>
+			</Link>
+			<Link className="timing" to="#0">
+				<span>11:00</span> <span>AM</span>
+			</Link>
+		</li>
+	</ul>
+</div>; */}

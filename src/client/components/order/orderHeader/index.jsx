@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LOGO01, LOGO02 } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
 
-class Header extends Component {
+class OrderHeader extends Component {
 	render() {
 		return (
 			<div>
@@ -32,4 +32,4 @@ class Header extends Component {
 	}
 }
 
-export default Header;
+export default OrderHeader;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { DashboardSidebar } from "./sidebar/sidebar.jsx";
 import { Tab, Tabs } from "react-bootstrap";
 import StickyBox from "react-sticky-box";
-import Header from '../../results/header/index';
+//import Header from '../../results/header/index';
 // import { Document, Page } from "react-pdf";
 // import Pdf from './pdf';
 import {
@@ -34,7 +34,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {/* <Header /> */}
         <div className="content">          
         <div className="container-fluid">
             <div className="row">
