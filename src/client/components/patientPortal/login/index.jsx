@@ -13,78 +13,78 @@ class PatientPortalLoginContainer extends Component {
 		};
 	}
 
-	handleChange = (e) => {
-		this.setState({ [e.target.name]: e.target.value });
-	};
+	// handleChange = (e) => {
+	// 	this.setState({ [e.target.name]: e.target.value });
+	// };
 
-	// endpoints with static data
-	handleLogin = (e) => {
-		e.preventDefault();
-		if (
-			(this.state.contactInfo === "johndoe@gmail.com" ||
-				this.state.contactInfo === "8766788987") &&
-			this.state.dob === "1970-10-30"
-		) {
-			this.setState({
-				isAuthenticationfailed: "NO",
-			});
-			window.localStorage.setItem("_id", "6032672222fd8c47b4d60cd3");
-			window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
-			window.localStorage.setItem("USER_NAME", "John Doe");
-			window.localStorage.setItem("DOB", "10/30/1970");
-			window.location.href = "/patientportal/dashboard";
-		} else {
-			this.setState({
-				isAuthenticationfailed: "YES",
-			});
-		}
-	};
-
+	// // endpoints with static data
 	// handleLogin = (e) => {
 	// 	e.preventDefault();
-	// 	var loginInfo = {};
 	// 	if (
-	// 		Number.isInteger(this.state.contactInfo) === true &&
-	// 		this.state.contactInfo.length === 10
+	// 		(this.state.contactInfo === "johndoe@gmail.com" ||
+	// 			this.state.contactInfo === "8766788987") &&
+	// 		this.state.dob === "1970-10-30"
 	// 	) {
-	// 		loginInfo = {
-	// 			mobile: this.state.contactInfo,
-	// 			date_of_birth: this.state.dob,
-	// 		};
-	// 	} else {
-	// 		loginInfo = {
-	// 			email: this.state.contactInfo,
-	// 			date_of_birth: this.state.dob,
-	// 		};
-	// 	}
-	// 	authenticateAndFetchUserDetails(loginInfo)
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 			console.log(res.data);
-	// 			if (res.data.length === 0) {
-	// 				this.setState({
-	// 					isAuthenticationfailed: "YES",
-	// 				});
-	// 				return;
-	// 			}
-	// 			this.setState({
-	// 				isAuthenticationfailed: "NO",
-	// 			});
-	// 			window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
-	// 			window.localStorage.setItem("USER_EMAIL", res.data[0].email);
-	// 			window.localStorage.setItem(
-	// 				"USER_NAME",
-	// 				res.data[0].firstName + " " + res.data[0].lastName
-	// 			);
-	// 			window.location.href = "/patientportal/dashboard";
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 			this.setState({
-	// 				isAuthenticationfailed: "YES",
-	// 			});
+	// 		this.setState({
+	// 			isAuthenticationfailed: "NO",
 	// 		});
-	//};
+	// 		window.localStorage.setItem("_id", "6032672222fd8c47b4d60cd3");
+	// 		window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
+	// 		window.localStorage.setItem("USER_NAME", "John Doe");
+	// 		window.localStorage.setItem("DOB", "10/30/1970");
+	// 		window.location.href = "/patientportal/dashboard";
+	// 	} else {
+	// 		this.setState({
+	// 			isAuthenticationfailed: "YES",
+	// 		});
+	// 	}
+	// };
+
+	handleLogin = (e) => {
+		e.preventDefault();
+		var loginInfo = {};
+		if (
+			Number.isInteger(this.state.contactInfo) === true &&
+			this.state.contactInfo.length === 10
+		) {
+			loginInfo = {
+				mobile: this.state.contactInfo,
+				date_of_birth: this.state.dob,
+			};
+		} else {
+			loginInfo = {
+				email: this.state.contactInfo,
+				date_of_birth: this.state.dob,
+			};
+		}
+		authenticateAndFetchUserDetails(loginInfo)
+			.then((res) => {
+				console.log(res);
+				console.log(res.data);
+				if (res.data.length === 0) {
+					this.setState({
+						isAuthenticationfailed: "YES",
+					});
+					return;
+				}
+				this.setState({
+					isAuthenticationfailed: "NO",
+				});
+				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
+				window.localStorage.setItem("USER_EMAIL", res.data[0].email);
+				window.localStorage.setItem(
+					"USER_NAME",
+					res.data[0].firstName + " " + res.data[0].lastName
+				);
+				window.location.href = "/patientportal/dashboard";
+			})
+			.catch((err) => {
+				console.log(err);
+				this.setState({
+					isAuthenticationfailed: "YES",
+				});
+			});
+	};
 
 	// componentDidMount(){
 	// 	document.body.classList.add('account-page');
