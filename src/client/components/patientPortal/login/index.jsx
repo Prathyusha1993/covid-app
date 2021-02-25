@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-//import loginBanner from '../../assets/images/login-banner.png';
 import { Form } from "react-bootstrap";
-//icon
-//import { Link } from 'react-router-dom';
-import { authenticateAndFetchUserDetails } from "../../../../orderServices/loginService";
+import { authenticateAndFetchUserDetails } from "../../../patientPortalServices/loginService";
 
-class OrderLoginContainer extends Component {
+class PatientPortalLoginContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,99 +18,74 @@ class OrderLoginContainer extends Component {
 	};
 
 	// endpoints with static data
-	// handleLogin = (e) => {
-	//     e.preventDefault();
-	//     if((this.state.contactInfo==="johndoe@gmail.com" || this.state.contactInfo ==="8766788987") &&
-	//     this.state.dob==="1970-10-30")
-	//         {
-	//             this.setState({
-	//                     isAuthenticationfailed: "NO",
-	//                 });
-	//                 window.localStorage.setItem(
-	//                     "_id",
-	//                     "6032672222fd8c47b4d60cd3"
-	//                 );
-	//                 window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
-	//                 window.localStorage.setItem("Username","John Doe" );
-	//                 window.location.href="/results/dashboard";
-
-	//         }
-	//         else{
-	//             this.setState({
-	//                 isAuthenticationfailed: "YES",
-	//             });
-	//         }
-	// }
-
-	// handleLogin = (e) => {
-	//     e.preventDefault();
-	//     authenticateAndFetchUserDetails(this.state.contactInfo, this.state.dob)
-	// 	.then((response) => {
-	// 		this.setState({
-	// 			isAuthenticationfailed: "NO",
-	// 		});
-	// 		window.localStorage.setItem(
-	// 			"_id",
-	// 			response.data._id
-	// 		);
-	// 		window.localStorage.setItem("USER-EMAIL", response.data.email);
-	// 		window.localStorage.setItem("USER-FIRST-NAME", response.data.first_name);
-	// 		window.localStorage.setItem("USER-LAST-NAME", response.data.last_name);
-	//         window.location.href = "/results/dashboard";
-	// 	})
-	// 	.catch((err) => {
-	// 		console.log(err);
-	// 		this.setState({
-	// 			isAuthenticationfailed: 'YES'
-	// 		});
-	// 	})
-	// }
-
 	handleLogin = (e) => {
 		e.preventDefault();
-		var loginInfo = {};
 		if (
-			Number.isInteger(this.state.contactInfo) === true &&
-			this.state.contactInfo.length === 10
+			(this.state.contactInfo === "johndoe@gmail.com" ||
+				this.state.contactInfo === "8766788987") &&
+			this.state.dob === "1970-10-30"
 		) {
-			loginInfo = {
-				mobile: this.state.contactInfo,
-				date_of_birth: this.state.dob,
-			};
-		} else {
-			loginInfo = {
-				email: this.state.contactInfo,
-				date_of_birth: this.state.dob,
-			};
-		}
-		authenticateAndFetchUserDetails(loginInfo)
-			.then((res) => {
-				console.log(res);
-				console.log(res.data);
-				if (res.data.length === 0) {
-					this.setState({
-						isAuthenticationfailed: "YES",
-					});
-					return;
-				}
-				this.setState({
-					isAuthenticationfailed: "NO",
-				});
-				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
-				window.localStorage.setItem("user_email", res.data[0].email);
-				window.localStorage.setItem(
-					"user_name",
-					res.data[0].firstName + " " + res.data[0].lastName
-				);
-				window.location.href = "/order/dashboard";
-			})
-			.catch((err) => {
-				console.log(err);
-				this.setState({
-					isAuthenticationfailed: "YES",
-				});
+			this.setState({
+				isAuthenticationfailed: "NO",
 			});
+			window.localStorage.setItem("_id", "6032672222fd8c47b4d60cd3");
+			window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
+			window.localStorage.setItem("USER_NAME", "John Doe");
+			window.localStorage.setItem("DOB", "10/30/1970");
+			window.location.href = "/patientportal/dashboard";
+		} else {
+			this.setState({
+				isAuthenticationfailed: "YES",
+			});
+		}
 	};
+
+	// handleLogin = (e) => {
+	// 	e.preventDefault();
+	// 	var loginInfo = {};
+	// 	if (
+	// 		Number.isInteger(this.state.contactInfo) === true &&
+	// 		this.state.contactInfo.length === 10
+	// 	) {
+	// 		loginInfo = {
+	// 			mobile: this.state.contactInfo,
+	// 			date_of_birth: this.state.dob,
+	// 		};
+	// 	} else {
+	// 		loginInfo = {
+	// 			email: this.state.contactInfo,
+	// 			date_of_birth: this.state.dob,
+	// 		};
+	// 	}
+	// 	authenticateAndFetchUserDetails(loginInfo)
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 			console.log(res.data);
+	// 			if (res.data.length === 0) {
+	// 				this.setState({
+	// 					isAuthenticationfailed: "YES",
+	// 				});
+	// 				return;
+	// 			}
+	// 			this.setState({
+	// 				isAuthenticationfailed: "NO",
+	// 			});
+	// 			window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
+	// 			window.localStorage.setItem("USER_EMAIL", res.data[0].email);
+	// 			window.localStorage.setItem(
+	// 				"USER_NAME",
+	// 				res.data[0].firstName + " " + res.data[0].lastName
+	// 			);
+	// 			window.location.href = "/patientportal/dashboard";
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 			this.setState({
+	// 				isAuthenticationfailed: "YES",
+	// 			});
+	// 		});
+	//};
+
 	// componentDidMount(){
 	// 	document.body.classList.add('account-page');
 	// }
@@ -130,7 +102,6 @@ class OrderLoginContainer extends Component {
 								<div className="row align-items-center justify-content-center">
 									{/* <div className="col-md-7 col-lg-6 login-left"> */}
 									<div className="col-md-7 col-lg-6 login-left">
-										{/* <img src={loginBanner} className="img-fluid" alt="Doccure Login" />	 */}
 										<h4>
 											Welcome to American Gene Technologies Results Portal
 											<sup>TM</sup>
@@ -154,9 +125,6 @@ class OrderLoginContainer extends Component {
 										<p>&copy; 2020 American Gene Technologies</p>
 									</div>
 									<div className="col-md-12 col-lg-5 login-right">
-										{/* <div className="login-header">
-											<h3>Login <span>Doccure</span></h3>
-										</div> */}
 										<form onSubmit={this.handleLogin}>
 											<div className="form-group">
 												<label className="font-weight-bold">
@@ -214,4 +182,4 @@ class OrderLoginContainer extends Component {
 	}
 }
 
-export default OrderLoginContainer;
+export default PatientPortalLoginContainer;

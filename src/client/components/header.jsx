@@ -9,6 +9,7 @@ import IMG01 from "../assets/images/doctors/doctor-thumb-02.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import $ from "jquery";
 import { useEffect } from "react";
+import logo2 from "../assets/images/results/logo2.png";
 
 const Header = (props) => {
   let pathnames = window.location.pathname
@@ -57,14 +58,14 @@ const Header = (props) => {
           </a>
           <Link to="/home" className="navbar-brand logo">
             {/* <img src={logo} className="img-fluid" alt="Logo" /> by p - commented*/}
-            <h4>MY COVID NOW</h4>
+            <img src={logo2} className="img-fluid" alt="Logo" />
           </Link>
         </div>
         <div className="main-menu-wrapper">
           <div className="menu-header">
             <Link to="/home" className="menu-logo">
-              {/* <img src={logo} className="img-fluid" alt="Logo" /> by p - commented */}
-              <h4>MY COVID NOW</h4>
+              <img src={logo2} className="img-fluid" alt="Logo" /> 
+              {/* <h4>MY COVID NOW</h4> */}
             </Link>
             <a
               href="#0"
@@ -84,10 +85,13 @@ const Header = (props) => {
                 For Teams 
               </a>
             </li>
-            <li className={`has-submenu ${url.includes("/patient") ? "active" : ""}`}>
+            {/* <li className={`has-submenu ${url.includes("/patient") ? "active" : ""}`}>
               <a href="#0">
                 view Results
               </a>
+            </li> */}
+            <li >
+              <Link href="/patientportal" to="/patientportal">view Results</Link>
             </li>
             <li className={`has-submenu ${url.includes("/blog") ? "active" : ""}`}>
               <a href="">Get Help Booking<i className="fas fa-chevron-down"></i>
