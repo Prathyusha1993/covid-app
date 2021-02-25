@@ -22,10 +22,9 @@ class Dates extends Component {
 						}
 						return (
 							<span>
-								<li>
+								<li key={item._id}>
 									<Link
 										className={linkClassName}
-										to="#0"
 										id={item.order_date}
 										key={item.order_date}
 										onClick={() => {
@@ -41,6 +40,35 @@ class Dates extends Component {
 				</ul>
 			</div>
 		);
+
+		// return (
+		// 	<div className="time-slot">
+		// 		<ul className="clearfix">
+		// 			{this.props.result.map((item, index) => {
+		// 				// let linkClassName = "timing selected";
+		// 				// if(this.props.selectedDate === item.order_date) {
+		// 				// 	linkClassName = "timing selected "
+		// 				// }
+		// 				return (
+		// 					<span>
+		// 						<li key={item._id}>
+		// 							<Link
+		// 								className="timing selected"
+		// 								id={item.order_date}
+		// 								key={item.order_date}
+		// 								// onClick={() => {
+		// 								// 	this.props.handleDateClick(item.results.pdf_path, item.order_date, item.results.value)
+		// 								// }}
+		// 							>
+		// 								<span>{parseDate(item.order_date)}</span>
+		// 							</Link>
+		// 						</li>
+		// 					</span>
+		// 				);
+		// 			})}
+		// 		</ul>
+		// 	</div>
+		// );
 	}
 
 	// render() {
@@ -70,14 +98,6 @@ class Dates extends Component {
 	// 	);
 	// }
 }
-
-// Dates.propTypes = {
-// 	orderDates: PropTypes.arrayOf(
-// 		PropTypes.shape({
-// 			orderDate: PropTypes.string.isRequired,
-// 		}).isRequired
-// 	).isRequired,
-// };
 
 // Dates.propTypes = {
 // 	orderDates: PropTypes.arrayOf(
