@@ -53,6 +53,7 @@ class PatientPortalDashboard extends Component {
 			this.setState({
 				result: data.data,
 				selectedDate: data.data[0].order_date,
+				//pdfPath: `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}`
 			});
 		});
 	}
