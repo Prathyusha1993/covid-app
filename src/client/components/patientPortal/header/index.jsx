@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LOGO01, LOGO02 } from "./img.jsx";
+import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
 
 class PatientPortalHeader extends Component {
@@ -10,7 +10,7 @@ class PatientPortalHeader extends Component {
 					<Navbar bg="light">
 						<Navbar.Brand>
 							<img
-								src={LOGO02}
+								src={AGT_MCN_LOGO}
 								width="400"
 								height="45"
 								object-fit="cover"
@@ -23,9 +23,9 @@ class PatientPortalHeader extends Component {
 					<Navbar.Collapse className="justify-content-end">
 						<Navbar.Brand>
 							<img
-								src={LOGO01}
+								src={AGT_LOGO}
 								width="200"
-								height="110"
+								height="80"
 								object-fit="cover"
 								className="d-inline-block align-top"
 								alt=""

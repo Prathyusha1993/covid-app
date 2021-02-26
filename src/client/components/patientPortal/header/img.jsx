@@ -1,2 +1,2 @@
-export { default as LOGO01} from '../../../assets/images/results/logo1.png';
-export { default as LOGO02} from '../../../assets/images/results/logo2.png';
+export { default as AGT_LOGO} from '../../../assets/images/results/agt-logo.png';
+export { default as AGT_MCN_LOGO} from '../../../assets/images/results/agt-mcn-logo.png';

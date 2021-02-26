@@ -9,7 +9,7 @@ import IMG01 from "../assets/images/doctors/doctor-thumb-02.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import $ from "jquery";
 import { useEffect } from "react";
-import logo2 from "../assets/images/results/logo2.png";
+import AGT_MCN_LOGO from "../assets/images/results/agt-mcn-logo.png";
 
 const Header = (props) => {
   let pathnames = window.location.pathname
@@ -58,13 +58,13 @@ const Header = (props) => {
           </a>
           <Link to="/home" className="navbar-brand logo">
             {/* <img src={logo} className="img-fluid" alt="Logo" /> by p - commented*/}
-            <img src={logo2} className="img-fluid" alt="Logo" />
+            <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />
           </Link>
         </div>
         <div className="main-menu-wrapper">
           <div className="menu-header">
             <Link to="/home" className="menu-logo">
-              <img src={logo2} className="img-fluid" alt="Logo" /> 
+              <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> 
               {/* <h4>MY COVID NOW</h4> */}
             </Link>
             <a

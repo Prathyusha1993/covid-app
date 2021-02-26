@@ -33,7 +33,7 @@ import MyPatient from "./client/components/doctors/mypatient";
 import Booking from "./client/components/patients/booking";
 import Checkout from "./client/components/patients/checkout";
 import BookingSuccess from "./client/components/patients/booking-success";
-import Dashboard from "./client/components/patients/dashboard";
+//import Dashboard from "./client/components/patients/dashboard";
 import Favourties from "./client/components/patients/dashboard/favourties";
 import Profile from "./client/components/patients/dashboard/profile";
 import Password from "./client/components/patients/dashboard/password";
@@ -129,7 +129,7 @@ const AppContainer = function (props) {
 							exact
 							component={BookingSuccess}
 						/>
-						<Route path="/patient/dashboard" exact component={Dashboard} />
+						{/* <Route path="/patient/dashboard" exact component={Dashboard} /> */}
 						<Route path="/patient/favourites" exact component={Favourties} />
 						<Route path="/patient/profile" exact component={Profile} />
 						<Route path="/patient/change-password" exact component={Password} />

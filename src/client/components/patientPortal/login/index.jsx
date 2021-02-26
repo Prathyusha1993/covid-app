@@ -76,6 +76,10 @@ class PatientPortalLoginContainer extends Component {
 				});
 				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
 				window.localStorage.setItem("USER_EMAIL", res.data[0].email);
+				window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
+				window.localStorage.setItem("USER_ADDRESS", res.data[0].address.state + ", " + res.data[0].address.country);
+				// console.log(res.data[0].date_of_birth);
+				//console.log(res.data[0].address.state);
 				window.localStorage.setItem(
 					"USER_NAME",
 					res.data[0].first_name + " " + res.data[0].last_name

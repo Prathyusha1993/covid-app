@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 //import IMG01 from '../../../../assets/images/patients/patient.jpg';
 export const DashboardSidebar = () => {
-	const dob = window.localStorage.getItem("DOB");
+	const dob = window.localStorage.getItem("USER_DOB");
 	let ageDetails = "";
 	if (dob) {
 		ageDetails =
-			moment(dob, "MM/DD/YYYY").format("Do MMM YYYY") +
+			moment(dob, "YYYY/MM/DD").format("Do MMM YYYY") +
 			", " +
-			moment().diff(moment(dob, "MM/DD/YYYY"), "years") +
+			moment().diff(moment(dob, "YYYY/MM/DD"), "years") +
 			" years";
 	}
 
@@ -35,7 +35,7 @@ export const DashboardSidebar = () => {
 								</h5>
 							)}
 							<h5 className="mb-0">
-								<i className="fas fa-map-marker-alt"></i> Newyork, USA
+								<i className="fas fa-map-marker-alt"></i> {window.localStorage.getItem("USER_ADDRESS")}
 							</h5>
 						</div>
 					</div>
@@ -45,7 +45,7 @@ export const DashboardSidebar = () => {
 				<nav className="dashboard-menu">
 					<ul>
 						<li className="active">
-							<Link to="/patient/dashboard">
+							<Link to="/patientportal/dashboard">
 								<i className="fas fa-columns"></i>
 								<span>Dashboard</span>
 							</Link>
