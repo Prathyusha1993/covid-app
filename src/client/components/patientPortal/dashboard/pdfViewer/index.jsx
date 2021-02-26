@@ -11,6 +11,7 @@ class PdfViewer extends Component {
 		return (
 			<div>
 				{/* label with value, props from date file*/}
+				<label>Result: {this.props.value}</label>
 				<iframe
 					// src="https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf"
 					src={this.props.pdfPath}

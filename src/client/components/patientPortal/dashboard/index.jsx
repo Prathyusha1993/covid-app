@@ -112,7 +112,8 @@ class PatientPortalDashboard extends Component {
 												selectedDate={this.state.selectedDate}
 											/>
 											<br />
-											<PdfViewer pdfPath={this.state.pdfPath} />
+											<PdfViewer pdfPath={this.state.pdfPath}
+											value={this.state.value} />
 										</div>
 									</div>
 								</div>
