@@ -32,7 +32,6 @@ class PdfViewer extends Component {
 	// 				width="900"
 	// 				title="Iframe Example"
 	// 			></iframe>
-
 	// 		</div>
 	// 	);
 	// }

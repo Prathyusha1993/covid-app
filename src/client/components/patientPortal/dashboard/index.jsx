@@ -15,8 +15,9 @@ class PatientPortalDashboard extends Component {
 		this.state = {
 			key: 1,
 			result: [],
-			pdfPath:
-				"https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf",
+			// pdfPath:
+			// 	"https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf",
+			pdfPath:"",
 			selectedDate: "",
 			orderDates: [],
 			value: "",
@@ -53,7 +54,7 @@ class PatientPortalDashboard extends Component {
 			this.setState({
 				result: data.data,
 				selectedDate: data.data[0].order_date,
-				//pdfPath: `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}`
+				pdfPath: `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}`
 			});
 		});
 	}

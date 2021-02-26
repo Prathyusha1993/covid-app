@@ -2,7 +2,7 @@ import {serviceConstants} from './constants';
 
 export const fetchDashboardDetails = (patient_id) => {
     const patientId = window.localStorage.getItem('PATIENT_ID');
-    return fetch(`${serviceConstants.HOST_NAME}/order/v1/search`, {
+    return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/search`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'
                 },
