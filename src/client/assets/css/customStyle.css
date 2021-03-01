@@ -1,0 +1,18 @@
+/* for mobile view */
+@media (max-width: 768px) {
+  .pdfWebView {
+    display: none;
+  }
+  .pdfMobileView {
+    display: block;
+  }
+}
+/* for web view */
+@media (min-width: 768px) {
+  .pdfWebView {
+    display: block;
+  }
+  .pdfMobileView {
+    display: none;
+  }
+}

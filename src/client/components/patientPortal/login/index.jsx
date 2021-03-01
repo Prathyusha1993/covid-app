@@ -77,7 +77,8 @@ class PatientPortalLoginContainer extends Component {
 				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
 				window.localStorage.setItem("USER_EMAIL", res.data[0].email);
 				window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
-				window.localStorage.setItem("USER_ADDRESS", res.data[0].address.state + ", " + res.data[0].address.country);
+				window.localStorage.setItem("USER_ADDRESS1", res.data[0].address.address1 + (( res.data[0].address.address2!="" ) ? ", " + res.data[0].address.address2  : ""));
+				window.localStorage.setItem("USER_ADDRESS2", res.data[0].address.city + ", " +  res.data[0].address.state + ", " + res.data[0].address.zip);
 				// console.log(res.data[0].date_of_birth);
 				//console.log(res.data[0].address.state);
 				window.localStorage.setItem(
@@ -110,7 +111,7 @@ class PatientPortalLoginContainer extends Component {
 							<div className="account-content">
 								<div className="row align-items-center justify-content-center">
 									{/* <div className="col-md-7 col-lg-6 login-left"> */}
-									<div className="col-md-7 col-lg-6 login-left">
+									<div className="col-md-12 col-lg-6 login-right" style={{border: 'none'}}>
 										<h4>
 											Welcome to American Gene Technologies Results Portal
 											<sup>TM</sup>
@@ -129,13 +130,13 @@ class PatientPortalLoginContainer extends Component {
 											access or use of this system may result in portal
 											termination and civil or criminal liability.
 										</p>
-										<p>&copy; 2020 American Gene Technologies</p>
+										<p>&copy; 2021 American Gene Technologies</p>
 									</div>
 									<div className="col-md-12 col-lg-5 login-right">
 										<form onSubmit={this.handleLogin}>
 											<div className="form-group">
 												<label className="font-weight-bold">
-													Email/MobileNumber#{" "}
+													Email or Mobile #{" "}
 													<span className="text-danger">*</span>
 												</label>
 												<input

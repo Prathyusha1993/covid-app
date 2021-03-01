@@ -35,7 +35,8 @@ export const DashboardSidebar = () => {
 								</h5>
 							)}
 							<h5 className="mb-0">
-								<i className="fas fa-map-marker-alt"></i> {window.localStorage.getItem("USER_ADDRESS")}
+								<i className="fas fa-map-marker-alt"></i> {window.localStorage.getItem("USER_ADDRESS1")} 
+								<br/> {window.localStorage.getItem("USER_ADDRESS2")} 
 							</h5>
 						</div>
 					</div>
@@ -56,10 +57,20 @@ export const DashboardSidebar = () => {
 													<span>Profile Settings</span>
 												</Link>
 											</li> */}
-						<li>
-							<Link to="/">
+						{/* <li>
+							<a href="/">
 								<i className="fas fa-sign-out-alt"></i>
-								<span>Logout</span>
+								<span>
+									Logout
+								</span>
+							</a>
+						</li> */}
+						<li>
+							<Link to="/patientportal/">
+								<i className="fas fa-sign-out-alt"></i>
+								<span>
+									Logout
+								</span>
 							</Link>
 						</li>
 					</ul>

@@ -29,33 +29,29 @@ class PatientPortalDashboard extends Component {
 		this.setState({ key });
 	}
 
-	// handleOrderDashboardData = (patient_id) => {
-	// 	const patientId = window.localStorage.getItem("PATIENT_ID");
-	// 	const requestOptions = {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		},
-	// 		body: JSON.stringify({ patient_id: patient_id }),
-	// 	};
-	// 	fetch(`${serviceConstants.HOST_NAME}/order/v1/search`, requestOptions)
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			// console.log('server response', JSON.stringify(data));
-	// 			console.log('server response result', JSON.stringify(data.data));
-	// 			this.setState({ result: data.data });
-	// 		});
-	// }
-
 	componentDidMount() {
 		//this.handleOrderDashboardData();
-		fetchDashboardDetails().then((data) => {
+		const patientId = window.localStorage.getItem('PATIENT_ID');
+		var patientInfo    = {patient_id : patientId};
+		console.log('patientInfo from index' , patientInfo);
+		fetchDashboardDetails(patientInfo).then((data) => {
 			console.log("server response result", JSON.stringify(data.data));
-			this.setState({
-				result: data.data,
-				selectedDate: data.data[0].order_date,
-				pdfPath: `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}`
-			});
+			if(data.data!=null && data.data.length > 0){
+				this.setState({
+					result: data.data,
+					selectedDate: data.data[0].order_date,
+					// pdfPath: (data.data[0].results != null) ? `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}` : ""
+					pdfPath: (data.data[0].results != null && data.data[0].results.pdf_path != null && data.data[0].results.pdf_path.length > 0) ? `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}` : ""
+				});
+			}
+			else
+			{
+				this.setState({
+					result: null,
+					selectedDate: "",
+					pdfPath: ""
+				});
+			}
 		});
 	}
 
@@ -106,7 +102,10 @@ class PatientPortalDashboard extends Component {
 								<div className="card schedule-widget mb-0">
 									<div className="schedule-header">
 										<div className="schedule-nav">
-											<Dates
+
+										{this.state.result != null ? (
+											<div>
+												<Dates
 												result={this.state.result}
 												handleDateClick={this.handleDateClick}
 												selectedDate={this.state.selectedDate}
@@ -114,6 +113,11 @@ class PatientPortalDashboard extends Component {
 											<br />
 											<PdfViewer pdfPath={this.state.pdfPath}
 											value={this.state.value} />
+											</div>
+										) : (
+											<label> No results </label>
+										)}
+											
 										</div>
 									</div>
 								</div>

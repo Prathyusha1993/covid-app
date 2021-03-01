@@ -1,12 +1,13 @@
 import {serviceConstants} from './constants';
 
-export const fetchDashboardDetails = (patient_id) => {
-    const patientId = window.localStorage.getItem('PATIENT_ID');
+export const fetchDashboardDetails = (patientInfo) => {
+   console.log('patientInfo from index' , patientInfo);
+    //console.log('patientId',patientId);
     return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/search`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'
                 },
-        body : JSON.stringify({patient_id: patient_id})
+        body : JSON.stringify(patientInfo)
       })
         .then(response => response.json());
   }

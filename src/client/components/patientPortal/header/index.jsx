@@ -25,7 +25,7 @@ class PatientPortalHeader extends Component {
 							<img
 								src={AGT_LOGO}
 								width="200"
-								height="80"
+								height="70"
 								object-fit="cover"
 								className="d-inline-block align-top"
 								alt=""

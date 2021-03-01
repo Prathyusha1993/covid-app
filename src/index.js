@@ -25,6 +25,7 @@ import "slick-carousel/slick/slick-theme.css";
 	require("./client/assets/css/fontawesome.min.css");
 	require("./client/assets/css/style.css");
 	require("./client/assets/js/script.js");
+	require("./client/assets/css/customStyle.css");
  //}
 
   ReactDOM.render(<AppRouter />, document.getElementById("root"));   

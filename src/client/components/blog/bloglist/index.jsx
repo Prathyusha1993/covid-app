@@ -89,7 +89,7 @@ class BlogList extends Component{
 									<div className="video">
 									
 										<iframe src="https://www.youtube.com/embed/nuVqJ_OriR8?rel=0&amp;controls=0&amp;showinfo=0" 
-										width="940" allowFullScreen ></iframe> 
+										width="100%" allowFullScreen ></iframe> 
 									</div>
 								</div>
 								<h3 className="blog-title"><Link to="/blog/blog-details">Benefits of consulting with an Online Doctor</Link></h3>

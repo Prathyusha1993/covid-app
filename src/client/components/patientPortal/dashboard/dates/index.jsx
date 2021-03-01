@@ -20,17 +20,18 @@ class Dates extends Component {
 							linkClassName = "timing selected";
 						}
 						return (
-							<span>
-								<li key={item._id}>
+							<span key={index}>
+								<li  style={{marginBottom : '10px'}}>
 									<Link
 										className={linkClassName}
+										to="#0"
 										id={item.order_date}
-										key={item.order_date}
+										key={item._id}
 										onClick={() => {
 											this.props.handleDateClick(
-												item.results.pdf_path,
+												(item.results!=null) ? item.results.pdf_path : "",
 												item.order_date,
-												item.results.value
+												(item.results!=null) ? item.results.value : ""
 											);
 										}}
 									>
