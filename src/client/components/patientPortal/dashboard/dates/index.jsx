@@ -9,7 +9,6 @@ class Dates extends Component {
 	}
 
 	render() {
-		console.log("date result", JSON.stringify(this.props));
 
 		return (
 			<div className="time-slot">
@@ -45,41 +44,7 @@ class Dates extends Component {
 			</div>
 		);
 	}
-
-	// render() {
-	// 	console.log("date result", JSON.stringify(this.props));
-	// 	return (
-	// 		<div className="time-slot">
-	// 			{/* <h6>dates</h6> */}
-	// 			<ul className="clearfix">
-	// 				{this.props.orderDates.map((item, index) => {
-	// 					return (
-	// 						<span>
-	// 							<li>
-	// 								<Link
-	// 									className="timing"
-	// 									to="#0"
-	// 									id={item.orderDate}
-	// 									key={item.orderDate}
-	// 								>
-	// 									<span>{parseDate(item.orderDate)}</span>
-	// 								</Link>
-	// 							</li>
-	// 						</span>
-	// 					);
-	// 				})}
-	// 			</ul>
-	// 		</div>
-	// 	);
-	// }
 }
 
-// Dates.propTypes = {
-// 	orderDates: PropTypes.arrayOf(
-// 		PropTypes.shape({
-// 			orderDate: PropTypes.string.isRequired,
-// 		}).isRequired
-// 	).isRequired,
-// };
 
 export default Dates;

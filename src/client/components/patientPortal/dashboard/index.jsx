@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { DashboardSidebar } from "./sidebar/sidebar.jsx";
-import { Tab, Tabs } from "react-bootstrap";
 import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
 import { serviceConstants } from "../../../patientPortalServices/constants";
 import { fetchDashboardDetails } from "../../../patientPortalServices/dashboardService";
-//import Header from '../../results/header/index';
 
 class PatientPortalDashboard extends Component {
 	constructor(props) {
@@ -30,17 +27,13 @@ class PatientPortalDashboard extends Component {
 	}
 
 	componentDidMount() {
-		//this.handleOrderDashboardData();
 		const patientId = window.localStorage.getItem('PATIENT_ID');
 		var patientInfo    = {patient_id : patientId};
-		console.log('patientInfo from index' , patientInfo);
 		fetchDashboardDetails(patientInfo).then((data) => {
-			console.log("server response result", JSON.stringify(data.data));
 			if(data.data!=null && data.data.length > 0){
 				this.setState({
 					result: data.data,
 					selectedDate: data.data[0].order_date,
-					// pdfPath: (data.data[0].results != null) ? `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}` : ""
 					pdfPath: (data.data[0].results != null && data.data[0].results.pdf_path != null && data.data[0].results.pdf_path.length > 0) ? `${serviceConstants.HOST_NAME}${data.data[0].results.pdf_path}` : ""
 				});
 			}
@@ -56,7 +49,6 @@ class PatientPortalDashboard extends Component {
 	}
 
 	handleDateClick = (pdfPath, date, dataValue) => {
-		console.log("date clicked is", pdfPath);
 		// const constructedUrl = 'https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf';
 
 		const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;

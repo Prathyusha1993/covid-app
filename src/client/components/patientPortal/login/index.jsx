@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
 import { authenticateAndFetchUserDetails } from "../../../patientPortalServices/loginService";
 
 class PatientPortalLoginContainer extends Component {
@@ -16,32 +15,6 @@ class PatientPortalLoginContainer extends Component {
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
-
-	// endpoints with static data
-	// handleLogin = (e) => {
-	//     e.preventDefault();
-	//     if((this.state.contactInfo==="johndoe@gmail.com" || this.state.contactInfo ==="8766788987") &&
-	//     this.state.dob==="1970-10-30")
-	//         {
-	//             this.setState({
-	//                     isAuthenticationfailed: "NO",
-	//                 });
-	//                 window.localStorage.setItem(
-	//                     "_id",
-	//                     "6032672222fd8c47b4d60cd3"
-	//                 );
-	//                 window.localStorage.setItem("USER-EMAIL", "johndoe@gmail.com");
-	//                 window.localStorage.setItem("USER_NAME","John Doe" );
-	// 				window.localStorage.setItem("DOB","10/30/1970" );
-	//                 window.location.href="/patientportal/dashboard";
-
-	//         }
-	//         else{
-	//             this.setState({
-	//                 isAuthenticationfailed: "YES",
-	//             });
-	//         }
-	// }
 
 
 	handleLogin = (e) => {
@@ -63,8 +36,6 @@ class PatientPortalLoginContainer extends Component {
 		}
 		authenticateAndFetchUserDetails(loginInfo)
 			.then((res) => {
-				console.log(res);
-				console.log(res.data);
 				if (res.data.length === 0) {
 					this.setState({
 						isAuthenticationfailed: "YES",
@@ -79,8 +50,6 @@ class PatientPortalLoginContainer extends Component {
 				window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
 				window.localStorage.setItem("USER_ADDRESS1", res.data[0].address.address1 + (( res.data[0].address.address2!="" ) ? ", " + res.data[0].address.address2  : ""));
 				window.localStorage.setItem("USER_ADDRESS2", res.data[0].address.city + ", " +  res.data[0].address.state + ", " + res.data[0].address.zip);
-				// console.log(res.data[0].date_of_birth);
-				//console.log(res.data[0].address.state);
 				window.localStorage.setItem(
 					"USER_NAME",
 					res.data[0].first_name + " " + res.data[0].last_name
@@ -96,12 +65,6 @@ class PatientPortalLoginContainer extends Component {
 	};
 
 
-	// componentDidMount(){
-	// 	document.body.classList.add('account-page');
-	// }
-	// componentWillUnmount(){
-	// 	document.body.classList.remove('account-page');
-	// }
 	render() {
 		return (
 			<div className="content">
@@ -162,7 +125,7 @@ class PatientPortalLoginContainer extends Component {
 												/>
 											</div>
 											{this.state.isAuthenticationfailed === "YES" && (
-												<div
+												<div className=" btn-block "
 													style={{
 														color: "red",
 														display: "flex",

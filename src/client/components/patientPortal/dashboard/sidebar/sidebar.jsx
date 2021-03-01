@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-//import IMG01 from '../../../../assets/images/patients/patient.jpg';
+
 export const DashboardSidebar = () => {
 	const dob = window.localStorage.getItem("USER_DOB");
 	let ageDetails = "";

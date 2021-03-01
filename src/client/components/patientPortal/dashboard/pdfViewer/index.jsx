@@ -13,8 +13,7 @@ class PdfViewer extends Component {
 				<div className="pdfMobileView">
 					<a style={{textDecoration:'underline'}} href={this.props.pdfPath}>Download COVID report</a><i class="fa fa-download" aria-hidden="true"></i>
 				</div>
-				<div style={{overflowX:"scroll"}} className="pdfWebView">
-					{/* label with value, props from date file*/}
+				<div className="pdfWebView">
 					<div>
 					<label>Result: {this.props.value}</label>	
 					</div>
@@ -32,20 +31,6 @@ class PdfViewer extends Component {
 			</div>
 		);
 	}
-
-	// render() {
-	// 	return (
-	// 		<div>
-	// 			<iframe
-	// 				src="https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf"
-	// 				// src={pdf.results.pdf_path}
-	// 				height="500"
-	// 				width="900"
-	// 				title="Iframe Example"
-	// 			></iframe>
-	// 		</div>
-	// 	);
-	// }
 }
 
 PdfViewer.propTypes = {
