@@ -11,7 +11,7 @@ class PdfViewer extends Component {
 		return (
 			<div>
 				<div className="pdfMobileView">
-					<a style={{textDecoration:'underline'}} href={this.props.pdfPath}>Download COVID report</a><i class="fa fa-download" aria-hidden="true"></i>
+					<a style={{textDecoration:'underline'}} href={this.props.pdfPath}>Download COVID report</a><i className="fa fa-download" aria-hidden="true"></i>
 				</div>
 				<div className="pdfWebView">
 					<div>

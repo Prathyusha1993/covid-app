@@ -80,11 +80,11 @@ const Header = (props) => {
             {/* <li className={pathnames.includes("/home") ? "active" : ""}><Link to="/home">Home</Link></li> */}
             {/* by p - need to change the paths once we get more detials */}
               
-            <li className={`has-submenu ${url.includes("/doctor") ? "active" : ""}`}>
+            {/* <li className={`has-submenu ${url.includes("/doctor") ? "active" : ""}`}>
               <a href="#0">
                 For Teams 
               </a>
-            </li>
+            </li> */}
             {/* <li className={`has-submenu ${url.includes("/patient") ? "active" : ""}`}>
               <a href="#0">
                 view Results
@@ -98,7 +98,7 @@ const Header = (props) => {
             {/* <li >
               <Link href="/patientportal" to="/patientportal">view Results</Link>
             </li> */}
-            <li className={`has-submenu ${url.includes("/blog") ? "active" : ""}`}>
+            {/* <li className={`has-submenu ${url.includes("/blog") ? "active" : ""}`}>
               <a href="">Get Help Booking<i className="fas fa-chevron-down"></i>
               </a>
               <ul className="submenu">
@@ -112,7 +112,7 @@ const Header = (props) => {
                   <Link to="/blog/blog-details" onClick={()=>onhandleCloseMenu()}>Blog Details</Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
             {/* <li><Link href="/admin" target="_blank" to="/admin">Admin</Link></li> by p - commented */}
             {/* <li>
               <a href="/admin" target="_blank" to="/admin">
@@ -120,7 +120,7 @@ const Header = (props) => {
               </a>
             </li> */}
             <li className="login-link" onClick={()=>onhandleCloseMenu()}>
-              <Link to="/">BOOK YOUR APPOINTMENT NOW</Link>
+              <Link to="/">BOOK AN APPOINTMENT</Link>
             </li>
           </ul>
         </div>
@@ -175,7 +175,7 @@ const Header = (props) => {
             <>
               <li className="nav-item">
                 <Link to="/login" className="nav-link header-login">
-                  BOOK YOUR APPOINTMENT NOW{" "}
+                  BOOK AN APPOINTMENT {" "}
                 </Link>
               </li>{" "}
             </>

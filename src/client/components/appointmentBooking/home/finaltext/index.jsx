@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
+//import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
 //slider
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
-class Popularsection extends Component{
+
+class FinalText extends Component{
     
     render(){
         const settings = {
@@ -53,4 +54,4 @@ class Popularsection extends Component{
         );
     }
 }
-export default Popularsection;
+export default FinalText;

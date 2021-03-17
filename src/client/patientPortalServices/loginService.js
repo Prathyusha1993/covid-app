@@ -1,7 +1,6 @@
 import {serviceConstants} from './constants';
 
 export const authenticateAndFetchUserDetails = (loginInfo) => {
-    console.log(loginInfo);
     return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/verify`, {
         method: 'POST',
         headers: {

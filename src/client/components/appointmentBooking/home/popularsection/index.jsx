@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
+//import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
 //slider
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
+
 class Popularsection extends Component{
     
     render(){
@@ -43,9 +44,9 @@ class Popularsection extends Component{
           <section className="section popular-section">
           <div className="container">
             <div className="section-header text-center">
-              <h5>Search for a Location</h5>
-              <h2>Book An Appointment Now!</h2>
-              <p className="sub-title">We make it simple to book an appointment find a location, pick a time, get a swab and wait for results.</p>
+              <h5>Our simple 4 step process</h5>
+              <h2>Results within 24 hours of Swab</h2>
+              <p className="sub-title">We make it simple to book an appointment. Find a location, book a time, get a swab and wait for results.</p>
             </div>
             
           </div>

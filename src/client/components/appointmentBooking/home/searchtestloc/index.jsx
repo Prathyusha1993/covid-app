@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
+//import { SPEC03, SPEC01, SPEC02, solution2,solution1, solution3 } from './img.jsx';
 //slider
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
-class Popularsection extends Component{
+
+class SearchTestLoc extends Component{
     
     render(){
         const settings = {
@@ -43,9 +44,9 @@ class Popularsection extends Component{
           <section className="section popular-section">
           <div className="container">
             <div className="section-header text-center">
-              <h5>Search for a Location</h5>
-              <h2>Book An Appointment Now!</h2>
-              <p className="sub-title">We make it simple to book an appointment find a location, pick a time, get a swab and wait for results.</p>
+              <h5>"Search Rt-PCR test provider locations"</h5>
+              <h2>"Find the nearest location to you and book a Covid 19 test"</h2>
+              <p className="sub-title">You will receive your results within 24 hours of getting your Rt-PCR Nasal Swab test from one of our providers."</p>
             </div>
             
           </div>
@@ -53,4 +54,4 @@ class Popularsection extends Component{
         );
     }
 }
-export default Popularsection;
+export default SearchTestLoc;
