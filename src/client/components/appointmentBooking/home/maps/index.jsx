@@ -13,7 +13,7 @@ const Maps = () => {
     }
 
 	const mapStyles = {
-		height: "100vh",
+		height: "250vh",
 		width: "100%",
 	};
 

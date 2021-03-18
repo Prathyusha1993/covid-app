@@ -26,7 +26,7 @@ export const locations = [
             lat: 39.02830783589008,
             lng: -77.07682728924972,
         },
-        bookingLink: " https://fastrackmd.com/covid-19-response/"
+        bookingLink: " https://fastrackmd.com/covid-19-response/",
     },
     {
         name: "Fast Track Urgent Care - Silver Spring",
@@ -35,7 +35,7 @@ export const locations = [
             lat: 39.076977557310016,
             lng: -77.00246890274003,
         },
-        bookingLink: "https://fastrackmd.com/covid-19-response/"
+        bookingLink: "https://fastrackmd.com/covid-19-response/",
     },
     {
         name: "Grubbs Pharmac",
@@ -44,7 +44,7 @@ export const locations = [
             lat: 38.89024144964276,
             lng: -77.00078413158236,
         },
-        bookingLink: " http://www.grubbspharmacy.com/"
+        bookingLink: " http://www.grubbspharmacy.com/",
     },
     
 ];

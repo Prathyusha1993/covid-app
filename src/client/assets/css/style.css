@@ -2801,7 +2801,7 @@ html.menu-opened body {
 }
 .choose-us {
 	padding: 60px 0;
-	background-image: url("../images/choose-us.jpg");
+	/* background-image: url("../images/choose-us.jpg"); */
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;

@@ -5,7 +5,7 @@ class Feature extends Component{
     render(){
        
         return(
-            <section className="feature-list">	
+            <section className="feature-list" style={{marginTop:"20px"}}>	
         <div className="container">
           <div className="row">
             <div className="col-12 col-md-6 col-lg-3">

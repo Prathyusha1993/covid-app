@@ -5,9 +5,9 @@ import PopularSection from "./popularsection";
 //import AboutUs from "./aboutus";
 import Features from "./feature";
 import SearchTestLoc from "./searchtestloc";
-import Maps from "./maps";
-import WrappedMap from './maps';
+//import Maps from "./maps";
 import FinalText from "./finaltext";
+import MapList from "./maplist";
 //import Testimonials from "./testimonials";
 //import ChooseUs from "./chooseus";
 //import HomeBlog from "./blog";
@@ -19,19 +19,13 @@ class Home extends Component {
 			<div>
 				<div className="main-wrapper">
 					<HomeBanner />
-					{/* <HomeSearch />     */}
 					<PopularSection />
-					{/* <AboutUs /> */}
 					<Features />
 					<br />
 					<SearchTestLoc />
-					<br />
-					<Maps/>
-					<br />
+					<br /> 
+					<MapList/>
 					<FinalText />
-					{/* <Testimonials/> */}
-					{/* <ChooseUs/> */}
-					{/* <HomeBlog/> */}
 				</div>
 			</div>
 		);
