@@ -23,7 +23,7 @@ export const locations = [
     {
         id:3,
         name: "Fast Track Urgent Care - Kensington",
-        address: "10540 Connecticut Ave, Kensington, MD 208950",
+        address: "10540 Connecticut Ave, Kensington, MD 20895",
         lat: 39.02830783589008,
         lng: -77.07682728924972,
         bookingLink: " https://fastrackmd.com/covid-19-response/",
@@ -40,7 +40,7 @@ export const locations = [
     },
     {
         id:5,
-        name: "Grubbs Pharmac",
+        name: "Grubbs Pharmacy",
         address: "326 E Capitol St NE, Washington, DC 20003-3809",
         lat: 38.89024144964276,
         lng: -77.00078413158236,

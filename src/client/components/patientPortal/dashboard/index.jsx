@@ -51,7 +51,11 @@ class PatientPortalDashboard extends Component {
 	handleDateClick = (pdfPath, date, dataValue) => {
 		// const constructedUrl = 'https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf';
 
-		const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
+		// const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
+		var constructedUrl = "";
+	
+		if(pdfPath != null && pdfPath.trim().length > 0)
+			constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
 
 		this.setState({
 			pdfPath: constructedUrl,

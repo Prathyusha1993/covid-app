@@ -16,7 +16,6 @@ class PatientPortalLoginContainer extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-
 	handleLogin = (e) => {
 		e.preventDefault();
 		var loginInfo = {};
@@ -48,8 +47,21 @@ class PatientPortalLoginContainer extends Component {
 				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
 				window.localStorage.setItem("USER_EMAIL", res.data[0].email);
 				window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
-				window.localStorage.setItem("USER_ADDRESS1", res.data[0].address.address1 + (( res.data[0].address.address2!="" ) ? ", " + res.data[0].address.address2  : ""));
-				window.localStorage.setItem("USER_ADDRESS2", res.data[0].address.city + ", " +  res.data[0].address.state + ", " + res.data[0].address.zip);
+				window.localStorage.setItem(
+					"USER_ADDRESS1",
+					res.data[0].address.address1 +
+						(res.data[0].address.address2 != ""
+							? ", " + res.data[0].address.address2
+							: "")
+				);
+				window.localStorage.setItem(
+					"USER_ADDRESS2",
+					res.data[0].address.city +
+						", " +
+						res.data[0].address.state +
+						", " +
+						res.data[0].address.zip
+				);
 				window.localStorage.setItem(
 					"USER_NAME",
 					res.data[0].first_name + " " + res.data[0].last_name
@@ -64,7 +76,6 @@ class PatientPortalLoginContainer extends Component {
 			});
 	};
 
-
 	render() {
 		return (
 			<div className="content">
@@ -74,14 +85,17 @@ class PatientPortalLoginContainer extends Component {
 							<div className="account-content">
 								<div className="row align-items-center justify-content-center">
 									{/* <div className="col-md-7 col-lg-6 login-left"> */}
-									<div className="col-md-12 col-lg-6 login-right" style={{border: 'none'}}>
+									<div
+										className="col-md-12 col-lg-6 login-right"
+										style={{ border: "none" }}
+									>
 										<h4>
 											Welcome to American Gene Technologies Results Portal
 											<sup>TM</sup>
 										</h4>
 										<br />
-										<p style={{fontWeight: '500'}}>
-												Please enter your information to access your Dashboard.
+										<p style={{ fontWeight: "500" }}>
+											Please enter your information to access your Dashboard.
 										</p>
 										<p>
 											Access to the AGT Portal is restricted solely to
@@ -110,6 +124,9 @@ class PatientPortalLoginContainer extends Component {
 													className="form-control"
 													required
 												/>
+												<span>Email: username@example.com</span>
+												<br />
+												<span>Mobile #: 1234567890</span>
 											</div>
 											<div className="form-group">
 												<label className="font-weight-bold">
@@ -125,7 +142,8 @@ class PatientPortalLoginContainer extends Component {
 												/>
 											</div>
 											{this.state.isAuthenticationfailed === "YES" && (
-												<div className=" btn-block "
+												<div
+													className=" btn-block "
 													style={{
 														color: "red",
 														display: "flex",

@@ -30,7 +30,7 @@ export class GoogleMapsContainer extends Component {
 				<Map
 					google={this.props.google}
 					className={"map"}
-					zoom={4}
+					zoom={10}
 					initialCenter={this.props.center}
 				>
 					{this.props.places.map((place, i) => {
@@ -81,14 +81,14 @@ export class GoogleMapsContainer extends Component {
 									{" "}
 									Virtual Visit Required for COVID-19 Tests{" "}
 								</p>
-								<div className="rating">
+								{/* <div className="rating">
 									<i className="fas fa-star filled" />
 									<i className="fas fa-star filled" />
 									<i className="fas fa-star filled" />
 									<i className="fas fa-star filled" />
 									<i className="fas fa-star" />
-									{/* <span className="d-inline-block average-rating">( {this.state.selectedPlace.total_review} )</span> */}
-								</div>
+									<span className="d-inline-block average-rating">( {this.state.selectedPlace.total_review} )</span>
+								</div> */}
 								<ul className="available-info">
 									<li>
 										<i className="fas fa-map-marker-alt" />

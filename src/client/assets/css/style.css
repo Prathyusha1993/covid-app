@@ -2800,7 +2800,8 @@ html.menu-opened body {
 	border: 0;
 }
 .choose-us {
-	padding: 60px 0;
+	/* padding: 60px 0; */
+	padding: 10px 0;
 	/* background-image: url("../images/choose-us.jpg"); */
 	background-repeat: no-repeat;
 	background-position: center;
@@ -8436,3 +8437,6 @@ box-shadow:inherit
 				}
 			}
 
+html {
+	scroll-behavior: smooth;
+}

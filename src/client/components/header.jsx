@@ -119,7 +119,8 @@ const Header = (props) => {
               </a>
             </li> */}
             <li className="login-link" onClick={()=>onhandleCloseMenu()}>
-              <Link to="/">BOOK AN APPOINTMENT</Link>
+              {/* <Link to="/">BOOK AN APPOINTMENT</Link> */}
+              <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
             </li>
           </ul>
         </div>
@@ -173,9 +174,10 @@ const Header = (props) => {
           ) : ( by p - commented */}
             <>
               <li className="nav-item">
-                <Link to="/login" className="nav-link header-login">
+                {/* <Link to="/login" className="nav-link header-login">
                   BOOK AN APPOINTMENT {" "}
-                </Link>
+                </Link> */}
+                <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
               </li>{" "}
             </>
           {/* )} by p - commented*/}

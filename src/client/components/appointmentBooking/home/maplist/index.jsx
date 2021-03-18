@@ -15,13 +15,14 @@ class MapList extends Component {
 	render() {
 		return (
 			<section
-				className="choose-us"
-				style={{ overflowY: "scroll", height: "100vh", width: "100%" }}
+				className="choose-us" id="search-map"
+				// style={{ overflowY: "scroll", height: "100vh", width: "100%" }}
 			>
-				<div className="container">
-					<div className="row">
-						<div className="col-12 col-lg-5">
-							<div className="left">
+				{/* <div className="container"> */}
+				<div style={{marginRight: "40px"}}>
+					<div className="row" >
+						<div className="col-12 col-lg-5" style={{ overflowY: "scroll", height: "100vh", width: "100%" }}>
+							<div className="left" >
 								{locations.map((item, index) => {
 									return (
 										<div className="card" index={item.name}>
@@ -68,11 +69,11 @@ class MapList extends Component {
 										</div>
 									);
 								})}
-								<div className="load-more text-center">
+								{/* <div className="load-more text-center">
 									<a href="#0" className="btn btn-primary btn-sm">
 										Load More
 									</a>
-								</div>
+								</div> */}
 							</div>
 						</div>
 						<div className="col-12 col-lg-7">

@@ -41,7 +41,7 @@ class Popularsection extends Component{
 
           };
         return(
-          <section className="section popular-section">
+          <section className="section popular-section" id="search-location">
           <div className="container">
             <div className="section-header text-center">
               <h5>Our simple 4 step process</h5>
