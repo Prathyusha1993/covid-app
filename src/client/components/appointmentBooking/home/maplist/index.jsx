@@ -79,7 +79,7 @@ class MapList extends Component {
 						<div className="col-12 col-lg-7">
 							<div className="right">
 								<div id="map" className="map-listing">
-									<div style={{ height: "250vh", width: "100%" }}>
+									<div style={{ height: "100vh", width: "100%" }}>
 										<Map
 											places={locations}
 											center={{ lat: 38.907192, lng: -77.036873 }}
