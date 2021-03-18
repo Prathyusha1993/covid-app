@@ -1,9 +1,9 @@
-/* global google */
+
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import InfoWindowEx from "./InfoWindowEx";
 //import Iconmap from '../../../../assets/images/marker.png';
-import {serviceConstants } from '../../../../appointmentBookingServices/constants'
+import { serviceConstants } from "../../../../appointmentBookingServices/constants";
 
 export class GoogleMapsContainer extends Component {
 	constructor(props) {
@@ -37,7 +37,6 @@ export class GoogleMapsContainer extends Component {
 					{this.props.places.map((place, i) => {
 						return (
 							<Marker
-								//icon={{ url: Iconmap}}
 								onClick={this.onMarkerClick}
 								key={place.id}
 								place_={place}
@@ -76,20 +75,11 @@ export class GoogleMapsContainer extends Component {
 										{" "}
 										{this.state.selectedPlace.name}{" "}
 									</a>
-									{/* <i className="fas fa-check-circle verified" /> */}
 								</h3>
 								<p className="speciality">
 									{" "}
 									Virtual Visit Required for COVID-19 Tests{" "}
 								</p>
-								{/* <div className="rating">
-									<i className="fas fa-star filled" />
-									<i className="fas fa-star filled" />
-									<i className="fas fa-star filled" />
-									<i className="fas fa-star filled" />
-									<i className="fas fa-star" />
-									<span className="d-inline-block average-rating">( {this.state.selectedPlace.total_review} )</span>
-								</div> */}
 								<ul className="available-info">
 									<li>
 										<i className="fas fa-map-marker-alt" />
@@ -106,5 +96,5 @@ export class GoogleMapsContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-	apiKey:`${serviceConstants.GOOGLE_API_KEY}`
+	apiKey: `${serviceConstants.GOOGLE_API_KEY}`,
 })(GoogleMapsContainer);

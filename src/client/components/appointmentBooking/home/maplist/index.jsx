@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 //import { CHECKMARK } from './img.jsx';
 import { Link } from "react-router-dom";
-//import Maps from "../maps";
 import Map from "./map";
-import { IMG01, IMG02, IMG03, IMG04 } from "./img";
+import {
+	FARRAGUT_MEDICAL,
+	FAST_TRACK_URGENT_CARE,
+	GRUBB_PHARMACY,
+	SHADY_GROVE,
+} from "./img";
 import { locations } from "./data";
 
 class MapList extends Component {
@@ -15,14 +19,16 @@ class MapList extends Component {
 	render() {
 		return (
 			<section
-				className="choose-us" id="search-map"
-				// style={{ overflowY: "scroll", height: "100vh", width: "100%" }}
+				className="choose-us"
+				id="search-map"
 			>
-				{/* <div className="container"> */}
-				<div style={{marginRight: "40px"}}>
-					<div className="row" >
-						<div className="col-12 col-lg-5" style={{ overflowY: "scroll", height: "100vh", width: "100%" }}>
-							<div className="left" >
+				<div style={{ marginRight: "40px" }}>
+					<div className="row">
+						<div
+							className="col-12 col-lg-5"
+							style={{ overflowY: "scroll", height: "100vh", width: "100%" }}
+						>
+							<div className="left">
 								{locations.map((item, index) => {
 									return (
 										<div className="card" index={item.name}>

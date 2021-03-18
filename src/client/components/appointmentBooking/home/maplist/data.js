@@ -1,5 +1,5 @@
 // Marker needs lat and lang values so for the given address below are lat and lang.
-import {IMG01, IMG02, IMG03, IMG04} from './img';
+import {FARRAGUT_MEDICAL, FAST_TRACK_URGENT_CARE, GRUBB_PHARMACY, SHADY_GROVE} from './img';
 
 export const locations = [
     {
@@ -9,7 +9,7 @@ export const locations = [
         lat: 39.102698,
         lng: -77.190221,
         bookingLink: "https://shadygrovemedicine.com/covid-19-testing-facility/",
-        image: IMG04
+        image: SHADY_GROVE
     },
     {
         id:2,
@@ -18,7 +18,7 @@ export const locations = [
         lat: 38.901257,
         lng: -77.037917,
         bookingLink: "https://www.farragutmedical.com/",
-        image: IMG01
+        image: FARRAGUT_MEDICAL
     },
     {
         id:3,
@@ -27,7 +27,7 @@ export const locations = [
         lat: 39.02830783589008,
         lng: -77.07682728924972,
         bookingLink: " https://fastrackmd.com/covid-19-response/",
-        image: IMG02
+        image: FAST_TRACK_URGENT_CARE
     },
     {
         id:4,
@@ -36,7 +36,7 @@ export const locations = [
         lat: 39.076977557310016,
         lng: -77.00246890274003,
         bookingLink: "https://fastrackmd.com/covid-19-response/",
-        image: IMG02
+        image: FAST_TRACK_URGENT_CARE
     },
     {
         id:5,
@@ -45,7 +45,7 @@ export const locations = [
         lat: 38.89024144964276,
         lng: -77.00078413158236,
         bookingLink: " http://www.grubbspharmacy.com/",
-        image: IMG03
+        image: GRUBB_PHARMACY
     },
     
 ];
