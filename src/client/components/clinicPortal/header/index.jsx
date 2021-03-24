@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
 
-class PatientPortalHeader extends Component {
+class ClinicPortalHeader extends Component {
 	render() {
 		return (
 			<div>
@@ -39,4 +39,4 @@ class PatientPortalHeader extends Component {
 	}
 }
 
-export default PatientPortalHeader;
+export default ClinicPortalHeader;

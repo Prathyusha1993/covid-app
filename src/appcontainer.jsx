@@ -55,6 +55,7 @@ import BlankPage from "./client/components/blankpage";
 import Componentss from "./client/components/pages/Components";
 import PatientPortalDashboard from "./client/components/patientPortal/dashboard";
 import PatientPortalLoginContainer from "./client/components/patientPortal/login";
+import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import PatientPortalHeader from "./client/components/patientPortal/header";
 
 //import AppUniversal from "./admin/app-universal";
@@ -68,7 +69,7 @@ const AppContainer = function (props) {
 			//basename={`${config.publicPath}`}       by p - commented
 			>
 				<div>
-					{url === "patientportal" ? (
+					{url === "patientportal" || url === "clinic" ? (
 						<Route render={(props) => <PatientPortalHeader {...props} />} />
 					) : (
 						<Route render={(props) => <Header {...props} />} />
@@ -84,6 +85,11 @@ const AppContainer = function (props) {
 							path="/patientportal/dashboard"
 							exact
 							component={PatientPortalDashboard}
+						/>
+						<Route
+							path="/clinic"
+							exact
+							component={ClinicPortalLoginContainer}
 						/>
 						<Route path="/patient/doctor-grid" exact component={DoctorGrid} />
 						<Route path="/patient/doctor-list" exact component={DoctorList} />

@@ -94,24 +94,18 @@ const Header = (props) => {
                 View Results
               </a>
             </li>
-            {/* <li >
-              <Link href="/patientportal" to="/patientportal">view Results</Link>
-            </li> */}
-            {/* <li className={`has-submenu ${url.includes("/blog") ? "active" : ""}`}>
-              <a href="">Get Help Booking<i className="fas fa-chevron-down"></i>
+
+            <li className={`has-submenu ${url.includes("/clinic") ? "active" : ""}`}>
+              <a href="/clinic">
+                Patients
               </a>
-              <ul className="submenu">
-                <li className={pathnames.includes("blog-list") ? "active" : ""}>
-                  <Link to="/blog/blog-list" onClick={()=>onhandleCloseMenu()}>Blog List</Link>
-                </li>
-                <li className={pathnames.includes("blog-grid") ? "active" : ""}>
-                  <Link to="/blog/blog-grid" onClick={()=>onhandleCloseMenu()}>Blog Grid</Link>
-                </li>
-                <li className={pathnames.includes("blog-details") ? "active" : ""}>
-                  <Link to="/blog/blog-details" onClick={()=>onhandleCloseMenu()}>Blog Details</Link>
-                </li>
-              </ul>
-            </li> */}
+            </li>
+
+            <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
+              <a href="/patientportal">
+                Orders
+              </a>
+            </li>
             {/* <li><Link href="/admin" target="_blank" to="/admin">Admin</Link></li> by p - commented */}
             {/* <li>
               <a href="/admin" target="_blank" to="/admin">
