@@ -5,7 +5,6 @@ import Header from "./client/components/header.jsx";
 import Footer from "./client/components/footer.jsx";
 import TopHeader from "./client/components/topheader.jsx";
 import LoginContainer from "./client/components/login/login.jsx";
-import Register from "./client/components/register/register.jsx";
 import ForgotPassword from "./client/components/forgot-password";
 //import Home from "./client/components/home/index";
 import Home from "./client/components/appointmentBooking/home/index";
@@ -18,13 +17,8 @@ import Home from "./client/components/appointmentBooking/home/index";
 import BlogList from "./client/components/blog/bloglist";
 import BlogGrid from "./client/components/blog/bloggrid";
 import BlogDetails from "./client/components/blog/blogdetails";
-//pages
-import VideoCall from "./client/components/pages/videocall";
-import VoiceCall from "./client/components/pages/voicecall";
-import SearchDoctor from "./client/components/pages/searchdoctor";
-import Calendar from "./client/components/pages/calender";
-import Invoice from "./client/components/pages/invoices/invoices";
-import InvoiceView from "./client/components/pages/invoices/view";
+
+
 import DoctorGrid from "./client/components/patients/doctorgrid";
 import DoctorList from "./client/components/patients/doctorlist";
 import DoctorProfile from "./client/components/patients/doctorprofile";
@@ -49,10 +43,7 @@ import AddBilling from "./client/components/doctors/addbilling";
 import ProfileSetting from "./client/components/doctors/profilesetting";
 import Review from "./client/components/doctors/reviews";
 import DoctorRegister from "./client/components/doctors/register";
-import Terms from "./client/components/pages/terms";
-import Policy from "./client/components/pages/policy";
 import BlankPage from "./client/components/blankpage";
-import Componentss from "./client/components/pages/Components";
 import PatientPortalDashboard from "./client/components/patientPortal/dashboard";
 import PatientPortalLoginContainer from "./client/components/patientPortal/login";
 import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
@@ -105,18 +96,11 @@ const AppContainer = function (props) {
 						/>
 						<Route path="/patient/doctor-grid" exact component={DoctorGrid} />
 						<Route path="/patient/doctor-list" exact component={DoctorList} />
-						<Route path="/pages/video-call" exact component={VideoCall} />
-						<Route path="/pages/voice-call" exact component={VoiceCall} />
 						<Route path="/doctor/chat-doctor" exact component={DoctorChat} />
 
 						<Route path="/login" exact component={LoginContainer} />
-						<Route path="/register" exact component={Register} />
 						<Route path="/forgot-password" exact component={ForgotPassword} />
 						<Route path="(/|/home)" exact component={Home} />
-						{/* <Route path="/home1" exact component={Home1} />	
-              			<Route path="/home2" exact component={Home2} />	
-              			<Route path="/homeslider1" exact component={HomeSlider1} />	
-              			<Route path="/homeslider2" exact component={HomeSlider2} /> */}
 
 						{/* blog */}
 						<Route path="/blog/blog-list" exact component={BlogList} />
@@ -124,15 +108,11 @@ const AppContainer = function (props) {
 						<Route path="/blog/blog-details" exact component={BlogDetails} />
 						{/* pages */}
 
-						<Route
+						{/* <Route
 							path="/patient/search-doctor"
 							exact
 							component={SearchDoctor}
-						/>
-						<Route path="/pages/calendar" exact component={Calendar} />
-						<Route path="/pages/invoice" exact component={Invoice} />
-						<Route path="/pages/invoice-view" exact component={InvoiceView} />
-						<Route path="/pages/components" exact component={Componentss} />
+						/> */}
 
 						<Route
 							path="/patient/doctor-profile"
@@ -188,9 +168,7 @@ const AppContainer = function (props) {
 							exact
 							component={DoctorRegister}
 						/>
-						<Route path="/terms" exact component={Terms} />
-						<Route path="/privacy-policy" exact component={Policy} />
-						<Route path="/pages/blank-page" exact component={BlankPage} />
+						
 					</Switch>
 					{/* <Route render={(props) => <Footer {...props} />} /> */}
 				</div>

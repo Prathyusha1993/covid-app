@@ -113,8 +113,7 @@ class ClinicPortalLoginContainer extends Component {
 										<form onSubmit={this.handleLogin}>
 											<div className="form-group">
 												<label className="font-weight-bold">
-													Email {" "}
-													<span className="text-danger">*</span>
+													Email <span className="text-danger">*</span>
 												</label>
 												<input
 													type="text"
