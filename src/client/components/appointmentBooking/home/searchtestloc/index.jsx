@@ -37,7 +37,7 @@ class SearchTestLoc extends Component {
 			],
 		};
 		return (
-			<section className="section popular-section">
+			<section className="section popular-section" id="search-location">
 				<div className="container">
 					<div className="section-header text-center">
 						<h5>"Search Rt-PCR test provider locations"</h5>

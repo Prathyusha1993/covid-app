@@ -8,14 +8,13 @@ class PatientPortalHeader extends Component {
 			<div>
 				<Navbar bg="light">
 					<Navbar bg="light">
-						<Navbar.Brand>
+						<Navbar.Brand className="navbar-brand logo">
 							<img
 								src={AGT_MCN_LOGO}
-								// width="400"
-								width="200"
+								width="400"
 								height="45"
 								object-fit="cover"
-								className="d-inline-block align-top"
+								className="img-fluid"
 								alt=""
 							/>
 						</Navbar.Brand>

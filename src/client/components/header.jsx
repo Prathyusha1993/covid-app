@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//icon
-
-import { faHospital } from "@fortawesome/free-regular-svg-icons";
-import logo from "../assets/images/logo.png";
-import IMG01 from "../assets/images/doctors/doctor-thumb-02.jpg";
-import Dropdown from "react-bootstrap/Dropdown";
 import $ from "jquery";
 import { useEffect } from "react";
 import AGT_MCN_LOGO from "../assets/images/results/agt-mcn-logo.png";
@@ -64,7 +57,6 @@ const Header = (props) => {
           <div className="menu-header">
             <Link to="/home" className="menu-logo">
               <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> 
-              {/* <h4>MY COVID NOW</h4> */}
             </Link>
             <a
               href="#0"
@@ -76,105 +68,35 @@ const Header = (props) => {
             </a>
           </div>
           <ul className="main-nav"> 
-            {/* <li className={pathnames.includes("/home") ? "active" : ""}><Link to="/home">Home</Link></li> */}
-            {/* by p - need to change the paths once we get more detials */}
-              
-            {/* <li className={`has-submenu ${url.includes("/doctor") ? "active" : ""}`}>
-              <a href="#0">
-                For Teams 
-              </a>
-            </li> */}
-            {/* <li className={`has-submenu ${url.includes("/patient") ? "active" : ""}`}>
-              <a href="#0">
-                view Results
-              </a>
-            </li> */}
             <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
               <a href="/patientportal">
                 View Results
               </a>
             </li>
 
-            <li className={`has-submenu ${url.includes("/clinic") ? "active" : ""}`}>
+             <li className={`has-submenu ${url.includes("/clinic") ? "active" : ""}`}>
               <a href="/clinic">
-                Patients
+                Clinic
               </a>
             </li>
 
-            <li className={`has-submenu ${url.includes("/clinic/orders") ? "active" : ""}`}>
+            {/*<li className={`has-submenu ${url.includes("/clinic/orders") ? "active" : ""}`}>
               <a href="/clinic/orders">
                 Orders
               </a>
-            </li>
-            {/* <li><Link href="/admin" target="_blank" to="/admin">Admin</Link></li> by p - commented */}
-            {/* <li>
-              <a href="/admin" target="_blank" to="/admin">
-                Admin
-              </a>
             </li> */}
+            
             <li className="login-link" onClick={()=>onhandleCloseMenu()}>
-              {/* <Link to="/">BOOK AN APPOINTMENT</Link> */}
               <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
             </li>
           </ul>
         </div>
         <ul className="nav header-navbar-rht">
-          {/* <li className="nav-item contact-item">
-            <div className="header-contact-img">
-              <i className="far fa-hospital" />							
-            </div>
-            <div className="header-contact-detail">
-              <p className="contact-header">Contact</p>
-              <p className="contact-info-header"> +1 315 369 5943</p>
-            </div>
-          </li> by p - commented*/}
-
-          {/* {(props.location.pathname) === ("/pages/voice-call") || (props.location.pathname) === ("/pages/video-call") ? (
-            <>
-              <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  <img
-                    className="rounded-circle"
-                    src={IMG01}
-                    width="31"
-                    alt="Darren Elder"
-                  />
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <div className="user-header">
-                    <div className="avatar avatar-sm">
-                      <img
-                        src={IMG01}
-                        alt="User"
-                        className="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <div className="user-text">
-                      <h6>Darren Elder</h6>
-                      <p className="text-muted mb-0">Doctor</p>
-                    </div>
-                  </div>
-                  <Dropdown.Item href="/doctor/doctor-dashboard">
-                    Dashboard
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/doctor/profile-setting">
-                    Profile Settings
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/login">Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </>
-          ) : ( by p - commented */}
             <>
               <li className="nav-item">
-                {/* <Link to="/login" className="nav-link header-login">
-                  BOOK AN APPOINTMENT {" "}
-                </Link> */}
                 <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
               </li>{" "}
             </>
-          {/* )} by p - commented*/}
         </ul>
       </nav>
     </header>
