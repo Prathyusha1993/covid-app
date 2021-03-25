@@ -1,13 +1,13 @@
-
+import {serviceConstants} from '../patientPortalServices/constants'
 
 export const fetchPatientMasterData = () => {
-    return fetch(` https://www.mycovidnow.com/api/patient/v1/`)
+    return fetch(` ${serviceConstants.API_HOST_NAME}/patient/v1/`)
     .then((response) => response.json());
 }
 
 
 export const fetchPatientExpandableData = (patiendId) => {
-    return fetch(`https://www.mycovidnow.com/api/order/v1/search`,
+    return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/search`,
     {
         method: "POST",
         headers: {
@@ -17,3 +17,5 @@ export const fetchPatientExpandableData = (patiendId) => {
     })
     .then((response) => response.json())
 }
+
+
