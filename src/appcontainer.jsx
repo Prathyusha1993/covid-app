@@ -57,6 +57,8 @@ import PatientPortalDashboard from "./client/components/patientPortal/dashboard"
 import PatientPortalLoginContainer from "./client/components/patientPortal/login";
 import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import PatientPortalHeader from "./client/components/patientPortal/header";
+import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/clinicPatientGrid/index";
+import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -90,6 +92,16 @@ const AppContainer = function (props) {
 							path="/clinic"
 							exact
 							component={ClinicPortalLoginContainer}
+						/>
+						<Route
+							path="/clinic/patients"
+							exact
+							component={ClinicPatientGrid}
+						/>
+						<Route
+							path="/clinic/orders"
+							exact
+							component={OrderGridDetails}
 						/>
 						<Route path="/patient/doctor-grid" exact component={DoctorGrid} />
 						<Route path="/patient/doctor-list" exact component={DoctorList} />
