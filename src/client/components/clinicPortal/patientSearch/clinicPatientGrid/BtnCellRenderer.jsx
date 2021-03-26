@@ -1,23 +1,3 @@
-// import React, { Component } from 'react'
-
-// class BtnCellRenderer extends Component {
-//     constructor(props) {
-//       super(props);
-//       this.btnClickedHandler = this.btnClickedHandler.bind(this);
-//     }
-//     btnClickedEditHandler() {
-//      this.props.clicked(this.props.value);
-//     }
-//     render() {
-//       return (
-//         // <span> <i class="fas fa-pen"></i></span>
-//         <button onClick={this.btnClickedEditHandler}>Click me</button>
-//       )
-//     }
-//   }
-
-//   export default BtnCellRenderer;
-//-------------------------------------------------------------------
 
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
@@ -41,9 +21,17 @@ export default class BtnCellRenderer extends Component {
 		this.setState({ show: false });
 	};
 
-	buttonClicked = () => {
-		alert(`${this.state.count} medals won!`);
-	};
+	// buttonClicked = () => {
+	// 	alert(`${this.state.count} medals won!`);
+	// };
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+    
+    handleEditChanges = () => {
+        //api edit changes here
+    }
 
 	render() {
 		return (
@@ -54,7 +42,7 @@ export default class BtnCellRenderer extends Component {
 
 				<Modal show={this.state.show} onHide={this.handleClose}>
 					<Modal.Header closeButton>
-						<Modal.Title>Modal heading</Modal.Title>
+						<Modal.Title>Modal</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<form>
@@ -70,6 +58,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="firstName"
 											value={this.state.firstName}
 											onChange={this.handleChange}
 										/>
@@ -86,6 +75,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="lastName"
 											value={this.state.lastName}
 											onChange={this.handleChange}
 										/>
@@ -94,21 +84,18 @@ export default class BtnCellRenderer extends Component {
 								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Date of Birth</label>
-										<div
-											className="cal-icon"
-											style={{
+											<input
+                                            style={{
 												borderTop: "none",
 												borderLeft: "none",
 												borderRight: "none",
 											}}
-										>
-											<input
-												type="text"
-												className="form-control datetimepicker"
+												type="date"
+												className="form-control "
+                                                name="dob"
 												value={this.state.dob}
 												onChange={this.handleChange}
 											/>
-										</div>
 									</div>
 								</div>
 								<div className="col-12 col-md-6">
@@ -122,6 +109,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control "
+                                            name="gender"
 											value={this.state.gender}
 											onChange={this.handleChange}
 										/>
@@ -138,6 +126,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="mrn"
 											value={this.state.mrn}
 											onChange={this.handleChange}
 										/>
@@ -155,6 +144,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="email"
 											className="form-control"
+                                            name="email"
 											value={this.state.email}
 											onChange={this.handleChange}
 										/>
@@ -171,6 +161,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="mobile"
 											value={this.state.mobile}
 											onChange={this.handleChange}
 										/>
@@ -187,6 +178,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="address"
 											value={this.state.address}
 											onChange={this.handleChange}
 										/>
@@ -203,6 +195,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="city"
 											value={this.state.city}
 											onChange={this.handleChange}
 										/>
@@ -213,6 +206,7 @@ export default class BtnCellRenderer extends Component {
 										<label>State</label>
 										<select
 											className="form-control select"
+                                            name="state"
 											value={this.state.state}
 											onChange={this.handleChange}
 										>
@@ -282,6 +276,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="zip"
 											value={this.state.zip}
 											onChange={this.handleChange}
 										/>
@@ -298,20 +293,13 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
+                                            name="country"
 											value={this.state.country}
 											onChange={this.handleChange}
 										/>
 									</div>
 								</div>
 							</div>
-							{/* <div className="submit-section">
-												<button
-													type="submit"
-													className="btn btn-primary submit-btn"
-												>
-													Save Changes
-												</button>
-											</div> */}
 						</form>
 					</Modal.Body>
 					<Modal.Footer>
