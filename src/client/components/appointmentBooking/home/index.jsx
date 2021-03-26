@@ -5,6 +5,7 @@ import Features from "./feature";
 import SearchTestLoc from "./searchtestloc";
 import FinalText from "./finaltext";
 import MapList from "./maplist";
+import FormInfo from "./forminfo";
 
 class Home extends Component {
 	render() {
@@ -19,6 +20,7 @@ class Home extends Component {
 					<br />
 					<MapList />
 					<FinalText />
+					<FormInfo />
 				</div>
 			</div>
 		);
