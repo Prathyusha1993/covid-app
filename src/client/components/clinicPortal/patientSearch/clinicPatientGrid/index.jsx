@@ -194,10 +194,6 @@ class ClinicPatientGrid extends Component {
 		};
 	}
 
-	handleGridEdit = (params) => {
-		console.log(params);
-		alert("hello");
-	}
 
 	onGridReady = (params) => {
 		console.log(params);

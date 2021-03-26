@@ -7,6 +7,8 @@ import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
+import moment from "moment";
+import EditBtnCellRenderer from "./EditBtnCellRenderer";
 
 class OrderGridDetails extends Component {
 	constructor(props) {
@@ -21,21 +23,28 @@ class OrderGridDetails extends Component {
 			],
 			columnDefs: [
 				{
-					headerName: "Test",
-					field: "test_info.description",
+					headerName: "Edit",
+					minWidth: 100,
+					cellStyle: { textAlign: 'center' },
+					 cellRenderer: 'editBtnCellRenderer',
 				},
-				{ headerName: "Test Type", field: "test_info.test_type" },
+				{ headerName: "Test", minWidth:150, field: "test_info.description" },
+				{ headerName: "Test Type", minWidth:150, field: "test_info.test_type" },
+				{ headerName: "Sample", field: "test_info.sample" },
 				{
 					headerName: "Result",
-					field: "results.value",
-				},
-				{
-					headerName: "Result Date",
-					field: "results.result_date",
+					field: "test_info.covid_detected",
 				},
 				{
 					headerName: "Specimen Collected Date",
-					field: "order_date",
+					field: "test_info.collected",
+					minWidth: 200,
+					resizable: true,
+					cellRenderer: function (params) {
+						return moment(params.data.test_info.collected).format(
+							"MM-DD-YYYY, h:mm:ss a"
+						);
+					},
 				},
 				{
 					headerName: "Provider",
@@ -49,32 +58,26 @@ class OrderGridDetails extends Component {
 						);
 					},
 				},
+				{
+					headerName: "Received Date",
+					field: "test_info.received",
+					minWidth: 200,
+					resizable: true,
+					cellRenderer: function (params) {
+						return moment(params.data.test_info.received).format(
+							"MM-DD-YYYY, h:mm:ss a"
+						);
+					},
+				},
+				{
+					headerName: "Requisition",
+					field: "test_info.requisition",
+				},
 			],
+			frameworkComponents: {
+				editBtnCellRenderer: EditBtnCellRenderer,
+			},
 			defaultColDef: { flex: 1 },
-			// detailCellRendererParams: {
-			// 	detailGridOptions: {
-			// 		columnDefs: [
-			// 			{ field: "callId" },
-			// 			{ field: "direction" },
-			// 			{
-			// 				field: "number",
-			// 				minWidth: 150,
-			// 			},
-			// 			{
-			// 				field: "duration",
-			// 				valueFormatter: "x.toLocaleString() + 's'",
-			// 			},
-			// 			{
-			// 				field: "switchCode",
-			// 				minWidth: 150,
-			// 			},
-			// 		],
-			// 		defaultColDef: { flex: 1 },
-			// 	},
-			// 	getDetailRowData: function (params) {
-			// 		params.successCallback(params.data.callRecords);
-			// 	},
-			// },
 			rowData: null,
 		};
 	}
@@ -83,19 +86,10 @@ class OrderGridDetails extends Component {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 
-		// const updateData = (data) => {
-		//   this.setState({ rowData: data });
-		// };
-
-		// fetch('https://www.ag-grid.com/example-assets/master-detail-data.json')
-		//   .then((resp) => resp.json())
-		//   .then((data) => updateData(data));
-
 		fetchOrderMasterData().then((data) => {
 			this.setState({ rowData: data.data });
 		});
 	};
-
 
 	render() {
 		return (
@@ -122,6 +116,9 @@ class OrderGridDetails extends Component {
 						// detailCellRendererParams={this.state.detailCellRendererParams}
 						onGridReady={this.onGridReady}
 						rowData={this.state.rowData}
+						frameworkComponents={this.state.frameworkComponents}
+						pagination={true}
+						paginationAutoPageSize={true}
 					/>
 				</div>
 			</div>

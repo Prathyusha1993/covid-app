@@ -10,6 +10,18 @@ export default class BtnCellRenderer extends Component {
 			count: 2,
 			item: 0,
 			show: false,
+			firstName: '',
+			lastName:'',
+			dob:'',
+			gender:'',
+			mrn:'',
+			email:'',
+			mobile:'',
+			address:'',
+			city:'',
+			state:'',
+			zip:'',
+			country:''
 		};
 	}
 
@@ -29,7 +41,7 @@ export default class BtnCellRenderer extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
     
-    handleEditChanges = () => {
+    handlePatientEditChanges = () => {
         //api edit changes here
     }
 
