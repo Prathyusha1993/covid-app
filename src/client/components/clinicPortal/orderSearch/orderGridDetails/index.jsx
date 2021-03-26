@@ -42,7 +42,7 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						return moment(params.data.test_info.collected).format(
-							"MM-DD-YYYY, h:mm:ss a"
+							"MM/DD/YYYY h:mm a"
 						);
 					},
 				},
@@ -65,7 +65,7 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						return moment(params.data.test_info.received).format(
-							"MM-DD-YYYY, h:mm:ss a"
+							"MM/DD/YYYY h:mm a"
 						);
 					},
 				},

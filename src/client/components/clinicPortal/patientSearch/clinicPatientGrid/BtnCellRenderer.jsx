@@ -48,13 +48,13 @@ export default class BtnCellRenderer extends Component {
 	render() {
 		return (
 			<div>
-				<Button onClick={this.handleShow} style={{ border: "none" }}>
+				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'white' }}>
 					<i class="fas fa-pen"></i>
-				</Button>
+				</button>
 
 				<Modal show={this.state.show} onHide={this.handleClose}>
 					<Modal.Header closeButton>
-						<Modal.Title>Modal</Modal.Title>
+						<Modal.Title>Edit Patient Information</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<form>
@@ -217,6 +217,11 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>State</label>
 										<select
+										style={{
+											borderTop: "none",
+											borderLeft: "none",
+											borderRight: "none",
+										}}
 											className="form-control select"
                                             name="state"
 											value={this.state.state}

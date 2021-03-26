@@ -124,9 +124,9 @@ class PatientPortalLoginContainer extends Component {
 													className="form-control"
 													required
 												/>
-												<span>Email: username@example.com</span>
-												<br />
-												<span>Mobile #: 1234567890</span>
+												<span style={{fontSize: '13px'}}>Email: username@example.com <br /> Mobile #: 1234567890</span>
+												{/* <br />
+												<span>Mobile #: 1234567890</span> */}
 											</div>
 											<div className="form-group">
 												<label className="font-weight-bold">

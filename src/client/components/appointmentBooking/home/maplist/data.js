@@ -12,7 +12,8 @@ export const locations = [
         image: SHADY_GROVE,
         timings1:"Mon to Fri: 9am - 5pm",
         timings2:"Sat: 9am - 12pm",
-        contactNumber:"(301) 217-0979"
+        contactNumber:"(301) 217-0979",
+        //animation: "DROP"
     },
     {
         id:2,
@@ -23,7 +24,8 @@ export const locations = [
         bookingLink: "https://www.farragutmedical.com/",
         image: FARRAGUT_MEDICAL,
         timings1:"Mon to Fri: 10Am - 5pm",
-        contactNumber:"(202) 775-8500"
+        contactNumber:"(202) 775-8500",
+        //animation: "DROP"
     },
     {
         id:3,
@@ -35,7 +37,8 @@ export const locations = [
         image: FAST_TRACK_URGENT_CARE,
         timings1:"Mon to Fri: 9am - 8:30pm",
         timings2: "Sat: 10:30am - 5pm",
-        contactNumber:"(844) 202-1532"
+        contactNumber:"(844) 202-1532",
+        //animation: "DROP"
     },
     {
         id:4,
@@ -47,7 +50,8 @@ export const locations = [
         image: FAST_TRACK_URGENT_CARE,
         timings1:"Mon to Fri: 9am - 9pm",
         timings2: "Sat: 9:30pm - 5:30pm",
-        contactNumber:"(844) 202-1532"
+        contactNumber:"(844) 202-1532",
+        //animation: "DROP"
     },
     {
         id:5,
@@ -59,7 +63,8 @@ export const locations = [
         image: GRUBB_PHARMACY,
         timings1:"Mon to Fri: 8:30am - 6pm",
         timings2: "Sat: 9am - 3pm",
-        contactNumber:"(202) 543-4400"
+        contactNumber:"(202) 543-4400",
+        //animation: "DROP"
     },
     
 ];

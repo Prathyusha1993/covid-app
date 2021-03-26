@@ -16,7 +16,6 @@ import BtnCellRenderer from "./BtnCellRenderer";
 class ClinicPatientGrid extends Component {
 	constructor(props) {
 		super(props);
-		this.handleGridEdit = this.handleGridEdit.bind(this);
 		
 		this.state = {
 			modules: [
@@ -30,22 +29,7 @@ class ClinicPatientGrid extends Component {
 					headerName: "Edit",
 					minWidth: 100,
 					cellStyle: { textAlign: 'center' },
-					// cellRenderer: function (params) {
-					// 	let value = params.value ? params.value : ''
-					// 	return(
-					// 		//'<span> <i class="fas fa-pen"></i>' + value + '</span>'
-					// 		<button onClick={this.handleGridEdit}><span> <i class="fas fa-pen"></i>{value}</span></button>
-					// 	)
-					// },
-					// cellRendererFramework: function(params) {
-					// 	return <button onClick={this.handleGridEdit}>Tesst</button>
-					// }
 					 cellRenderer: 'btnCellRenderer',
-					// cellRendererParams: {
-					// 	clicked: function() {
-					// 	  alert("hello");
-					// 	},
-					//   },
 				},
 			
 				{
@@ -60,7 +44,7 @@ class ClinicPatientGrid extends Component {
 					field: "date_of_birth",
 					minWidth: 150,
 					cellRenderer: function (params) {
-						return moment(params.data.date_of_birth).format("MM-DD-YYYY");
+						return moment(params.data.date_of_birth).format("MM/DD/YYYY");
 					},
 				},
 				{
@@ -79,11 +63,14 @@ class ClinicPatientGrid extends Component {
 					minWidth: 150,
 					resizable: true,
 					cellRenderer: function (params) {
-						let email =  params.data.email ? params.data.email : '';
+						//let email =  params.data.email ? params.data.email : '';
 						return (
-							'<span><i class="fas fa-envelope"></i> ' +
-							email +
-							"</span>"
+							params.data.email ? '<span><i class="fas fa-envelope"></i> ' +
+							params.data.email +
+							'</span>' : ''
+							// '<span><i class="fas fa-envelope"></i> ' +
+							// email +
+							// "</span>"
 						);
 					},
 				},
@@ -147,7 +134,7 @@ class ClinicPatientGrid extends Component {
 							resizable: true,
 							cellRenderer: function (params) {
 								return moment(params.data.test_info.collected).format(
-									"MM-DD-YYYY, h:mm:ss a"
+									"MM/DD/YYYY h:mm a"
 								);
 							},
 						},
@@ -170,7 +157,7 @@ class ClinicPatientGrid extends Component {
 							resizable: true,
 							cellRenderer: function (params) {
 								return moment(params.data.test_info.received).format(
-									"MM-DD-YYYY, h:mm:ss a"
+									"MM/DD/YYYY h:mm a"
 								);
 							},
 						},
