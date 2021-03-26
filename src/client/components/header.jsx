@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import $ from "jquery";
 import { useEffect } from "react";
 import AGT_MCN_LOGO from "../assets/images/results/agt-mcn-logo.png";
+import AGT_LOGO from '../assets/images/results/agt-logo.png';
 
 const Header = (props) => {
   let pathnames = window.location.pathname
@@ -49,14 +50,30 @@ const Header = (props) => {
               <span></span>
             </span>
           </a>
-          <Link to="/home" className="navbar-brand logo">
-            <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />
+          <Link to="/home" className="navbar-brand " style={{marginRight:100}}>
+            {/* <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> */}
+            <img
+								src={AGT_MCN_LOGO}
+								width="400"
+								height="45"
+								object-fit="cover"
+								
+								alt=""
+							/>
           </Link>
         </div>
         <div className="main-menu-wrapper">
           <div className="menu-header">
             <Link to="/home" className="menu-logo">
-              <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> 
+              {/* <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />  */}
+              <img
+								src={AGT_MCN_LOGO}
+								width="400"
+								height="45"
+								object-fit="cover"
+								
+								alt=""
+							/>
             </Link>
             <a
               href="#0"
@@ -68,17 +85,21 @@ const Header = (props) => {
             </a>
           </div>
           <ul className="main-nav"> 
-            <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
-              <a href="/patientportal">
-                View Results
-              </a>
-            </li>
+            <li className="nav-item">
+                <a href="/patientportal" className="top-nav-button"> View My Results </a>
+            </li>{" "}
 
-             <li className={`has-submenu ${url.includes("/clinic") ? "active" : ""}`}>
+            {/* <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
+              <a href="/patientportal">
+                View My Results
+              </a>
+            </li> */}
+
+             {/* <li className={`has-submenu ${url.includes("/clinic") ? "active" : ""}`}>
               <a href="/clinic">
                 Clinic
               </a>
-            </li>
+            </li> */}
 
             {/*<li className={`has-submenu ${url.includes("/clinic/orders") ? "active" : ""}`}>
               <a href="/clinic/orders">
@@ -86,17 +107,25 @@ const Header = (props) => {
               </a>
             </li> */}
             
-            <li className="login-link" onClick={()=>onhandleCloseMenu()}>
+            {/* <li className="login-link" onClick={()=>onhandleCloseMenu()}>
               <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <ul className="nav header-navbar-rht">
-            <>
+            {/* <>
               <li className="nav-item">
                 <a href="#search-location" className="nav-link header-login"> BOOK AN APPOINTMENT </a>
               </li>{" "}
-            </>
+            </> */}
+            <img
+								src={AGT_LOGO}
+								width="200"
+								height="70"
+								object-fit="cover"
+								className="d-inline-block align-top"
+								alt=""
+							/>
         </ul>
       </nav>
     </header>

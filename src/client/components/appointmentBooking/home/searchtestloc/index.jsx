@@ -37,14 +37,14 @@ class SearchTestLoc extends Component {
 			],
 		};
 		return (
-			<section className="section popular-section" id="search-location">
+			<section className="section popular-section" id="search-provider">
 				<div className="container">
 					<div className="section-header text-center">
-						<h5>"Search Rt-PCR test provider locations"</h5>
-						<h2>"Find the nearest location to you and book a Covid 19 test"</h2>
+						<h5>Search for a COVID-19 Rt-PCR testing provider near you</h5>
+						<h2>Find the nearest location then book an appointment</h2>
 						<p className="sub-title">
-							You will receive your results within 24 hours of getting your
-							Rt-PCR Nasal Swab test from one of our providers."
+						You will receive your results between 12 to 24 hours of getting your COVID-19 Rt-PCR nasal swab test 
+						from one of our providers in the map below.
 						</p>
 					</div>
 				</div>

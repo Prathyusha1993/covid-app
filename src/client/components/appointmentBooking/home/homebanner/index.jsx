@@ -14,17 +14,16 @@ class HomeBookAppoinment extends Component {
 									<h5>Covid 19 Rt-PCR Testing</h5>
 									<h1>
 										Results within 24 hours <br />
-										<span>simple 4 step process</span>
+										<span>Four step process</span>
 									</h1>
 									<p>
-										Book an appointment with a physician at one of our partner
-										locations and get your results within 24 hours!
+									Book an appointment with a physician at one of our partner locations and you will have your results within 24 hours!
 									</p>
 									<div className="btn-col">
 										<ul>
 											<li>
-												<a href="#search-map" className="btn btn-fill">
-													Find Nearest Location
+												<a href="#search-provider" className="btn btn-fill">
+												Book an Appointment Now
 												</a>
 											</li>
 										</ul>

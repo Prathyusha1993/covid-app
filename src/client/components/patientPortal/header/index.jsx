@@ -13,17 +13,17 @@ class PatientPortalHeader extends Component {
 			<div>
 				<Navbar bg="light">
 					<Navbar bg="light">
-						<Navbar.Brand className="navbar-brand logo">
+						<Link to="/home" className="navbar-brand ">							
 							<img
 								src={AGT_MCN_LOGO}
-								width="400"
+								width="400"								
 								height="45"
 								object-fit="cover"
-								className="img-fluid"
+								className="d-inline-block align-top"
 								alt=""
 							/>
-						</Navbar.Brand>
-						{/* {isUserLoggedIn() && ( */}
+						</Link>
+						{/* {isUserLoggedIn() && ( 
 							<Navbar.Brand>
 							<div className="main-menu-wrapper">
 								<div className="menu-header">

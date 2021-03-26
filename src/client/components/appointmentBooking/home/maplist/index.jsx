@@ -20,12 +20,12 @@ class MapList extends Component {
 		return (
 			<section
 				className="choose-us"
-				id="search-map"
+				
 			>
-				<div style={{ marginRight: "40px" }}>
+				<div style={{ marginRight: "40px",marginLeft:"20px" }}>
 					<div className="row">
 						<div
-							className="col-12 col-lg-5"
+							className="col-12 col-lg-4"
 							style={{ overflowY: "scroll", height: "100vh", width: "100%" }}
 						>
 							<div className="left">
@@ -44,13 +44,14 @@ class MapList extends Component {
 														</div>
 														<div className="doc-info-cont">
 															<h4 className="doc-name">{item.name}</h4>
-															<p className="doc-speciality">
-																Virtual Visits Required for COVID-19 Tests
-															</p>
+															
 															<div className="clinic-details">
 																<p className="doc-location">
 																	<i className="fas fa-map-marker-alt"></i>{" "}
-																	{item.address}
+																	{item.address}<br/><br/>
+																	{item.timings1}<br/>
+																	{item.timings2}<br/>
+																	<i className="fas fa-phone"></i>{" "}{item.contactNumber}
 																</p>
 																<div className="clinic-booking">
 																	<a
@@ -82,7 +83,7 @@ class MapList extends Component {
 								</div> */}
 							</div>
 						</div>
-						<div className="col-12 col-lg-7">
+						<div className="col-12 col-lg-8">
 							<div className="right">
 								<div id="map" className="map-listing">
 									<div style={{ height: "100vh", width: "100%" }}>

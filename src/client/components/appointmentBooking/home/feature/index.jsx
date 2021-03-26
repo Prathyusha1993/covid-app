@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IMG01, IMG02, IMG03, IMG04 } from "./img.jsx";
+import { ImgStep1, ImgStep2, ImgStep3, ImgStep4 } from "./img.jsx";
 
 class Feature extends Component {
 	render() {
@@ -13,7 +13,7 @@ class Feature extends Component {
 									<h5>01</h5>
 								</div>
 								<div className="feature-icon">
-									<img src={IMG01} alt="" />
+									<img src={ImgStep1} alt="" />
 								</div>
 								<h4>
 									Find A Close <br />
@@ -30,7 +30,7 @@ class Feature extends Component {
 									<h5>02</h5>
 								</div>
 								<div className="feature-icon">
-									<img src={IMG02} alt="" />
+									<img src={ImgStep2} alt="" />
 								</div>
 								<h4>
 									Book An <br />
@@ -47,11 +47,12 @@ class Feature extends Component {
 									<h5>03</h5>
 								</div>
 								<div className="feature-icon">
-									<img src={IMG03} alt="" />
+									<img src={ImgStep3} alt="" />
 								</div>
 								<h4>
-									Go For Nasal Swab <br />
-									Appointment
+									Go For Your <br />
+									Rt-PCR Test 
+									
 								</h4>
 								<div className="plus-icon text-right">
 									{/* <i className="fas fa-plus-circle" /> */}
@@ -64,7 +65,7 @@ class Feature extends Component {
 									<h5>04</h5>
 								</div>
 								<div className="feature-icon">
-									<img src={IMG04} alt="" />
+									<img src={ImgStep4} alt="" />
 								</div>
 								<h4>
 									Get Your <br />

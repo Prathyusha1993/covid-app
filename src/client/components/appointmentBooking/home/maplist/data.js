@@ -9,7 +9,10 @@ export const locations = [
         lat: 39.102698,
         lng: -77.190221,
         bookingLink: "https://shadygrovemedicine.com/covid-19-testing-facility/",
-        image: SHADY_GROVE
+        image: SHADY_GROVE,
+        timings1:"Mon to Fri: 9am - 5pm",
+        timings2:"Sat: 9am - 12pm",
+        contactNumber:"(301) 217-0979"
     },
     {
         id:2,
@@ -18,7 +21,9 @@ export const locations = [
         lat: 38.901257,
         lng: -77.037917,
         bookingLink: "https://www.farragutmedical.com/",
-        image: FARRAGUT_MEDICAL
+        image: FARRAGUT_MEDICAL,
+        timings1:"Mon to Fri: 10Am - 5pm",
+        contactNumber:"(202) 775-8500"
     },
     {
         id:3,
@@ -27,7 +32,10 @@ export const locations = [
         lat: 39.02830783589008,
         lng: -77.07682728924972,
         bookingLink: " https://fastrackmd.com/covid-19-response/",
-        image: FAST_TRACK_URGENT_CARE
+        image: FAST_TRACK_URGENT_CARE,
+        timings1:"Mon to Fri: 9am - 8:30pm",
+        timings2: "Sat: 10:30am - 5pm",
+        contactNumber:"(844) 202-1532"
     },
     {
         id:4,
@@ -36,7 +44,10 @@ export const locations = [
         lat: 39.076977557310016,
         lng: -77.00246890274003,
         bookingLink: "https://fastrackmd.com/covid-19-response/",
-        image: FAST_TRACK_URGENT_CARE
+        image: FAST_TRACK_URGENT_CARE,
+        timings1:"Mon to Fri: 9am - 9pm",
+        timings2: "Sat: 9:30pm - 5:30pm",
+        contactNumber:"(844) 202-1532"
     },
     {
         id:5,
@@ -45,7 +56,10 @@ export const locations = [
         lat: 38.89024144964276,
         lng: -77.00078413158236,
         bookingLink: " http://www.grubbspharmacy.com/",
-        image: GRUBB_PHARMACY
+        image: GRUBB_PHARMACY,
+        timings1:"Mon to Fri: 8:30am - 6pm",
+        timings2: "Sat: 9am - 3pm",
+        contactNumber:"(202) 543-4400"
     },
     
 ];
