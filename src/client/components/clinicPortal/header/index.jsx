@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class ClinicPortalHeader extends Component {
 	render() {

@@ -10,11 +10,14 @@ import {
 	fetchPatientMasterData,
 	fetchPatientExpandableData,
 } from "../../../../clinicPortalServices/patientSearchService";
+import moment from "moment";
+import BtnCellRenderer from "./BtnCellRenderer";
 
 class ClinicPatientGrid extends Component {
 	constructor(props) {
 		super(props);
-
+		this.handleGridEdit = this.handleGridEdit.bind(this);
+		
 		this.state = {
 			modules: [
 				ClientSideRowModelModule,
@@ -24,24 +27,62 @@ class ClinicPatientGrid extends Component {
 			],
 			columnDefs: [
 				{
+					headerName: "Edit",
+					minWidth: 100,
+					cellStyle: { textAlign: 'center' },
+					// cellRenderer: function (params) {
+					// 	let value = params.value ? params.value : ''
+					// 	return(
+					// 		//'<span> <i class="fas fa-pen"></i>' + value + '</span>'
+					// 		<button onClick={this.handleGridEdit}><span> <i class="fas fa-pen"></i>{value}</span></button>
+					// 	)
+					// },
+					// cellRendererFramework: function(params) {
+					// 	return <button onClick={this.handleGridEdit}>Tesst</button>
+					// }
+					 cellRenderer: 'btnCellRenderer',
+					// cellRendererParams: {
+					// 	clicked: function() {
+					// 	  alert("hello");
+					// 	},
+					//   },
+				},
+			
+				{
 					headerName: "First Name",
 					field: "first_name",
 					cellRenderer: "agGroupCellRenderer",
+					minWidth: 200,
 				},
-				{ headerName: "Last Name", field: "last_name" },
-				{ headerName: "Date Of Birth", field: "date_of_birth" },
+				{ headerName: "Last Name", field: "last_name", minWidth: 150 },
+				{
+					headerName: "Date Of Birth",
+					field: "date_of_birth",
+					minWidth: 150,
+					cellRenderer: function (params) {
+						return moment(params.data.date_of_birth).format("MM-DD-YYYY");
+					},
+				},
 				{
 					headerName: "Gender",
 					field: "gender",
+					minWidth: 150,
+				},
+				{
+					headerName: "MRN",
+					field: "mrn",
+					minWidth: 150,
 				},
 				{
 					headerName: "Email",
 					field: "email",
 					minWidth: 150,
+					resizable: true,
 					cellRenderer: function (params) {
+						let email =  params.data.email ? params.data.email : '';
 						return (
-							'<span><i class="fas fa-envelope-square"></i> ' +
-							params.data.email +
+							'<span><i class="fas fa-envelope"></i> ' +
+							email +
 							"</span>"
 						);
 					},
@@ -49,11 +90,12 @@ class ClinicPatientGrid extends Component {
 				{
 					headerName: "Phone",
 					field: "mobile",
-					minWidth: 150,
+					minWidth: 200,
 					cellRenderer: function (params) {
+						let phone =  params.data.mobile ? params.data.mobile : '';
 						return (
-							'<span><i class="fas fa-phone-square-alt"></i> ' +
-							params.data.mobile +
+							'<span><i class="fas fa-phone-alt"></i> ' +
+							phone +
 							"</span>"
 						);
 					},
@@ -62,7 +104,6 @@ class ClinicPatientGrid extends Component {
 					headerName: "Address",
 					minWidth: 200,
 					resizable: true,
-					field: "address1",
 					valueGetter: function addColumns(params) {
 						return (
 							params.data.address.address1 +
@@ -71,39 +112,44 @@ class ClinicPatientGrid extends Component {
 							" " +
 							params.data.address.city +
 							" " +
-							params.data.address.state
+							params.data.address.state +
+							" " +
+							params.data.address.zip
 						);
 					},
 					cellRenderer: function (params) {
 						return (
 							'<span><i class="fas fa-map-marker-alt"></i> ' +
 							params.value +
-							"</span>"
+							'</span>'
 						);
 					},
 				},
-				{
-					headerName: "Source",
-					field: "facility_source",
-				},
 			],
+			frameworkComponents: {
+				btnCellRenderer: BtnCellRenderer,
+			},
 			defaultColDef: { flex: 1 },
 			detailCellRendererParams: {
 				detailGridOptions: {
 					columnDefs: [
 						{ headerName: "Test", field: "test_info.description" },
 						{ headerName: "Test Type", field: "test_info.test_type" },
+						{ headerName: "Sample", field: "test_info.sample" },
 						{
 							headerName: "Result",
-							field: "results.value",
-						},
-						{
-							headerName: "Result Date",
-							field: "results.result_date",
+							field: "test_info.covid_detected",
 						},
 						{
 							headerName: "Specimen Collected Date",
-							field: "order_date",
+							field: "test_info.collected",
+							minWidth: 200,
+							resizable: true,
+							cellRenderer: function (params) {
+								return moment(params.data.test_info.collected).format(
+									"MM-DD-YYYY, h:mm:ss a"
+								);
+							},
 						},
 						{
 							headerName: "Provider",
@@ -117,16 +163,30 @@ class ClinicPatientGrid extends Component {
 								);
 							},
 						},
+						{
+							headerName: "Received Date",
+							field: "test_info.received",
+							minWidth: 200,
+							resizable: true,
+							cellRenderer: function (params) {
+								return moment(params.data.test_info.received).format(
+									"MM-DD-YYYY, h:mm:ss a"
+								);
+							},
+						},
+						{
+							headerName: "Requisition",
+							field: "test_info.requisition",
+						},
 					],
 					defaultColDef: { flex: 1 },
 				},
 				getDetailRowData: function (params) {
-					fetchPatientExpandableData(params.data.patiendId).then(
+					fetchPatientExpandableData(params.data._id).then(
 						(expandableRowData) => {
 							params.successCallback(expandableRowData.data);
 						}
 					);
-					//params.successCallback(params.data.callRecords);
 				},
 			},
 			rowData: null,
@@ -134,32 +194,32 @@ class ClinicPatientGrid extends Component {
 		};
 	}
 
+	handleGridEdit = (params) => {
+		console.log(params);
+		alert("hello");
+	}
+
 	onGridReady = (params) => {
+		console.log(params);
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 
-		// const updateData = (data) => {
-		//   this.setState({ rowData: data });
-		// };
-
-		// fetch('https://www.ag-grid.com/example-assets/master-detail-data.json')
-		//   .then((resp) => resp.json())
-		//   .then((data) => updateData(data));
-
+		//need to pass facility_id as input 
 		fetchPatientMasterData().then((data) => {
 			this.setState({ rowData: data.data });
 		});
 	};
 
-	onFirstDataRendered = (params) => {
-		setTimeout(function () {
-			params.api.getDisplayedRowAtIndex(1).setExpanded(true);
-		}, 0);
-	};
+	// onFilterTextChange = (e) => {
+	// 	this.gridApi.setQuickFilter(e.target.value);
+	// }
 
 	render() {
 		return (
 			<div>
+				{/* <div style={{padding:' 10px'}}>
+				<input type="search" onChange={this.onFilterTextChange} placeholder="Quick Search"/>
+				</div> */}
 				<div
 					style={{
 						width: "100%",
@@ -182,8 +242,10 @@ class ClinicPatientGrid extends Component {
 							masterDetail={true}
 							detailCellRendererParams={this.state.detailCellRendererParams}
 							onGridReady={this.onGridReady}
-							onFirstDataRendered={this.onFirstDataRendered.bind(this)}
 							rowData={this.state.rowData}
+							frameworkComponents={this.state.frameworkComponents}
+							pagination={true}
+							paginationAutoPageSize={true}
 						/>
 					</div>
 				</div>

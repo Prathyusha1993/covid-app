@@ -23,7 +23,6 @@ class OrderGridDetails extends Component {
 				{
 					headerName: "Test",
 					field: "test_info.description",
-					cellRenderer: "agGroupCellRenderer",
 				},
 				{ headerName: "Test Type", field: "test_info.test_type" },
 				{
@@ -52,30 +51,30 @@ class OrderGridDetails extends Component {
 				},
 			],
 			defaultColDef: { flex: 1 },
-			detailCellRendererParams: {
-				detailGridOptions: {
-					columnDefs: [
-						{ field: "callId" },
-						{ field: "direction" },
-						{
-							field: "number",
-							minWidth: 150,
-						},
-						{
-							field: "duration",
-							valueFormatter: "x.toLocaleString() + 's'",
-						},
-						{
-							field: "switchCode",
-							minWidth: 150,
-						},
-					],
-					defaultColDef: { flex: 1 },
-				},
-				getDetailRowData: function (params) {
-					params.successCallback(params.data.callRecords);
-				},
-			},
+			// detailCellRendererParams: {
+			// 	detailGridOptions: {
+			// 		columnDefs: [
+			// 			{ field: "callId" },
+			// 			{ field: "direction" },
+			// 			{
+			// 				field: "number",
+			// 				minWidth: 150,
+			// 			},
+			// 			{
+			// 				field: "duration",
+			// 				valueFormatter: "x.toLocaleString() + 's'",
+			// 			},
+			// 			{
+			// 				field: "switchCode",
+			// 				minWidth: 150,
+			// 			},
+			// 		],
+			// 		defaultColDef: { flex: 1 },
+			// 	},
+			// 	getDetailRowData: function (params) {
+			// 		params.successCallback(params.data.callRecords);
+			// 	},
+			// },
 			rowData: null,
 		};
 	}
@@ -97,11 +96,6 @@ class OrderGridDetails extends Component {
 		});
 	};
 
-	onFirstDataRendered = (params) => {
-		setTimeout(function () {
-			params.api.getDisplayedRowAtIndex(1).setExpanded(true);
-		}, 0);
-	};
 
 	render() {
 		return (
@@ -125,9 +119,8 @@ class OrderGridDetails extends Component {
 						columnDefs={this.state.columnDefs}
 						defaultColDef={this.state.defaultColDef}
 						masterDetail={true}
-						detailCellRendererParams={this.state.detailCellRendererParams}
+						// detailCellRendererParams={this.state.detailCellRendererParams}
 						onGridReady={this.onGridReady}
-						onFirstDataRendered={this.onFirstDataRendered.bind(this)}
 						rowData={this.state.rowData}
 					/>
 				</div>

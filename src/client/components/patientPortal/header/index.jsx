@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
+//import {isUserLoggedIn} from "../../../utils/util";
+
+let pathnames = window.location.pathname;
+const url = pathnames.split("/").slice(0, -1).join("/");
 
 class PatientPortalHeader extends Component {
 	render() {
@@ -18,6 +23,34 @@ class PatientPortalHeader extends Component {
 								alt=""
 							/>
 						</Navbar.Brand>
+						{/* {isUserLoggedIn() && ( */}
+							<Navbar.Brand>
+							<div className="main-menu-wrapper">
+								<div className="menu-header">
+									<Link to="/home" className="menu-logo">
+										<img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />
+									</Link>
+								</div>
+								<ul className="main-nav">
+									<li
+										className={`has-submenu ${
+											url.includes("/clinic/patients") ? "active" : ""
+										}`}
+									>
+										<a href="/clinic/patients">Patients</a>
+									</li>
+
+									<li
+										className={`has-submenu ${
+											url.includes("/clinic/orders") ? "active" : ""
+										}`}
+									>
+										<a href="/clinic/orders">Orders</a>
+									</li>
+								</ul>
+							</div>
+						</Navbar.Brand>
+						{/* )} */}
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
