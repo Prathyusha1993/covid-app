@@ -1,3 +1,3 @@
-export const isUserLoggedIn = () => {
-    return window.localStorage.getItem('AUTH-TOKEN') ? true : false;
-}
+// export const isUserLoggedIn = () => {
+//     return window.localStorage.getItem('AUTH-TOKEN') ? true : false;
+// }

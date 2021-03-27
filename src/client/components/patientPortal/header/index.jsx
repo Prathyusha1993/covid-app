@@ -23,32 +23,25 @@ class PatientPortalHeader extends Component {
 								alt=""
 							/>
 						</Link>
-						{/* {isUserLoggedIn() && ( 
-							<Navbar.Brand>
-							<div className="main-menu-wrapper">
-								<div className="menu-header">
-									<Link to="/home" className="menu-logo">
-										<img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />
-									</Link>
-								</div>
-								<ul className="main-nav">
-									<li
-										className={`has-submenu ${
-											url.includes("/clinic/patients") ? "active" : ""
-										}`}
-									>
-										<a href="/clinic/patients">Patients</a>
-									</li>
-
-									<li
-										className={`has-submenu ${
-											url.includes("/clinic/orders") ? "active" : ""
-										}`}
-									>
-										<a href="/clinic/orders">Orders</a>
+						
+						 {/* {isUserLoggedIn() && (  */}
+							<Navbar.Brand >
+								<div>
+								<ul className="main-nav" >
+									<li className="nav-item">
+										<a href="/clinic/patients" className="top-nav-button">
+											{" "}
+											Patient{" "}
+										</a>
+									</li>{" "}
+									<li className="nav-item">
+										<a href="/clinic/orders" className="top-nav-button">
+											{" "}
+											Order{" "}
+										</a>
 									</li>
 								</ul>
-							</div>
+								</div>
 						</Navbar.Brand>
 						{/* )} */}
 					</Navbar>

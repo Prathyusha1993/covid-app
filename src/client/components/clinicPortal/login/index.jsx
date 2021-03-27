@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { authenticateAndFetchUserDetails } from "../../../clinicPortalServices/loginService";
 //import { authenticateAndFetchUserDetails } from "../../../patientPortalServices/loginService";
 
 class ClinicPortalLoginContainer extends Component {
@@ -6,8 +7,9 @@ class ClinicPortalLoginContainer extends Component {
 		super(props);
 		this.state = {
 			password: "",
-			email: "",
+			userName: "",
 			id: "",
+			token: "",
 			isAuthenticationfailed: "UNKNOWN",
 		};
 	}
@@ -18,62 +20,31 @@ class ClinicPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
-		// var loginInfo = {};
-		// if (
-		// 	Number.isInteger(+this.state.contactInfo) === true &&
-		// 	this.state.contactInfo.length === 10
-		// ) {
-		// 	loginInfo = {
-		// 		mobile: this.state.contactInfo,
-		// 		date_of_birth: this.state.dob,
-		// 	};
-		// } else {
-		// 	loginInfo = {
-		// 		email: this.state.contactInfo,
-		// 		date_of_birth: this.state.dob,
-		// 	};
-		// }
-		// authenticateAndFetchUserDetails(loginInfo)
-		// 	.then((res) => {
-		// 		if (res.data.length === 0) {
-		// 			this.setState({
-		// 				isAuthenticationfailed: "YES",
-		// 			});
-		// 			return;
-		// 		}
-		// 		this.setState({
-		// 			isAuthenticationfailed: "NO",
-		// 		});
-		// 		window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
-		// 		window.localStorage.setItem("USER_EMAIL", res.data[0].email);
-		// 		window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
-		// 		window.localStorage.setItem(
-		// 			"USER_ADDRESS1",
-		// 			res.data[0].address.address1 +
-		// 				(res.data[0].address.address2 != ""
-		// 					? ", " + res.data[0].address.address2
-		// 					: "")
-		// 		);
-		// 		window.localStorage.setItem(
-		// 			"USER_ADDRESS2",
-		// 			res.data[0].address.city +
-		// 				", " +
-		// 				res.data[0].address.state +
-		// 				", " +
-		// 				res.data[0].address.zip
-		// 		);
-		// 		window.localStorage.setItem(
-		// 			"USER_NAME",
-		// 			res.data[0].first_name + " " + res.data[0].last_name
-		// 		);
-		// 		window.location.href = "/clinicportal/patients";
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 		this.setState({
-		// 			isAuthenticationfailed: "YES",
-		// 		});
-		// 	});
+	
+		authenticateAndFetchUserDetails(this.state.userName, this.state.password)
+			.then((userInfo) => {
+				console.log(userInfo);
+				if (userInfo.data.length === 0) {
+					this.setState({
+						isAuthenticationfailed: "YES",
+					});
+					return;
+				}
+				this.setState({
+					isAuthenticationfailed: "NO",
+				});
+				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
+				window.localStorage.setItem(
+					"FACILITY_ID",
+					userInfo.facilities[0]._id
+				);
+				window.location.href = "/clinic/patients";
+			})
+			.catch((err) => {
+				this.setState({
+					isAuthenticationfailed: "YES",
+				});
+			});
 	};
 
 	render() {
@@ -113,12 +84,12 @@ class ClinicPortalLoginContainer extends Component {
 										<form onSubmit={this.handleLogin}>
 											<div className="form-group">
 												<label className="font-weight-bold">
-													Email <span className="text-danger">*</span>
+													User Name <span className="text-danger">*</span>
 												</label>
 												<input
 													type="text"
-													name="email"
-													value={this.state.email}
+													name="userName"
+													value={this.state.userName}
 													onChange={this.handleChange}
 													className="form-control"
 													required
@@ -129,7 +100,7 @@ class ClinicPortalLoginContainer extends Component {
 													Password <span className="text-danger">*</span>
 												</label>
 												<input
-													type="text"
+													type="password"
 													name="password"
 													value={this.state.password}
 													onChange={this.handleChange}
