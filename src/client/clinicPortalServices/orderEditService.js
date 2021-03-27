@@ -8,13 +8,15 @@ export const fetchOrderEditData = (editParams) => {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({ 
-            'test': editParams && editParams.test_info.description ? editParams.test_info.description : '',
-            'sample': editParams && editParams.test_info.sample ? editParams.test_info.sample : '',
-            'result': editParams && editParams.test_info.covid_detected ? editParams.test_info.covid_detected  : '',
-            'collectedDate': editParams && editParams.test_info.collected ? editParams.test_info.collected : '',
-            'receivedDate': editParams && editParams.test_info.received ? editParams.test_info.received : '',
-            'requisition': editParams && editParams.test_info.requisition ? editParams.test_info.requisition : '',
-            
+            'test': editParams && editParams.description ? editParams.description : '',
+			'testType': editParams && editParams.testType ? editParams.testType : '',
+            'sample': editParams && editParams.sample ? editParams.sample : '',
+            'result': editParams && editParams.result ? editParams.result  : '',
+            'collectedDate': editParams && editParams.collectedDate ? editParams.collectedDate : '',
+            'provider': editParams && editParams.provider ? editParams.provider : '',
+            'receivedDate': editParams && editParams.receivedDate ? editParams.receivedDate : '',
+			'requisition': editParams && editParams.requisition ? editParams.requisition : '',
+            'patientName': editParams && editParams.patientName ? editParams.patientName : '',
          } )
 	}
 	).then((response) => response.json());

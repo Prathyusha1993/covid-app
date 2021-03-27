@@ -9,17 +9,17 @@ export const fetchPatientEditData = (editParams) => {
 		},
 		body: JSON.stringify({ 
             '_id': editParams._id,
-            'first_name': editParams && editParams.first_name ? editParams.first_name : '',
-            'last_name': editParams && editParams.last_name ? editParams.last_name : '',
+            'first_name': editParams && editParams.firstName ? editParams.firstName : '',
+            'last_name': editParams && editParams.lastName ? editParams.lastName : '',
             'email': editParams && editParams.email ? editParams.email : '',
+            'gender': editParams && editParams.gender ? editParams.gender : '',
             'mobile': editParams && editParams.mobile ? editParams.mobile : '',
-            'date_of_birth': editParams && editParams.date_of_birth ? editParams.date_of_birth : '',
-            'address1': editParams && editParams.address.address1 ? editParams.address.address1 : '',
-            'address2': editParams && editParams.address.address2 ? editParams.address.address2 : '',
-            'city': editParams && editParams.address.city ? editParams.address.city : '',
-            'state': editParams && editParams.address.state ? editParams.address.state : '',
-            'zip': editParams && editParams.address.zip ? editParams.address.zip : '',
-            'country': editParams && editParams.address.country ? editParams.address.country : '',
+            'date_of_birth': editParams && editParams.dob ? editParams.dob : '',
+            'address1': editParams && editParams.address1 ? editParams.address1 : '',
+            'address2': editParams && editParams.address2 ? editParams.address2 : '',
+            'city': editParams && editParams.city ? editParams.city : '',
+            'state': editParams && editParams.state ? editParams.state : '',
+            'zip': editParams && editParams.zip ? editParams.zip : '',
 
          } )
 	}

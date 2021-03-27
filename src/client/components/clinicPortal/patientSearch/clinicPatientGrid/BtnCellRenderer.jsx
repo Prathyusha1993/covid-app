@@ -1,27 +1,33 @@
 
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { states } from "./stateOptionsData";
+import {fetchPatientEditData} from "../../../../clinicPortalServices/patientEditService"
 
 export default class BtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
 
+		// console.log('BtnCellRenderer',BtnCellRenderer.getValueToDisplay(props));
+
 		this.state = {
-			count: 2,
-			item: 0,
 			show: false,
-			firstName: '',
-			lastName:'',
-			dob:'',
-			gender:'',
-			mrn:'',
-			email:'',
-			mobile:'',
-			address:'',
-			city:'',
-			state:'',
-			zip:'',
-			country:''
+			firstName: props.data.first_name,
+			lastName:props.data.last_name,
+			dob:props.data.date_of_birth,
+			gender:props.data.gender,
+			mrn:props.data.mrn,
+			email:props.data.email,
+			mobile:props.data.mobile,
+			address1:props.data.address.address1,
+			address2:props.data.address.address2,
+			city:props.data.address.city,
+			state:props.data.address.state,
+			zip:props.data.address.zip,
+			country:'',
+			stateOptions: '',
+			id:'',
+			loading: false
 		};
 	}
 
@@ -33,26 +39,46 @@ export default class BtnCellRenderer extends Component {
 		this.setState({ show: false });
 	};
 
-	// buttonClicked = () => {
-	// 	alert(`${this.state.count} medals won!`);
-	// };
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
     
-    handlePatientEditChanges = () => {
+    handlePatientEditChanges = (e) => {
         //api edit changes here
+		e.preventDefault();
+		
+		const editParams = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			dob:this.state.dob,
+			gender:this.state.gender,
+			mrn:this.state.mrn,
+			email:this.state.email,
+			mobile:this.state.mobile,
+			address1:this.state.address1,
+			address2:this.state.address2,
+			city:this.state.city,
+			state:this.state.state,
+			zip:this.state.zip,
+		};
+		fetchPatientEditData(editParams)
+		.then((userDetails) => {
+			this.setState({
+				editParams : userDetails,
+				show: false
+			});
+		})
     }
 
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'white' }}>
+				<button onClick={this.handleShow} data-toggle="modal" data-target="#exampleModal" style={{ border: "none", backgroundColor: 'white' }}>
 					<i class="fas fa-pen"></i>
 				</button>
 
-				<Modal show={this.state.show} onHide={this.handleClose}>
+				<Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show} onHide={this.handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Patient Information</Modal.Title>
 					</Modal.Header>
@@ -179,9 +205,9 @@ export default class BtnCellRenderer extends Component {
 										/>
 									</div>
 								</div>
-								<div className="col-12">
+								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Address</label>
+										<label>Address Line 1</label>
 										<input
 											style={{
 												borderTop: "none",
@@ -190,8 +216,25 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="address"
-											value={this.state.address}
+                                            name="address1"
+											value={this.state.address1}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Address Line 2</label>
+										<input
+											style={{
+												borderTop: "none",
+												borderLeft: "none",
+												borderRight: "none",
+											}}
+											type="text"
+											className="form-control"
+                                            name="address2"
+											value={this.state.address2}
 											onChange={this.handleChange}
 										/>
 									</div>
@@ -227,57 +270,10 @@ export default class BtnCellRenderer extends Component {
 											value={this.state.state}
 											onChange={this.handleChange}
 										>
-											<option value="AL">Alabama</option>
-											<option>Alaska</option>
-											<option>Arizona</option>
-											<option>Arkansas</option>
-											<option>California</option>
-											<option>Colorado</option>
-											<option>Connecticut</option>
-											<option>Delaware</option>
-											<option>District Of Columbia</option>
-											<option>Florida</option>
-											<option>Georgia</option>
-											<option>Hawaii</option>
-											<option>Idaho</option>
-											<option>Illinois</option>
-											<option>Indiana</option>
-											<option>Iowa</option>
-											<option>Kansas</option>
-											<option>Kentucky</option>
-											<option>Louisiana</option>
-											<option>Maine</option>
-											<option>Maryland</option>
-											<option>Massachusetts</option>
-											<option>Michigan</option>
-											<option>Minnesota</option>
-											<option>Mississippi</option>
-											<option>Missouri</option>
-											<option>Montana</option>
-											<option>Nebraska</option>
-											<option>Nevada</option>
-											<option>New Hampshire</option>
-											<option>New Jersey</option>
-											<option>New Mexico</option>
-											<option>New York</option>
-											<option>North Carolina</option>
-											<option>North Dakota</option>
-											<option>Ohio</option>
-											<option>Oklahoma</option>
-											<option>Oregon</option>
-											<option>Pennsylvania</option>
-											<option>Rhode Island</option>
-											<option>South Carolina</option>
-											<option>South Dakota</option>
-											<option>Tennessee</option>
-											<option>Texas</option>
-											<option>Utah</option>
-											<option>Vermont</option>
-											<option>Virginia</option>
-											<option>Washington</option>
-											<option>West Virginia</option>
-											<option>Wisconsin</option>
-											<option>Wyoming</option>
+											{states.map((state) => {
+												return (<option value={state.value}>{state.state}</option>);
+											})}
+											
 										</select>
 									</div>
 								</div>
@@ -299,23 +295,6 @@ export default class BtnCellRenderer extends Component {
 										/>
 									</div>
 								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>Country</label>
-										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
-											type="text"
-											className="form-control"
-                                            name="country"
-											value={this.state.country}
-											onChange={this.handleChange}
-										/>
-									</div>
-								</div>
 							</div>
 						</form>
 					</Modal.Body>
@@ -323,7 +302,7 @@ export default class BtnCellRenderer extends Component {
 						<Button variant="secondary" onClick={this.handleClose}>
 							Close
 						</Button>
-						<Button variant="primary" onClick={this.handleClose}>
+						<Button variant="primary" onClick={this.handlePatientEditChanges}>
 							Save Changes
 						</Button>
 					</Modal.Footer>

@@ -28,11 +28,21 @@ class OrderGridDetails extends Component {
 					cellStyle: { textAlign: 'center' },
 					 cellRenderer: 'editBtnCellRenderer',
 				},
+				{ headerName: "Patient Name", minWidth:200, 
+				valueGetter: function addColumns(params) {
+					return (
+						params.data.patient_id.first_name +
+						" " +
+						params.data.patient_id.last_name 
+					);
+				},
+			 },
 				{ headerName: "Test", minWidth:150, field: "test_info.description" },
 				{ headerName: "Test Type", minWidth:150, field: "test_info.test_type" },
-				{ headerName: "Sample", field: "test_info.sample" },
+				{ headerName: "Sample", minWidth:150, field: "test_info.sample" },
 				{
 					headerName: "Result",
+					minWidth:150,
 					field: "test_info.covid_detected",
 				},
 				{
@@ -71,6 +81,7 @@ class OrderGridDetails extends Component {
 				},
 				{
 					headerName: "Requisition",
+					minWidth:150,
 					field: "test_info.requisition",
 				},
 			],

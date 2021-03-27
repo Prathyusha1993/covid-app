@@ -12,6 +12,7 @@ import {
 } from "../../../../clinicPortalServices/patientSearchService";
 import moment from "moment";
 import BtnCellRenderer from "./BtnCellRenderer";
+import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellRenderer";
 
 class ClinicPatientGrid extends Component {
 	constructor(props) {
@@ -44,7 +45,13 @@ class ClinicPatientGrid extends Component {
 					field: "date_of_birth",
 					minWidth: 150,
 					cellRenderer: function (params) {
-						return moment(params.data.date_of_birth).format("MM/DD/YYYY");
+						 return moment(params.data.date_of_birth).format("MM/DD/YYYY");
+						// return (
+						// 	true ? '<span><i class="fas fa-envelope"></i> ' +
+						// 	'reddy' +
+						// 	'</span>' : ''
+						// );
+						//return ('<span>kiran</span>');
 					},
 				},
 				{
@@ -63,14 +70,10 @@ class ClinicPatientGrid extends Component {
 					minWidth: 150,
 					resizable: true,
 					cellRenderer: function (params) {
-						//let email =  params.data.email ? params.data.email : '';
 						return (
 							params.data.email ? '<span><i class="fas fa-envelope"></i> ' +
 							params.data.email +
 							'</span>' : ''
-							// '<span><i class="fas fa-envelope"></i> ' +
-							// email +
-							// "</span>"
 						);
 					},
 				},
@@ -79,11 +82,10 @@ class ClinicPatientGrid extends Component {
 					field: "mobile",
 					minWidth: 200,
 					cellRenderer: function (params) {
-						let phone =  params.data.mobile ? params.data.mobile : '';
 						return (
-							'<span><i class="fas fa-phone-alt"></i> ' +
-							phone +
-							"</span>"
+							params.data.mobile ? '<span><i class="fas fa-phone-alt"></i> ' +
+							params.data.mobile +
+							'</span>' : ''
 						);
 					},
 				},
@@ -106,9 +108,9 @@ class ClinicPatientGrid extends Component {
 					},
 					cellRenderer: function (params) {
 						return (
-							'<span><i class="fas fa-map-marker-alt"></i> ' +
+							params.value ? '<span><i class="fas fa-map-marker-alt"></i> ' +
 							params.value +
-							'</span>'
+							'</span>' : ''
 						);
 					},
 				},
@@ -120,6 +122,12 @@ class ClinicPatientGrid extends Component {
 			detailCellRendererParams: {
 				detailGridOptions: {
 					columnDefs: [
+						{
+							headerName: "Edit",
+							minWidth: 100,
+							cellStyle: { textAlign: 'center' },
+							 cellRenderer: 'editBtnCellRenderer',
+						},
 						{ headerName: "Test", field: "test_info.description" },
 						{ headerName: "Test Type", field: "test_info.test_type" },
 						{ headerName: "Sample", field: "test_info.sample" },
@@ -166,6 +174,9 @@ class ClinicPatientGrid extends Component {
 							field: "test_info.requisition",
 						},
 					],
+					frameworkComponents: {
+						editBtnCellRenderer: EditBtnCellRenderer,
+					},
 					defaultColDef: { flex: 1 },
 				},
 				getDetailRowData: function (params) {

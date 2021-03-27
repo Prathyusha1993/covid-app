@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
+import {fetchOrderEditData} from "../../../../clinicPortalServices/orderEditService"
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -7,14 +8,15 @@ export default class EditBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
-			description: "",
-			testType: "",
-			sample: "",
-			result: "",
-			collectedDate: "",
-			provider: "",
-			receivedDate: "",
-			requisition: "",
+			description: props.data.test_info.description,
+			testType: props.data.test_info.test_type,
+			sample: props.data.test_info.sample,
+			result: props.data.test_info.covid_detected,
+			collectedDate: props.data.test_info.collected,
+			provider: props.data.provider.first_name + " " + props.data.provider.last_name,
+			receivedDate: props.data.test_info.received,
+			requisition: props.data.test_info.requisition,
+			patientName:props.data.patient_id.first_name + " " + props.data.patient_id.last_name
 		};
 	}
 
@@ -32,6 +34,24 @@ export default class EditBtnCellRenderer extends Component {
 
 	handleOrderEditChanges = () => {
 		//api edit changes here
+		const editParams = {
+			description: this.state.description,
+			testType: this.state.testType,
+			sample:this.state.sample,
+			result:this.state.result,
+			collectedDate:this.state.collectedDate,
+			provider:this.state.provider,
+			receivedDate:this.state.receivedDate,
+			requisition:this.state.requisition,
+			patientName: this.state.patientName,
+		};
+		fetchOrderEditData(editParams)
+		.then((userDetails) => {
+			this.setState({
+				editParams : userDetails,
+				show: false
+			});
+		})
 	};
 
 	render() {
@@ -41,7 +61,7 @@ export default class EditBtnCellRenderer extends Component {
 					<i class="fas fa-pen"></i>
 				</button>
 
-				<Modal show={this.state.show} onHide={this.handleClose}>
+				<Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show} onHide={this.handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Order Information</Modal.Title>
 					</Modal.Header>
@@ -79,6 +99,24 @@ export default class EditBtnCellRenderer extends Component {
 											className="form-control"
 											name="testType"
 											value={this.state.testType}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Patient Name</label>
+										<input
+											style={{
+												borderTop: "none",
+												borderLeft: "none",
+												borderRight: "none",
+											}}
+											type="text"
+                                            disabled
+											className="form-control"
+											name="patientName"
+											value={this.state.patientName}
 											onChange={this.handleChange}
 										/>
 									</div>
@@ -192,7 +230,7 @@ export default class EditBtnCellRenderer extends Component {
 						<Button variant="secondary" onClick={this.handleClose}>
 							Close
 						</Button>
-						<Button variant="primary" onClick={this.handleClose}>
+						<Button variant="primary" onClick={this.handleOrderEditChanges}>
 							Save Changes
 						</Button>
 					</Modal.Footer>
