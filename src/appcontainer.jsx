@@ -7,47 +7,22 @@ import TopHeader from "./client/components/topheader.jsx";
 import LoginContainer from "./client/components/login/login.jsx";
 import ForgotPassword from "./client/components/forgot-password";
 //import Home from "./client/components/home/index";
+
+//Home Appointment Booking
 import Home from "./client/components/appointmentBooking/home/index";
 // import Home1 from "./client/components/home/home1";
 // import Home2 from "./client/components/home/home2";
 // import HomeSlider1 from "./client/components/home/homeslider1";
 // import HomeSlider2 from "./client/components/home/homeslider2";
 
-//blog
-import BlogList from "./client/components/blog/bloglist";
-import BlogGrid from "./client/components/blog/bloggrid";
-import BlogDetails from "./client/components/blog/blogdetails";
-
-
-import DoctorGrid from "./client/components/patients/doctorgrid";
-import DoctorList from "./client/components/patients/doctorlist";
-import DoctorProfile from "./client/components/patients/doctorprofile";
-import DoctorChat from "./client/components/doctors/chat";
-import PatientChat from "./client/components/patients/chat";
-import MyPatient from "./client/components/doctors/mypatient";
-import Booking from "./client/components/patients/booking";
-import Checkout from "./client/components/patients/checkout";
-import BookingSuccess from "./client/components/patients/booking-success";
-//import Dashboard from "./client/components/patients/dashboard";
-import Favourties from "./client/components/patients/dashboard/favourties";
-import Profile from "./client/components/patients/dashboard/profile";
-import Password from "./client/components/patients/dashboard/password";
-import DoctorDashboard from "./client/components/doctors/dashboard";
-import SocialMedia from "./client/components/doctors/socialmedia";
-import ScheduleTiming from "./client/components/doctors/scheduletimings";
-import DoctorPassword from "./client/components/doctors/password";
-import Appointments from "./client/components/doctors/appointments";
-import PatientProfile from "./client/components/doctors/patientprofile";
-import AddPescription from "./client/components/doctors/addpescription";
-import AddBilling from "./client/components/doctors/addbilling";
-import ProfileSetting from "./client/components/doctors/profilesetting";
-import Review from "./client/components/doctors/reviews";
-import DoctorRegister from "./client/components/doctors/register";
 import BlankPage from "./client/components/blankpage";
+//Patient Portal
 import PatientPortalDashboard from "./client/components/patientPortal/dashboard";
 import PatientPortalLoginContainer from "./client/components/patientPortal/login";
-import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import PatientPortalHeader from "./client/components/patientPortal/header";
+
+//Clinic Portal
+import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/clinicPatientGrid/index";
 import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
 
@@ -94,80 +69,13 @@ const AppContainer = function (props) {
 							exact
 							component={OrderGridDetails}
 						/>
-						<Route path="/patient/doctor-grid" exact component={DoctorGrid} />
-						<Route path="/patient/doctor-list" exact component={DoctorList} />
-						<Route path="/doctor/chat-doctor" exact component={DoctorChat} />
+						
 
 						<Route path="/login" exact component={LoginContainer} />
 						<Route path="/forgot-password" exact component={ForgotPassword} />
 						<Route path="(/|/home)" exact component={Home} />
 
-						{/* blog */}
-						<Route path="/blog/blog-list" exact component={BlogList} />
-						<Route path="/blog/blog-grid" exact component={BlogGrid} />
-						<Route path="/blog/blog-details" exact component={BlogDetails} />
-						{/* pages */}
-
-						{/* <Route
-							path="/patient/search-doctor"
-							exact
-							component={SearchDoctor}
-						/> */}
-
-						<Route
-							path="/patient/doctor-profile"
-							exact
-							component={DoctorProfile}
-						/>
-						<Route path="/doctor/my-patients" exact component={MyPatient} />
-						<Route path="/patient/booking" exact component={Booking} />
-						<Route path="/patient/patient-chat" exact component={PatientChat} />
-						<Route path="/patient/checkout" exact component={Checkout} />
-						<Route
-							path="/patient/booking-success"
-							exact
-							component={BookingSuccess}
-						/>
-						{/* <Route path="/patient/dashboard" exact component={Dashboard} /> */}
-						<Route path="/patient/favourites" exact component={Favourties} />
-						<Route path="/patient/profile" exact component={Profile} />
-						<Route path="/patient/change-password" exact component={Password} />
-						<Route
-							path="/doctor/doctor-dashboard"
-							exact
-							component={DoctorDashboard}
-						/>
-						<Route path="/social-media" exact component={SocialMedia} />
-						<Route
-							path="/doctor/schedule-timing"
-							exact
-							component={ScheduleTiming}
-						/>
-						<Route
-							path="/doctor-change-passwword"
-							exact
-							component={DoctorPassword}
-						/>
-						{/* <Route path="/chat-doctor" exact component={DoctorChat} /> */}
-						<Route path="/doctor/appointments" exact component={Appointments} />
-						<Route
-							path="/doctor/patient-profile"
-							exact
-							component={PatientProfile}
-						/>
-						<Route path="/add-prescription" exact component={AddPescription} />
-						<Route path="/add-billing" exact component={AddBilling} />
-						<Route
-							path="/doctor/profile-setting"
-							exact
-							component={ProfileSetting}
-						/>
-						<Route path="/doctor/review" exact component={Review} />
-						<Route
-							path="/doctor/doctor-register"
-							exact
-							component={DoctorRegister}
-						/>
+						
 						
 					</Switch>
 					{/* <Route render={(props) => <Footer {...props} />} /> */}
