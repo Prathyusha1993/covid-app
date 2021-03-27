@@ -30,7 +30,7 @@ class ClinicPatientGrid extends Component {
 			columnDefs: [
 				{
 					headerName: "Edit",
-					minWidth: 100,
+					minWidth: 80,
 					cellStyle: { textAlign: 'center' },
 					 cellRenderer: 'btnCellRenderer',
 				},
@@ -126,16 +126,17 @@ class ClinicPatientGrid extends Component {
 					columnDefs: [
 						{
 							headerName: "Edit",
-							minWidth: 100,
+							minWidth: 80,
 							cellStyle: { textAlign: 'center' },
 							 cellRenderer: 'editBtnCellRenderer',
 						},
 						{ headerName: "Test", field: "test_info.description" },
 						{ headerName: "Test Type", field: "test_info.test_type" },
-						{ headerName: "Sample", field: "test_info.sample" },
+						{ headerName: "Sample", resizable: true, field: "test_info.sample" },
 						{
 							headerName: "Result",
 							field: "test_info.covid_detected",
+							resizable: true
 						},
 						{
 							headerName: "Specimen Collected Date",
@@ -143,9 +144,24 @@ class ClinicPatientGrid extends Component {
 							minWidth: 200,
 							resizable: true,
 							cellRenderer: function (params) {
-								return moment(params.data.test_info.collected).format(
+								console.log('collectedDate', params.data.test_info.collected);
+
+								// if (params.data.test_info.collected) {
+								// 	return moment(params.data.test_info.collected).format(
+								// 		"MM/DD/YYYY h:mm a"
+								// 	);
+								// } else {
+								// 	return '';
+								// }
+								return params.data.test_info.collected ? moment(params.data.test_info.collected).format(
 									"MM/DD/YYYY h:mm a"
-								);
+								) : ''
+								// return params.data.test_info.collected ? moment(params.data.test_info.collected, "YYYYMMDDhhmmss").format(
+								// 	"MM/DD/YYYY h:mm a"
+								// ) : ''
+								// return moment(params.data.test_info.collected).format(
+								// 	"MM/DD/YYYY h:mm a"
+								// );
 							},
 						},
 						{
@@ -179,7 +195,7 @@ class ClinicPatientGrid extends Component {
 					frameworkComponents: {
 						editBtnCellRenderer: EditBtnCellRenderer,
 					},
-					defaultColDef: { flex: 1 },
+					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
 					fetchPatientExpandableData(params.data._id).then(

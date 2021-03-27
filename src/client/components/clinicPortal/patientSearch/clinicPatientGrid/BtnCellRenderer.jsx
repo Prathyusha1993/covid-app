@@ -74,7 +74,7 @@ export default class BtnCellRenderer extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleShow} data-toggle="modal" data-target="#exampleModal" style={{ border: "none", backgroundColor: 'white' }}>
+				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'transparent' }}>
 					<i class="fas fa-pen"></i>
 				</button>
 

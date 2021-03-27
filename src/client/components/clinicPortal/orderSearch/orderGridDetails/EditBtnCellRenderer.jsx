@@ -57,7 +57,7 @@ export default class EditBtnCellRenderer extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'white' }}>
+				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'transparent' }}>
 					<i class="fas fa-pen"></i>
 				</button>
 
@@ -147,6 +147,7 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.result}
 											onChange={this.handleChange}
 										>
+											<option>Select</option>
 											<option>SARS-CoV-2 Not Detected</option>
 											<option>SARS-CoV-2 Detected</option>
 										</select>

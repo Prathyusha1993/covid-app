@@ -24,7 +24,7 @@ class OrderGridDetails extends Component {
 			columnDefs: [
 				{
 					headerName: "Edit",
-					minWidth: 100,
+					minWidth: 80,
 					cellStyle: { textAlign: 'center' },
 					 cellRenderer: 'editBtnCellRenderer',
 				},
@@ -43,6 +43,7 @@ class OrderGridDetails extends Component {
 				{
 					headerName: "Result",
 					minWidth:150,
+					resizable: true,
 					field: "test_info.covid_detected",
 				},
 				{
