@@ -4,6 +4,7 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
+import { AllCommunityModules } from '@ag-grid-community/all-modules';
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import {
@@ -24,6 +25,7 @@ class ClinicPatientGrid extends Component {
 				MasterDetailModule,
 				MenuModule,
 				ColumnsToolPanelModule,
+				AllCommunityModules
 			],
 			columnDefs: [
 				{
@@ -118,7 +120,7 @@ class ClinicPatientGrid extends Component {
 			frameworkComponents: {
 				btnCellRenderer: BtnCellRenderer,
 			},
-			defaultColDef: { flex: 1 },
+			defaultColDef: { flex: 1, filter: true },
 			detailCellRendererParams: {
 				detailGridOptions: {
 					columnDefs: [
