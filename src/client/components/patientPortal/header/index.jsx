@@ -31,13 +31,13 @@ class PatientPortalHeader extends Component {
 									<li className="nav-item">
 										<a href="/clinic/patients" className="top-nav-button">
 											{" "}
-											Patient{" "}
+											Patients{" "}
 										</a>
 									</li>{" "}
 									<li className="nav-item">
 										<a href="/clinic/orders" className="top-nav-button">
 											{" "}
-											Order{" "}
+											Orders{" "}
 										</a>
 									</li>
 								</ul>

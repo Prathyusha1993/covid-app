@@ -75,6 +75,7 @@ export default class EditBtnCellRenderer extends Component {
 			patientName: this.state.patientName,
 		};
 		fetchOrderEditData(editParams).then((userDetails) => {
+			//make api call to get patient info parameter is patient_id
 			this.setState({
 				editParams: userDetails,
 				show: false,
@@ -83,6 +84,12 @@ export default class EditBtnCellRenderer extends Component {
 	};
 
 	render() {
+		const formStyle = {
+			borderTop: "none",
+			borderLeft: "none",
+			borderRight: "none",
+			borderRadius: "0px"
+		};
 		return (
 			<div>
 				<button
@@ -109,12 +116,8 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Test Description</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
 											type="text"
+											style={formStyle}
 											className="form-control"
 											name="description"
 											value={this.state.description}
@@ -126,11 +129,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Test Type</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											disabled
 											className="form-control"
@@ -144,11 +143,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Patient Name</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											disabled
 											className="form-control"
@@ -162,11 +157,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Sample</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control "
 											name="sample"
@@ -179,6 +170,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Result</label>
 										<select
+											style={formStyle}
 											className="form-control select"
 											name="result"
 											value={this.state.result}
@@ -194,11 +186,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Collected Date</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="collectedDate"
@@ -212,11 +200,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Provider</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="provider"
@@ -230,11 +214,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Received Date</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="receivedDate"
@@ -248,11 +228,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Requisition</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="requisition"

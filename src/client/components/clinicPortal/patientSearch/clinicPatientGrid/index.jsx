@@ -285,9 +285,10 @@ class ClinicPatientGrid extends Component {
 	render() {
 		return (
 			<div>
-				<div style={{ padding: " 10px" }}>
+				<div className="col-md-3" style={{ padding: " 12px" }}>
 					<input
 						type="search"
+						className="form-control"
 						onChange={this.onFilterTextChange}
 						placeholder="Quick Search"
 					/>

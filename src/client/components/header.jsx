@@ -89,9 +89,9 @@ const Header = (props) => {
                 <a href="/patientportal" className="top-nav-button"> View My Results </a>
             </li>{" "}
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <a href="/clinic" className="top-nav-button"> Clinic </a>
-            </li>{" "}
+            </li>{" "} */}
 
             {/* <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
               <a href="/patientportal">

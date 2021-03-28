@@ -84,6 +84,13 @@ export default class BtnCellRenderer extends Component {
 	};
 
 	render() {
+		const formStyle = {
+			borderTop: "none",
+			borderLeft: "none",
+			borderRight: "none",
+			borderRadius: "0px",
+			
+		};
 		return (
 			<div>
 				<button
@@ -108,13 +115,9 @@ export default class BtnCellRenderer extends Component {
 							<div className="row form-row">
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>First Name</label>
+										<label style={{fontWeight: "100"}}>First Name</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="firstName"
@@ -127,11 +130,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Last Name</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="lastName"
@@ -144,11 +143,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Date of Birth</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="date"
 											className="form-control "
 											name="dob"
@@ -161,11 +156,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Gender</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control "
 											name="gender"
@@ -178,11 +169,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>MRN</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="mrn"
@@ -196,11 +183,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Email ID</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="email"
 											className="form-control"
 											name="email"
@@ -213,11 +196,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Mobile</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="mobile"
@@ -230,11 +209,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Address Line 1</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="address1"
@@ -247,11 +222,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Address Line 2</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="address2"
@@ -264,11 +235,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>City</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="city"
@@ -281,11 +248,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>State</label>
 										<select
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											className="form-control select"
 											name="state"
 											value={this.state.state}
@@ -304,11 +267,7 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Zip Code</label>
 										<input
-											style={{
-												borderTop: "none",
-												borderLeft: "none",
-												borderRight: "none",
-											}}
+											style={formStyle}
 											type="text"
 											className="form-control"
 											name="zip"
