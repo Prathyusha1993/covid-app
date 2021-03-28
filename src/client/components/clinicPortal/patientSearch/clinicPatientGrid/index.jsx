@@ -4,7 +4,7 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
-import { AllCommunityModules } from '@ag-grid-community/all-modules';
+import { AllCommunityModules } from "@ag-grid-community/all-modules";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import {
@@ -18,23 +18,23 @@ import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellR
 class ClinicPatientGrid extends Component {
 	constructor(props) {
 		super(props);
-		
+
 		this.state = {
 			modules: [
 				ClientSideRowModelModule,
 				MasterDetailModule,
 				MenuModule,
 				ColumnsToolPanelModule,
-				AllCommunityModules
+				AllCommunityModules,
 			],
 			columnDefs: [
 				{
 					headerName: "Edit",
 					minWidth: 80,
-					cellStyle: { textAlign: 'center' },
-					 cellRenderer: 'btnCellRenderer',
+					cellStyle: { textAlign: "center" },
+					cellRenderer: "btnCellRenderer",
 				},
-			
+
 				{
 					headerName: "First Name",
 					field: "first_name",
@@ -47,10 +47,10 @@ class ClinicPatientGrid extends Component {
 					field: "date_of_birth",
 					minWidth: 150,
 					cellRenderer: function (params) {
-						 //return moment(params.data.date_of_birth).format("MM/DD/YYYY");
-						 return params.data.date_of_birth ? moment(params.data.date_of_birth).format(
-							"MM/DD/YYYY"
-						) : ''
+						//return moment(params.data.date_of_birth).format("MM/DD/YYYY");
+						return params.data.date_of_birth
+							? moment(params.data.date_of_birth).format("MM/DD/YYYY")
+							: "";
 					},
 				},
 				{
@@ -69,11 +69,11 @@ class ClinicPatientGrid extends Component {
 					minWidth: 150,
 					resizable: true,
 					cellRenderer: function (params) {
-						return (
-							params.data.email ? '<span><i class="fas fa-envelope"></i> ' +
-							params.data.email +
-							'</span>' : ''
-						);
+						return params.data.email
+							? '<span><i class="fas fa-envelope"></i> ' +
+									params.data.email +
+									"</span>"
+							: "";
 					},
 				},
 				{
@@ -81,11 +81,11 @@ class ClinicPatientGrid extends Component {
 					field: "mobile",
 					minWidth: 200,
 					cellRenderer: function (params) {
-						return (
-							params.data.mobile ? '<span><i class="fas fa-phone-alt"></i> ' +
-							params.data.mobile +
-							'</span>' : ''
-						);
+						return params.data.mobile
+							? '<span><i class="fas fa-phone-alt"></i> ' +
+									params.data.mobile +
+									"</span>"
+							: "";
 					},
 				},
 				{
@@ -95,7 +95,7 @@ class ClinicPatientGrid extends Component {
 					valueGetter: function addColumns(params) {
 						console.log(params.data.address);
 
-						if(params.data.address) {
+						if (params.data.address) {
 							return (
 								params.data.address.address1 +
 								" " +
@@ -108,15 +108,15 @@ class ClinicPatientGrid extends Component {
 								params.data.address.zip
 							);
 						} else {
-							return '';
+							return "";
 						}
 					},
 					cellRenderer: function (params) {
-						return (
-							params.value ? '<span><i class="fas fa-map-marker-alt"></i> ' +
-							params.value +
-							'</span>' : ''
-						);
+						return params.value
+							? '<span><i class="fas fa-map-marker-alt"></i> ' +
+									params.value +
+									"</span>"
+							: "";
 					},
 				},
 			],
@@ -130,50 +130,58 @@ class ClinicPatientGrid extends Component {
 						{
 							headerName: "Edit",
 							minWidth: 80,
-							cellStyle: { textAlign: 'center' },
-							 cellRenderer: 'editBtnCellRenderer',
+							cellStyle: { textAlign: "center" },
+							cellRenderer: "editBtnCellRenderer",
 						},
-						{ headerName: "Test", 
-						field: "test_info.description",
-						cellRenderer: function (params) {
-							if(params.data.test_info && params.data.test_info.description) {
-								return  params.data.test_info.description;
-							} else {
-								return '';
-							}
+						{
+							headerName: "Test",
+							field: "test_info.description",
+							cellRenderer: function (params) {
+								if (
+									params.data.test_info &&
+									params.data.test_info.description
+								) {
+									return params.data.test_info.description;
+								} else {
+									return "";
+								}
+							},
 						},
-						 },
-						{ headerName: "Test Type", 
-						field: "test_info.test_type",
-						cellRenderer: function (params) {
-							if(params.data.test_info && params.data.test_info.test_type) {
-								return  params.data.test_info.test_type;
-							} else {
-								return '';
-							}
+						{
+							headerName: "Test Type",
+							field: "test_info.test_type",
+							cellRenderer: function (params) {
+								if (params.data.test_info && params.data.test_info.test_type) {
+									return params.data.test_info.test_type;
+								} else {
+									return "";
+								}
+							},
 						},
-					 },
-						{ headerName: "Sample", 
-						resizable: true, 
-						field: "test_info.sample",
-						cellRenderer: function (params) {
-							if(params.data.test_info && params.data.test_info.sample) {
-								return  params.data.test_info.sample;
-							} else {
-								return '';
-							}
+						{
+							headerName: "Sample",
+							resizable: true,
+							field: "test_info.sample",
+							cellRenderer: function (params) {
+								if (params.data.test_info && params.data.test_info.sample) {
+									return params.data.test_info.sample;
+								} else {
+									return "";
+								}
+							},
 						},
-					
-					},
 						{
 							headerName: "Result",
 							field: "test_info.covid_detected",
 							resizable: true,
 							cellRenderer: function (params) {
-								if(params.data.test_info && params.data.test_info.covid_detected) {
-									return  params.data.test_info.covid_detected;
+								if (
+									params.data.test_info &&
+									params.data.test_info.covid_detected
+								) {
+									return params.data.test_info.covid_detected;
 								} else {
-									return '';
+									return "";
 								}
 							},
 						},
@@ -183,11 +191,14 @@ class ClinicPatientGrid extends Component {
 							minWidth: 200,
 							resizable: true,
 							cellRenderer: function (params) {
-								console.log('collectedDate', params.data.test_info.collected);
-								if(params.data.test_info && params.data.test_info.collected) {
-									return  moment(params.data.test_info.collected, 'YYYYMMDDhhmmss').format("MM/DD/YYYY h:mm a");
+								console.log("collectedDate", params.data.test_info.collected);
+								if (params.data.test_info && params.data.test_info.collected) {
+									return moment(
+										params.data.test_info.collected,
+										"YYYYMMDDhhmmss"
+									).format("MM/DD/YYYY h:mm a");
 								} else {
-									return '';
+									return "";
 								}
 							},
 						},
@@ -196,15 +207,14 @@ class ClinicPatientGrid extends Component {
 							minWidth: 150,
 							resizable: true,
 							valueGetter: function addColumns(params) {
-								if(params.data.provider) {
+								if (params.data.provider) {
 									return (
 										params.data.provider.first_name +
 										" " +
 										params.data.provider.last_name
 									);
-								}
-								else {
-									return '';
+								} else {
+									return "";
 								}
 							},
 						},
@@ -214,10 +224,13 @@ class ClinicPatientGrid extends Component {
 							minWidth: 200,
 							resizable: true,
 							cellRenderer: function (params) {
-								if(params.data.test_info && params.data.test_info.received) {
-									return  moment(params.data.test_info.received, 'YYYYMMDDhhmmss').format("MM/DD/YYYY h:mm a");
+								if (params.data.test_info && params.data.test_info.received) {
+									return moment(
+										params.data.test_info.received,
+										"YYYYMMDDhhmmss"
+									).format("MM/DD/YYYY h:mm a");
 								} else {
-									return '';
+									return "";
 								}
 							},
 						},
@@ -225,10 +238,13 @@ class ClinicPatientGrid extends Component {
 							headerName: "Requisition",
 							field: "test_info.requisition",
 							cellRenderer: function (params) {
-								if(params.data.test_info && params.data.test_info.requisition) {
-									return  params.data.test_info.requisition;
+								if (
+									params.data.test_info &&
+									params.data.test_info.requisition
+								) {
+									return params.data.test_info.requisition;
 								} else {
-									return '';
+									return "";
 								}
 							},
 						},
@@ -251,13 +267,12 @@ class ClinicPatientGrid extends Component {
 		};
 	}
 
-
 	onGridReady = (params) => {
 		console.log(params);
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 
-		//need to pass facility_id as input 
+		//need to pass facility_id as input
 		fetchPatientMasterData().then((data) => {
 			this.setState({ rowData: data.data });
 		});
@@ -265,15 +280,15 @@ class ClinicPatientGrid extends Component {
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
-	}
+	};
 
 	render() {
 		return (
 			<div>
-				<div style={{padding:' 10px'}}>
-					<input 
-						type="search" 
-						onChange={this.onFilterTextChange} 
+				<div style={{ padding: " 10px" }}>
+					<input
+						type="search"
+						onChange={this.onFilterTextChange}
 						placeholder="Quick Search"
 					/>
 				</div>

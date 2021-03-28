@@ -1,8 +1,7 @@
-
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { states } from "./stateOptionsData";
-import {fetchPatientEditData} from "../../../../clinicPortalServices/patientEditService"
+import { fetchPatientEditData } from "../../../../clinicPortalServices/patientEditService";
 
 export default class BtnCellRenderer extends Component {
 	constructor(props) {
@@ -13,21 +12,36 @@ export default class BtnCellRenderer extends Component {
 		this.state = {
 			show: false,
 			firstName: props.data.first_name,
-			lastName:props.data.last_name,
-			dob:props.data.date_of_birth,
-			gender:props.data.gender,
-			mrn:props.data.mrn,
-			email:props.data.email,
-			mobile:props.data.mobile,
-			address1:props.data.address && props.data.address.address1 ? props.data.address.address1 : '',
-			address2:props.data.address && props.data.address.address2 ? props.data.address.address2 : '',
-			city:props.data.address && props.data.address.city ? props.data.address.city : '',
-			state:props.data.address && props.data.address.state ? props.data.address.state : '',
-			zip:props.data.address && props.data.address.zip ? props.data.address.zip : '',
-			country:'',
-			stateOptions: '',
-			id:'',
-			loading: false
+			lastName: props.data.last_name,
+			dob: props.data.date_of_birth,
+			gender: props.data.gender,
+			mrn: props.data.mrn,
+			email: props.data.email,
+			mobile: props.data.mobile,
+			address1:
+				props.data.address && props.data.address.address1
+					? props.data.address.address1
+					: "",
+			address2:
+				props.data.address && props.data.address.address2
+					? props.data.address.address2
+					: "",
+			city:
+				props.data.address && props.data.address.city
+					? props.data.address.city
+					: "",
+			state:
+				props.data.address && props.data.address.state
+					? props.data.address.state
+					: "",
+			zip:
+				props.data.address && props.data.address.zip
+					? props.data.address.zip
+					: "",
+			country: "",
+			stateOptions: "",
+			id: "",
+			loading: false,
 		};
 	}
 
@@ -39,46 +53,53 @@ export default class BtnCellRenderer extends Component {
 		this.setState({ show: false });
 	};
 
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
-    
-    handlePatientEditChanges = (e) => {
-        //api edit changes here
+	handlePatientEditChanges = (e) => {
+		//api edit changes here
 		e.preventDefault();
-		
+
 		const editParams = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
-			dob:this.state.dob,
-			gender:this.state.gender,
-			mrn:this.state.mrn,
-			email:this.state.email,
-			mobile:this.state.mobile,
-			address1:this.state.address1,
-			address2:this.state.address2,
-			city:this.state.city,
-			state:this.state.state,
-			zip:this.state.zip,
+			dob: this.state.dob,
+			gender: this.state.gender,
+			mrn: this.state.mrn,
+			email: this.state.email,
+			mobile: this.state.mobile,
+			address1: this.state.address1,
+			address2: this.state.address2,
+			city: this.state.city,
+			state: this.state.state,
+			zip: this.state.zip,
 		};
-		fetchPatientEditData(editParams)
-		.then((userDetails) => {
+		fetchPatientEditData(editParams).then((userDetails) => {
 			this.setState({
-				editParams : userDetails,
-				show: false
+				editParams: userDetails,
+				show: false,
 			});
-		})
-    }
+		});
+	};
 
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'transparent' }}>
+				<button
+					onClick={this.handleShow}
+					style={{ border: "none", backgroundColor: "transparent" }}
+				>
 					<i class="fas fa-pen"></i>
 				</button>
 
-				<Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show} onHide={this.handleClose}>
+				<Modal
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={this.state.show}
+					onHide={this.handleClose}
+				>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Patient Information</Modal.Title>
 					</Modal.Header>
@@ -96,7 +117,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="firstName"
+											name="firstName"
 											value={this.state.firstName}
 											onChange={this.handleChange}
 										/>
@@ -113,7 +134,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="lastName"
+											name="lastName"
 											value={this.state.lastName}
 											onChange={this.handleChange}
 										/>
@@ -122,18 +143,18 @@ export default class BtnCellRenderer extends Component {
 								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Date of Birth</label>
-											<input
-                                            style={{
+										<input
+											style={{
 												borderTop: "none",
 												borderLeft: "none",
 												borderRight: "none",
 											}}
-												type="date"
-												className="form-control "
-                                                name="dob"
-												value={this.state.dob}
-												onChange={this.handleChange}
-											/>
+											type="date"
+											className="form-control "
+											name="dob"
+											value={this.state.dob}
+											onChange={this.handleChange}
+										/>
 									</div>
 								</div>
 								<div className="col-12 col-md-6">
@@ -147,7 +168,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control "
-                                            name="gender"
+											name="gender"
 											value={this.state.gender}
 											onChange={this.handleChange}
 										/>
@@ -164,7 +185,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="mrn"
+											name="mrn"
 											value={this.state.mrn}
 											onChange={this.handleChange}
 										/>
@@ -182,7 +203,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="email"
 											className="form-control"
-                                            name="email"
+											name="email"
 											value={this.state.email}
 											onChange={this.handleChange}
 										/>
@@ -199,7 +220,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="mobile"
+											name="mobile"
 											value={this.state.mobile}
 											onChange={this.handleChange}
 										/>
@@ -216,7 +237,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="address1"
+											name="address1"
 											value={this.state.address1}
 											onChange={this.handleChange}
 										/>
@@ -233,7 +254,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="address2"
+											name="address2"
 											value={this.state.address2}
 											onChange={this.handleChange}
 										/>
@@ -250,7 +271,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="city"
+											name="city"
 											value={this.state.city}
 											onChange={this.handleChange}
 										/>
@@ -260,20 +281,21 @@ export default class BtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>State</label>
 										<select
-										style={{
-											borderTop: "none",
-											borderLeft: "none",
-											borderRight: "none",
-										}}
+											style={{
+												borderTop: "none",
+												borderLeft: "none",
+												borderRight: "none",
+											}}
 											className="form-control select"
-                                            name="state"
+											name="state"
 											value={this.state.state}
 											onChange={this.handleChange}
 										>
 											{states.map((state) => {
-												return (<option value={state.value}>{state.state}</option>);
+												return (
+													<option value={state.value}>{state.state}</option>
+												);
 											})}
-											
 										</select>
 									</div>
 								</div>
@@ -289,7 +311,7 @@ export default class BtnCellRenderer extends Component {
 											}}
 											type="text"
 											className="form-control"
-                                            name="zip"
+											name="zip"
 											value={this.state.zip}
 											onChange={this.handleChange}
 										/>

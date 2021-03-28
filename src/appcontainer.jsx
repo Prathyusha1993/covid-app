@@ -4,8 +4,6 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Header from "./client/components/header.jsx";
 import Footer from "./client/components/footer.jsx";
 import TopHeader from "./client/components/topheader.jsx";
-import LoginContainer from "./client/components/login/login.jsx";
-import ForgotPassword from "./client/components/forgot-password";
 //import Home from "./client/components/home/index";
 
 //Home Appointment Booking
@@ -70,9 +68,6 @@ const AppContainer = function (props) {
 							component={OrderGridDetails}
 						/>
 						
-
-						<Route path="/login" exact component={LoginContainer} />
-						<Route path="/forgot-password" exact component={ForgotPassword} />
 						<Route path="(/|/home)" exact component={Home} />
 
 						

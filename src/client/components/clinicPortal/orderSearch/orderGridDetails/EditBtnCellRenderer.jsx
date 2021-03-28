@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import {fetchOrderEditData} from "../../../../clinicPortalServices/orderEditService";
+import { fetchOrderEditData } from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
 
 export default class EditBtnCellRenderer extends Component {
@@ -9,19 +9,44 @@ export default class EditBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
-			description: props.data.test_info && props.data.test_info.description ? props.data.test_info.description : '',
-			testType: props.data.test_info &&  props.data.test_info.test_type ?props.data.test_info.test_type : '',
-			sample: props.data.test_info && props.data.test_info.sample ? props.data.test_info.sample : '',
-			result: props.data.test_info && props.data.test_info.covid_detected ? props.data.test_info.covid_detected : '',
-			collectedDate: props.data.test_info && props.data.test_info.collected ? moment(props.data.test_info.collected, 'YYYYMMDDhhmmss').format(
-				"MM/DD/YYYY h:mm a"
-			) : '',
-			provider: props.data.provider.first_name + " " + props.data.provider.last_name,
-			receivedDate: props.data.test_info && props.data.test_info.received ? moment(props.data.test_info.received, 'YYYYMMDDhhmmss').format(
-				"MM/DD/YYYY h:mm a"
-			) : '',
-			requisition: props.data.test_info && props.data.test_info.requisition ? props.data.test_info.requisition : '',
-			patientName:props.data.patient_id.first_name + " " + props.data.patient_id.last_name
+			description:
+				props.data.test_info && props.data.test_info.description
+					? props.data.test_info.description
+					: "",
+			testType:
+				props.data.test_info && props.data.test_info.test_type
+					? props.data.test_info.test_type
+					: "",
+			sample:
+				props.data.test_info && props.data.test_info.sample
+					? props.data.test_info.sample
+					: "",
+			result:
+				props.data.test_info && props.data.test_info.covid_detected
+					? props.data.test_info.covid_detected
+					: "",
+			collectedDate:
+				props.data.test_info && props.data.test_info.collected
+					? moment(props.data.test_info.collected, "YYYYMMDDhhmmss").format(
+							"MM/DD/YYYY h:mm a"
+					  )
+					: "",
+			provider:
+				props.data.provider.first_name + " " + props.data.provider.last_name,
+			receivedDate:
+				props.data.test_info && props.data.test_info.received
+					? moment(props.data.test_info.received, "YYYYMMDDhhmmss").format(
+							"MM/DD/YYYY h:mm a"
+					  )
+					: "",
+			requisition:
+				props.data.test_info && props.data.test_info.requisition
+					? props.data.test_info.requisition
+					: "",
+			patientName:
+				props.data.patient_id.first_name +
+				" " +
+				props.data.patient_id.last_name,
 		};
 	}
 
@@ -41,31 +66,39 @@ export default class EditBtnCellRenderer extends Component {
 		const editParams = {
 			description: this.state.description,
 			testType: this.state.testType,
-			sample:this.state.sample,
-			result:this.state.result,
-			collectedDate:this.state.collectedDate,
-			provider:this.state.provider,
-			receivedDate:this.state.receivedDate,
-			requisition:this.state.requisition,
+			sample: this.state.sample,
+			result: this.state.result,
+			collectedDate: this.state.collectedDate,
+			provider: this.state.provider,
+			receivedDate: this.state.receivedDate,
+			requisition: this.state.requisition,
 			patientName: this.state.patientName,
 		};
-		fetchOrderEditData(editParams)
-		.then((userDetails) => {
+		fetchOrderEditData(editParams).then((userDetails) => {
 			this.setState({
-				editParams : userDetails,
-				show: false
+				editParams: userDetails,
+				show: false,
 			});
-		})
+		});
 	};
 
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleShow} style={{ border: "none", backgroundColor: 'transparent' }}>
+				<button
+					onClick={this.handleShow}
+					style={{ border: "none", backgroundColor: "transparent" }}
+				>
 					<i class="fas fa-pen"></i>
 				</button>
 
-				<Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show} onHide={this.handleClose}>
+				<Modal
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={this.state.show}
+					onHide={this.handleClose}
+				>
 					<Modal.Header closeButton>
 						<Modal.Title>Edit Order Information</Modal.Title>
 					</Modal.Header>
@@ -99,7 +132,7 @@ export default class EditBtnCellRenderer extends Component {
 												borderRight: "none",
 											}}
 											type="text"
-                                            disabled
+											disabled
 											className="form-control"
 											name="testType"
 											value={this.state.testType}
@@ -117,7 +150,7 @@ export default class EditBtnCellRenderer extends Component {
 												borderRight: "none",
 											}}
 											type="text"
-                                            disabled
+											disabled
 											className="form-control"
 											name="patientName"
 											value={this.state.patientName}
@@ -187,7 +220,7 @@ export default class EditBtnCellRenderer extends Component {
 											type="text"
 											className="form-control"
 											name="provider"
-                                            disabled
+											disabled
 											value={this.state.provider}
 											onChange={this.handleChange}
 										/>

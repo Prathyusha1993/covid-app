@@ -20,7 +20,7 @@ class ClinicPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
-	
+
 		authenticateAndFetchUserDetails(this.state.userName, this.state.password)
 			.then((userInfo) => {
 				console.log(userInfo);
@@ -34,10 +34,7 @@ class ClinicPortalLoginContainer extends Component {
 					isAuthenticationfailed: "NO",
 				});
 				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
-				window.localStorage.setItem(
-					"FACILITY_ID",
-					userInfo.facilities[0]._id
-				);
+				window.localStorage.setItem("FACILITY_ID", userInfo.facilities[0]._id);
 				window.location.href = "/clinic/patients";
 			})
 			.catch((err) => {

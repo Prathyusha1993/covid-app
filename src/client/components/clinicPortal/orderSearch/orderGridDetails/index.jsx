@@ -4,7 +4,7 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
-import { AllCommunityModules } from '@ag-grid-community/all-modules';
+import { AllCommunityModules } from "@ag-grid-community/all-modules";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
@@ -21,7 +21,7 @@ class OrderGridDetails extends Component {
 				MasterDetailModule,
 				MenuModule,
 				ColumnsToolPanelModule,
-				AllCommunityModules
+				AllCommunityModules,
 			],
 			columnDefs: [
 				{
@@ -65,9 +65,10 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						if (params.data.test_info && params.data.test_info.collected) {
-							return moment(params.data.test_info.collected, 'YYYYMMDDhhmmss').format(
-								"MM/DD/YYYY h:mm a"
-							);
+							return moment(
+								params.data.test_info.collected,
+								"YYYYMMDDhhmmss"
+							).format("MM/DD/YYYY h:mm a");
 						} else {
 							return "";
 						}
@@ -96,9 +97,10 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						if (params.data.test_info && params.data.test_info.received) {
-							return moment(params.data.test_info.received, 'YYYYMMDDhhmmss').format(
-								"MM/DD/YYYY h:mm a"
-							);
+							return moment(
+								params.data.test_info.received,
+								"YYYYMMDDhhmmss"
+							).format("MM/DD/YYYY h:mm a");
 						} else {
 							return "";
 						}
@@ -129,8 +131,7 @@ class OrderGridDetails extends Component {
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
-	}
-
+	};
 
 	render() {
 		return (
