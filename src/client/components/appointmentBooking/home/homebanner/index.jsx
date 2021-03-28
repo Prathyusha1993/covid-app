@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class HomeBookAppoinment extends Component {
 	render() {
 		return (
-			<section className="section section-banner">
+			<section className="section section-banner" id="scroll-top">
 				<div className="container">
 					<div className="row">
 						<div className="col-12 col-md-6"></div>

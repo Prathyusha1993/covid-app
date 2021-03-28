@@ -13,21 +13,25 @@ class PatientPortalHeader extends Component {
 			<div>
 				<Navbar bg="light">
 					<Navbar bg="light">
-						<Link to="/home" className="navbar-brand ">							
+						<Link
+							// to="/home"
+							className="navbar-brand "
+							style={{marginRight:"140px"}}
+						>
 							<img
 								src={AGT_MCN_LOGO}
-								width="400"								
+								width="400"
 								height="45"
 								object-fit="cover"
 								className="d-inline-block align-top"
 								alt=""
 							/>
 						</Link>
-						
-						 {/* {isUserLoggedIn() && (  */}
-							<Navbar.Brand >
-								<div>
-								<ul className="main-nav" >
+
+						{/* {isUserLoggedIn() && (  */}
+						<Navbar.Brand>
+							<div>
+								<ul className="main-nav">
 									<li className="nav-item">
 										<a href="/clinic/patients" className="top-nav-button">
 											{" "}
@@ -41,7 +45,7 @@ class PatientPortalHeader extends Component {
 										</a>
 									</li>
 								</ul>
-								</div>
+							</div>
 						</Navbar.Brand>
 						{/* )} */}
 					</Navbar>

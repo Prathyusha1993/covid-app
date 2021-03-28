@@ -50,7 +50,7 @@ const Header = (props) => {
               <span></span>
             </span>
           </a>
-          <Link to="/home" className="navbar-brand " style={{marginRight:100}}>
+          <Link to="/home" className="navbar-brand " style={{marginRight:"100px"}}>
             {/* <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> */}
             <img
 								src={AGT_MCN_LOGO}
