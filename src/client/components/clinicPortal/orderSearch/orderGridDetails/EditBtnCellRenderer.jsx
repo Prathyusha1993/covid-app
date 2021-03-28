@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import {fetchOrderEditData} from "../../../../clinicPortalServices/orderEditService"
+import {fetchOrderEditData} from "../../../../clinicPortalServices/orderEditService";
+import moment from "moment";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -12,9 +13,13 @@ export default class EditBtnCellRenderer extends Component {
 			testType: props.data.test_info &&  props.data.test_info.test_type ?props.data.test_info.test_type : '',
 			sample: props.data.test_info && props.data.test_info.sample ? props.data.test_info.sample : '',
 			result: props.data.test_info && props.data.test_info.covid_detected ? props.data.test_info.covid_detected : '',
-			collectedDate: props.data.test_info && props.data.test_info.collected ? props.data.test_info.collected : '',
+			collectedDate: props.data.test_info && props.data.test_info.collected ? moment(props.data.test_info.collected, 'YYYYMMDDhhmmss').format(
+				"MM/DD/YYYY h:mm a"
+			) : '',
 			provider: props.data.provider.first_name + " " + props.data.provider.last_name,
-			receivedDate: props.data.test_info && props.data.test_info.received ? props.data.test_info.received : '',
+			receivedDate: props.data.test_info && props.data.test_info.received ? moment(props.data.test_info.received, 'YYYYMMDDhhmmss').format(
+				"MM/DD/YYYY h:mm a"
+			) : '',
 			requisition: props.data.test_info && props.data.test_info.requisition ? props.data.test_info.requisition : '',
 			patientName:props.data.patient_id.first_name + " " + props.data.patient_id.last_name
 		};

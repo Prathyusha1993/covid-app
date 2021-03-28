@@ -65,7 +65,7 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						if (params.data.test_info && params.data.test_info.collected) {
-							return moment(params.data.test_info.collected).format(
+							return moment(params.data.test_info.collected, 'YYYYMMDDhhmmss').format(
 								"MM/DD/YYYY h:mm a"
 							);
 						} else {
@@ -96,7 +96,7 @@ class OrderGridDetails extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						if (params.data.test_info && params.data.test_info.received) {
-							return moment(params.data.test_info.received).format(
+							return moment(params.data.test_info.received, 'YYYYMMDDhhmmss').format(
 								"MM/DD/YYYY h:mm a"
 							);
 						} else {
