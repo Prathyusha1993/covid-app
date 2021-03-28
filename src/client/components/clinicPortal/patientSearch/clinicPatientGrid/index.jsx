@@ -47,13 +47,10 @@ class ClinicPatientGrid extends Component {
 					field: "date_of_birth",
 					minWidth: 150,
 					cellRenderer: function (params) {
-						 return moment(params.data.date_of_birth).format("MM/DD/YYYY");
-						// return (
-						// 	true ? '<span><i class="fas fa-envelope"></i> ' +
-						// 	'reddy' +
-						// 	'</span>' : ''
-						// );
-						//return ('<span>kiran</span>');
+						 //return moment(params.data.date_of_birth).format("MM/DD/YYYY");
+						 return params.data.date_of_birth ? moment(params.data.date_of_birth).format(
+							"MM/DD/YYYY"
+						) : ''
 					},
 				},
 				{
@@ -96,17 +93,23 @@ class ClinicPatientGrid extends Component {
 					minWidth: 200,
 					resizable: true,
 					valueGetter: function addColumns(params) {
-						return (
-							params.data.address.address1 +
-							" " +
-							params.data.address.address2 +
-							" " +
-							params.data.address.city +
-							" " +
-							params.data.address.state +
-							" " +
-							params.data.address.zip
-						);
+						console.log(params.data.address);
+
+						if(params.data.address) {
+							return (
+								params.data.address.address1 +
+								" " +
+								params.data.address.address2 +
+								" " +
+								params.data.address.city +
+								" " +
+								params.data.address.state +
+								" " +
+								params.data.address.zip
+							);
+						} else {
+							return '';
+						}
 					},
 					cellRenderer: function (params) {
 						return (
@@ -130,13 +133,49 @@ class ClinicPatientGrid extends Component {
 							cellStyle: { textAlign: 'center' },
 							 cellRenderer: 'editBtnCellRenderer',
 						},
-						{ headerName: "Test", field: "test_info.description" },
-						{ headerName: "Test Type", field: "test_info.test_type" },
-						{ headerName: "Sample", resizable: true, field: "test_info.sample" },
+						{ headerName: "Test", 
+						field: "test_info.description",
+						cellRenderer: function (params) {
+							if(params.data.test_info && params.data.test_info.description) {
+								return  params.data.test_info.description;
+							} else {
+								return '';
+							}
+						},
+						 },
+						{ headerName: "Test Type", 
+						field: "test_info.test_type",
+						cellRenderer: function (params) {
+							if(params.data.test_info && params.data.test_info.test_type) {
+								return  params.data.test_info.test_type;
+							} else {
+								return '';
+							}
+						},
+					 },
+						{ headerName: "Sample", 
+						resizable: true, 
+						field: "test_info.sample",
+						cellRenderer: function (params) {
+							if(params.data.test_info && params.data.test_info.sample) {
+								return  params.data.test_info.sample;
+							} else {
+								return '';
+							}
+						},
+					
+					},
 						{
 							headerName: "Result",
 							field: "test_info.covid_detected",
-							resizable: true
+							resizable: true,
+							cellRenderer: function (params) {
+								if(params.data.test_info && params.data.test_info.covid_detected) {
+									return  params.data.test_info.covid_detected;
+								} else {
+									return '';
+								}
+							},
 						},
 						{
 							headerName: "Specimen Collected Date",
@@ -145,23 +184,11 @@ class ClinicPatientGrid extends Component {
 							resizable: true,
 							cellRenderer: function (params) {
 								console.log('collectedDate', params.data.test_info.collected);
-
-								// if (params.data.test_info.collected) {
-								// 	return moment(params.data.test_info.collected).format(
-								// 		"MM/DD/YYYY h:mm a"
-								// 	);
-								// } else {
-								// 	return '';
-								// }
-								return params.data.test_info.collected ? moment(params.data.test_info.collected).format(
-									"MM/DD/YYYY h:mm a"
-								) : ''
-								// return params.data.test_info.collected ? moment(params.data.test_info.collected, "YYYYMMDDhhmmss").format(
-								// 	"MM/DD/YYYY h:mm a"
-								// ) : ''
-								// return moment(params.data.test_info.collected).format(
-								// 	"MM/DD/YYYY h:mm a"
-								// );
+								if(params.data.test_info && params.data.test_info.collected) {
+									return  moment(params.data.test_info.collected).format("MM/DD/YYYY h:mm a");
+								} else {
+									return '';
+								}
 							},
 						},
 						{
@@ -169,11 +196,16 @@ class ClinicPatientGrid extends Component {
 							minWidth: 150,
 							resizable: true,
 							valueGetter: function addColumns(params) {
-								return (
-									params.data.provider.first_name +
-									" " +
-									params.data.provider.last_name
-								);
+								if(params.data.provider) {
+									return (
+										params.data.provider.first_name +
+										" " +
+										params.data.provider.last_name
+									);
+								}
+								else {
+									return '';
+								}
 							},
 						},
 						{
@@ -182,14 +214,23 @@ class ClinicPatientGrid extends Component {
 							minWidth: 200,
 							resizable: true,
 							cellRenderer: function (params) {
-								return moment(params.data.test_info.received).format(
-									"MM/DD/YYYY h:mm a"
-								);
+								if(params.data.test_info && params.data.test_info.received) {
+									return  moment(params.data.test_info.received).format("MM/DD/YYYY h:mm a");
+								} else {
+									return '';
+								}
 							},
 						},
 						{
 							headerName: "Requisition",
 							field: "test_info.requisition",
+							cellRenderer: function (params) {
+								if(params.data.test_info && params.data.test_info.requisition) {
+									return  params.data.test_info.requisition;
+								} else {
+									return '';
+								}
+							},
 						},
 					],
 					frameworkComponents: {
@@ -222,16 +263,20 @@ class ClinicPatientGrid extends Component {
 		});
 	};
 
-	// onFilterTextChange = (e) => {
-	// 	this.gridApi.setQuickFilter(e.target.value);
-	// }
+	onFilterTextChange = (e) => {
+		this.gridApi.setQuickFilter(e.target.value);
+	}
 
 	render() {
 		return (
 			<div>
-				{/* <div style={{padding:' 10px'}}>
-				<input type="search" onChange={this.onFilterTextChange} placeholder="Quick Search"/>
-				</div> */}
+				<div style={{padding:' 10px'}}>
+					<input 
+						type="search" 
+						onChange={this.onFilterTextChange} 
+						placeholder="Quick Search"
+					/>
+				</div>
 				<div
 					style={{
 						width: "100%",

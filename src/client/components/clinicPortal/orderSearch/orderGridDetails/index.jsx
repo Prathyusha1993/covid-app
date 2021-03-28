@@ -4,6 +4,7 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
+import { AllCommunityModules } from '@ag-grid-community/all-modules';
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
@@ -20,29 +21,40 @@ class OrderGridDetails extends Component {
 				MasterDetailModule,
 				MenuModule,
 				ColumnsToolPanelModule,
+				AllCommunityModules
 			],
 			columnDefs: [
 				{
 					headerName: "Edit",
 					minWidth: 80,
-					cellStyle: { textAlign: 'center' },
-					 cellRenderer: 'editBtnCellRenderer',
+					cellStyle: { textAlign: "center" },
+					cellRenderer: "editBtnCellRenderer",
 				},
-				{ headerName: "Patient Name", minWidth:200, 
-				valueGetter: function addColumns(params) {
-					return (
-						params.data.patient_id.first_name +
-						" " +
-						params.data.patient_id.last_name 
-					);
+				{
+					headerName: "Patient Name",
+					minWidth: 200,
+					valueGetter: function addColumns(params) {
+						if (params.data.patient_id) {
+							return (
+								params.data.patient_id.first_name +
+								" " +
+								params.data.patient_id.last_name
+							);
+						} else {
+							return "";
+						}
+					},
 				},
-			 },
-				{ headerName: "Test", minWidth:150, field: "test_info.description" },
-				{ headerName: "Test Type", minWidth:150, field: "test_info.test_type" },
-				{ headerName: "Sample", minWidth:150, field: "test_info.sample" },
+				{ headerName: "Test", minWidth: 150, field: "test_info.description" },
+				{
+					headerName: "Test Type",
+					minWidth: 150,
+					field: "test_info.test_type",
+				},
+				{ headerName: "Sample", minWidth: 150, field: "test_info.sample" },
 				{
 					headerName: "Result",
-					minWidth:150,
+					minWidth: 150,
 					resizable: true,
 					field: "test_info.covid_detected",
 				},
@@ -52,9 +64,13 @@ class OrderGridDetails extends Component {
 					minWidth: 200,
 					resizable: true,
 					cellRenderer: function (params) {
-						return moment(params.data.test_info.collected).format(
-							"MM/DD/YYYY h:mm a"
-						);
+						if (params.data.test_info && params.data.test_info.collected) {
+							return moment(params.data.test_info.collected).format(
+								"MM/DD/YYYY h:mm a"
+							);
+						} else {
+							return "";
+						}
 					},
 				},
 				{
@@ -62,11 +78,15 @@ class OrderGridDetails extends Component {
 					minWidth: 150,
 					resizable: true,
 					valueGetter: function addColumns(params) {
-						return (
-							params.data.provider.first_name +
-							" " +
-							params.data.provider.last_name
-						);
+						if (params.data.provider) {
+							return (
+								params.data.provider.first_name +
+								" " +
+								params.data.provider.last_name
+							);
+						} else {
+							return "";
+						}
 					},
 				},
 				{
@@ -75,21 +95,25 @@ class OrderGridDetails extends Component {
 					minWidth: 200,
 					resizable: true,
 					cellRenderer: function (params) {
-						return moment(params.data.test_info.received).format(
-							"MM/DD/YYYY h:mm a"
-						);
+						if (params.data.test_info && params.data.test_info.received) {
+							return moment(params.data.test_info.received).format(
+								"MM/DD/YYYY h:mm a"
+							);
+						} else {
+							return "";
+						}
 					},
 				},
 				{
 					headerName: "Requisition",
-					minWidth:150,
+					minWidth: 150,
 					field: "test_info.requisition",
 				},
 			],
 			frameworkComponents: {
 				editBtnCellRenderer: EditBtnCellRenderer,
 			},
-			defaultColDef: { flex: 1 },
+			defaultColDef: { flex: 1, filter: true },
 			rowData: null,
 		};
 	}
@@ -103,35 +127,50 @@ class OrderGridDetails extends Component {
 		});
 	};
 
+	onFilterTextChange = (e) => {
+		this.gridApi.setQuickFilter(e.target.value);
+	}
+
+
 	render() {
 		return (
-			<div
-				style={{
-					width: "100%",
-					height: "550px",
-					padding: "15px 15px 15px 15px",
-				}}
-			>
-				<div
-					id="myGrid"
-					style={{
-						height: "100%",
-						width: "100%",
-					}}
-					className="ag-theme-alpine"
-				>
-					<AgGridReact
-						modules={this.state.modules}
-						columnDefs={this.state.columnDefs}
-						defaultColDef={this.state.defaultColDef}
-						masterDetail={true}
-						// detailCellRendererParams={this.state.detailCellRendererParams}
-						onGridReady={this.onGridReady}
-						rowData={this.state.rowData}
-						frameworkComponents={this.state.frameworkComponents}
-						pagination={true}
-						paginationAutoPageSize={true}
+			<div>
+				<div style={{ padding: " 10px" }}>
+					<input
+						type="search"
+						onChange={this.onFilterTextChange}
+						placeholder="Quick Search"
 					/>
+				</div>
+
+				<div
+					style={{
+						width: "100%",
+						height: "550px",
+						padding: "15px 15px 15px 15px",
+					}}
+				>
+					<div
+						id="myGrid"
+						style={{
+							height: "100%",
+							width: "100%",
+						}}
+						className="ag-theme-alpine"
+					>
+						<AgGridReact
+							modules={this.state.modules}
+							columnDefs={this.state.columnDefs}
+							defaultColDef={this.state.defaultColDef}
+							masterDetail={true}
+							// detailCellRendererParams={this.state.detailCellRendererParams}
+							onGridReady={this.onGridReady}
+							rowData={this.state.rowData}
+							frameworkComponents={this.state.frameworkComponents}
+							pagination={true}
+							paginationAutoPageSize={true}
+						/>
+					</div>
 				</div>
 			</div>
 		);

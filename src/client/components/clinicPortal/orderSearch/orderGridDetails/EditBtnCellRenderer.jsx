@@ -8,14 +8,14 @@ export default class EditBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
-			description: props.data.test_info.description,
-			testType: props.data.test_info.test_type,
-			sample: props.data.test_info.sample,
-			result: props.data.test_info.covid_detected,
-			collectedDate: props.data.test_info.collected,
+			description: props.data.test_info && props.data.test_info.description ? props.data.test_info.description : '',
+			testType: props.data.test_info &&  props.data.test_info.test_type ?props.data.test_info.test_type : '',
+			sample: props.data.test_info && props.data.test_info.sample ? props.data.test_info.sample : '',
+			result: props.data.test_info && props.data.test_info.covid_detected ? props.data.test_info.covid_detected : '',
+			collectedDate: props.data.test_info && props.data.test_info.collected ? props.data.test_info.collected : '',
 			provider: props.data.provider.first_name + " " + props.data.provider.last_name,
-			receivedDate: props.data.test_info.received,
-			requisition: props.data.test_info.requisition,
+			receivedDate: props.data.test_info && props.data.test_info.received ? props.data.test_info.received : '',
+			requisition: props.data.test_info && props.data.test_info.requisition ? props.data.test_info.requisition : '',
 			patientName:props.data.patient_id.first_name + " " + props.data.patient_id.last_name
 		};
 	}
@@ -33,7 +33,6 @@ export default class EditBtnCellRenderer extends Component {
 	};
 
 	handleOrderEditChanges = () => {
-		//api edit changes here
 		const editParams = {
 			description: this.state.description,
 			testType: this.state.testType,
