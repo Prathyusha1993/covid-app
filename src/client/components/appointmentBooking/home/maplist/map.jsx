@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import InfoWindowEx from "./InfoWindowEx";
 //import Iconmap from '../../../../assets/images/marker.png';
-import { serviceConstants } from "../../../../appointmentBookingServices/constants";
+import { serviceConstants } from "../../../../patientPortalServices/constants";
 
 export class GoogleMapsContainer extends Component {
 	constructor(props) {

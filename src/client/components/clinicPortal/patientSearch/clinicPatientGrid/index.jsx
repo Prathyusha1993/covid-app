@@ -14,6 +14,10 @@ import {
 import moment from "moment";
 import BtnCellRenderer from "./BtnCellRenderer";
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellRenderer";
+import {serviceConstants} from "../../../../patientPortalServices/constants"
+
+import {LicenseManager} from "ag-grid-enterprise";
+LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
 class ClinicPatientGrid extends Component {
 	constructor(props) {
