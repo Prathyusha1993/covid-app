@@ -2,12 +2,25 @@ import React, { Component } from "react";
 import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-//import {isUserLoggedIn} from "../../../utils/util";
+import {isUserLoggedIn} from "../../../utils/util";
 
 let pathnames = window.location.pathname;
 const url = pathnames.split("/").slice(0, -1).join("/");
 
 class PatientPortalHeader extends Component {
+	constructor(props) {
+		super(props);
+		const clinicUrl = props.location.pathname.split("/")[1];
+		this.state={
+			showClinicMenu: (clinicUrl.trim().toLowerCase() == "clinic" ) ? true:false
+		}
+	}
+	
+
+	logout = () =>{
+		window.localStorage.removeItem("FACILITY_ID");
+		window.localStorage.removeItem("AUTH-TOKEN");
+	}
 	render() {
 		return (
 			<div>
@@ -28,7 +41,7 @@ class PatientPortalHeader extends Component {
 							/>
 						</Link>
 
-						{/* {isUserLoggedIn() && (  */}
+						{(isUserLoggedIn() && this.state.showClinicMenu) && (
 						<Navbar.Brand>
 							<div>
 								<ul className="main-nav">
@@ -44,10 +57,16 @@ class PatientPortalHeader extends Component {
 											Orders{" "}
 										</a>
 									</li>
+									<li className="nav-item">
+										<a href="/clinic" className="top-nav-button" onClick={this.logout}>
+											{" "}
+											Logout{" "}
+										</a>
+									</li>
 								</ul>
 							</div>
 						</Navbar.Brand>
-						{/* )} */}
+						)}
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">

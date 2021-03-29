@@ -18,14 +18,18 @@ import {LicenseManager} from "ag-grid-enterprise";
 LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
 const getPatientInfo = (patientData, patientId) => {
-	const foundPatientInfo = patientData.find((item) => {
-		return item._id === patientId;
-	});
-	return {
-		gender: foundPatientInfo.gender,
-		mrn: foundPatientInfo.mrn,
-		dob: foundPatientInfo.date_of_birth,
-	};
+	if(patientData && patientData.length>0){
+		const foundPatientInfo = patientData.find((item) => {
+			return item._id === patientId;
+		});
+		return {
+			gender: foundPatientInfo.gender,
+			mrn: foundPatientInfo.mrn,
+			dob: foundPatientInfo.date_of_birth,
+			email: foundPatientInfo.email,
+			mobile: foundPatientInfo.mobile
+		};
+	}
 };
 
 class OrderGridDetails extends Component {
@@ -44,26 +48,37 @@ class OrderGridDetails extends Component {
 				{
 					headerName: "Edit",
 					minWidth: 80,
+					maxWidth: 80,
 					cellStyle: { textAlign: "center" },
 					cellRenderer: "editBtnCellRenderer",
 				},
 				{
 					headerName: "Patient Name",
 					minWidth: 200,
-					field: "patientName"
+					field: "patientName",
+					resizable: true,
 				},
-				{ headerName: "Test", minWidth: 150, field: "description" },
+				{ 
+					headerName: "Test", 
+					minWidth: 150, 
+					field: "description" 
+				},
 				{
 					headerName: "Test Type",
 					minWidth: 150,
 					field: "testType",
 				},
-				{ headerName: "Sample", minWidth: 150, field: "sample" },
+				{ 
+					headerName: "Sample", 
+					minWidth: 150, 
+					field: "sample" 
+				},
 				{
 					headerName: "Result",
 					minWidth: 150,
 					resizable: true,
-					field: "result",
+					//field: "result",
+					cellRenderer: "pdfResultRenderer",
 					// cellRenderer: function (params) {
 					// 	if (
 					// 		params.data.test_info &&
@@ -121,41 +136,56 @@ class OrderGridDetails extends Component {
 	};
 
 	loadGridData = () => {
-		Promise.all([
-			fetchOrderMasterData(),
-			fetchPatientMasterData()
+		var facilityID = window.localStorage.getItem("FACILITY_ID");
+		//var facilityID = "";
+		Promise.all([			
+			fetchOrderMasterData(facilityID),
+			fetchPatientMasterData(facilityID)
 		]).then(([orderData, patientData]) => {
+			//console.log(orderData);
+			if(orderData && orderData.data && orderData.data.length>0) {
+				const formattedData = orderData.data.map((item) => {
 
-			const formattedData = orderData.data.map((item) => {
+					
+					const returnData = {
+						orderId : item._id,
+						patientName: item.patient_id ? item.patient_id.first_name + ' ' + item.patient_id.last_name : ''  ,
+						description: item.test_info && item.test_info.description ? item.test_info.description : '',
+						testType: item.test_info && item.test_info.test_type ? item.test_info.test_type : '',
+						sample: item.test_info && item.test_info.sample ? item.test_info.sample : '',
+						result: item.test_info && item.test_info.covid_detected ? item.test_info.covid_detected : '',
+						collectedDate: item.test_info && item.test_info.collected ? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
+											"MM/DD/YYYY hh:mm A") : '',
+						provider: (item.provider && item.provider.first_name? item.provider.first_name : '') + " " + (item.provider && item.provider.last_name? item.provider.last_name : ''),
+						receivedDate: item.test_info && item.test_info.received ? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
+							"MM/DD/YYYY hh:mm A") : '',
+						requisition: item.lab_order_id && item.lab_order_id ? item.lab_order_id : '',
+						facilitySource: item.facility_source ? item.facility_source : '',
+						code : item.code ? item.code:'',
+						codeType : item.code_type ? item.code_type: '',
+						pdfPath: item.results && item.results.pdf_path ? item.results.pdf_path: '',	
+						
+						refreshGrid: this.loadGridData
+					}
 
+					if(item.patient_id && item.patient_id._id) {
+						const patientInfo = getPatientInfo(patientData.data, item.patient_id._id);
+						returnData.gender = patientInfo ? patientInfo.gender : ''; 
+						returnData.mrn = patientInfo ? patientInfo.mrn : '';
+						returnData.dob = patientInfo && patientInfo.dob ? moment(patientInfo.dob, "YYYY-MM-DD").format(
+							"MM/DD/YYYY") : '';
+						returnData.email = patientInfo ? patientInfo.email : '';
+						returnData.mobile = patientInfo ? patientInfo.mobile : '';
+					}
+
+					return returnData;
 				
-				const returnData = {
-					patientName: item.patient_id && item.patient_id.first_name ? item.patient_id.first_name : ''  ,
-					description: item.test_info && item.test_info.description ? item.test_info.description : '',
-					testType: item.test_info && item.test_info.test_type ? item.test_info.test_type : '',
-					sample: item.test_info && item.test_info.sample ? item.test_info.sample : '',
-					result: item.test_info && item.test_info.covid_detected ? item.test_info.covid_detected : '',
-					collectedDate: item.test_info && item.test_info.collected ? moment(item.test_info.collected, "YYYYMMDDhhmmss").format(
-						 				"MM/DD/YYYY h:mm a") : '',
-					provider: item.provider && item.provider.first_name? item.provider.first_name : '' + " " + item.provider && item.provider.last_name? item.provider.last_name : '',
-					receivedDate: item.test_info && item.test_info.received ? moment(item.test_info.received, "YYYYMMDDhhmmss").format(
-						"MM/DD/YYYY h:mm a") : '',
-					requisition: item.test_info && item.test_info.requisition ? item.test_info.requisition : '',
-					facilitySource: item.facility_source ? item.facility_source : '',
-					refreshGrid: this.loadGridData
-				}
-
-				if(item.patient_id && item.patient_id._id) {
-					const patientInfo = getPatientInfo(patientData.data, item.patient_id._id);
-					returnData.gender = patientInfo.gender; 
-					returnData.mrn = patientInfo.mrn;
-					returnData.dob = patientInfo.dob;
-				}
-
-				return returnData;
-			});
-
-			this.setState({ rowData: formattedData });
+				});
+				//console.log(formattedData);
+				this.setState({ rowData: formattedData });
+			}
+			else
+			this.setState({ rowData: [] });
 		});
 	}
 
@@ -166,6 +196,25 @@ class OrderGridDetails extends Component {
 	render() {
 		return (
 			<div>
+				<div className="breadcrumb-bar">
+					<div className="container-fluid">
+						<div className="row align-items-center">
+							<div className="col-md-12 col-12">
+								<nav aria-label="breadcrumb" className="page-breadcrumb">
+									<ol className="breadcrumb">
+										<li className="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li className="breadcrumb-item active" aria-current="page">
+											Orders
+										</li>
+									</ol>
+								</nav>
+								<h2 className="breadcrumb-title">Orders</h2>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div className="col-md-3" style={{ padding: " 12px" }}>
 					<input
 						type="search"

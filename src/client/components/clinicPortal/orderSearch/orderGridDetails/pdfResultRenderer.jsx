@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import {serviceConstants} from "../../../../patientPortalServices/constants";
 
 export default class PdfResultRenderer extends Component {
 	constructor(props) {
 		super(props);
-
+		console.log(this.props);
 		this.state = {
-			pdfResult: props.data.results && props.data.results.pdf_path ? props.data.results.pdf_path : "",
+			//pdfPath: props.data && props.data.pdfPath ? props.data.pdfPath : "",
+			pdfPath: props.data && props.data.pdfPath && props.data && props.data.pdfPath.length > 0 ?  `${serviceConstants.HOST_NAME}${props.data && props.data.pdfPath}`: '',	
+			result: props.data && props.data.result ? props.data.result : ""
 		};
 	}
 
@@ -15,44 +18,13 @@ export default class PdfResultRenderer extends Component {
 
 	render() {
 		return (
-			// <div>
-			// 	<a href={this.state.pdfResult} target="_blank"><i class="fas fa-file-pdf"></i></a>
-
-            //     {this.props.pdfPath!='' ?
-			// 	(
-			// 		<div>
-			// 			<div className="pdfMobileView">
-			// 				<a style={{textDecoration:'underline'}} href={this.props.pdfPath} target="_blank">Download COVID report</a><i class="fa fa-download" aria-hidden="true"></i>
-			// 			</div>
-			// 			<div style={{overflowX:"scroll"}} className="pdfWebView">
-			// 			<label>If you are unable to see your results on the page,</label><br/>
-			// 			<label>Please download your result below instead</label><br/>
-			// 			<a style={{textDecoration:'underline'}} href={this.props.pdfPath} target="_blank">Download COVID report</a><i class="fa fa-download" aria-hidden="true"></i><br/><br/>
-			// 				{/* label with value, props from date file*/}
-			// 				{/* <div>
-			// 				<label>Result: {this.props.value}</label>	
-			// 				</div> */}
-			// 				<div style={{ overflow: 'auto'}}>
-			// 				<iframe
-			// 					// src="https://oneportal.dsimed.com/DSIPortal/HelpGuides/One%20Portal%20Best%20Practices%20eScreen%20OR%20Alere%20clients.pdf"
-			// 					src={this.props.pdfPath}
-			// 					height="500"
-			// 					width="900"
-			// 					title="Iframe Example"
-			// 				></iframe>
-			// 				</div>
-			// 			</div>
-			// 		</div>
-			// 		) :
-			// 		(
-			// 		<div>
-			// 			<label>No results available</label>	
-			// 		</div>
-			// 	)
-			// 	}
-			// </div>
+			
             <div>
-                
+				{(this.state.pdfPath.length>0) ?
+				<a href={this.state.pdfPath} target="_blank">
+					<i class="fa fa-file-pdf-o"></i> {this.state.result}
+				</a>
+				: ""}
             </div>
 		);
 	}

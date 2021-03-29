@@ -74,6 +74,7 @@ const AppContainer = function (props) {
 						
 					</Switch>
 					<Route render={(props) => <Footer {...props} />} />
+					
 				</div>
 			</Router>
 		);

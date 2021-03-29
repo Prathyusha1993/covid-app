@@ -1,6 +1,7 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 
 export const fetchPatientMasterData = (facilityId) => {
+	debugger;
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v2/search`, {
 		method: "POST",
 		headers: {
@@ -11,12 +12,13 @@ export const fetchPatientMasterData = (facilityId) => {
 	}).then((response) => response.json());
 };
 
-export const fetchPatientExpandableData = (patiendId) => {
+export const fetchPatientExpandableData = (patientId) => {
+	debugger;
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/search`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ patient_id: patiendId }),
+		body: JSON.stringify({ patient_id: patientId }),
 	}).then((response) => response.json());
 };

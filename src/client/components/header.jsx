@@ -38,7 +38,7 @@ const Header = (props) => {
   //   });
   // }, []);
 
-  console.log("sreevidhya "+url+" "+pathnames)
+//  console.log("sreevidhya "+url+" "+pathnames)
   return (
     <header className="header">
       <nav className="navbar navbar-expand-lg header-nav">
@@ -89,9 +89,9 @@ const Header = (props) => {
                 <a href="/patientportal" className="top-nav-button"> View My Results </a>
             </li>{" "}
 
-            {/* <li className="nav-item">
-                <a href="/clinic" className="top-nav-button"> Clinic </a>
-            </li>{" "} */}
+         <li className="nav-item">
+                <a href="/clinic" className="top-nav-button"> Clinic Login </a>
+            </li>{" "}  
 
             {/* <li className={`has-submenu ${url.includes("/patientportal") ? "active" : ""}`}>
               <a href="/patientportal">

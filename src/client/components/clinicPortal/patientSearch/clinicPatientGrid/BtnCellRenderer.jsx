@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { states } from "./stateOptionsData";
-import { fetchPatientEditData } from "../../../../clinicPortalServices/patientEditService";
-
+import { updatePatientData } from "../../../../clinicPortalServices/patientEditService";
+import moment from "moment";
 export default class BtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-
+		//console.log(props);
 		// console.log('BtnCellRenderer',BtnCellRenderer.getValueToDisplay(props));
 
 		this.state = {
@@ -38,10 +38,14 @@ export default class BtnCellRenderer extends Component {
 				props.data.address && props.data.address.zip
 					? props.data.address.zip
 					: "",
-			country: "",
+			country: 
+				props.data.address && props.data.address.country
+			? props.data.address.country
+			: "",
 			stateOptions: "",
-			id: "",
-			loading: false,
+			_id: props.data._id,
+			loading: false
+			
 		};
 	}
 
@@ -60,8 +64,9 @@ export default class BtnCellRenderer extends Component {
 	handlePatientEditChanges = (e) => {
 		//api edit changes here
 		e.preventDefault();
-
+		
 		const editParams = {
+			_id:this.state._id,
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			dob: this.state.dob,
@@ -74,12 +79,16 @@ export default class BtnCellRenderer extends Component {
 			city: this.state.city,
 			state: this.state.state,
 			zip: this.state.zip,
+			country: this.state.country
 		};
-		fetchPatientEditData(editParams).then((userDetails) => {
+		updatePatientData(editParams).then((userDetails) => {
 			this.setState({
 				editParams: userDetails,
 				show: false,
 			});
+
+			// call refresh grid function
+			//this.props.data.refreshGrid();
 		});
 	};
 

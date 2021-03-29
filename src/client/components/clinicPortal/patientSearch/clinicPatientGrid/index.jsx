@@ -14,10 +14,14 @@ import {
 import moment from "moment";
 import BtnCellRenderer from "./BtnCellRenderer";
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellRenderer";
+import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
 import {serviceConstants} from "../../../../patientPortalServices/constants";
 
 import {LicenseManager} from "ag-grid-enterprise";
 LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+
+var enterprise = require("@ag-grid-enterprise/core");
+enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
 class ClinicPatientGrid extends Component {
 	constructor(props) {
@@ -35,6 +39,7 @@ class ClinicPatientGrid extends Component {
 				{
 					headerName: "Edit",
 					minWidth: 80,
+					maxWidth: 80,
 					cellStyle: { textAlign: "center" },
 					cellRenderer: "btnCellRenderer",
 				},
@@ -44,23 +49,32 @@ class ClinicPatientGrid extends Component {
 					field: "first_name",
 					cellRenderer: "agGroupCellRenderer",
 					minWidth: 200,
+					resizable: true
 				},
-				{ headerName: "Last Name", field: "last_name", minWidth: 150 },
+				{ 
+					headerName: "Last Name", 
+					field: "last_name", 
+					minWidth: 150,
+					resizable: true
+				},
 				{
 					headerName: "Date Of Birth",
 					field: "date_of_birth",
 					minWidth: 150,
+					maxWidth: 150,
+					
 					cellRenderer: function (params) {
 						//return moment(params.data.date_of_birth).format("MM/DD/YYYY");
 						return params.data.date_of_birth
-							? moment(params.data.date_of_birth).format("MM/DD/YYYY")
+							? moment(params.data.date_of_birth,"YYYY-MM-DD").format("MM/DD/YYYY")
 							: "";
 					},
 				},
 				{
 					headerName: "Gender",
 					field: "gender",
-					minWidth: 150,
+					minWidth: 100,
+					maxWidth: 100,
 				},
 				{
 					headerName: "MRN",
@@ -83,7 +97,8 @@ class ClinicPatientGrid extends Component {
 				{
 					headerName: "Phone",
 					field: "mobile",
-					minWidth: 200,
+					minWidth: 170,
+					maxWidth: 170,
 					cellRenderer: function (params) {
 						return params.data.mobile
 							? '<span><i class="fas fa-phone-alt"></i> ' +
@@ -97,7 +112,7 @@ class ClinicPatientGrid extends Component {
 					minWidth: 200,
 					resizable: true,
 					valueGetter: function addColumns(params) {
-						console.log(params.data.address);
+						//console.log(params.data.address);
 
 						if (params.data.address) {
 							return (
@@ -134,8 +149,10 @@ class ClinicPatientGrid extends Component {
 						{
 							headerName: "Edit",
 							minWidth: 80,
+							maxWidth:80,
 							cellStyle: { textAlign: "center" },
 							cellRenderer: "editBtnCellRenderer",
+							// hide: true
 						},
 						{
 							headerName: "Test",
@@ -178,15 +195,20 @@ class ClinicPatientGrid extends Component {
 							headerName: "Result",
 							field: "test_info.covid_detected",
 							resizable: true,
-							cellRenderer: function (params) {
+							cellRenderer: 
+							function (params) {
+								//var pdfPath = params.data.results.pdf_path;
+								console.log(params.data.results.pdf_path);
+								console.log(`${serviceConstants.HOST_NAME}${params.data.results.pdf_path}`);
+								var pdfPath = (params.data && params.data.results && params.data.results.pdf_path && params.data.results.pdf_path.length > 0) ?  `${serviceConstants.HOST_NAME}${params.data.results.pdf_path}`: '';
 								if (
 									params.data.test_info &&
 									params.data.test_info.covid_detected
 								) {
-									//return params.data.test_info.covid_detected;
-									return '<span><i class="fas fa-file-pdf"></i> ' +
+									
+									return '<div><a href={'+pdfPath+'} target="_blank"><i class="fa fa-file-pdf-o"></i> ' +
 									params.data.test_info.covid_detected +
-									'</span>'
+									'</a></div>'
 								} else {
 									return "";
 								}
@@ -202,8 +224,8 @@ class ClinicPatientGrid extends Component {
 								if (params.data.test_info && params.data.test_info.collected) {
 									return moment(
 										params.data.test_info.collected,
-										"YYYYMMDDhhmmss"
-									).format("MM/DD/YYYY h:mm a");
+										"YYYYMMDDHHmmss"
+									).format("MM/DD/YYYY hh:mm A");
 								} else {
 									return "";
 								}
@@ -234,8 +256,8 @@ class ClinicPatientGrid extends Component {
 								if (params.data.test_info && params.data.test_info.received) {
 									return moment(
 										params.data.test_info.received,
-										"YYYYMMDDhhmmss"
-									).format("MM/DD/YYYY h:mm a");
+										"YYYYMMDDHHmmss"
+									).format("MM/DD/YYYY hh:mm A");
 								} else {
 									return "";
 								}
@@ -258,6 +280,7 @@ class ClinicPatientGrid extends Component {
 					],
 					frameworkComponents: {
 						editBtnCellRenderer: EditBtnCellRenderer,
+						pdfResultRenderer: PdfResultRenderer
 					},
 					defaultColDef: { flex: 1, filter: true },
 				},
@@ -278,12 +301,15 @@ class ClinicPatientGrid extends Component {
 		console.log(params);
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
+		this.loadGridData();
+	};
 
+	loadGridData=()=>{
 		//need to pass facility_id as input
-		fetchPatientMasterData().then((data) => {
+		fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")).then((data) => {
 			this.setState({ rowData: data.data });
 		});
-	};
+	}
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
@@ -292,6 +318,25 @@ class ClinicPatientGrid extends Component {
 	render() {
 		return (
 			<div>
+				<div className="breadcrumb-bar">
+					<div className="container-fluid">
+						<div className="row align-items-center">
+							<div className="col-md-12 col-12">
+								<nav aria-label="breadcrumb" className="page-breadcrumb">
+									<ol className="breadcrumb">
+										<li className="breadcrumb-item">
+											<a href="/">Home</a>
+										</li>
+										<li className="breadcrumb-item active" aria-current="page">
+											Patients
+										</li>
+									</ol>
+								</nav>
+								<h2 className="breadcrumb-title">Patients</h2>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div className="col-md-3" style={{ padding: " 12px" }}>
 					<input
 						type="search"

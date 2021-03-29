@@ -4,6 +4,8 @@ import { authenticateAndFetchUserDetails } from "../../../clinicPortalServices/l
 
 class ClinicPortalLoginContainer extends Component {
 	constructor(props) {
+		window.localStorage.removeItem("FACILITY_ID");
+		window.localStorage.removeItem("AUTH-TOKEN");
 		super(props);
 		this.state = {
 			password: "",
@@ -12,6 +14,7 @@ class ClinicPortalLoginContainer extends Component {
 			token: "",
 			isAuthenticationfailed: "UNKNOWN",
 		};
+		
 	}
 
 	handleChange = (e) => {
@@ -20,11 +23,14 @@ class ClinicPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
-
+		//Kiran - setting ID for test. remove later
+		// window.localStorage.setItem("FACILITY_ID", "605cc709177b981d9967357d");
+		// return;
 		authenticateAndFetchUserDetails(this.state.userName, this.state.password)
 			.then((userInfo) => {
+				debugger;
 				console.log(userInfo);
-				if (userInfo.data.length === 0) {
+				if (!userInfo || (userInfo && userInfo.token.length === 0)) {
 					this.setState({
 						isAuthenticationfailed: "YES",
 					});
@@ -34,8 +40,9 @@ class ClinicPortalLoginContainer extends Component {
 					isAuthenticationfailed: "NO",
 				});
 				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
-				window.localStorage.setItem("FACILITY_ID", userInfo.facilities[0]._id);
-				window.location.href = "/clinic/patients";
+				if(userInfo.user.facilities.length>0)
+					window.localStorage.setItem("FACILITY_ID", userInfo.user.facilities[0].facility);
+				window.location.href = "/clinic/orders";
 			})
 			.catch((err) => {
 				this.setState({

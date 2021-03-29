@@ -1,8 +1,10 @@
 import React from "react";
 const Footer = (props) => {
-	
+	const url = props.location.pathname;
+	const fixedFooter = url.endsWith("clinic") || url.endsWith("patientportal");
+	const styles = (fixedFooter) ? {paddingTop: "20px",bottom:"0",left:"0",position:"absolute",width:"100%"} : {paddingTop: "20px"};
 	return (
-		<footer style={{ paddingTop: "20px" }} className="footer">
+		<footer style= {styles} className="footer">
 			<div className="footer-bottom">
 				<div className="container-fluid">
 					<div className="copyright">

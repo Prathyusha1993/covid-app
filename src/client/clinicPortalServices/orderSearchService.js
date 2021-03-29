@@ -1,11 +1,12 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 
-export const fetchOrderMasterData = (patiendId) => {
+export const fetchOrderMasterData = (facilityId) => {
+	debugger;
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/search`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ patient_id: patiendId }),
+		body: facilityId.length > 0 ? JSON.stringify({ facility_id: facilityId }) : "",
 	}).then((response) => response.json());
 };
