@@ -11,22 +11,7 @@ import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSear
 import {fetchPatientMasterData} from "../../../../clinicPortalServices/patientSearchService";
 import moment from "moment";
 import EditBtnCellRenderer from "./EditBtnCellRenderer";
-import PdfResultRenderer from "./pdfResultRenderer";
-import {serviceConstants} from "../../../../patientPortalServices/constants";
-
-import {LicenseManager} from "ag-grid-enterprise";
-LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
-
-const getPatientInfo = (patientData, patientId) => {
-	const foundPatientInfo = patientData.find((item) => {
-		return item._id === patientId;
-	});
-	return {
-		gender: foundPatientInfo.gender,
-		mrn: foundPatientInfo.mrn,
-		dob: foundPatientInfo.date_of_birth,
-	};
-};
+import PdfResultRenderer from "./pdfResultRenderer"
 
 class OrderGridDetails extends Component {
 	constructor(props) {
@@ -50,20 +35,30 @@ class OrderGridDetails extends Component {
 				{
 					headerName: "Patient Name",
 					minWidth: 200,
-					field: "patientName"
+					valueGetter: function addColumns(params) {
+						if (params.data.patient_id) {
+							return (
+								params.data.patient_id.first_name +
+								" " +
+								params.data.patient_id.last_name
+							);
+						} else {
+							return "";
+						}
+					},
 				},
 				{ headerName: "Test", minWidth: 150, field: "description" },
 				{
 					headerName: "Test Type",
 					minWidth: 150,
-					field: "testType",
+					field: "test_info.test_type",
 				},
-				{ headerName: "Sample", minWidth: 150, field: "sample" },
+				{ headerName: "Sample", minWidth: 150, field: "test_info.sample" },
 				{
 					headerName: "Result",
 					minWidth: 150,
 					resizable: true,
-					field: "result",
+					field: "test_info.covid_detected",
 					// cellRenderer: function (params) {
 					// 	if (
 					// 		params.data.test_info &&
@@ -77,30 +72,60 @@ class OrderGridDetails extends Component {
 					// 		return "";
 					// 	}
 					// },
-					//cellRenderer: "pdfResultRenderer"
+					cellRenderer: "pdfResultRenderer"
 				},
 				{
 					headerName: "Specimen Collected Date",
-					field: "collectedDate",
+					field: "test_info.collected",
 					minWidth: 200,
 					resizable: true,
+					cellRenderer: function (params) {
+						if (params.data.test_info && params.data.test_info.collected) {
+							return moment(
+								params.data.test_info.collected,
+								"YYYYMMDDhhmmss"
+							).format("MM/DD/YYYY h:mm a");
+						} else {
+							return "";
+						}
+					},
 				},
 				{
 					headerName: "Physician",
 					minWidth: 150,
 					resizable: true,
-					field: 'provider'
+					valueGetter: function addColumns(params) {
+						if (params.data.provider) {
+							return (
+								params.data.provider.first_name +
+								" " +
+								params.data.provider.last_name
+							);
+						} else {
+							return "";
+						}
+					},
 				},
 				{
 					headerName: "Received Date",
-					field: "receivedDate",
+					field: "test_info.received",
 					minWidth: 200,
 					resizable: true,
+					cellRenderer: function (params) {
+						if (params.data.test_info && params.data.test_info.received) {
+							return moment(
+								params.data.test_info.received,
+								"YYYYMMDDhhmmss"
+							).format("MM/DD/YYYY h:mm a");
+						} else {
+							return "";
+						}
+					},
 				},
 				{
 					headerName: "Requisition",
 					minWidth: 150,
-					field: "requisition",
+					field: "test_info.requisition",
 				},
 			],
 			frameworkComponents: {
@@ -116,40 +141,54 @@ class OrderGridDetails extends Component {
 	onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
-		this.loadGridData();
-		
-	};
 
-	loadGridData = () => {
+		// fetchOrderMasterData().then((data) => {
+		// 	this.setState({ rowData: data.data });
+		// });
+
+		
+
+		// fetchOrderMasterData().then((response) => {
+		// 	const formattedData = response.data.map((item) => {
+		// 		return {
+		// 			description: item.test_info.description,
+		// 			testType: test_info.test_type
+		// 		};
+		// 	});
+
+		// 	this.setState({ rowData: formattedData });
+		// });
+
+
+
+		// Promise.all([
+		// 	fetchOrderMasterData(),
+		// 	fetchPatientMasterData()
+		// ]).then(([orderData, patientData]) => {
+
+		// 	const populatedRowData = [];
+
+		// 	this.setState({
+		// 		rowData: orderData.data.concat(patientData.data)
+		// 	});
+		// });
+
 		Promise.all([
 			fetchOrderMasterData(),
 			fetchPatientMasterData()
 		]).then(([orderData, patientData]) => {
 
 			const formattedData = orderData.data.map((item) => {
-
 				
 				const returnData = {
-					patientName: item.patient_id && item.patient_id.first_name ? item.patient_id.first_name : ''  ,
 					description: item.test_info && item.test_info.description ? item.test_info.description : '',
-					testType: item.test_info && item.test_info.test_type ? item.test_info.test_type : '',
-					sample: item.test_info && item.test_info.sample ? item.test_info.sample : '',
-					result: item.test_info && item.test_info.covid_detected ? item.test_info.covid_detected : '',
-					collectedDate: item.test_info && item.test_info.collected ? moment(item.test_info.collected, "YYYYMMDDhhmmss").format(
-						 				"MM/DD/YYYY h:mm a") : '',
-					provider: item.provider && item.provider.first_name? item.provider.first_name : '' + " " + item.provider && item.provider.last_name? item.provider.last_name : '',
-					receivedDate: item.test_info && item.test_info.received ? moment(item.test_info.received, "YYYYMMDDhhmmss").format(
-						"MM/DD/YYYY h:mm a") : '',
-					requisition: item.test_info && item.test_info.requisition ? item.test_info.requisition : '',
-					facilitySource: item.facility_source ? item.facility_source : '',
-					refreshGrid: this.loadGridData
+					// testType: item.test_info.test_type
 				}
 
 				if(item.patient_id && item.patient_id._id) {
 					const patientInfo = getPatientInfo(patientData.data, item.patient_id._id);
 					returnData.gender = patientInfo.gender; 
 					returnData.mrn = patientInfo.mrn;
-					returnData.dob = patientInfo.dob;
 				}
 
 				return returnData;
@@ -157,7 +196,56 @@ class OrderGridDetails extends Component {
 
 			this.setState({ rowData: formattedData });
 		});
-	}
+
+		/**
+		 * 
+		 * {
+      "address": {
+        "address1": "11107 woodson ave",
+        "address2": "",
+        "city": "Kensington",
+        "state": "MD",
+        "zip": "20895",
+        "country": "USA"
+      },
+      "_id": "604b9839177b981d99605c1f",
+      "date_of_birth": "1988-10-21",
+      "first_name": "Samantha",
+      "last_name": "Hadaway",
+      "__v": 0,
+      "createdAt": "2021-03-12T16:35:05.035Z",
+      "email": "",
+      "ids": [
+        {
+          "_id": "605d6bdf90d1702a0ccb11f8",
+          "external_id": "1596839047",
+          "client": "LimitLIS.cloud"
+        },
+        {
+          "_id": "605d6bdf90d1702a0ccb11f9",
+          "external_id": "1553880982",
+          "client": "Brooks"
+        }
+      ],
+      "mobile": "4436192202",
+      "updatedAt": "2021-03-26T05:06:39.067Z",
+      "facility_id": "605cc709177b981d9967357d",
+      "gender": "F",
+      "mrn": "1553880982"
+    }
+		 */
+
+		const getPatientInfo = (patientData, patientId) => {
+			const foundPatientInfo = patientData.find((item) => {
+				return item._id === patientId;
+			});
+			return {
+				gender: foundPatientInfo.gender,
+				mrn: foundPatientInfo.mrn,
+				dob: foundPatientInfo.date_of_birth
+			};
+		}
+	};
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);

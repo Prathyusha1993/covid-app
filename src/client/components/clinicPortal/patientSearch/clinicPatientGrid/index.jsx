@@ -14,7 +14,7 @@ import {
 import moment from "moment";
 import BtnCellRenderer from "./BtnCellRenderer";
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellRenderer";
-import {serviceConstants} from "../../../../patientPortalServices/constants"
+import {serviceConstants} from "../../../../patientPortalServices/constants";
 
 import {LicenseManager} from "ag-grid-enterprise";
 LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
@@ -184,9 +184,9 @@ class ClinicPatientGrid extends Component {
 									params.data.test_info.covid_detected
 								) {
 									//return params.data.test_info.covid_detected;
-									return '<span><i class="fa-file-pdf-o "></i> ' +
+									return '<span><i class="fas fa-file-pdf"></i> ' +
 									params.data.test_info.covid_detected +
-									"</span>"
+									'</span>'
 								} else {
 									return "";
 								}

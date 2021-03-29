@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { fetchOrderEditData } from "../../../../clinicPortalServices/orderEditService";
+import { saveOrderEditData } from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
 
 export default class EditBtnCellRenderer extends Component {
@@ -9,49 +9,44 @@ export default class EditBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
-			gender:'',
-			dob:'',
-			mrn:'',
+			gender: props.data.gender ? props.data.gender: '',
+			dob: props.data.dob ? props.data.dob : '',
+			mrn:props.data.mrn ? props.data.mrn: '',
 			physician:
-				props.data.provider.first_name + " " + props.data.provider.last_name,
-			facilitySource:'',
+				props.data && props.data.provider ? props.data.provider : "" ,
+			facilitySource: props.data.facility_source ? props.data.facility_source : '',
 			receivedDate:
-				props.data.test_info && props.data.test_info.received
-					? moment(props.data.test_info.received, "YYYYMMDDhhmmss").format(
-							"MM/DD/YYYY h:mm a"
-					  )
+				props.data && props.data.received
+					? props.data.received
 					: "",
 			description:
-				props.data.test_info && props.data.test_info.description
-					? props.data.test_info.description
+				props.data && props.data.description
+					? props.data.description
 					: "",
 			testType:
-				props.data.test_info && props.data.test_info.test_type
-					? props.data.test_info.test_type
+				props.data && props.data.test_type
+					? props.data.test_type
 					: "",
 			sample:
-				props.data.test_info && props.data.test_info.sample
-					? props.data.test_info.sample
+				props.data && props.data.sample
+					? props.data.sample
 					: "",
 			result:
-				props.data.test_info && props.data.test_info.covid_detected
-					? props.data.test_info.covid_detected
+				props.data && props.data.covid_detected
+					? props.data.covid_detected
 					: "",
 			collectedDate:
-				props.data.test_info && props.data.test_info.collected
-					? moment(props.data.test_info.collected, "YYYYMMDDhhmmss").format(
-							"MM/DD/YYYY h:mm a"
-					  )
+				props.data && props.data.collected
+					? props.data.collected
 					: "",
 			
 			requisition:
-				props.data.test_info && props.data.test_info.requisition
-					? props.data.test_info.requisition
+				props.data && props.data.requisition
+					? props.data.requisition
 					: "",
 			patientName:
-				props.data.patient_id.first_name +
-				" " +
-				props.data.patient_id.last_name,
+			props.data && props.data.patientName ? props.data.patientName : '' 
+			
 		};
 	}
 
@@ -79,12 +74,15 @@ export default class EditBtnCellRenderer extends Component {
 			requisition: this.state.requisition,
 			patientName: this.state.patientName,
 		};
-		fetchOrderEditData(editParams).then((userDetails) => {
+		saveOrderEditData(editParams).then((userDetails) => {
 			//make api call to get patient info parameter is patient_id
 			this.setState({
 				editParams: userDetails,
 				show: false,
 			});
+
+			// call refresh grid function
+			this.props.data.refreshGrid();
 		});
 	};
 

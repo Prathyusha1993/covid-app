@@ -1,6 +1,6 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 
-export const fetchOrderEditData = (editParams) => {
+export const saveOrderEditData = (editParams) => {
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/`, {
 		method: "POST",
 		headers: {
