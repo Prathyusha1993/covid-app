@@ -183,7 +183,10 @@ class ClinicPatientGrid extends Component {
 									params.data.test_info &&
 									params.data.test_info.covid_detected
 								) {
-									return params.data.test_info.covid_detected;
+									//return params.data.test_info.covid_detected;
+									return '<span><i class="fa-file-pdf-o "></i> ' +
+									params.data.test_info.covid_detected +
+									"</span>"
 								} else {
 									return "";
 								}
@@ -207,7 +210,7 @@ class ClinicPatientGrid extends Component {
 							},
 						},
 						{
-							headerName: "Provider",
+							headerName: "Physician",
 							minWidth: 150,
 							resizable: true,
 							valueGetter: function addColumns(params) {

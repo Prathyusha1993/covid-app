@@ -75,7 +75,7 @@ class OrderGridDetails extends Component {
 					},
 				},
 				{
-					headerName: "Provider",
+					headerName: "Physician",
 					minWidth: 150,
 					resizable: true,
 					valueGetter: function addColumns(params) {

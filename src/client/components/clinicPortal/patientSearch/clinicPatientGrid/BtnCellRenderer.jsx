@@ -155,14 +155,19 @@ export default class BtnCellRenderer extends Component {
 								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Gender</label>
-										<input
+										<select
 											style={formStyle}
-											type="text"
-											className="form-control "
+											className="form-control select"
 											name="gender"
 											value={this.state.gender}
 											onChange={this.handleChange}
-										/>
+										>
+											<option>select</option>
+											<option value="M">Male</option>
+											<option value="F">Female</option>
+											<option value="U">Unknown</option>
+											<option value="N">Not Specified</option>
+										</select>
 									</div>
 								</div>
 								<div className="col-12 col-md-6">

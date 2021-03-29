@@ -9,6 +9,18 @@ export default class EditBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
+			gender:'',
+			dob:'',
+			mrn:'',
+			physician:
+				props.data.provider.first_name + " " + props.data.provider.last_name,
+			facilitySource:'',
+			receivedDate:
+				props.data.test_info && props.data.test_info.received
+					? moment(props.data.test_info.received, "YYYYMMDDhhmmss").format(
+							"MM/DD/YYYY h:mm a"
+					  )
+					: "",
 			description:
 				props.data.test_info && props.data.test_info.description
 					? props.data.test_info.description
@@ -31,14 +43,7 @@ export default class EditBtnCellRenderer extends Component {
 							"MM/DD/YYYY h:mm a"
 					  )
 					: "",
-			provider:
-				props.data.provider.first_name + " " + props.data.provider.last_name,
-			receivedDate:
-				props.data.test_info && props.data.test_info.received
-					? moment(props.data.test_info.received, "YYYYMMDDhhmmss").format(
-							"MM/DD/YYYY h:mm a"
-					  )
-					: "",
+			
 			requisition:
 				props.data.test_info && props.data.test_info.requisition
 					? props.data.test_info.requisition
@@ -112,6 +117,90 @@ export default class EditBtnCellRenderer extends Component {
 					<Modal.Body>
 						<form>
 							<div className="row form-row">
+							<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Patient Name</label>
+										<input
+											style={formStyle}
+											type="text"
+											disabled
+											className="form-control"
+											name="patientName"
+											value={this.state.patientName}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>MRN</label>
+										<input
+											style={formStyle}
+											type="text"
+											disabled
+											className="form-control"
+											name="mrn"
+											value={this.state.mrn}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Date Of Birth</label>
+										<input
+											style={formStyle}
+											type="text"
+											disabled
+											className="form-control"
+											name="dob"
+											value={this.state.dob}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Gender</label>
+										<input
+											style={formStyle}
+											type="text"
+											disabled
+											className="form-control"
+											name="gender"
+											value={this.state.gender}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Physician</label>
+										<input
+											style={formStyle}
+											type="text"
+											className="form-control"
+											name="physician"
+											disabled
+											value={this.state.physician}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="form-group">
+										<label>Facility</label>
+										<input
+											style={formStyle}
+											type="text"
+											className="form-control"
+											name="facilitySource"
+											disabled
+											value={this.state.facilitySource}
+											onChange={this.handleChange}
+										/>
+									</div>
+								</div>
 								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Test Description</label>
@@ -141,14 +230,13 @@ export default class EditBtnCellRenderer extends Component {
 								</div>
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Patient Name</label>
+										<label>Requisition</label>
 										<input
 											style={formStyle}
 											type="text"
-											disabled
 											className="form-control"
-											name="patientName"
-											value={this.state.patientName}
+											name="requisition"
+											value={this.state.requisition}
 											onChange={this.handleChange}
 										/>
 									</div>
@@ -168,22 +256,6 @@ export default class EditBtnCellRenderer extends Component {
 								</div>
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Result</label>
-										<select
-											style={formStyle}
-											className="form-control select"
-											name="result"
-											value={this.state.result}
-											onChange={this.handleChange}
-										>
-											<option>Select</option>
-											<option>SARS-CoV-2 Not Detected</option>
-											<option>SARS-CoV-2 Detected</option>
-										</select>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
 										<label>Collected Date</label>
 										<input
 											style={formStyle}
@@ -193,23 +265,11 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.collectedDate}
 											onChange={this.handleChange}
 										/>
+										<label style={{fontSize: '13px'}}>Date format - MM/DD/YYYY hh:mi am/pm</label>
 									</div>
 								</div>
 
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>Provider</label>
-										<input
-											style={formStyle}
-											type="text"
-											className="form-control"
-											name="provider"
-											disabled
-											value={this.state.provider}
-											onChange={this.handleChange}
-										/>
-									</div>
-								</div>
+
 								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Received Date</label>
@@ -221,22 +281,27 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.receivedDate}
 											onChange={this.handleChange}
 										/>
+										<label style={{fontSize: '13px'}}>Date format - MM/DD/YYYY hh:mi am/pm</label>
 									</div>
 								</div>
-
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Requisition</label>
-										<input
+										<label>Result</label>
+										<select
 											style={formStyle}
-											type="text"
-											className="form-control"
-											name="requisition"
-											value={this.state.requisition}
+											className="form-control select"
+											name="result"
+											value={this.state.result}
 											onChange={this.handleChange}
-										/>
+										>
+											<option>Select</option>
+											<option>SARS-CoV-2 Not Detected</option>
+											<option>SARS-CoV-2 Detected</option>
+											<option>SARS-CoV-2 Inconclusion</option>
+										</select>
 									</div>
 								</div>
+								
 							</div>
 						</form>
 					</Modal.Body>
