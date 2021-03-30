@@ -3,7 +3,9 @@ import { Modal, Button } from "react-bootstrap";
 import { states } from "./stateOptionsData";
 import { updatePatientData } from "../../../../clinicPortalServices/patientEditService";
 import moment from "moment";
-export default class BtnCellRenderer extends Component {
+
+
+export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
 		//console.log(props);
@@ -171,7 +173,7 @@ export default class BtnCellRenderer extends Component {
 											value={this.state.gender}
 											onChange={this.handleChange}
 										>
-											<option>select</option>
+											<option >select</option>
 											<option value="M">Male</option>
 											<option value="F">Female</option>
 											<option value="U">Unknown</option>
@@ -270,7 +272,7 @@ export default class BtnCellRenderer extends Component {
 										>
 											{states.map((state) => {
 												return (
-													<option value={state.value}>{state.state}</option>
+													<option key={state.value} value={state.value}>{state.state}</option>
 												);
 											})}
 										</select>

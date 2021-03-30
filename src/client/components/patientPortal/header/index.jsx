@@ -27,7 +27,7 @@ class PatientPortalHeader extends Component {
 				<Navbar bg="light">
 					<Navbar bg="light">
 						<Link
-							// to="/home"
+							to=""
 							className="navbar-brand "
 							style={{marginRight:"140px"}}
 						>

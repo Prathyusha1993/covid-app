@@ -52,6 +52,7 @@ export default class EditBtnCellRenderer extends Component {
 			email:  props.data && props.data.email ? props.data.email : '',
 			mobile:  props.data && props.data.mobile ? props.data.mobile : '',
 			pdfPath: props.data && props.data.pdfPath ? props.data.pdfPath : '',
+			refreshGrid: props.data.refreshGrid,
 		};
 	}
 
@@ -87,7 +88,7 @@ export default class EditBtnCellRenderer extends Component {
 			mrn: this.state.mrn,
 			dob: this.state.dob,
 			pdfPath: this.state.pdfPath,
-			provider: this.state.provider
+			// provider: this.state.provider
 
 		};		
 		saveOrderEditData(editParams).then((userDetails) => {
@@ -98,7 +99,8 @@ export default class EditBtnCellRenderer extends Component {
 			});
 
 			// call refresh grid function
-			this.props.data.refreshGrid();
+			//this.props.data.refreshGrid();
+			this.state.refreshGrid();
 			
 			editParams.collectedDate = editParams.collectedDate ? moment(editParams.collectedDate, "YYYYMMDDHHmmss").format(
 				"MM/DD/YYYY hh:mm A") : '';

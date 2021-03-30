@@ -12,16 +12,32 @@ import {
 	fetchPatientExpandableData,
 } from "../../../../clinicPortalServices/patientSearchService";
 import moment from "moment";
-import BtnCellRenderer from "./BtnCellRenderer";
-import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/EditBtnCellRenderer";
+import MasterBtnCellRenderer from "./masterBtnCellRenderer";
+
+import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
 import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
 import {serviceConstants} from "../../../../patientPortalServices/constants";
 
-import {LicenseManager} from "ag-grid-enterprise";
-LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+// import {LicenseManager} from "ag-grid-enterprise";
+// LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
-var enterprise = require("@ag-grid-enterprise/core");
-enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+// var enterprise = require("@ag-grid-enterprise/core");
+// enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+
+const getPatientInfo = (patientData, patientId) => {
+	if(patientData && patientData.length>0){
+		const foundPatientInfo = patientData.find((item) => {
+			return item._id === patientId;
+		});
+		return {
+			gender: foundPatientInfo.gender,
+			mrn: foundPatientInfo.mrn,
+			dob: foundPatientInfo.date_of_birth,
+			email: foundPatientInfo.email,
+			mobile: foundPatientInfo.mobile
+		};
+	}
+};
 
 class ClinicPatientGrid extends Component {
 	constructor(props) {
@@ -41,7 +57,7 @@ class ClinicPatientGrid extends Component {
 					minWidth: 80,
 					maxWidth: 80,
 					cellStyle: { textAlign: "center" },
-					cellRenderer: "btnCellRenderer",
+					cellRenderer: "masterBtnCellRenderer",
 				},
 
 				{
@@ -64,7 +80,6 @@ class ClinicPatientGrid extends Component {
 					maxWidth: 150,
 					
 					cellRenderer: function (params) {
-						//return moment(params.data.date_of_birth).format("MM/DD/YYYY");
 						return params.data.date_of_birth
 							? moment(params.data.date_of_birth,"YYYY-MM-DD").format("MM/DD/YYYY")
 							: "";
@@ -140,7 +155,7 @@ class ClinicPatientGrid extends Component {
 				},
 			],
 			frameworkComponents: {
-				btnCellRenderer: BtnCellRenderer,
+				masterBtnCellRenderer: MasterBtnCellRenderer,
 			},
 			defaultColDef: { flex: 1, filter: true },
 			detailCellRendererParams: {
@@ -156,140 +171,103 @@ class ClinicPatientGrid extends Component {
 						},
 						{
 							headerName: "Test",
-							field: "test_info.description",
-							cellRenderer: function (params) {
-								if (
-									params.data.test_info &&
-									params.data.test_info.description
-								) {
-									return params.data.test_info.description;
-								} else {
-									return "";
-								}
-							},
+							field: "description",
 						},
 						{
 							headerName: "Test Type",
-							field: "test_info.test_type",
-							cellRenderer: function (params) {
-								if (params.data.test_info && params.data.test_info.test_type) {
-									return params.data.test_info.test_type;
-								} else {
-									return "";
-								}
-							},
+							field: "testType",
 						},
 						{
 							headerName: "Sample",
 							resizable: true,
-							field: "test_info.sample",
-							cellRenderer: function (params) {
-								if (params.data.test_info && params.data.test_info.sample) {
-									return params.data.test_info.sample;
-								} else {
-									return "";
-								}
-							},
+							field: "sample",
 						},
 						{
 							headerName: "Result",
-							field: "test_info.covid_detected",
 							resizable: true,
-							cellRenderer: 
-							function (params) {
-								//var pdfPath = params.data.results.pdf_path;
-								console.log(params.data.results.pdf_path);
-								console.log(`${serviceConstants.HOST_NAME}${params.data.results.pdf_path}`);
-								var pdfPath = (params.data && params.data.results && params.data.results.pdf_path && params.data.results.pdf_path.length > 0) ?  `${serviceConstants.HOST_NAME}${params.data.results.pdf_path}`: '';
-								if (
-									params.data.test_info &&
-									params.data.test_info.covid_detected
-								) {
-									
-									return '<div><a href={'+pdfPath+'} target="_blank"><i class="fa fa-file-pdf-o"></i> ' +
-									params.data.test_info.covid_detected +
-									'</a></div>'
-								} else {
-									return "";
-								}
-							},
+							cellRenderer: "pdfResultRenderer"
 						},
 						{
 							headerName: "Specimen Collected Date",
-							field: "test_info.collected",
+							field: "collectedDate",
 							minWidth: 200,
 							resizable: true,
-							cellRenderer: function (params) {
-								console.log("collectedDate", params.data.test_info.collected);
-								if (params.data.test_info && params.data.test_info.collected) {
-									return moment(
-										params.data.test_info.collected,
-										"YYYYMMDDHHmmss"
-									).format("MM/DD/YYYY hh:mm A");
-								} else {
-									return "";
-								}
-							},
 						},
 						{
 							headerName: "Physician",
 							minWidth: 150,
 							resizable: true,
-							valueGetter: function addColumns(params) {
-								if (params.data.provider) {
-									return (
-										params.data.provider.first_name +
-										" " +
-										params.data.provider.last_name
-									);
-								} else {
-									return "";
-								}
-							},
+							field: "provider",
 						},
 						{
 							headerName: "Received Date",
-							field: "test_info.received",
+							field: "receivedDate",
 							minWidth: 200,
 							resizable: true,
-							cellRenderer: function (params) {
-								if (params.data.test_info && params.data.test_info.received) {
-									return moment(
-										params.data.test_info.received,
-										"YYYYMMDDHHmmss"
-									).format("MM/DD/YYYY hh:mm A");
-								} else {
-									return "";
-								}
-							},
 						},
 						{
 							headerName: "Requisition",
-							field: "test_info.requisition",
-							cellRenderer: function (params) {
-								if (
-									params.data.test_info &&
-									params.data.test_info.requisition
-								) {
-									return params.data.test_info.requisition;
-								} else {
-									return "";
-								}
-							},
+							field: "requisition",
 						},
 					],
 					frameworkComponents: {
-						editBtnCellRenderer: EditBtnCellRenderer,
-						pdfResultRenderer: PdfResultRenderer
+						pdfResultRenderer: PdfResultRenderer,
+						editBtnCellRenderer : EditBtnCellRenderer
 					},
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
-					fetchPatientExpandableData(params.data._id).then(
-						(expandableRowData) => {
-							params.successCallback(expandableRowData.data);
+
+
+					Promise.all([			
+						fetchPatientExpandableData(params.data._id),
+						fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID"))
+					]).then(([patientExpandableData, patientData]) => {
+						//console.log(orderData);
+						if(patientExpandableData && patientExpandableData.data && patientExpandableData.data.length>0) {
+							const formattedData = patientExpandableData.data.map((item) => {
+			
+								
+								const returnData = {
+									orderId : item._id,
+									patientName: item.patient_id ? item.patient_id.first_name + ' ' + item.patient_id.last_name : ''  ,
+									description: item.test_info && item.test_info.description ? item.test_info.description : '',
+									testType: item.test_info && item.test_info.test_type ? item.test_info.test_type : '',
+									sample: item.test_info && item.test_info.sample ? item.test_info.sample : '',
+									result: item.test_info && item.test_info.covid_detected ? item.test_info.covid_detected : '',
+									collectedDate: item.test_info && item.test_info.collected ? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
+														"MM/DD/YYYY hh:mm A") : '',
+									provider: (item.provider && item.provider.first_name? item.provider.first_name : '') + " " + (item.provider && item.provider.last_name? item.provider.last_name : ''),
+									receivedDate: item.test_info && item.test_info.received ? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
+										"MM/DD/YYYY hh:mm A") : '',
+									requisition: item.lab_order_id && item.lab_order_id ? item.lab_order_id : '',
+									facilitySource: item.facility_source ? item.facility_source : '',
+									code : item.code ? item.code:'',
+									codeType : item.code_type ? item.code_type: '',
+									pdfPath: item.results && item.results.pdf_path ? item.results.pdf_path: '',	
+									
+									// refreshGrid: this.loadGridData
+								}
+			
+								if(item.patient_id && item.patient_id._id) {
+									const patientInfo = getPatientInfo(patientData.data, item.patient_id._id);
+									returnData.gender = patientInfo ? patientInfo.gender : ''; 
+									returnData.mrn = patientInfo ? patientInfo.mrn : '';
+									returnData.dob = patientInfo && patientInfo.dob ? moment(patientInfo.dob, "YYYY-MM-DD").format(
+										"MM/DD/YYYY") : '';
+									returnData.email = patientInfo ? patientInfo.email : '';
+									returnData.mobile = patientInfo ? patientInfo.mobile : '';
+								}
+			
+								return returnData;
+							
+							});
+							//console.log(formattedData);
+							params.successCallback(formattedData);
 						}
-					);
+					});
+
+					
 				},
 			},
 			rowData: null,

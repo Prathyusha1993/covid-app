@@ -10,12 +10,14 @@ import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
 import {fetchPatientMasterData} from "../../../../clinicPortalServices/patientSearchService";
 import moment from "moment";
-import EditBtnCellRenderer from "./EditBtnCellRenderer";
+import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
 import {serviceConstants} from "../../../../patientPortalServices/constants";
 
-import {LicenseManager} from "ag-grid-enterprise";
-LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+
+var enterprise = require("@ag-grid-enterprise/core");
+enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
+
 
 const getPatientInfo = (patientData, patientId) => {
 	if(patientData && patientData.length>0){
@@ -77,22 +79,7 @@ class OrderGridDetails extends Component {
 					headerName: "Result",
 					minWidth: 150,
 					resizable: true,
-					//field: "result",
 					cellRenderer: "pdfResultRenderer",
-					// cellRenderer: function (params) {
-					// 	if (
-					// 		params.data.test_info &&
-					// 		params.data.test_info.covid_detected
-					// 	) {
-					// 		//return params.data.test_info.covid_detected;
-					// 		return '<span><i  class="fas fa-file-pdf"></i> ' +
-					// 		params.data.test_info.covid_detected +
-					// 		'</span>'
-					// 	} else {
-					// 		return "";
-					// 	}
-					// },
-					//cellRenderer: "pdfResultRenderer"
 				},
 				{
 					headerName: "Specimen Collected Date",
