@@ -25,7 +25,6 @@ export const locations = [
         image: FARRAGUT_MEDICAL,
         timings1:"Mon to Fri: 10Am - 5pm",
         contactNumber:"(202) 775-8500",
-        //animation: "DROP"
     },
     {
         id:3,
@@ -38,7 +37,6 @@ export const locations = [
         timings1:"Mon to Fri: 9am - 8:30pm",
         timings2: "Sat: 10:30am - 5pm",
         contactNumber:"(844) 202-1532",
-        //animation: "DROP"
     },
     {
         id:4,
@@ -51,7 +49,6 @@ export const locations = [
         timings1:"Mon to Fri: 9am - 9pm",
         timings2: "Sat: 9:30pm - 5:30pm",
         contactNumber:"(844) 202-1532",
-        //animation: "DROP"
     },
     {
         id:5,
@@ -64,7 +61,6 @@ export const locations = [
         timings1:"Mon to Fri: 8:30am - 6pm",
         timings2: "Sat: 9am - 3pm",
         contactNumber:"(202) 543-4400",
-        //animation: "DROP"
     },
     
 ];

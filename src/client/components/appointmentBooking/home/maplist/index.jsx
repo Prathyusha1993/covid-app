@@ -2,12 +2,6 @@ import React, { Component } from "react";
 //import { CHECKMARK } from './img.jsx';
 import { Link } from "react-router-dom";
 import Map from "./map";
-import {
-	FARRAGUT_MEDICAL,
-	FAST_TRACK_URGENT_CARE,
-	GRUBB_PHARMACY,
-	SHADY_GROVE,
-} from "./img";
 import { locations } from "./data";
 
 class MapList extends Component {
@@ -61,12 +55,6 @@ class MapList extends Component {
 																	>
 																		Book Appointment
 																	</a>
-																	{/* <Link
-																		to={item.bookingLink}
-																		className="apt-btn"
-																	>
-																		Book Appointment
-																	</Link> */}
 																</div>
 															</div>
 														</div>
