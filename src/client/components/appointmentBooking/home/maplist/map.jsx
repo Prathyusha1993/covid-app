@@ -41,7 +41,7 @@ export class GoogleMapsContainer extends Component {
 								key={place.id}
 								place_={place}
 								position={{ lat: place.lat, lng: place.lng }}
-								animation={this.props.google.maps.Animation.BOUNCE}
+								//animation={this.props.google.maps.Animation.BOUNCE}
 							/>
 						);
 					})}
