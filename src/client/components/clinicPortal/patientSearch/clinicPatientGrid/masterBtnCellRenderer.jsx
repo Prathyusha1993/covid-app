@@ -13,13 +13,13 @@ export default class MasterBtnCellRenderer extends Component {
 
 		this.state = {
 			show: false,
-			firstName: props.data.first_name,
-			lastName: props.data.last_name,
-			dob: props.data.date_of_birth,
-			gender: props.data.gender,
-			mrn: props.data.mrn,
-			email: props.data.email,
-			mobile: props.data.mobile,
+			firstName: props.data.first_name ? props.data.first_name : " ",
+			lastName: props.data.last_name ? props.data.last_name : " ",
+			dob: props.data.date_of_birth ? props.data.date_of_birth : " ",
+			gender: props.data.gender ? props.data.gender : " ",
+			mrn: props.data.mrn ? props.data.mrn : " ",
+			email: props.data.email ? props.data.email : " ",
+			mobile: props.data.mobile ? props.data.mobile : " ",
 			address1:
 				props.data.address && props.data.address.address1
 					? props.data.address.address1
