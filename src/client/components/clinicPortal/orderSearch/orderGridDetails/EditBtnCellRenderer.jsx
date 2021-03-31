@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { saveOrderEditData,updateResultPDF } from "../../../../clinicPortalServices/orderEditService";
+import {
+	saveOrderEditData,
+	updateResultPDF,
+} from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
 
 export default class EditBtnCellRenderer extends Component {
@@ -9,49 +12,33 @@ export default class EditBtnCellRenderer extends Component {
 		//console.log(props);
 		this.state = {
 			show: false,
-			orderId : props.data.orderId,
-			gender: props.data.gender ? props.data.gender: '',
-			dob: props.data.dob ? props.data.dob : '',
-			mrn:props.data.mrn ? props.data.mrn: '',
-			provider:
-				props.data && props.data.provider ? props.data.provider : "" ,
-			facilitySource: props.data.facilitySource ? props.data.facilitySource : '',
+			orderId: props.data.orderId,
+			gender: props.data.gender ? props.data.gender : "",
+			dob: props.data.dob ? props.data.dob : "",
+			mrn: props.data.mrn ? props.data.mrn : "",
+			provider: props.data && props.data.provider ? props.data.provider : "",
+			facilitySource: props.data.facilitySource
+				? props.data.facilitySource
+				: "",
 			receivedDate:
-				props.data && props.data.receivedDate
-					? props.data.receivedDate
-					: "",
+				props.data && props.data.receivedDate ? props.data.receivedDate : "",
 			description:
-				props.data && props.data.description
-					? props.data.description
-					: "",
-			testType:
-				props.data && props.data.testType
-					? props.data.testType
-					: "",
-			sample:
-				props.data && props.data.sample
-					? props.data.sample
-					: "",
-			result:
-				props.data && props.data.result
-					? props.data.result
-					: "",
+				props.data && props.data.description ? props.data.description : "",
+			testType: props.data && props.data.testType ? props.data.testType : "",
+			sample: props.data && props.data.sample ? props.data.sample : "",
+			result: props.data && props.data.result ? props.data.result : "",
 			collectedDate:
-				props.data && props.data.collectedDate
-					? props.data.collectedDate
-					: "",
-			
+				props.data && props.data.collectedDate ? props.data.collectedDate : "",
+
 			requisition:
-				props.data && props.data.requisition
-					? props.data.requisition
-					: "",
-			code: props.data && props.data.code ? props.data.code : '',
-			codeType: props.data && props.data.codeType ? props.data.codeType : '',
+				props.data && props.data.requisition ? props.data.requisition : "",
+			code: props.data && props.data.code ? props.data.code : "",
+			codeType: props.data && props.data.codeType ? props.data.codeType : "",
 			patientName:
-			props.data && props.data.patientName ? props.data.patientName : '',
-			email:  props.data && props.data.email ? props.data.email : '',
-			mobile:  props.data && props.data.mobile ? props.data.mobile : '',
-			pdfPath: props.data && props.data.pdfPath ? props.data.pdfPath : '',
+				props.data && props.data.patientName ? props.data.patientName : "",
+			email: props.data && props.data.email ? props.data.email : "",
+			mobile: props.data && props.data.mobile ? props.data.mobile : "",
+			pdfPath: props.data && props.data.pdfPath ? props.data.pdfPath : "",
 			refreshGrid: props.data.refreshGrid,
 		};
 	}
@@ -61,7 +48,73 @@ export default class EditBtnCellRenderer extends Component {
 	};
 
 	handleClose = () => {
-		this.setState({ show: false });
+		const intialState = {
+			orderId : this.props.data.orderId,
+			gender: this.props.data.gender ? this.props.data.gender: '',
+			dob: this.props.data.dob ? this.props.data.dob : '',
+			mrn:this.props.data.mrn ? this.props.data.mrn: '',
+			provider:
+			this.props.data && this.props.data.provider ? this.props.data.provider : "" ,
+			facilitySource: this.props.data.facilitySource ? this.props.data.facilitySource : '',
+			receivedDate:
+			this.props.data && this.props.data.receivedDate
+					? this.props.data.receivedDate
+					: "",
+			description:
+			this.props.data && this.props.data.description
+					? this.props.data.description
+					: "",
+			testType:
+			this.props.data && this.props.data.testType
+					? this.props.data.testType
+					: "",
+			sample:
+			this.props.data && this.props.data.sample
+					? this.props.data.sample
+					: "",
+			result:
+			this.props.data && this.props.data.result
+					? this.props.data.result
+					: "",
+			collectedDate:
+			this.props.data && this.props.data.collectedDate
+					? this.props.data.collectedDate
+					: "",
+
+			requisition:
+			this.props.data && this.props.data.requisition
+					? this.props.data.requisition
+					: "",
+			code: this.props.data && this.props.data.code ? this.props.data.code : '',
+			codeType: this.props.data && this.props.data.codeType ? this.props.data.codeType : '',
+			patientName:
+			this.props.data && this.props.data.patientName ? this.props.data.patientName : '',
+			email:  this.props.data && this.props.data.email ? this.props.data.email : '',
+			mobile:  this.props.data && this.props.data.mobile ? this.props.data.mobile : '',
+			pdfPath: this.props.data && this.props.data.pdfPath ? this.props.data.pdfPath : '',
+
+			// orderId: this.state.orderId,
+			// gender: this.state.gender,
+			// dob: this.state.dob,
+			// mrn: this.state.mrn,
+			// provider: this.state.provider,
+			// facilitySource: this.state.facilitySource,
+			// receivedDate: this.state.receivedDate,
+			// description: this.state.description,
+			// testType: this.state.testType,
+			// sample: this.state.sample,
+			// result: this.state.result,
+			// collectedDate: this.state.collectedDate,
+
+			// requisition: this.state.requisition,
+			// code: this.state.code,
+			// codeType: this.state.codeType,
+			// patientName: this.state.patientName,
+			// email: this.state.email,
+			// mobile: this.state.mobile,
+			// pdfPath: this.state.pdfPath,
+		};
+		this.setState({ show: false, ...intialState });
 	};
 
 	handleChange = (e) => {
@@ -74,11 +127,17 @@ export default class EditBtnCellRenderer extends Component {
 			testType: this.state.testType,
 			sample: this.state.sample,
 			result: this.state.result,
-			collectedDate: this.state.collectedDate ? moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
-				"YYYYMMDDHHmmss") : '',
+			collectedDate: this.state.collectedDate
+				? moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
+						"YYYYMMDDHHmmss"
+				  )
+				: "",
 			provider: this.state.provider,
-			receivedDate: this.state.receivedDate ? moment(this.state.receivedDate, "MM/DD/YYYY hh:mm A").format(
-				"YYYYMMDDHHmmss") : '',
+			receivedDate: this.state.receivedDate
+				? moment(this.state.receivedDate, "MM/DD/YYYY hh:mm A").format(
+						"YYYYMMDDHHmmss"
+				  )
+				: "",
 			requisition: this.state.requisition,
 			patientName: this.state.patientName,
 			orderId: this.state.orderId,
@@ -89,8 +148,7 @@ export default class EditBtnCellRenderer extends Component {
 			dob: this.state.dob,
 			pdfPath: this.state.pdfPath,
 			// provider: this.state.provider
-
-		};		
+		};
 		saveOrderEditData(editParams).then((userDetails) => {
 			//make api call to get patient info parameter is patient_id
 			this.setState({
@@ -101,17 +159,19 @@ export default class EditBtnCellRenderer extends Component {
 			// call refresh grid function
 			//this.props.data.refreshGrid();
 			this.state.refreshGrid();
-			
-			editParams.collectedDate = editParams.collectedDate ? moment(editParams.collectedDate, "YYYYMMDDHHmmss").format(
-				"MM/DD/YYYY hh:mm A") : '';
-			editParams.receivedDate = editParams.receivedDate ? moment(editParams.receivedDate, "YYYYMMDDHHmmss").format(
-					"MM/DD/YYYY hh:mm A") : '';
+
+			editParams.collectedDate = editParams.collectedDate
+				? moment(editParams.collectedDate, "YYYYMMDDHHmmss").format(
+						"MM/DD/YYYY hh:mm A"
+				  )
+				: "";
+			editParams.receivedDate = editParams.receivedDate
+				? moment(editParams.receivedDate, "YYYYMMDDHHmmss").format(
+						"MM/DD/YYYY hh:mm A"
+				  )
+				: "";
 			//call this method to generate/update the result letter pdf
-			updateResultPDF(editParams).then((data)=>{
-
-			})
-
-
+			updateResultPDF(editParams).then((data) => {});
 		});
 	};
 
@@ -120,7 +180,7 @@ export default class EditBtnCellRenderer extends Component {
 			borderTop: "none",
 			borderLeft: "none",
 			borderRight: "none",
-			borderRadius: "0px"
+			borderRadius: "0px",
 		};
 		return (
 			<div>
@@ -144,7 +204,7 @@ export default class EditBtnCellRenderer extends Component {
 					<Modal.Body>
 						<form>
 							<div className="row form-row">
-							<div className="col-12 col-md-6">
+								<div className="col-12 col-md-6">
 									<div className="form-group">
 										<label>Patient Name</label>
 										<input
@@ -293,10 +353,11 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.collectedDate}
 											onChange={this.handleChange}
 										/>
-										<label style={{fontSize: '13px'}}>Date format - MM/DD/YYYY hh:mi AM/PM</label>
+										<label style={{ fontSize: "13px" }}>
+											Date format - MM/DD/YYYY hh:mi AM/PM
+										</label>
 									</div>
 								</div>
-
 
 								<div className="col-12 col-md-6">
 									<div className="form-group">
@@ -309,7 +370,9 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.receivedDate}
 											onChange={this.handleChange}
 										/>
-										<label style={{fontSize: '13px'}}>Date format - MM/DD/YYYY hh:mi AM/PM</label>
+										<label style={{ fontSize: "13px" }}>
+											Date format - MM/DD/YYYY hh:mi AM/PM
+										</label>
 									</div>
 								</div>
 								<div className="col-12 col-md-6">
@@ -329,7 +392,6 @@ export default class EditBtnCellRenderer extends Component {
 										</select>
 									</div>
 								</div>
-								
 							</div>
 						</form>
 					</Modal.Body>

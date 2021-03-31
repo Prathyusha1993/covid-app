@@ -24,7 +24,7 @@ export default class PdfResultRenderer extends Component {
 				<a href={this.state.pdfPath} target="_blank">
 					<i class="fa fa-file-pdf-o"></i> {this.state.result}
 				</a>
-				: ""}
+				: alert('results are not found')}
             </div>
 		);
 	}

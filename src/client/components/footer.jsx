@@ -19,7 +19,7 @@ const Footer = (props) => {
 									<ul className="policy-menu">
 										<li>
 											<a href="#scroll-top">
-												<i class="fas fa-arrow-up"></i>
+												<i className="fas fa-arrow-up"></i>
 											</a>
 										</li>
 									</ul>

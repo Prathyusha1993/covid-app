@@ -44,9 +44,10 @@ export default class MasterBtnCellRenderer extends Component {
 				props.data.address && props.data.address.country
 			? props.data.address.country
 			: "",
-			stateOptions: "",
+			
 			_id: props.data._id,
-			loading: false
+			loading: false,
+			stateOptions: "",
 			
 		};
 	}
@@ -56,7 +57,42 @@ export default class MasterBtnCellRenderer extends Component {
 	};
 
 	handleClose = () => {
-		this.setState({ show: false });
+		const intialState = {
+			firstName: this.props.data.first_name ? this.props.data.first_name : "",
+			lastName: this.props.data.last_name ? this.props.data.last_name : "",
+			dob: this.props.data.date_of_birth ? this.props.data.date_of_birth : "",
+			gender: this.props.data.gender ? this.props.data.gender : "",
+			mrn: this.props.data.mrn ? this.props.data.mrn : "",
+			email: this.props.data.email ? this.props.data.email : "",
+			mobile: this.props.data.mobile ? this.props.data.mobile : "",
+			address1:
+			this.props.data.address && this.props.data.address.address1
+					? this.props.data.address.address1
+					: "",
+			address2:
+			this.props.data.address && this.props.data.address.address2
+					? this.props.data.address.address2
+					: "",
+			city:
+			this.props.data.address && this.props.data.address.city
+					? this.props.data.address.city
+					: "",
+			state:
+			this.props.data.address && this.props.data.address.state
+					? this.props.data.address.state
+					: "",
+			zip:
+			this.props.data.address && this.props.data.address.zip
+					? this.props.data.address.zip
+					: "",
+			country: 
+			this.props.data.address && this.props.data.address.country
+			? this.props.data.address.country
+			: "",
+			
+			_id: this.props.data._id ? this.props.data._id : "",
+		}
+		this.setState({ show: false, ...intialState });
 	};
 
 	handleChange = (e) => {

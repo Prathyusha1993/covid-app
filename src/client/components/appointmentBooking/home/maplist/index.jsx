@@ -25,7 +25,7 @@ class MapList extends Component {
 							<div className="left">
 								{locations.map((item, index) => {
 									return (
-										<div className="card" index={item.name}>
+										<div className="card" key={item.name}>
 											<div className="card-body">
 												<div className="doctor-widget">
 													<div className="doc-info-left">

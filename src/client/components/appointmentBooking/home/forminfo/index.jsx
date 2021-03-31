@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
+//import message from semanticuireact if you want to shoe mesage after submission
 
 class FormInfo extends Component {
 	constructor(props) {
@@ -10,17 +11,30 @@ class FormInfo extends Component {
 			mobile: "",
 			email: "",
 			text: "",
+			// formSuccess: false,
+			// formError: true,
 		};
 	}
 
-	handleLogin = (e) => {
+	getInTouch = (e) => {
+		const info = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			mobile: this.state.mobile,
+			email: this.state.email,
+			text: this.state.text,
+		}
 		e.preventDefault();
 		fetch(`https://hipaa.jotform.com/jsform/210838200288049`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-		});
+			body: JSON.stringify(info),
+		}).then((response) => {
+			console.log(response);
+			response.json();
+		})
 	};
 
 	handleChange = (e) => {
@@ -42,7 +56,16 @@ class FormInfo extends Component {
 		};
 		return (
 			<div style={{ paddingTop: "50px" }}>
+				{/* <Form style={styleForm} success={this.state.formSuccess} error={this.state.formError} onSubmit={this.getInTouch}> */}
 				<Form style={styleForm} onSubmit={this.getInTouch}>
+					{/* <Message 
+					success
+					header="Form completed"
+					content="Thank you your submission has been received" />
+					<Message 
+					error
+					header="Missing fields!"
+					list={['All fields must be filled.']}/> */}
 					<Form.Row>
 						<Form.Group as={Col} controlId="formGridEmail">
 							<Form.Label>What is your name?</Form.Label>
@@ -66,7 +89,7 @@ class FormInfo extends Component {
 
 					<Form.Group controlId="formGridAddress1">
 						<Form.Label>What number can you be reached at?</Form.Label>
-						<Form.Control type="number" defaultValue="(000) 000-0000" name="mobile"
+						<Form.Control type="number" name="mobile"
 								value={this.state.mobile}
 								onChange={this.handleChange} />
 						<Form.Label style={{ fontSize: "12px" }}>
