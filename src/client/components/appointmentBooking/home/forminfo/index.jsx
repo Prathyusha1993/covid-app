@@ -57,7 +57,10 @@ class FormInfo extends Component {
 		return (
 			<div style={{ paddingTop: "50px" }}>
 				{/* <Form style={styleForm} success={this.state.formSuccess} error={this.state.formError} onSubmit={this.getInTouch}> */}
-				<Form style={styleForm} onSubmit={this.getInTouch}>
+				<Form style={styleForm} 
+				//onSubmit={this.getInTouch} 
+				action="https://hipaa.jotform.com/jsform/210838200288049"
+				method="post" autocomplete="off">
 					{/* <Message 
 					success
 					header="Form completed"
