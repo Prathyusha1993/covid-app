@@ -349,6 +349,7 @@ class ClinicPatientGrid extends Component {
 							frameworkComponents={this.state.frameworkComponents}
 							pagination={true}
 							paginationAutoPageSize={true}
+							//paginationPageSize={10}
 						/>
 					</div>
 				</div>
