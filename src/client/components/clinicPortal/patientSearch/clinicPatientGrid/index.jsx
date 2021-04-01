@@ -16,7 +16,10 @@ import MasterBtnCellRenderer from "./masterBtnCellRenderer";
 
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
 import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
-import {serviceConstants} from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../patientPortalServices/constants";
+
+import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
+import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
 // import {LicenseManager} from "ag-grid-enterprise";
 // LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
@@ -25,7 +28,7 @@ import {serviceConstants} from "../../../../patientPortalServices/constants";
 // enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
 const getPatientInfo = (patientData, patientId) => {
-	if(patientData && patientData.length>0){
+	if (patientData && patientData.length > 0) {
 		const foundPatientInfo = patientData.find((item) => {
 			return item._id === patientId;
 		});
@@ -34,7 +37,7 @@ const getPatientInfo = (patientData, patientId) => {
 			mrn: foundPatientInfo.mrn,
 			dob: foundPatientInfo.date_of_birth,
 			email: foundPatientInfo.email,
-			mobile: foundPatientInfo.mobile
+			mobile: foundPatientInfo.mobile,
 		};
 	}
 };
@@ -50,6 +53,8 @@ class ClinicPatientGrid extends Component {
 				MenuModule,
 				ColumnsToolPanelModule,
 				AllCommunityModules,
+				ClipboardModule,
+				ExcelExportModule,
 			],
 			columnDefs: [
 				{
@@ -65,23 +70,25 @@ class ClinicPatientGrid extends Component {
 					field: "first_name",
 					cellRenderer: "agGroupCellRenderer",
 					minWidth: 200,
-					resizable: true
+					resizable: true,
 				},
-				{ 
-					headerName: "Last Name", 
-					field: "last_name", 
+				{
+					headerName: "Last Name",
+					field: "last_name",
 					minWidth: 150,
-					resizable: true
+					resizable: true,
 				},
 				{
 					headerName: "Date Of Birth",
 					field: "date_of_birth",
 					minWidth: 150,
 					maxWidth: 150,
-					
+
 					cellRenderer: function (params) {
 						return params.data.date_of_birth
-							? moment(params.data.date_of_birth,"YYYY-MM-DD").format("MM/DD/YYYY")
+							? moment(params.data.date_of_birth, "YYYY-MM-DD").format(
+									"MM/DD/YYYY"
+							  )
 							: "";
 					},
 				},
@@ -164,7 +171,7 @@ class ClinicPatientGrid extends Component {
 						{
 							headerName: "Edit",
 							minWidth: 80,
-							maxWidth:80,
+							maxWidth: 80,
 							cellStyle: { textAlign: "center" },
 							cellRenderer: "editBtnCellRenderer",
 							// hide: true
@@ -185,7 +192,7 @@ class ClinicPatientGrid extends Component {
 						{
 							headerName: "Result",
 							resizable: true,
-							cellRenderer: "pdfResultRenderer"
+							cellRenderer: "pdfResultRenderer",
 						},
 						{
 							headerName: "Specimen Collected Date",
@@ -212,64 +219,125 @@ class ClinicPatientGrid extends Component {
 					],
 					frameworkComponents: {
 						pdfResultRenderer: PdfResultRenderer,
-						editBtnCellRenderer : EditBtnCellRenderer
+						editBtnCellRenderer: EditBtnCellRenderer,
 					},
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
-
-
-					Promise.all([			
+					Promise.all([
 						fetchPatientExpandableData(params.data._id),
-						fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID"))
+						fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")),
 					]).then(([patientExpandableData, patientData]) => {
 						//console.log(orderData);
-						if(patientExpandableData && patientExpandableData.data && patientExpandableData.data.length>0) {
+						if (
+							patientExpandableData &&
+							patientExpandableData.data &&
+							patientExpandableData.data.length > 0
+						) {
 							const formattedData = patientExpandableData.data.map((item) => {
-			
-								
 								const returnData = {
-									orderId : item._id,
-									patientName: item.patient_id ? item.patient_id.first_name + ' ' + item.patient_id.last_name : ''  ,
-									description: item.test_info && item.test_info.description ? item.test_info.description : '',
-									testType: item.test_info && item.test_info.test_type ? item.test_info.test_type : '',
-									sample: item.test_info && item.test_info.sample ? item.test_info.sample : '',
-									result: item.test_info && item.test_info.covid_detected ? item.test_info.covid_detected : '',
-									collectedDate: item.test_info && item.test_info.collected ? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
-														"MM/DD/YYYY hh:mm A") : '',
-									provider: (item.provider && item.provider.first_name? item.provider.first_name : '') + " " + (item.provider && item.provider.last_name? item.provider.last_name : ''),
-									receivedDate: item.test_info && item.test_info.received ? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A") : '',
-									requisition: item.lab_order_id && item.lab_order_id ? item.lab_order_id : '',
-									facilitySource: item.facility_source ? item.facility_source : '',
-									code : item.code ? item.code:'',
-									codeType : item.code_type ? item.code_type: '',
-									pdfPath: item.results && item.results.pdf_path ? item.results.pdf_path: '',	
-									
+									orderId: item._id,
+									patientName: item.patient_id
+										? item.patient_id.first_name +
+										  " " +
+										  item.patient_id.last_name
+										: "",
+									description:
+										item.test_info && item.test_info.description
+											? item.test_info.description
+											: "",
+									testType:
+										item.test_info && item.test_info.test_type
+											? item.test_info.test_type
+											: "",
+									sample:
+										item.test_info && item.test_info.sample
+											? item.test_info.sample
+											: "",
+									result:
+										item.test_info && item.test_info.covid_detected
+											? item.test_info.covid_detected
+											: "",
+									collectedDate:
+										item.test_info && item.test_info.collected
+											? moment(
+													item.test_info.collected,
+													"YYYYMMDDHHmmss"
+											  ).format("MM/DD/YYYY hh:mm A")
+											: "",
+									provider:
+										(item.provider && item.provider.first_name
+											? item.provider.first_name
+											: "") +
+										" " +
+										(item.provider && item.provider.last_name
+											? item.provider.last_name
+											: ""),
+									receivedDate:
+										item.test_info && item.test_info.received
+											? moment(
+													item.test_info.received,
+													"YYYYMMDDHHmmss"
+											  ).format("MM/DD/YYYY hh:mm A")
+											: "",
+									requisition:
+										item.lab_order_id && item.lab_order_id
+											? item.lab_order_id
+											: "",
+									facilitySource: item.facility_source
+										? item.facility_source
+										: "",
+									code: item.code ? item.code : "",
+									codeType: item.code_type ? item.code_type : "",
+									pdfPath:
+										item.results && item.results.pdf_path
+											? item.results.pdf_path
+											: "",
+
 									// refreshGrid: this.loadGridData
+								};
+
+								if (item.patient_id && item.patient_id._id) {
+									const patientInfo = getPatientInfo(
+										patientData.data,
+										item.patient_id._id
+									);
+									returnData.gender = patientInfo ? patientInfo.gender : "";
+									returnData.mrn = patientInfo ? patientInfo.mrn : "";
+									returnData.dob =
+										patientInfo && patientInfo.dob
+											? moment(patientInfo.dob, "YYYY-MM-DD").format(
+													"MM/DD/YYYY"
+											  )
+											: "";
+									returnData.email = patientInfo ? patientInfo.email : "";
+									returnData.mobile = patientInfo ? patientInfo.mobile : "";
 								}
-			
-								if(item.patient_id && item.patient_id._id) {
-									const patientInfo = getPatientInfo(patientData.data, item.patient_id._id);
-									returnData.gender = patientInfo ? patientInfo.gender : ''; 
-									returnData.mrn = patientInfo ? patientInfo.mrn : '';
-									returnData.dob = patientInfo && patientInfo.dob ? moment(patientInfo.dob, "YYYY-MM-DD").format(
-										"MM/DD/YYYY") : '';
-									returnData.email = patientInfo ? patientInfo.email : '';
-									returnData.mobile = patientInfo ? patientInfo.mobile : '';
-								}
-			
+
 								return returnData;
-							
 							});
 							//console.log(formattedData);
 							params.successCallback(formattedData);
 						}
 					});
-
-					
 				},
 			},
+			excelStyles: [
+				{
+					id: "header",
+					interior: {
+						color: "#aaaaaa",
+						pattern: "Solid",
+					},
+				},
+				{
+					id: "body",
+					interior: {
+						color: "#dddddd",
+						pattern: "Solid",
+					},
+				},
+			],
 			rowData: null,
 			expandableRowData: null,
 		};
@@ -282,16 +350,25 @@ class ClinicPatientGrid extends Component {
 		this.loadGridData();
 	};
 
-	loadGridData=()=>{
+	loadGridData = () => {
 		//need to pass facility_id as input
-		fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")).then((data) => {
-			this.setState({ rowData: data.data });
-		});
-	}
+		fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")).then(
+			(data) => {
+				this.setState({ rowData: data.data });
+			}
+		);
+	};
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
 	};
+
+
+	
+	onBtExport = () => {
+		this.gridApi.exportDataAsExcel({});
+	  };
+
 
 	render() {
 		return (
@@ -315,14 +392,21 @@ class ClinicPatientGrid extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="col-md-3" style={{ padding: " 12px" }}>
-					<input
+				
+				<div className="row" style={{ padding: " 12px" }}>
+					<div className="col-md-3">
+						<input 
 						type="search"
 						className="form-control"
 						onChange={this.onFilterTextChange}
 						placeholder="Quick Search"
-					/>
+						/>
+					</div>
+					<div className="col export-button">
+						<button className="btn btn-primary submit-btn" onClick={() => this.onBtExport()}>Export to Excel</button>
+					</div>
 				</div>
+				
 				<div
 					style={{
 						width: "100%",
@@ -350,6 +434,7 @@ class ClinicPatientGrid extends Component {
 							pagination={true}
 							paginationAutoPageSize={true}
 							//paginationPageSize={10}
+							excelStyles={this.state.excelStyles}
 						/>
 					</div>
 				</div>

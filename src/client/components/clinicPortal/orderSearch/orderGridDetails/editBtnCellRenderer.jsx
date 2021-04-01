@@ -398,7 +398,7 @@ export default class EditBtnCellRenderer extends Component {
 											<option>Select</option>
 											<option>SARS-CoV-2 Not Detected</option>
 											<option>SARS-CoV-2 Detected</option>
-											<option>SARS-CoV-2 Inconclusion</option>
+											<option>SARS-CoV-2 Inconclusive</option>
 										</select>
 									</div>
 								</div>

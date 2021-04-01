@@ -15,8 +15,8 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
 
-import { ClipboardModule } from '@ag-grid-enterprise/clipboard';
-import { ExcelExportModule } from '@ag-grid-enterprise/excel-export';
+import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
+import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
 // import "@ag-grid-community/all-modules/dist/styles/ag-grid.css";
 // import "@ag-grid-community/all-modules/dist/styles/ag-theme-alpine.css";
@@ -123,20 +123,20 @@ class OrderGridDetails extends Component {
 			rowData: null,
 			excelStyles: [
 				{
-				  id: 'header',
-				  interior: {
-					color: '#aaaaaa',
-					pattern: 'Solid',
-				  },
+					id: "header",
+					interior: {
+						color: "#aaaaaa",
+						pattern: "Solid",
+					},
 				},
 				{
-				  id: 'body',
-				  interior: {
-					color: '#dddddd',
-					pattern: 'Solid',
-				  },
+					id: "body",
+					interior: {
+						color: "#dddddd",
+						pattern: "Solid",
+					},
 				},
-			  ],
+			],
 		};
 	}
 
@@ -237,6 +237,10 @@ class OrderGridDetails extends Component {
 		this.gridApi.setQuickFilter(e.target.value);
 	};
 
+	onBtExport = () => {
+		this.gridApi.exportDataAsExcel({});
+	};
+
 	render() {
 		return (
 			<div>
@@ -259,46 +263,49 @@ class OrderGridDetails extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="col-md-3" style={{ padding: " 12px" }}>
-					<input
+				<div className="row" style={{ padding: " 12px" }}>
+					<div className="col-md-3">
+						<input 
 						type="search"
 						className="form-control"
 						onChange={this.onFilterTextChange}
 						placeholder="Quick Search"
-					/>
+						/>
+					</div>
+					<div className="col export-button">
+						<button className="btn btn-primary submit-btn" onClick={() => this.onBtExport()}>Export to Excel</button>
+					</div>
 				</div>
+					<div
+						style={{
+							width: "100%",
+							height: "550px",
+							padding: "15px 15px 15px 15px",
+						}}
+					>
 						<div
+							id="myGrid"
 							style={{
+								height: "100%",
 								width: "100%",
-								height: "550px",
-								padding: "15px 15px 15px 15px",
 							}}
+							className="ag-theme-alpine"
 						>
-							<div
-								id="myGrid"
-								style={{
-									height: "100%",
-									width: "100%",
-								}}
-								className="ag-theme-alpine"
-							>
-								<AgGridReact
-									modules={this.state.modules}
-									columnDefs={this.state.columnDefs}
-									defaultColDef={this.state.defaultColDef}
-									masterDetail={true}
-									onGridReady={this.onGridReady}
-									rowData={this.state.rowData}
-									frameworkComponents={this.state.frameworkComponents}
-									pagination={true}
-									paginationAutoPageSize={true}
-									excelStyles={this.state.excelStyles}
-								/>
-							</div>
+							<AgGridReact
+								modules={this.state.modules}
+								columnDefs={this.state.columnDefs}
+								defaultColDef={this.state.defaultColDef}
+								masterDetail={true}
+								onGridReady={this.onGridReady}
+								rowData={this.state.rowData}
+								frameworkComponents={this.state.frameworkComponents}
+								pagination={true}
+								paginationAutoPageSize={true}
+								excelStyles={this.state.excelStyles}
+							/>
 						</div>
 					</div>
-			// 	</div>
-			// </div>
+				</div>
 		);
 	}
 }
