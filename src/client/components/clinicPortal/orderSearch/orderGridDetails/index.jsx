@@ -15,8 +15,11 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
 
-import "@ag-grid-community/all-modules/dist/styles/ag-grid.css";
-import "@ag-grid-community/all-modules/dist/styles/ag-theme-alpine.css";
+import { ClipboardModule } from '@ag-grid-enterprise/clipboard';
+import { ExcelExportModule } from '@ag-grid-enterprise/excel-export';
+
+// import "@ag-grid-community/all-modules/dist/styles/ag-grid.css";
+// import "@ag-grid-community/all-modules/dist/styles/ag-theme-alpine.css";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -50,6 +53,8 @@ class OrderGridDetails extends Component {
 				ColumnsToolPanelModule,
 				AllCommunityModules,
 				AllModules,
+				ClipboardModule,
+				ExcelExportModule,
 			],
 			columnDefs: [
 				{
@@ -115,34 +120,23 @@ class OrderGridDetails extends Component {
 				pdfResultRenderer: PdfResultRenderer,
 			},
 			defaultColDef: { flex: 1, filter: true },
-			//rowSelection: "multiple",
 			rowData: null,
-			// pinnedTopRowData: [
-			// 	{
-			// 		patientName: "Floating <Top> patientname",
-			// 		description: "rtr pcr test",
-			// 		testType: "Floating <Top> nasal swab",
-			// 		sample: 88,
-			// 		result: "sara-cov2",
-			// 		collectedDate: "03/03/2021",
-			// 		provider: "name",
-			// 		receivedDate: "03/03/2021",
-			// 		requisition: "dummy",
-			// 	},
-			// ],
-			// pinnedBottomRowData: [
-			// 	{
-			// 		patientName: "Floating <Top> patientname",
-			// 		description: "rtr pcr test",
-			// 		testType: "Floating <Top> nasal swab",
-			// 		sample: 88,
-			// 		result: "sara-cov2",
-			// 		collectedDate: "03/03/2021",
-			// 		provider: "name",
-			// 		receivedDate: "03/03/2021",
-			// 		requisition: "dummy",
-			// 	},
-			// ],
+			excelStyles: [
+				{
+				  id: 'header',
+				  interior: {
+					color: '#aaaaaa',
+					pattern: 'Solid',
+				  },
+				},
+				{
+				  id: 'body',
+				  interior: {
+					color: '#dddddd',
+					pattern: 'Solid',
+				  },
+				},
+			  ],
 		};
 	}
 
@@ -243,29 +237,6 @@ class OrderGridDetails extends Component {
 		this.gridApi.setQuickFilter(e.target.value);
 	};
 
-	// onBtExport = () => {
-	// 	var columnWidth = getBooleanValue("#columnWidth")
-	// 		? getTextValue("#columnWidthValue")
-	// 		: undefined;
-	// 	var params = {
-	// 		columnWidth:
-	// 			columnWidth === "myColumnWidthCallback"
-	// 				? myColumnWidthCallback
-	// 				: parseFloat(columnWidth),
-	// 		sheetName:
-	// 			getBooleanValue("#sheetName") && getTextValue("#sheetNameValue"),
-	// 		exportMode: getBooleanValue("#exportModeXml") ? "xml" : undefined,
-	// 		suppressTextAsCDATA: getBooleanValue("#suppressTextAsCDATA"),
-	// 		rowHeight: getBooleanValue("#rowHeight")
-	// 			? getNumericValue("#rowHeightValue")
-	// 			: undefined,
-	// 		headerRowHeight: getBooleanValue("#headerRowHeight")
-	// 			? getNumericValue("#headerRowHeightValue")
-	// 			: undefined,
-	// 	};
-	// 	this.gridApi.exportDataAsExcel(params);
-	// };
-
 	render() {
 		return (
 			<div>
@@ -296,77 +267,6 @@ class OrderGridDetails extends Component {
 						placeholder="Quick Search"
 					/>
 				</div>
-
-				{/* <div style={{ width: "100%", height: "100%" }}>
-					<div className="container">
-						<div className="columns">
-							<div className="column">
-								<label className="option">
-									<input type="checkbox" id="columnWidth" />
-									columnWidth =
-									<select id="columnWidthValue">
-										<option>100</option>
-										<option>200</option>
-										<option>myColumnWidthCallback</option>
-									</select>
-								</label>
-								<label className="option">
-									<input type="checkbox" id="sheetName" />
-									sheetName =
-									<input
-										type="text"
-										id="sheetNameValue"
-										defaultValue="custom-name"
-										maxlength="31"
-									/>
-								</label>
-								<label className="option">
-									<input type="checkbox" id="exportModeXml" />
-									<span className="option-name">exportMode = "xml"</span>
-								</label>
-							</div>
-							<div className="column" style={{ marginLeft: "30px" }}>
-								<label className="option">
-									<input type="checkbox" id="suppressTextAsCDATA" />
-									<span className="option-name">suppressTextAsCDATA</span>
-								</label>
-								<div className="option">
-									<label>
-										<input type="checkbox" id="rowHeight" />
-										rowHeight =
-									</label>
-									<input
-										type="text"
-										id="rowHeightValue"
-										defaultValue="30"
-										style={{ width: "40px" }}
-									/>
-								</div>
-								<div className="option">
-									<label>
-										<input type="checkbox" id="headerRowHeight" />
-										headerRowHeight =
-									</label>
-									<input
-										type="text"
-										id="headerRowHeightValue"
-										defaultValue="40"
-										style={{ width: "40px" }}
-									/>
-								</div>
-							</div>
-						</div>
-
-						<div style={{ margin: "5px" }}>
-							<label>
-								<button
-									onClick={() => this.onBtExport()}
-									style={{ margin: "5px", fontWeight: "bold" }}
-								>
-									Export to Excel
-								</button>
-							</label>
-						</div> */}
 						<div
 							style={{
 								width: "100%",
@@ -387,14 +287,12 @@ class OrderGridDetails extends Component {
 									columnDefs={this.state.columnDefs}
 									defaultColDef={this.state.defaultColDef}
 									masterDetail={true}
-									rowSelection={this.state.rowSelection}
 									onGridReady={this.onGridReady}
 									rowData={this.state.rowData}
 									frameworkComponents={this.state.frameworkComponents}
 									pagination={true}
 									paginationAutoPageSize={true}
-									//pinnedTopRowData={this.state.pinnedTopRowData}
-									//pinnedBottomRowData={this.state.pinnedBottomRowData}
+									excelStyles={this.state.excelStyles}
 								/>
 							</div>
 						</div>
@@ -404,28 +302,5 @@ class OrderGridDetails extends Component {
 		);
 	}
 }
-
-// function getBooleanValue(cssSelector) {
-// 	return document.querySelector(cssSelector).checked === true;
-// }
-// function getTextValue(cssSelector) {
-// 	return document.querySelector(cssSelector).value;
-// }
-// function getNumericValue(cssSelector) {
-// 	var value = parseFloat(getTextValue(cssSelector));
-// 	if (isNaN(value)) {
-// 		var message = "Invalid number entered in " + cssSelector + " field";
-// 		alert(message);
-// 		throw new Error(message);
-// 	}
-// 	return value;
-// }
-// function myColumnWidthCallback(params) {
-// 	var originalWidth = params.column.getActualWidth();
-// 	if (params.index < 7) {
-// 		return originalWidth;
-// 	}
-// 	return 30;
-// }
 
 export default OrderGridDetails;
