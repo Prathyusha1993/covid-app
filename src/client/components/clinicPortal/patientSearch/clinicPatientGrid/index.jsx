@@ -166,7 +166,9 @@ class ClinicPatientGrid extends Component {
 			},
 			defaultColDef: { flex: 1, filter: true },
 			detailCellRendererParams: {
+				//refreshStrategy: 'everything',
 				detailGridOptions: {
+				//enableCellChangeFlash: true,
 					columnDefs: [
 						{
 							headerName: "Edit",
@@ -215,6 +217,7 @@ class ClinicPatientGrid extends Component {
 						{
 							headerName: "Requisition",
 							field: "requisition",
+							resizable: true,
 						},
 					],
 					frameworkComponents: {
@@ -435,6 +438,7 @@ class ClinicPatientGrid extends Component {
 							paginationAutoPageSize={true}
 							//paginationPageSize={10}
 							excelStyles={this.state.excelStyles}
+							//enableCellChangeFlash={true}
 						/>
 					</div>
 				</div>
