@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { states } from "./stateOptionsData";
 import { updatePatientData } from "../../../../clinicPortalServices/patientEditService";
-import moment from "moment";
+import { states, identity } from "./optionsData";
 
 
 export default class MasterBtnCellRenderer extends Component {
@@ -209,11 +208,11 @@ export default class MasterBtnCellRenderer extends Component {
 											value={this.state.gender}
 											onChange={this.handleChange}
 										>
-											<option >select</option>
-											<option value="M">Male</option>
-											<option value="F">Female</option>
-											<option value="U">Unknown</option>
-											<option value="N">Not Specified</option>
+											{identity.map((identity) => {
+												return (
+													<option key={identity.value} value={identity.value}>{identity.gender}</option>
+												);
+											})}
 										</select>
 									</div>
 								</div>

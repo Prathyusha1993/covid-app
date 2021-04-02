@@ -5,6 +5,7 @@ import {
 	updateResultPDF,
 } from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
+import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -103,26 +104,6 @@ export default class EditBtnCellRenderer extends Component {
 					? this.props.data.pdfPath
 					: "",
 
-			// orderId: this.state.orderId,
-			// gender: this.state.gender,
-			// dob: this.state.dob,
-			// mrn: this.state.mrn,
-			// provider: this.state.provider,
-			// facilitySource: this.state.facilitySource,
-			// receivedDate: this.state.receivedDate,
-			// description: this.state.description,
-			// testType: this.state.testType,
-			// sample: this.state.sample,
-			// result: this.state.result,
-			// collectedDate: this.state.collectedDate,
-
-			// requisition: this.state.requisition,
-			// code: this.state.code,
-			// codeType: this.state.codeType,
-			// patientName: this.state.patientName,
-			// email: this.state.email,
-			// mobile: this.state.mobile,
-			// pdfPath: this.state.pdfPath,
 		};
 		this.setState({ show: false, ...intialState });
 	};
@@ -395,10 +376,11 @@ export default class EditBtnCellRenderer extends Component {
 											value={this.state.result}
 											onChange={this.handleChange}
 										>
-											<option>Select</option>
-											<option>SARS-CoV-2 Not Detected</option>
-											<option>SARS-CoV-2 Detected</option>
-											<option>SARS-CoV-2 Inconclusive</option>
+											{results.map((res) => {
+												return (
+													<option>{res.result}</option>
+												);
+											})}
 										</select>
 									</div>
 								</div>
