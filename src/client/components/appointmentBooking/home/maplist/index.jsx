@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import { CHECKMARK } from './img.jsx';
 import { Link } from "react-router-dom";
 import Map from "./map";
 import { locations } from "./data";
@@ -12,11 +11,8 @@ class MapList extends Component {
 
 	render() {
 		return (
-			<section
-				className="choose-us"
-				
-			>
-				<div style={{ marginRight: "40px",marginLeft:"20px" }}>
+			<section className="choose-us">
+				<div style={{ marginRight: "40px", marginLeft: "20px" }}>
 					<div className="row">
 						<div
 							className="col-12 col-lg-4"
@@ -38,14 +34,19 @@ class MapList extends Component {
 														</div>
 														<div className="doc-info-cont">
 															<h4 className="doc-name">{item.name}</h4>
-															
+
 															<div className="clinic-details">
 																<p className="doc-location">
 																	<i className="fas fa-map-marker-alt"></i>{" "}
-																	{item.address}<br/><br/>
-																	{item.timings1}<br/>
-																	{item.timings2}<br/>
-																	<i className="fas fa-phone"></i>{" "}{item.contactNumber}
+																	{item.address}
+																	<br />
+																	<br />
+																	{item.timings1}
+																	<br />
+																	{item.timings2}
+																	<br />
+																	<i className="fas fa-phone"></i>{" "}
+																	{item.contactNumber}
 																</p>
 																<div className="clinic-booking">
 																	<a
@@ -64,11 +65,6 @@ class MapList extends Component {
 										</div>
 									);
 								})}
-								{/* <div className="load-more text-center">
-									<a href="#0" className="btn btn-primary btn-sm">
-										Load More
-									</a>
-								</div> */}
 							</div>
 						</div>
 						<div className="col-12 col-lg-8">

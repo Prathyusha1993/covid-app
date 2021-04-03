@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import AGT_MCN_LOGO from "../assets/images/results/agt-mcn-logo.png";
 import AGT_LOGO from "../assets/images/results/agt-logo.png";
 import Dropdown from "react-bootstrap/Dropdown";
-import DOC_IMG from "../assets/images/doctors/doctor-thumb-02.jpg";
+//import DOC_IMG from "../assets/images/doctors/doctor-thumb-02.jpg";
+import DOC_IMG from "../assets/images/doctors/doctor-013.jpg";
 
 const Header = (props) => {
 	let pathnames = window.location.pathname;
@@ -104,6 +105,9 @@ const Header = (props) => {
 					</ul>
 				</div>
 				<ul className="nav header-navbar-rht">
+					
+					
+
           {(props.location.pathname) === ("/patientportal/dashboard") || (props.location.pathname) === ("/clinic/patients") || (props.location.pathname) === ("/clinic/orders") ? (
             <>
               <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
@@ -117,19 +121,6 @@ const Header = (props) => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {/* <div className="user-header">
-                    <div className="avatar avatar-sm">
-                      <img
-                        src={DOC_IMG}
-                        alt="User"
-                        className="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <div className="user-text">
-                      <h6>Darren Elder</h6>
-                      <p className="text-muted mb-0">Doctor</p>
-                    </div>
-                  </div> */}
                   <Dropdown.Item href="/doctor/profile-setting">
                     Profile Settings
                   </Dropdown.Item>
@@ -137,6 +128,7 @@ const Header = (props) => {
                 </Dropdown.Menu>
               </Dropdown>
             </>
+			// <h1>Hello</h1>
           ) : (
             <>
               <li className="nav-item">
@@ -151,33 +143,6 @@ const Header = (props) => {
               </li>{" "}
             </>
           )}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 				</ul>
 			</nav>

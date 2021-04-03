@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { authenticateAndFetchUserDetails } from "../../../clinicPortalServices/loginService";
-//import { authenticateAndFetchUserDetails } from "../../../patientPortalServices/loginService";
 
 class ClinicPortalLoginContainer extends Component {
 	constructor(props) {
@@ -14,7 +13,6 @@ class ClinicPortalLoginContainer extends Component {
 			token: "",
 			isAuthenticationfailed: "UNKNOWN",
 		};
-		
 	}
 
 	handleChange = (e) => {
@@ -23,9 +21,6 @@ class ClinicPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
-		//Kiran - setting ID for test. remove later
-		// window.localStorage.setItem("FACILITY_ID", "605cc709177b981d9967357d");
-		// return;
 		authenticateAndFetchUserDetails(this.state.userName, this.state.password)
 			.then((userInfo) => {
 				debugger;
@@ -40,8 +35,11 @@ class ClinicPortalLoginContainer extends Component {
 					isAuthenticationfailed: "NO",
 				});
 				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
-				if(userInfo.user.facilities.length>0)
-					window.localStorage.setItem("FACILITY_ID", userInfo.user.facilities[0].facility);
+				if (userInfo.user.facilities.length > 0)
+					window.localStorage.setItem(
+						"FACILITY_ID",
+						userInfo.user.facilities[0].facility
+					);
 				window.location.href = "/clinic/orders";
 			})
 			.catch((err) => {
@@ -59,7 +57,6 @@ class ClinicPortalLoginContainer extends Component {
 						<div className="col-md-8 offset-md-2">
 							<div className="account-content">
 								<div className="row align-items-center justify-content-center">
-									{/* <div className="col-md-7 col-lg-6 login-left"> */}
 									<div
 										className="col-md-12 col-lg-6 login-right"
 										style={{ border: "none" }}

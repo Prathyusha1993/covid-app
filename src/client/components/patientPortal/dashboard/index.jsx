@@ -86,8 +86,8 @@ class PatientPortalDashboard extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="content">
-					<div className="container-fluid">
+				<div className="content" >
+					<div className="container-fluid" >
 						<div className="row">
 							<div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 								<StickyBox offsetTop={20} offsetBottom={20}>

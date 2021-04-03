@@ -3,7 +3,6 @@ import { Modal, Button } from "react-bootstrap";
 import { updatePatientData } from "../../../../clinicPortalServices/patientEditService";
 import { states, identity } from "./optionsData";
 
-
 export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
@@ -39,15 +38,14 @@ export default class MasterBtnCellRenderer extends Component {
 				props.data.address && props.data.address.zip
 					? props.data.address.zip
 					: "",
-			country: 
+			country:
 				props.data.address && props.data.address.country
-			? props.data.address.country
-			: "",
-			
+					? props.data.address.country
+					: "",
+
 			_id: props.data._id,
 			loading: false,
 			stateOptions: "",
-			
 		};
 	}
 
@@ -65,32 +63,32 @@ export default class MasterBtnCellRenderer extends Component {
 			email: this.props.data.email ? this.props.data.email : "",
 			mobile: this.props.data.mobile ? this.props.data.mobile : "",
 			address1:
-			this.props.data.address && this.props.data.address.address1
+				this.props.data.address && this.props.data.address.address1
 					? this.props.data.address.address1
 					: "",
 			address2:
-			this.props.data.address && this.props.data.address.address2
+				this.props.data.address && this.props.data.address.address2
 					? this.props.data.address.address2
 					: "",
 			city:
-			this.props.data.address && this.props.data.address.city
+				this.props.data.address && this.props.data.address.city
 					? this.props.data.address.city
 					: "",
 			state:
-			this.props.data.address && this.props.data.address.state
+				this.props.data.address && this.props.data.address.state
 					? this.props.data.address.state
 					: "",
 			zip:
-			this.props.data.address && this.props.data.address.zip
+				this.props.data.address && this.props.data.address.zip
 					? this.props.data.address.zip
 					: "",
-			country: 
-			this.props.data.address && this.props.data.address.country
-			? this.props.data.address.country
-			: "",
-			
+			country:
+				this.props.data.address && this.props.data.address.country
+					? this.props.data.address.country
+					: "",
+
 			_id: this.props.data._id ? this.props.data._id : "",
-		}
+		};
 		this.setState({ show: false, ...intialState });
 	};
 
@@ -101,9 +99,9 @@ export default class MasterBtnCellRenderer extends Component {
 	handlePatientEditChanges = (e) => {
 		//api edit changes here
 		e.preventDefault();
-		
+
 		const editParams = {
-			_id:this.state._id,
+			_id: this.state._id,
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			dob: this.state.dob,
@@ -116,7 +114,7 @@ export default class MasterBtnCellRenderer extends Component {
 			city: this.state.city,
 			state: this.state.state,
 			zip: this.state.zip,
-			country: this.state.country
+			country: this.state.country,
 		};
 		updatePatientData(editParams).then((userDetails) => {
 			this.setState({
@@ -135,7 +133,6 @@ export default class MasterBtnCellRenderer extends Component {
 			borderLeft: "none",
 			borderRight: "none",
 			borderRadius: "0px",
-			
 		};
 		return (
 			<div>
@@ -161,7 +158,7 @@ export default class MasterBtnCellRenderer extends Component {
 							<div className="row form-row">
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label style={{fontWeight: "100"}}>First Name</label>
+										<label style={{ fontWeight: "100" }}>First Name</label>
 										<input
 											style={formStyle}
 											type="text"
@@ -210,7 +207,9 @@ export default class MasterBtnCellRenderer extends Component {
 										>
 											{identity.map((identity) => {
 												return (
-													<option key={identity.value} value={identity.value}>{identity.gender}</option>
+													<option key={identity.value} value={identity.value}>
+														{identity.gender}
+													</option>
 												);
 											})}
 										</select>
@@ -307,7 +306,9 @@ export default class MasterBtnCellRenderer extends Component {
 										>
 											{states.map((state) => {
 												return (
-													<option key={state.value} value={state.value}>{state.state}</option>
+													<option key={state.value} value={state.value}>
+														{state.state}
+													</option>
 												);
 											})}
 										</select>

@@ -18,8 +18,7 @@ import { serviceConstants } from "../../../../patientPortalServices/constants";
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
-// import "@ag-grid-community/all-modules/dist/styles/ag-grid.css";
-// import "@ag-grid-community/all-modules/dist/styles/ag-theme-alpine.css";
+
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -265,47 +264,52 @@ class OrderGridDetails extends Component {
 				</div>
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						<input 
-						type="search"
-						className="form-control"
-						onChange={this.onFilterTextChange}
-						placeholder="Quick Search"
+						<input
+							type="search"
+							className="form-control"
+							onChange={this.onFilterTextChange}
+							placeholder="Quick Search"
 						/>
 					</div>
 					<div className="col export-button">
-						<button className="btn btn-primary submit-btn" onClick={() => this.onBtExport()}>Export to Excel</button>
-					</div>
-				</div>
-					<div
-						style={{
-							width: "100%",
-							height: "550px",
-							padding: "15px 15px 15px 15px",
-						}}
-					>
-						<div
-							id="myGrid"
-							style={{
-								height: "100%",
-								width: "100%",
-							}}
-							className="ag-theme-alpine"
+						<button
+							className="btn btn-primary submit-btn"
+							onClick={() => this.onBtExport()}
 						>
-							<AgGridReact
-								modules={this.state.modules}
-								columnDefs={this.state.columnDefs}
-								defaultColDef={this.state.defaultColDef}
-								masterDetail={true}
-								onGridReady={this.onGridReady}
-								rowData={this.state.rowData}
-								frameworkComponents={this.state.frameworkComponents}
-								pagination={true}
-								paginationAutoPageSize={true}
-								excelStyles={this.state.excelStyles}
-							/>
-						</div>
+							Export to Excel
+						</button>
 					</div>
 				</div>
+				<div
+					style={{
+						width: "100%",
+						height: "100vh",
+						padding: "15px 15px 15px 15px",
+					}}
+				>
+					<div
+						id="myGrid"
+						style={{
+							height: "100%",
+							width: "100%",
+						}}
+						className="ag-theme-alpine"
+					>
+						<AgGridReact
+							modules={this.state.modules}
+							columnDefs={this.state.columnDefs}
+							defaultColDef={this.state.defaultColDef}
+							masterDetail={true}
+							onGridReady={this.onGridReady}
+							rowData={this.state.rowData}
+							frameworkComponents={this.state.frameworkComponents}
+							pagination={true}
+							paginationAutoPageSize={true}
+							excelStyles={this.state.excelStyles}
+						/>
+					</div>
+				</div>
+			</div>
 		);
 	}
 }

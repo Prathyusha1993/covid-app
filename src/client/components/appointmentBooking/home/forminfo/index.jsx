@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-//import message from semanticuireact if you want to shoe mesage after submission
+//import message from semanticuireact if you want to show mesage after submission
 
 class FormInfo extends Component {
 	constructor(props) {
@@ -11,56 +11,44 @@ class FormInfo extends Component {
 			mobile: "",
 			email: "",
 			text: "",
-			// formSuccess: false,
-			// formError: true,
 		};
 	}
 
-	getInTouch = (e) => {
-		const info = {
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
-			mobile: this.state.mobile,
-			email: this.state.email,
-			text: this.state.text,
-		}
-		e.preventDefault();
-		fetch(`https://hipaa.jotform.com/jsform/210838200288049`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(info),
-		}).then((response) => {
-			console.log(response);
-			response.json();
-		})
-	};
+	// getInTouch = (e) => {
+	// 	const info = {
+	// 		firstName: this.state.firstName,
+	// 		lastName: this.state.lastName,
+	// 		mobile: this.state.mobile,
+	// 		email: this.state.email,
+	// 		text: this.state.text,
+	// 	}
+	// 	e.preventDefault();
+	// 	fetch(`https://hipaa.jotform.com/jsform/210838200288049`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify(info),
+	// 	}).then((response) => {
+	// 		console.log(response);
+	// 		response.json();
+	// 	})
+	// };
 
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
 	render() {
-		const styleForm = {
-			border: "1px solid",
-			width: "600px",
-			height: "600px",
-			backgroundColor: "#f7f7f7",
-			padding: "20px 20px 20px 20px",
-			display: "block",
-			marginLeft: "auto",
-			marginRight: "auto",
-			boxShadow: "5px 10px 18px #888888",
-			borderRadius: "5px",
-		};
 		return (
 			<div style={{ paddingTop: "50px" }}>
-				{/* <Form style={styleForm} success={this.state.formSuccess} error={this.state.formError} onSubmit={this.getInTouch}> */}
-				<Form style={styleForm} 
-				//onSubmit={this.getInTouch} 
-				action="https://hipaa.jotform.com/jsform/210838200288049"
-				method="post" autocomplete="off">
+				<Form
+					className="home-page-form"
+					//onSubmit={this.getInTouch}
+					action="https://hipaa.jotform.com/jsform/210838200288049"
+					method="post"
+					autocomplete="off"
+				>
 					{/* <Message 
 					success
 					header="Form completed"
@@ -78,24 +66,30 @@ class FormInfo extends Component {
 								value={this.state.firstName}
 								onChange={this.handleChange}
 							/>
-							<Form.Label style={{ fontSize: "12px" }}>First Name </Form.Label>
+							<Form.Label className="home-page-label">First Name </Form.Label>
 						</Form.Group>
 
 						<Form.Group as={Col} controlId="formGridPassword">
 							<Form.Label> </Form.Label>
-							<Form.Control type="text" name="lastName"
+							<Form.Control
+								type="text"
+								name="lastName"
 								value={this.state.lastName}
-								onChange={this.handleChange}/>
-							<Form.Label style={{ fontSize: "12px" }}> Last Name </Form.Label>
+								onChange={this.handleChange}
+							/>
+							<Form.Label className="home-page-label"> Last Name </Form.Label>
 						</Form.Group>
 					</Form.Row>
 
 					<Form.Group controlId="formGridAddress1">
 						<Form.Label>What number can you be reached at?</Form.Label>
-						<Form.Control type="number" name="mobile"
-								value={this.state.mobile}
-								onChange={this.handleChange} />
-						<Form.Label style={{ fontSize: "12px" }}>
+						<Form.Control
+							type="number"
+							name="mobile"
+							value={this.state.mobile}
+							onChange={this.handleChange}
+						/>
+						<Form.Label className="home-page-label">
 							{" "}
 							please enter a valid phone number.{" "}
 						</Form.Label>
@@ -103,10 +97,13 @@ class FormInfo extends Component {
 
 					<Form.Group controlId="formGridAddress2">
 						<Form.Label>What is your email address?</Form.Label>
-						<Form.Control type="text" name="email"
-								value={this.state.email}
-								onChange={this.handleChange}/>
-						<Form.Label style={{ fontSize: "12px" }}>
+						<Form.Control
+							type="text"
+							name="email"
+							value={this.state.email}
+							onChange={this.handleChange}
+						/>
+						<Form.Label className="home-page-label">
 							{" "}
 							example@example.com{" "}
 						</Form.Label>
@@ -114,16 +111,17 @@ class FormInfo extends Component {
 
 					<Form.Group controlId="exampleForm.ControlTextarea1">
 						<Form.Label>Tell us about your testing needs</Form.Label>
-						<Form.Control as="textarea" rows={3} placeholder="Type here..." name="text"
-								value={this.state.text}
-								onChange={this.handleChange}/>
+						<Form.Control
+							as="textarea"
+							rows={3}
+							placeholder="Type here..."
+							name="text"
+							value={this.state.text}
+							onChange={this.handleChange}
+						/>
 					</Form.Group>
 
-					<Button
-						variant="primary"
-						type="submit"
-						style={{ width: "40%", marginLeft: "30%", marginRight: "30%" }}
-					>
+					<Button variant="primary" type="submit" className="home-page-button">
 						Get in Touch With Luke
 					</Button>
 				</Form>

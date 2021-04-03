@@ -9,7 +9,6 @@ class Dates extends Component {
 	}
 
 	render() {
-
 		return (
 			<div className="time-slot">
 				<ul className="clearfix">
@@ -20,7 +19,7 @@ class Dates extends Component {
 						}
 						return (
 							<span key={index}>
-								<li  style={{marginBottom : '10px'}}>
+								<li style={{ marginBottom: "10px" }}>
 									<Link
 										className={linkClassName}
 										to="#0"
@@ -28,9 +27,9 @@ class Dates extends Component {
 										key={item._id}
 										onClick={() => {
 											this.props.handleDateClick(
-												(item.results!=null) ? item.results.pdf_path : "",
+												item.results != null ? item.results.pdf_path : "",
 												item.order_date,
-												(item.results!=null) ? item.results.value : ""
+												item.results != null ? item.results.value : ""
 											);
 										}}
 									>
@@ -45,6 +44,5 @@ class Dates extends Component {
 		);
 	}
 }
-
 
 export default Dates;

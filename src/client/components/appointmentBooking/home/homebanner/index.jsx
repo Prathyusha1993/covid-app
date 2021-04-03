@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class HomeBookAppoinment extends Component {
 	render() {
@@ -17,13 +16,14 @@ class HomeBookAppoinment extends Component {
 										<span>Four step process</span>
 									</h1>
 									<p>
-									Book an appointment with a physician at one of our partner locations and you will have your results within 24 hours!
+										Book an appointment with a physician at one of our partner
+										locations and you will have your results within 24 hours!
 									</p>
 									<div className="btn-col">
 										<ul>
 											<li>
 												<a href="#search-provider" className="btn btn-fill">
-												Book an Appointment Now
+													Book an Appointment Now
 												</a>
 											</li>
 										</ul>

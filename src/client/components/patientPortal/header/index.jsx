@@ -14,7 +14,8 @@ class PatientPortalHeader extends Component {
 		super(props);
 		const clinicUrl = props.location.pathname.split("/")[1];
 		this.state = {
-			showClinicMenu: (clinicUrl.trim().toLowerCase() === "clinic" ) ? true:false
+			showClinicMenu:
+				clinicUrl.trim().toLowerCase() === "clinic" ? true : false,
 		};
 	}
 
@@ -42,7 +43,7 @@ class PatientPortalHeader extends Component {
 							/>
 						</Link>
 
-						{(isUserLoggedIn() && this.state.showClinicMenu) && (
+						{isUserLoggedIn() && this.state.showClinicMenu && (
 							<Navbar.Brand>
 								<div>
 									<ul className="main-nav">
@@ -84,35 +85,7 @@ class PatientPortalHeader extends Component {
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
-						<Navbar.Brand>
-							{/* <img
-								src={AGT_LOGO}
-								width="200"
-								height="70"
-								object-fit="cover"
-								className="d-inline-block align-top"
-								alt=""
-							/> */}
-							{/* <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
-								<Dropdown.Toggle variant="success" id="dropdown-basic">
-									<img
-										className="rounded-circle"
-										// src={IMG01}
-										src={DOC_IMG}
-										width="31"
-										alt="Darren Elder"
-									/>
-								</Dropdown.Toggle>
-
-								<Dropdown.Menu>
-									
-									<Dropdown.Item href="/doctor/profile-setting">
-										Profile Settings
-									</Dropdown.Item>
-									<Dropdown.Item href="/clinic">Logout</Dropdown.Item>
-								</Dropdown.Menu>
-							</Dropdown> */}
-						</Navbar.Brand>
+						<Navbar.Brand></Navbar.Brand>
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

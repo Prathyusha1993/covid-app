@@ -19,9 +19,6 @@ class Feature extends Component {
 									Find A Close <br />
 									Location
 								</h4>
-								<div className="plus-icon text-right">
-									{/* <i className="fas fa-plus-circle" /> */}
-								</div>
 							</div>
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
@@ -36,9 +33,6 @@ class Feature extends Component {
 									Book An <br />
 									Appointment
 								</h4>
-								<div className="plus-icon text-right">
-									{/* <i className="fas fa-plus-circle" /> */}
-								</div>
 							</div>
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
@@ -51,12 +45,8 @@ class Feature extends Component {
 								</div>
 								<h4>
 									Go For Your <br />
-									Rt-PCR Test 
-									
+									Rt-PCR Test
 								</h4>
-								<div className="plus-icon text-right">
-									{/* <i className="fas fa-plus-circle" /> */}
-								</div>
 							</div>
 						</div>
 						<div className="col-12 col-md-6 col-lg-3">
@@ -71,9 +61,6 @@ class Feature extends Component {
 									Get Your <br />
 									Results
 								</h4>
-								<div className="plus-icon text-right">
-									{/* <i className="fas fa-plus-circle" /> */}
-								</div>
 							</div>
 						</div>
 					</div>

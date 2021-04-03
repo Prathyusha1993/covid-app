@@ -16,16 +16,9 @@ import MasterBtnCellRenderer from "./masterBtnCellRenderer";
 
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
 import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
 
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
-
-// import {LicenseManager} from "ag-grid-enterprise";
-// LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
-
-// var enterprise = require("@ag-grid-enterprise/core");
-// enterprise.LicenseManager.setLicenseKey(`${serviceConstants.AG_GRID_LICENSE_KEY}`);
 
 const getPatientInfo = (patientData, patientId) => {
 	if (patientData && patientData.length > 0) {
@@ -168,7 +161,7 @@ class ClinicPatientGrid extends Component {
 			detailCellRendererParams: {
 				//refreshStrategy: 'everything',
 				detailGridOptions: {
-				//enableCellChangeFlash: true,
+					//enableCellChangeFlash: true,
 					columnDefs: [
 						{
 							headerName: "Edit",
@@ -366,12 +359,9 @@ class ClinicPatientGrid extends Component {
 		this.gridApi.setQuickFilter(e.target.value);
 	};
 
-
-	
 	onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
-	  };
-
+	};
 
 	render() {
 		return (
@@ -395,25 +385,30 @@ class ClinicPatientGrid extends Component {
 						</div>
 					</div>
 				</div>
-				
+
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						<input 
-						type="search"
-						className="form-control"
-						onChange={this.onFilterTextChange}
-						placeholder="Quick Search"
+						<input
+							type="search"
+							className="form-control"
+							onChange={this.onFilterTextChange}
+							placeholder="Quick Search"
 						/>
 					</div>
 					<div className="col export-button">
-						<button className="btn btn-primary submit-btn" onClick={() => this.onBtExport()}>Export to Excel</button>
+						<button
+							className="btn btn-primary submit-btn"
+							onClick={() => this.onBtExport()}
+						>
+							Export to Excel
+						</button>
 					</div>
 				</div>
-				
+
 				<div
 					style={{
 						width: "100%",
-						height: "550px",
+						height: "100vh",
 						padding: "15px 15px 15px 15px",
 					}}
 				>
