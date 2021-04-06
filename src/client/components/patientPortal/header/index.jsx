@@ -45,38 +45,13 @@ class PatientPortalHeader extends Component {
 
 						{isUserLoggedIn() && this.state.showClinicMenu && (
 							<Navbar.Brand>
-								<div>
+								<div className="row">
 									<ul className="main-nav">
-										{/* <li className="nav-item">
-										<a href="/clinic/patients" className="top-nav-button">
-											{" "}
-											Patients{" "}
-										</a>
-									</li>{" "}
-									<li className="nav-item">
-										<a href="/clinic/orders" className="top-nav-button">
-											{" "}
-											Orders{" "}
-										</a>
-									</li>
-									<li className="nav-item">
-										<a href="/clinic" className="top-nav-button" onClick={this.logout}>
-											{" "}
-											Logout{" "}
-										</a>
-									</li> */}
-										{/* className={pathnames.includes("/clinic") ? "active" : ""} */}
 										<li>
 											<a href="/clinic/patients"> Patients </a>
 										</li>
 										<li>
 											<a href="/clinic/orders"> Orders </a>
-										</li>
-										<li>
-											<a href="/clinic" onClick={this.logout}>
-												{" "}
-												Logout{" "}
-											</a>
 										</li>
 									</ul>
 								</div>
@@ -85,7 +60,29 @@ class PatientPortalHeader extends Component {
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
-						<Navbar.Brand></Navbar.Brand>
+						{isUserLoggedIn() && this.state.showClinicMenu && (
+							<Navbar.Brand style={{marginRight: "50px"}}>
+								<>
+									<Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
+										<Dropdown.Toggle variant="success" id="dropdown-basic">
+											<img
+												className="rounded-circle"
+												src={DOC_IMG}
+												width="31"
+												alt="Darren Elder"
+											/>
+										</Dropdown.Toggle>
+
+										<Dropdown.Menu>
+											<Dropdown.Item href="/doctor/profile-setting">
+												Profile Settings
+											</Dropdown.Item>
+											<Dropdown.Item href="/clinic">Logout</Dropdown.Item>
+										</Dropdown.Menu>
+									</Dropdown>
+								</>
+							</Navbar.Brand>
+						)}
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

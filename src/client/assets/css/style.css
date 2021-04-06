@@ -2217,6 +2217,8 @@ html.menu-opened body {
   /* color: #fff; */
   color: #3a3a3a;
   font-size: 15px;
+  margin-top: 20px;
+  margin-left: 15px;
 }
 .footer .footer-bottom .copyright-text p a {
   color: #ee344e;
@@ -8805,9 +8807,14 @@ html {
   border-right: none;
 } */
 
-.export-button {
+.grid-buttons {
   display: flex;
   justify-content: flex-end;
+}
+
+.button-info-grid {
+  margin-left: 9px;
+  height: 45px
 }
 
 .home-page-form {
@@ -8831,4 +8838,30 @@ html {
   width: 40%; 
   margin-left: 30%; 
   margin-right: 30%;
+}
+
+.footer-changes {
+  padding-top: 20px;
+}
+
+.footer-h3 {
+  display: inline;
+  color: #0274be;
+  font-family: "Open Sans", Sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1em;
+}
+
+.footer-img {
+  height: 60px;
+  width: 200px;
+  border: none;
+}
+
+.footer-a {
+  margin-left: 15px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #0274be;
 }

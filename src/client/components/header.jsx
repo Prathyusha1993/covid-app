@@ -89,7 +89,7 @@ const Header = (props) => {
 							<i className="fas fa-times"></i>
 						</a>
 					</div>
-					<ul className="main-nav">
+					{/* <ul className="main-nav">
 						<li className="nav-item">
 							<a href="/patientportal" className="top-nav-button">
 								{" "}
@@ -102,13 +102,11 @@ const Header = (props) => {
 								Clinic Login{" "}
 							</a>
 						</li>{" "}
-					</ul>
+					</ul> */}
 				</div>
 				<ul className="nav header-navbar-rht">
 					
-					
-
-          {(props.location.pathname) === ("/patientportal/dashboard") || (props.location.pathname) === ("/clinic/patients") || (props.location.pathname) === ("/clinic/orders") ? (
+          {/* {(props.location.pathname) === ("/patientportal/dashboard") || (props.location.pathname) === ("/clinic/patients") || (props.location.pathname) === ("/clinic/orders") ? (
             <>
               <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -127,20 +125,24 @@ const Header = (props) => {
                   <Dropdown.Item href="/clinic">Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            </>
-			// <h1>Hello</h1>
+            </> */}
+				
           ) : (
             <>
-              <li className="nav-item">
-              <img
-								src={AGT_LOGO}
-								width="200"
-								height="70"
-								object-fit="cover"
-								className="d-inline-block align-top"
-								alt=""
-							/>
-              </li>{" "}
+              <ul className="main-nav">
+						<li className="nav-item">
+							<a href="/patientportal" className="top-nav-button">
+								{" "}
+								View My Results{" "}
+							</a>
+						</li>{" "}
+						<li className="nav-item">
+							<a href="/clinic" className="top-nav-button">
+								{" "}
+								Clinic Login{" "}
+							</a>
+						</li>{" "}
+					</ul>
             </>
           )}
 

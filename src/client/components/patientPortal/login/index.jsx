@@ -78,7 +78,7 @@ class PatientPortalLoginContainer extends Component {
 
 	render() {
 		return (
-			<div className="content">
+			<div className="content" style={{height: "100vh"}}>
 				<div className="container-fluid">
 					<div className="row">
 						<div className="col-md-8 offset-md-2">

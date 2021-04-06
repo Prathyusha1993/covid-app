@@ -157,7 +157,14 @@ class ClinicPatientGrid extends Component {
 			frameworkComponents: {
 				masterBtnCellRenderer: MasterBtnCellRenderer,
 			},
-			defaultColDef: { flex: 1, filter: true },
+			paginationNumberFormatter: function (params) {
+				return "[" + params.value.toLocaleString() + "]";
+			},
+			defaultColDef: { flex: 1, filter: true, enableRowGroup: true, enablePivot: true,
+				enableValue: true},
+				sideBar: { toolPanels: ['columns'] },
+				rowGroupPanelShow: 'always',
+				pivotPanelShow: 'always',
 			detailCellRendererParams: {
 				//refreshStrategy: 'everything',
 				detailGridOptions: {
@@ -217,6 +224,7 @@ class ClinicPatientGrid extends Component {
 						pdfResultRenderer: PdfResultRenderer,
 						editBtnCellRenderer: EditBtnCellRenderer,
 					},
+					
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
@@ -344,6 +352,7 @@ class ClinicPatientGrid extends Component {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 		this.loadGridData();
+		//get patient grid state from local storage
 	};
 
 	loadGridData = () => {
@@ -362,6 +371,29 @@ class ClinicPatientGrid extends Component {
 	onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
 	};
+
+	onPageSizeChanged = () => {
+		var value = document.getElementById("page-size").value;
+		this.gridApi.paginationSetPageSize(Number(value));
+	};
+
+	saveState = () => {
+		window.colState = this.gridColumnApi.getColumnState();
+	}
+
+	restoreState = () => {
+		if (!window.colState) {
+		  return;
+		}
+		this.gridColumnApi.applyColumnState({
+		  state: window.colState,
+		  applyOrder: true,
+		});
+	};
+
+	resetState = () => {
+		this.gridColumnApi.resetColumnState();
+	  };
 
 	render() {
 		return (
@@ -395,13 +427,44 @@ class ClinicPatientGrid extends Component {
 							placeholder="Quick Search"
 						/>
 					</div>
-					<div className="col export-button">
-						<button
-							className="btn btn-primary submit-btn"
-							onClick={() => this.onBtExport()}
-						>
-							Export to Excel
-						</button>
+					<div className="col grid-buttons">
+						<div>
+							{/* <label>Page Size</label> */}
+							<input
+								type="number"
+								className="form-control"
+								onChange={this.onPageSizeChanged}
+								placeholder="Page Size"
+								id="page-size"
+							/>
+						</div>
+						<div>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.saveState()}
+							>
+								<i class="far fa-save"></i> Save
+							</button>
+							{/* <button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.restoreState()}
+							> Restore State
+							</button>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.resetState()}
+							> Reset State
+							</button> */}
+						</div>
+						<div>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.onBtExport()}
+							>
+								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to
+								Excel
+							</button>
+						</div>
 					</div>
 				</div>
 
@@ -430,10 +493,13 @@ class ClinicPatientGrid extends Component {
 							rowData={this.state.rowData}
 							frameworkComponents={this.state.frameworkComponents}
 							pagination={true}
-							paginationAutoPageSize={true}
-							//paginationPageSize={10}
+							//paginationAutoPageSize={true}
+							paginationPageSize={10}
+							paginationNumberFormatter={this.state.paginationNumberFormatter}
 							excelStyles={this.state.excelStyles}
-							//enableCellChangeFlash={true}
+							// sideBar={this.state.sideBar}
+							// rowGroupPanelShow={this.state.rowGroupPanelShow}
+        					// pivotPanelShow={this.state.pivotPanelShow}
 						/>
 					</div>
 				</div>

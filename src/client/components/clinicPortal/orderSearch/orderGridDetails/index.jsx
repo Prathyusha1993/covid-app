@@ -18,8 +18,6 @@ import { serviceConstants } from "../../../../patientPortalServices/constants";
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
-
-
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
 	`${serviceConstants.AG_GRID_LICENSE_KEY}`
@@ -118,8 +116,16 @@ class OrderGridDetails extends Component {
 				editBtnCellRenderer: EditBtnCellRenderer,
 				pdfResultRenderer: PdfResultRenderer,
 			},
-			defaultColDef: { flex: 1, filter: true },
+			paginationNumberFormatter: function (params) {
+				return "[" + params.value.toLocaleString() + "]";
+			},
+			defaultColDef: { flex: 1, filter: true,enableRowGroup: true,
+				enablePivot: true,
+				enableValue: true },
 			rowData: null,
+			sideBar: { toolPanels: ['columns'] },
+      rowGroupPanelShow: 'always',
+      pivotPanelShow: 'always',
 			excelStyles: [
 				{
 					id: "header",
@@ -143,6 +149,8 @@ class OrderGridDetails extends Component {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 		this.loadGridData();
+		//get the oder grid state from local storage
+		
 	};
 
 	loadGridData = () => {
@@ -240,6 +248,29 @@ class OrderGridDetails extends Component {
 		this.gridApi.exportDataAsExcel({});
 	};
 
+	onPageSizeChanged = () => {
+		var value = document.getElementById("page-size").value;
+		this.gridApi.paginationSetPageSize(Number(value));
+	};
+
+	saveState = () => {
+		window.colState = this.gridColumnApi.getColumnState();
+	}
+
+	restoreState = () => {
+		if (!window.colState) {
+		  return;
+		}
+		this.gridColumnApi.applyColumnState({
+		  state: window.colState,
+		  applyOrder: true,
+		});
+	};
+
+	resetState = () => {
+		this.gridColumnApi.resetColumnState();
+	  };
+
 	render() {
 		return (
 			<div>
@@ -271,13 +302,44 @@ class OrderGridDetails extends Component {
 							placeholder="Quick Search"
 						/>
 					</div>
-					<div className="col export-button">
-						<button
-							className="btn btn-primary submit-btn"
-							onClick={() => this.onBtExport()}
-						>
-							Export to Excel
-						</button>
+					<div className="col grid-buttons">
+						<div>
+							{/* <label>Page Size</label>  */}
+							<input
+								type="number"
+								className="form-control"
+								onChange={this.onPageSizeChanged}
+								placeholder="Page Size"
+								id="page-size"
+							/>
+						</div>
+						<div>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.saveState()}
+							>
+								<i class="far fa-save"></i> Save 
+							</button>
+							{/* <button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.restoreState()}
+							> Restore State
+							</button>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.resetState()}
+							> Reset State
+							</button> */}
+						</div>
+						<div>
+							<button
+								className="btn btn-primary submit-btn button-info-grid"
+								onClick={() => this.onBtExport()}
+							>
+								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to
+								Excel
+							</button>
+						</div>
 					</div>
 				</div>
 				<div
@@ -304,8 +366,13 @@ class OrderGridDetails extends Component {
 							rowData={this.state.rowData}
 							frameworkComponents={this.state.frameworkComponents}
 							pagination={true}
-							paginationAutoPageSize={true}
+							//paginationAutoPageSize={true}
+							paginationPageSize={10}
+							paginationNumberFormatter={this.state.paginationNumberFormatter}
 							excelStyles={this.state.excelStyles}
+							// sideBar={this.state.sideBar}
+							// rowGroupPanelShow={this.state.rowGroupPanelShow}
+        					// pivotPanelShow={this.state.pivotPanelShow}
 						/>
 					</div>
 				</div>
