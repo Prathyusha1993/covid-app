@@ -17,6 +17,8 @@ import { serviceConstants } from "../../../../patientPortalServices/constants";
 
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
+import { getUserSettings } from "../../../../clinicPortalServices/userGridSettings";
+import { saveSettings } from "../../../../clinicPortalServices/saveStateSettings";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -53,6 +55,8 @@ class OrderGridDetails extends Component {
 				ClipboardModule,
 				ExcelExportModule,
 			],
+			gridName: "order",
+			userGridSchema: null,
 			columnDefs: [
 				{
 					headerName: "Edit",
@@ -149,10 +153,38 @@ class OrderGridDetails extends Component {
 	onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
+		//console.log(params.columnApi);
 		this.loadGridData();
-		//get the oder grid state from local storage
-		
+		 this.loadGridSchema();
 	};
+
+	loadGridSchema = () => {
+		var userId = window.localStorage.getItem("USER_ID");
+		getUserSettings(userId, this.state.gridName)
+		.then((userState) => {
+			console.log("uerdetails:", userState);
+			if(userState.data.length > 0){
+				const state = userState.data.map((item) => {
+					const updatedData = {
+						gridName: item.grid_state[0].grid_name,
+						page_size: item.grid_state[0].page_size,
+						colState: item.grid_state[0].columns[0]
+					}
+					return updatedData;
+				})
+				this.setState({ userGridSchema: state });
+			}
+			else {
+				this.gridColumnApi.resetColumnState();
+			}
+			// restore call
+			// get colState from data;
+			// this.gridColumnApi.applyColumnState({
+			// 	state: colState,
+			// 	applyOrder: true,
+			//   });
+		})
+	}
 
 	loadGridData = () => {
 		var facilityID = window.localStorage.getItem("FACILITY_ID");
@@ -255,22 +287,32 @@ class OrderGridDetails extends Component {
 	};
 
 	saveState = () => {
-		window.colState = this.gridColumnApi.getColumnState();
+		// window.colState = this.gridColumnApi.getColumnState();
+		const colState = this.gridColumnApi.getColumnState();
+		// save colState using API
+		const saveParams = {
+
+		}
+		saveSettings(saveParams).then((saveInfo) => {
+			
+		})
 	}
 
 	restoreState = () => {
-		if (!window.colState) {
-		  return;
-		}
-		this.gridColumnApi.applyColumnState({
-		  state: window.colState,
-		  applyOrder: true,
-		});
+		// if (!window.colState) {
+		//   return;
+		// }
+
+		// // retrieve colState from API
+		// this.gridColumnApi.applyColumnState({
+		//   state: colState,
+		//   applyOrder: true,
+		// });
 	};
 
-	resetState = () => {
-		this.gridColumnApi.resetColumnState();
-	  };
+	// resetState = () => {
+	// 	this.gridColumnApi.resetColumnState();
+	//   };
 
 	render() {
 		return (
@@ -321,12 +363,12 @@ class OrderGridDetails extends Component {
 							>
 								<i class="far fa-save"></i> Save 
 							</button>
-							{/* <button
+							{/*<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.restoreState()}
 							> Restore State
 							</button>
-							<button
+							 <button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}
 							> Reset State

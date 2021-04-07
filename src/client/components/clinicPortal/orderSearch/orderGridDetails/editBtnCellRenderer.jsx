@@ -141,7 +141,6 @@ export default class EditBtnCellRenderer extends Component {
 			// provider: this.state.provider
 		};
 		saveOrderEditData(editParams).then((userDetails) => {
-			//make api call to get patient info parameter is patient_id
 			this.setState({
 				editParams: userDetails,
 				show: false,
