@@ -34,7 +34,7 @@ class ClinicPortalLoginContainer extends Component {
 				this.setState({
 					isAuthenticationfailed: "NO",
 				});
-				//here save the local storage of order grid state and patient grid state
+				//here save the local storage of userid
 				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
 				if (userInfo.user.facilities.length > 0)
 					window.localStorage.setItem(

@@ -89,47 +89,8 @@ const Header = (props) => {
 							<i className="fas fa-times"></i>
 						</a>
 					</div>
-					{/* <ul className="main-nav">
-						<li className="nav-item">
-							<a href="/patientportal" className="top-nav-button">
-								{" "}
-								View My Results{" "}
-							</a>
-						</li>{" "}
-						<li className="nav-item">
-							<a href="/clinic" className="top-nav-button">
-								{" "}
-								Clinic Login{" "}
-							</a>
-						</li>{" "}
-					</ul> */}
 				</div>
 				<ul className="nav header-navbar-rht">
-					
-          {/* {(props.location.pathname) === ("/patientportal/dashboard") || (props.location.pathname) === ("/clinic/patients") || (props.location.pathname) === ("/clinic/orders") ? (
-            <>
-              <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  <img
-                    className="rounded-circle"
-                    src={DOC_IMG}
-                    width="31"
-                    alt="Darren Elder"
-                  />
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item href="/doctor/profile-setting">
-                    Profile Settings
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/clinic">Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </> */}
-				
-          ) : (
-            <>
-              <ul className="main-nav">
 						<li className="nav-item">
 							<a href="/patientportal" className="top-nav-button">
 								{" "}
@@ -142,10 +103,6 @@ const Header = (props) => {
 								Clinic Login{" "}
 							</a>
 						</li>{" "}
-					</ul>
-            </>
-          )}
-
 				</ul>
 			</nav>
 		</header>

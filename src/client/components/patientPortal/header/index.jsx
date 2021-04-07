@@ -4,7 +4,7 @@ import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { isUserLoggedIn } from "../../../utils/util";
 import Dropdown from "react-bootstrap/Dropdown";
-import DOC_IMG from "../../../assets/images/doctors/doctor-thumb-02.jpg";
+//import DOC_IMG from "../../../assets/images/doctors/doctor-thumb-02.jpg";
 
 let pathnames = window.location.pathname;
 const url = pathnames.split("/").slice(0, -1).join("/");
@@ -28,10 +28,10 @@ class PatientPortalHeader extends Component {
 			<div>
 				<Navbar bg="light">
 					<Navbar bg="light">
-						<Link
-							to=""
+						<a
+							href="/home"
 							className="navbar-brand "
-							style={{ marginRight: "40px" }}
+							style={{ marginRight: "150px" }}
 						>
 							<img
 								src={AGT_MCN_LOGO}
@@ -41,7 +41,7 @@ class PatientPortalHeader extends Component {
 								className="d-inline-block align-top"
 								alt=""
 							/>
-						</Link>
+						</a>
 
 						{isUserLoggedIn() && this.state.showClinicMenu && (
 							<Navbar.Brand>
@@ -61,23 +61,32 @@ class PatientPortalHeader extends Component {
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
 						{isUserLoggedIn() && this.state.showClinicMenu && (
-							<Navbar.Brand style={{marginRight: "50px"}}>
+							<Navbar.Brand style={{ marginRight: "50px" }}>
 								<>
 									<Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
 										<Dropdown.Toggle variant="success" id="dropdown-basic">
-											<img
+											{/* <img
 												className="rounded-circle"
 												src={DOC_IMG}
 												width="31"
 												alt="Darren Elder"
-											/>
+											/> */}
+											{/* <a href="#0" className="booking-doc-img"> */}
+												<i
+													className="fa fa-user-circle fa-3x"
+													style={{ color: "#0369b3" }}
+													aria-hidden="true"
+												></i>
+											{/* </a> */}
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu>
 											<Dropdown.Item href="/doctor/profile-setting">
 												Profile Settings
 											</Dropdown.Item>
-											<Dropdown.Item href="/clinic">Logout</Dropdown.Item>
+											<Dropdown.Item onClick={this.logout} href="/clinic">
+												Logout
+											</Dropdown.Item>
 										</Dropdown.Menu>
 									</Dropdown>
 								</>
