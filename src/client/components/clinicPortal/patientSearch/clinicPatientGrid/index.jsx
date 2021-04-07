@@ -20,6 +20,9 @@ import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRende
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
+import { getPatientUserSettings } from "../../../../clinicPortalServices/userGridSettings";
+import { savePatientSettings } from "../../../../clinicPortalServices/saveStateSettings";
+
 const getPatientInfo = (patientData, patientId) => {
 	if (patientData && patientData.length > 0) {
 		const foundPatientInfo = patientData.find((item) => {
@@ -49,6 +52,7 @@ class ClinicPatientGrid extends Component {
 				ClipboardModule,
 				ExcelExportModule,
 			],
+			gridName: "Patient",
 			columnDefs: [
 				{
 					headerName: "Edit",
@@ -352,7 +356,7 @@ class ClinicPatientGrid extends Component {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 		this.loadGridData();
-		//get patient grid state from local storage
+		this.loadGridSchema();
 	};
 
 	loadGridData = () => {
@@ -377,23 +381,51 @@ class ClinicPatientGrid extends Component {
 		this.gridApi.paginationSetPageSize(Number(value));
 	};
 
-	saveState = () => {
-		window.colState = this.gridColumnApi.getColumnState();
+	loadGridSchema = () => {
+		var userId = window.localStorage.getItem("USER_ID");
+		getPatientUserSettings(userId, this.state.gridName)
+		.then((patientUserInfo) => {
+
+			console.log('getSettings', patientUserInfo);
+
+			const columnState = patientUserInfo.data && patientUserInfo.data.grid_state.find((item)=> {
+				return item.grid_name === 'Patient';
+			}).columns;
+			console.log('columnState-retrieved',columnState);
+			if(columnState) {
+				this.gridColumnApi.applyColumnState({
+					state: columnState,
+					applyOrder: true,
+				  });
+			}
+			
+		});
 	}
 
-	restoreState = () => {
-		if (!window.colState) {
-		  return;
-		}
-		this.gridColumnApi.applyColumnState({
-		  state: window.colState,
-		  applyOrder: true,
-		});
-	};
+	saveState = () => {
+		var userId = window.localStorage.getItem("USER_ID");
+		const columnState = this.gridColumnApi.getColumnState();
 
-	resetState = () => {
-		this.gridColumnApi.resetColumnState();
-	  };
+		console.log('columnState', columnState);
+
+		savePatientSettings(userId, this.state.gridName, columnState).then(() => {
+			console.log('saveSettings success');
+		});
+	}
+
+	// restoreState = () => {
+	// 	if (!window.colState) {
+	// 	  return;
+	// 	}
+	// 	this.gridColumnApi.applyColumnState({
+	// 	  state: window.colState,
+	// 	  applyOrder: true,
+	// 	});
+	// };
+
+	// resetState = () => {
+	// 	this.gridColumnApi.resetColumnState();
+	//   };
 
 	render() {
 		return (

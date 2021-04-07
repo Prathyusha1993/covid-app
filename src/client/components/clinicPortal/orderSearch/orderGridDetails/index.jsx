@@ -17,8 +17,8 @@ import { serviceConstants } from "../../../../patientPortalServices/constants";
 
 import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
-import { getUserSettings } from "../../../../clinicPortalServices/userGridSettings";
-import { saveSettings } from "../../../../clinicPortalServices/saveStateSettings";
+import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
+import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -55,7 +55,8 @@ class OrderGridDetails extends Component {
 				ClipboardModule,
 				ExcelExportModule,
 			],
-			gridName: "order",
+			gridName: "Order",
+			pageSize: '',
 			userGridSchema: null,
 			columnDefs: [
 				{
@@ -88,6 +89,7 @@ class OrderGridDetails extends Component {
 				},
 				{
 					headerName: "Result",
+					field: "result",
 					minWidth: 150,
 					resizable: true,
 					cellRenderer: "pdfResultRenderer",
@@ -156,35 +158,9 @@ class OrderGridDetails extends Component {
 		//console.log(params.columnApi);
 		this.loadGridData();
 		 this.loadGridSchema();
-	};
 
-	loadGridSchema = () => {
-		var userId = window.localStorage.getItem("USER_ID");
-		getUserSettings(userId, this.state.gridName)
-		.then((userState) => {
-			console.log("uerdetails:", userState);
-			if(userState.data.length > 0){
-				const state = userState.data.map((item) => {
-					const updatedData = {
-						gridName: item.grid_state[0].grid_name,
-						page_size: item.grid_state[0].page_size,
-						colState: item.grid_state[0].columns[0]
-					}
-					return updatedData;
-				})
-				this.setState({ userGridSchema: state });
-			}
-			else {
-				this.gridColumnApi.resetColumnState();
-			}
-			// restore call
-			// get colState from data;
-			// this.gridColumnApi.applyColumnState({
-			// 	state: colState,
-			// 	applyOrder: true,
-			//   });
-		})
-	}
+	};
+	
 
 	loadGridData = () => {
 		var facilityID = window.localStorage.getItem("FACILITY_ID");
@@ -286,33 +262,39 @@ class OrderGridDetails extends Component {
 		this.gridApi.paginationSetPageSize(Number(value));
 	};
 
-	saveState = () => {
-		// window.colState = this.gridColumnApi.getColumnState();
-		const colState = this.gridColumnApi.getColumnState();
-		// save colState using API
-		const saveParams = {
+	loadGridSchema = () => {
+		var userId = window.localStorage.getItem("USER_ID");
+		getOrderUserSettings(userId, this.state.gridName)
+		.then((orderUserInfo) => {
 
-		}
-		saveSettings(saveParams).then((saveInfo) => {
+			console.log('getSettings', orderUserInfo);
+			// const columnState = userInfo.data.grid_state[0].columns;
+
+			const columnState = orderUserInfo.data && orderUserInfo.data.grid_state.find((item)=> {
+				return item.grid_name === 'Order';
+			}).columns;
+			console.log('columnState-retrieved',columnState);
+			if(columnState) {
+				this.gridColumnApi.applyColumnState({
+					state: columnState,
+					applyOrder: true,
+				  });
+			}
 			
-		})
+		});
 	}
 
-	restoreState = () => {
-		// if (!window.colState) {
-		//   return;
-		// }
+	saveState = () => {
+		var userId = window.localStorage.getItem("USER_ID");
+		const columnState = this.gridColumnApi.getColumnState();
 
-		// // retrieve colState from API
-		// this.gridColumnApi.applyColumnState({
-		//   state: colState,
-		//   applyOrder: true,
-		// });
-	};
+		console.log('columnState', columnState);
 
-	// resetState = () => {
-	// 	this.gridColumnApi.resetColumnState();
-	//   };
+		saveOrderSettings(userId, this.state.gridName, columnState).then(() => {
+			console.log('saveSettings success');
+		});
+	}
+
 
 	render() {
 		return (
@@ -363,7 +345,7 @@ class OrderGridDetails extends Component {
 							>
 								<i class="far fa-save"></i> Save 
 							</button>
-							{/*<button
+							{/* <button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.restoreState()}
 							> Restore State
