@@ -45,7 +45,9 @@ export const updateResultPDF = (params) => {
 		provider_name:params.provider,
 		facility_source:params.facilitySource,
 		value:params.result,
-		pdf_path:params.pdfPath
+		pdf_path:params.pdfPath,
+		released_date:params.released,
+		released_by:params.releasedBy
 	};
 	console.log(updatedOrder);	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/update/`, {

@@ -17,6 +17,15 @@ export const identity = [
 	},
 ];
 
+export const testTypes = [
+	{
+		testType: "Nasal Swab",
+	},
+	{
+		testType: "Nasopharyngeal Swab",
+	}
+];
+
 export const results = [
 	{
 		result: "SARS-CoV-2 Not Detected",

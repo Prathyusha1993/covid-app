@@ -8,10 +8,10 @@ export const getOrderUserSettings = (userId, gridName) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-            // user_id: userId,
-            // grid_name: gridName,
-            "user_id": "6062151112591a26d4bb6685",
-            "grid_name":"Order"
+            user_id: userId,
+            grid_name: gridName,
+            // "user_id": "6062151112591a26d4bb6685",
+            // "grid_name":"Order"
         }),
 	}).then((response) => response.json());
 };
@@ -25,10 +25,10 @@ export const getPatientUserSettings = (userId, gridName) => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-            // user_id: userId,
-            // grid_name: gridName,
-            "user_id": "6062151112591a26d4bb6685",
-            "grid_name":"Patient"
+            user_id: userId,
+            grid_name: gridName,
+            //"user_id": "6062151112591a26d4bb6685",
+            //"grid_name":"Patient"
         }),
 	}).then((response) => response.json());
 };
