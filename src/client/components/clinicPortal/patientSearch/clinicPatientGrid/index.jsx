@@ -5,21 +5,22 @@ import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
 import { AllCommunityModules } from "@ag-grid-community/all-modules";
+import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
+import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
-import {
-  fetchPatientMasterData,
-  fetchPatientExpandableData,
-} from "../../../../clinicPortalServices/patientSearchService";
+import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import moment from "moment";
 import MasterBtnCellRenderer from "./masterBtnCellRenderer";
 
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
 import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
 
-import { ClipboardModule } from "@ag-grid-enterprise/clipboard";
-import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 
+import {
+  fetchPatientMasterData,
+  fetchPatientExpandableData,
+} from "../../../../clinicPortalServices/patientSearchService";
 import { getPatientUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { savePatientSettings } from "../../../../clinicPortalServices/saveStateSettings";
 
@@ -49,8 +50,9 @@ class ClinicPatientGrid extends Component {
         MenuModule,
         ColumnsToolPanelModule,
         AllCommunityModules,
-        ClipboardModule,
         ExcelExportModule,
+        SetFilterModule,
+				FiltersToolPanelModule,
       ],
       gridName: "Patient",
       columnDefs: [
@@ -190,10 +192,12 @@ class ClinicPatientGrid extends Component {
             {
               headerName: "Test",
               field: "description",
+              resizable: true,
             },
             {
               headerName: "Test Type",
               field: "testType",
+              resizable: true,
             },
             {
               headerName: "Sample",
@@ -203,6 +207,7 @@ class ClinicPatientGrid extends Component {
             {
               headerName: "Result",
               resizable: true,
+              field: "result",
               cellRenderer: "pdfResultRenderer",
             },
             {

@@ -24,22 +24,22 @@ const Header = (props) => {
 		root.classList.remove("menu-opened");
 	};
 
-	// useEffect(() => {
-	//   $(".main-nav a").on("click", function (e) {
-	//     if ($(this).parent().hasClass("has-submenu")) {
-	//       e.preventDefault();
-	//     }
-	//     if (!$(this).hasClass("submenu")) {
-	//       $("ul", $(this).parents("ul:first")).slideUp(350);
-	//       $("a", $(this).parents("ul:first")).removeClass("submenu");
-	//       $(this).next("ul").slideDown(350);
-	//       $(this).addClass("submenu");
-	//     } else if ($(this).hasClass("submenu")) {
-	//       $(this).removeClass("submenu");
-	//       $(this).next("ul").slideUp(350);
-	//     }
-	//   });
-	// }, []);
+	useEffect(() => {
+	  $(".main-nav a").on("click", function (e) {
+	    if ($(this).parent().hasClass("has-submenu")) {
+	      e.preventDefault();
+	    }
+	    if (!$(this).hasClass("submenu")) {
+	      $("ul", $(this).parents("ul:first")).slideUp(350);
+	      $("a", $(this).parents("ul:first")).removeClass("submenu");
+	      $(this).next("ul").slideDown(350);
+	      $(this).addClass("submenu");
+	    } else if ($(this).hasClass("submenu")) {
+	      $(this).removeClass("submenu");
+	      $(this).next("ul").slideUp(350);
+	    }
+	  });
+	}, []);
 
 	//  console.log("sreevidhya "+url+" "+pathnames)
 	return (
@@ -81,7 +81,7 @@ const Header = (props) => {
 							/>
 						</Link>
 						<a
-							href="#0"
+							href="/home"
 							id="menu_close"
 							className="menu-close"
 							onClick={() => onhandleCloseMenu()}
@@ -89,6 +89,28 @@ const Header = (props) => {
 							<i className="fas fa-times"></i>
 						</a>
 					</div>
+					{/* <ul className="main-nav">
+						<li className={pathnames.includes("/home") ? "active" : ""}>
+							<Link to="/home">Home</Link>
+						</li>
+						<li className={`has-submenu ${
+								url.includes("/patientportal") ? "active" : ""
+							}`}		>
+							<a href="/patientportal" className="top-nav-button">
+								{" "}
+								View My Results{" "}
+							</a>
+						</li>
+						<li className={`has-submenu ${
+								url.includes("/clinic") ? "active" : ""
+							}`}
+						>
+							<a href="/clinic" className="top-nav-button">
+								{" "}
+								Clinic Login{" "}
+							</a>
+						</li>
+					</ul> */}
 				</div>
 				<ul className="nav header-navbar-rht">
 						<li className="nav-item">
