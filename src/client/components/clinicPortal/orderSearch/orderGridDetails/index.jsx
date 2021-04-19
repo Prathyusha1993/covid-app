@@ -329,6 +329,10 @@ class OrderGridDetails extends Component {
 		this.gridColumnApi.resetColumnState();
 	};
 
+  // clearFilter = () => {
+  //   this.gridApi.setFilterModel(null);
+  // };
+
 	render() {
 		return (
 			<div>
@@ -383,6 +387,8 @@ class OrderGridDetails extends Component {
 								onClick={() => this.restoreState()}
 							> Restore State
 							</button>*/}
+              				{/* <button className="btn btn-primary submit-btn button-info-grid"
+              					onClick={() => this.clearFilter()}>Clear Filter</button> */}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}

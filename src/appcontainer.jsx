@@ -8,10 +8,6 @@ import TopHeader from "./client/components/topheader.jsx";
 
 //Home Appointment Booking
 import Home from "./client/components/appointmentBooking/home/index";
-// import Home1 from "./client/components/home/home1";
-// import Home2 from "./client/components/home/home2";
-// import HomeSlider1 from "./client/components/home/homeslider1";
-// import HomeSlider2 from "./client/components/home/homeslider2";
 
 import BlankPage from "./client/components/blankpage";
 //Patient Portal
@@ -23,6 +19,7 @@ import PatientPortalHeader from "./client/components/patientPortal/header";
 import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/clinicPatientGrid/index";
 import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
+import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDetails/index.jsx";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -62,19 +59,12 @@ const AppContainer = function (props) {
 							exact
 							component={ClinicPatientGrid}
 						/>
-						<Route
-							path="/clinic/orders"
-							exact
-							component={OrderGridDetails}
-						/>
-						
-						<Route path="(/|/home)" exact component={Home} />
+						<Route path="/clinic/orders" exact component={OrderGridDetails} />
+						<Route path="/clinic/audit" exact component={AuditGridDetails} />
 
-						
-						
+						<Route path="(/|/home)" exact component={Home} />
 					</Switch>
 					<Route render={(props) => <Footer {...props} />} />
-					
 				</div>
 			</Router>
 		);

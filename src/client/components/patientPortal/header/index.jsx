@@ -53,6 +53,9 @@ class PatientPortalHeader extends Component {
                     <li>
                       <a href="/clinic/orders"> Orders </a>
                     </li>
+                    <li>
+                      <a href="/clinic/audit"> Audit </a>
+                    </li>
                   </ul>
                 </div>
               </Navbar.Brand>
