@@ -47,7 +47,8 @@ export const updateResultPDF = (params) => {
 		value:params.result,
 		pdf_path:params.pdfPath,
 		released_date:params.released,
-		released_by:params.releasedBy
+		released_by:params.releasedBy,
+		test_type: params.testType,
 	};
 	console.log(updatedOrder);	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/update/`, {

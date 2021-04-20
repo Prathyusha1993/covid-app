@@ -36,9 +36,6 @@ export const results = [
 	{
 		result: "SARS-CoV-2 Inconclusive",
 	},
-	{
-		result: "Blank",
-	},
 ];
 
 export const states = [
