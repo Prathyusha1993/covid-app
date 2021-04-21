@@ -149,7 +149,6 @@ export default class EditBtnCellRenderer extends Component {
       mrn: this.state.mrn,
       dob: this.state.dob,
       pdfPath: this.state.pdfPath,
-      // provider: this.state.provider
       released: this.state.released,
       releasedBy: this.state.releasedBy,
     };

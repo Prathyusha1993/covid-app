@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-//import message from semanticuireact if you want to show mesage after submission
+import { getInTouchDetails } from "../../../../appointmentBookingServices/getInTouch";
 
 class FormInfo extends Component {
 	constructor(props) {
@@ -10,30 +10,63 @@ class FormInfo extends Component {
 			lastName: "",
 			mobile: "",
 			email: "",
-			text: "",
+			testingNeeds: "",
+			toEmail:"",
+			subject: "",
+			showMessage: false,
 		};
 	}
 
 	// getInTouch = (e) => {
 	// 	const info = {
-	// 		firstName: this.state.firstName,
+	// 		firstName: this.state.firstName ,
 	// 		lastName: this.state.lastName,
 	// 		mobile: this.state.mobile,
 	// 		email: this.state.email,
-	// 		text: this.state.text,
+	// 		testingNeeds: this.state.testingNeeds,
 	// 	}
 	// 	e.preventDefault();
-	// 	fetch(`https://hipaa.jotform.com/jsform/210838200288049`, {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(info),
-	// 	}).then((response) => {
-	// 		console.log(response);
-	// 		response.json();
-	// 	})
+	// 	getInTouchDetails(this.state.toEmail, this.state.subject, info);
+	// 	this.setState({
+	// 		firstName: '',
+	// 		lastName: '',
+	// 		mobile:'',
+	// 		email:'',
+	// 		testingNeeds: '',
+	// 		showMessage: true
+	// 	});
 	// };
+
+	getInTouch = (e) => {
+			const info = {
+			firstName: this.state.firstName ,
+			lastName: this.state.lastName,
+			mobile: this.state.mobile,
+			email: this.state.email,
+			testingNeeds: this.state.testingNeeds,
+		}
+		e.preventDefault();
+		fetch('https://www.mycovidnow.com/api/misc/v2/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				"toEmail" : "prathyusha9310@gmail.com",
+				"subject" : "Contact Us",
+				"body" : info
+			})
+		})
+		.then(response => response.json());
+		this.setState({
+					firstName: '',
+					lastName: '',
+					mobile:'',
+					email:'',
+					testingNeeds: '',
+					showMessage: true
+				});
+	}
 
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -44,19 +77,11 @@ class FormInfo extends Component {
 			<div style={{ paddingTop: "50px" }}>
 				<Form
 					className="home-page-form"
-					//onSubmit={this.getInTouch}
-					action="https://hipaa.jotform.com/jsform/210838200288049"
-					method="post"
-					autocomplete="off"
+					onSubmit={this.getInTouch}
+					//action="https://hipaa.jotform.com/jsform/210838200288049"
+					//method="post"
+					//autocomplete="off"
 				>
-					{/* <Message 
-					success
-					header="Form completed"
-					content="Thank you your submission has been received" />
-					<Message 
-					error
-					header="Missing fields!"
-					list={['All fields must be filled.']}/> */}
 					<Form.Row>
 						<Form.Group as={Col} controlId="formGridEmail">
 							<Form.Label>What is your name?</Form.Label>
@@ -72,12 +97,13 @@ class FormInfo extends Component {
 						<Form.Group as={Col} controlId="formGridPassword">
 							<Form.Label> </Form.Label>
 							<Form.Control
+							style={{marginTop: "8px"}}
 								type="text"
 								name="lastName"
 								value={this.state.lastName}
 								onChange={this.handleChange}
 							/>
-							<Form.Label className="home-page-label"> Last Name </Form.Label>
+							<Form.Label className="home-page-label" > Last Name </Form.Label>
 						</Form.Group>
 					</Form.Row>
 
@@ -115,15 +141,17 @@ class FormInfo extends Component {
 							as="textarea"
 							rows={3}
 							placeholder="Type here..."
-							name="text"
-							value={this.state.text}
+							name="testingNeeds"
+							value={this.state.testingNeeds}
 							onChange={this.handleChange}
 						/>
 					</Form.Group>
 
 					<Button variant="primary" type="submit" className="home-page-button">
-						Get in Touch With Luke
+						Submit
 					</Button>
+					<br/>
+					{this.state.showMessage && <p style={{color: 'green', marginLeft: '50px', marginTop: '10px'}}>Thank you for contacting us, we will get back to you shortly.</p>}
 				</Form>
 			</div>
 		);
