@@ -12,6 +12,7 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import moment from "moment";
+import TextField from "@material-ui/core/TextField";
 
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
@@ -329,10 +330,10 @@ class OrderGridDetails extends Component {
 		this.gridColumnApi.resetColumnState();
 	};
 
-  clearFilter = () => {
-    this.gridApi.setFilterModel(null);
-	this.gridApi.setQuickFilter(null);
-  };
+	clearFilter = () => {
+		this.gridApi.setFilterModel(null);
+		this.gridApi.setQuickFilter(null);
+	};
 
 	render() {
 		return (
@@ -365,6 +366,14 @@ class OrderGridDetails extends Component {
 							placeholder="Quick Search"
 						/>
 					</div>
+					<div>
+						<button
+							className="btn btn-primary submit-btn button-info-grid"
+							onClick={() => this.clearFilter()}
+						>
+							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
+						</button>
+					</div>
 					<div className="col grid-buttons">
 						<div>
 							{/* <label>Page Size</label> */}
@@ -388,14 +397,14 @@ class OrderGridDetails extends Component {
 								onClick={() => this.restoreState()}
 							> Restore State
 							</button>*/}
-              				<button className="btn btn-primary submit-btn button-info-grid"
-              					onClick={() => this.clearFilter()}>Clear Filter</button>
+							{/* <button className="btn btn-primary submit-btn button-info-grid"
+              					onClick={() => this.clearFilter()}>Clear Filter</button> */}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}
 							>
 								{" "}
-								<i class="fa fa-repeat"></i> Reset
+								<i class="fa fa-repeat"></i> Default
 							</button>
 						</div>
 						<div>
