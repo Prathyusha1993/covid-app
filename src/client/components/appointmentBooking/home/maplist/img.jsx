@@ -2,3 +2,10 @@ export { default as FARRAGUT_MEDICAL} from '../../../../assets/images/bookingmap
 export { default as FAST_TRACK_URGENT_CARE} from '../../../../assets/images/bookingmaplist/fast-track-urgent-care.jpg';
 export { default as GRUBB_PHARMACY} from '../../../../assets/images/bookingmaplist/grubb-pharmacy.jpg';
 export { default as SHADY_GROVE} from '../../../../assets/images/bookingmaplist/shady-grove.jpg';
+export { default as ALPHA_PEOPLES_DRUGS} from '../../../../assets/images/bookingmaplist/alpha-peoples-drugs.jpg';
+export { default as PASSPORT_HEALTH_ALEXANDRIA} from '../../../../assets/images/bookingmaplist/passport-health-alexandria.jpg';
+export { default as PASSPORT_HEALTH_BETHESDA} from '../../../../assets/images/bookingmaplist/passport-health-bethesda.jpg';
+export { default as PASSPORT_HEALTH_DC} from '../../../../assets/images/bookingmaplist/passport-health-dc.jpg';
+export { default as PASSPORT_HEALTH_RESTON} from '../../../../assets/images/bookingmaplist/passport-health-reston.jpg';
+export { default as PASSPORT_HEALTH_SILVER_SPRING} from '../../../../assets/images/bookingmaplist/passport-health-silver-spring.jpg';
+export { default as PILL_PLUS} from '../../../../assets/images/bookingmaplist/pill-plus.jpg';
