@@ -4,8 +4,12 @@ import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-mod
 import { MasterDetailModule } from "@ag-grid-enterprise/master-detail";
 import { MenuModule } from "@ag-grid-enterprise/menu";
 import { ColumnsToolPanelModule } from "@ag-grid-enterprise/column-tool-panel";
+import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
+import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
+
+import TextField from "@material-ui/core/TextField";
 
 //service calls
 import { getAuditData } from "../../../../clinicPortalServices/auditService";
@@ -21,6 +25,8 @@ class AuditGridDetails extends Component {
 				MasterDetailModule,
 				MenuModule,
 				ColumnsToolPanelModule,
+				SetFilterModule,
+				FiltersToolPanelModule,
 			],
 			columnDefs: [
 				{
@@ -75,6 +81,7 @@ class AuditGridDetails extends Component {
 			defaultColDef: {
 				flex: 1,
 				filter:true,
+				sortable: true,
 			},
 			rowData: null,
 		};
@@ -90,6 +97,16 @@ class AuditGridDetails extends Component {
 		getAuditData().then((data) => {
 			this.setState({ rowData: data.data });
 		});
+	};
+
+	onFilterTextChange = (e) => {
+		this.gridApi.setQuickFilter(e.target.value);
+	};
+
+	clearFilter = () => {
+		this.gridApi.setFilterModel(null);
+		this.gridApi.setQuickFilter(null);
+		document.getElementById("reset-form").value="";
 	};
 
 	render() {
@@ -114,6 +131,29 @@ class AuditGridDetails extends Component {
 						</div>
 					</div>
 				</div>
+				<div className="row" style={{padding: "12px"}}>
+					<div className="col-md-3">
+						<TextField
+							label="Quick Search"
+							variant="outlined"
+							className="form-control"
+							id="reset-form"
+							InputLabelProps={{
+								shrink: true,
+							  }}
+							type="string"
+							onChange={this.onFilterTextChange}
+						/>
+					</div>
+					<div>
+						<button
+							className="btn btn-primary submit-btn button-info-grid"
+							onClick={() => this.clearFilter()}
+						>
+							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
+						</button>
+					</div>
+				</div>
 				<div
 					style={{
 						width: "100%",
@@ -136,7 +176,6 @@ class AuditGridDetails extends Component {
 							masterDetail={true}
 							onGridReady={this.onGridReady}
 							rowData={this.state.rowData}
-							//frameworkComponents={this.state.frameworkComponents}
 							pagination={true}
 							paginationAutoPageSize={true}
 							//paginationPageSize={20}

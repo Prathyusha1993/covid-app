@@ -441,16 +441,6 @@ class ClinicPatientGrid extends Component {
 		});
 	};
 
-	// restoreState = () => {
-	// 	if (!window.colState) {
-	// 	  return;
-	// 	}
-	// 	this.gridColumnApi.applyColumnState({
-	// 	  state: window.colState,
-	// 	  applyOrder: true,
-	// 	});
-	// };
-
 	resetState = () => {
 		this.gridColumnApi.resetColumnState();
 	};
@@ -458,6 +448,7 @@ class ClinicPatientGrid extends Component {
 	clearFilter = () => {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
+		document.getElementById("reset-form").value="";
 	};
 
 	render() {
@@ -485,16 +476,15 @@ class ClinicPatientGrid extends Component {
 
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						{/* <input
-							type="search"
-							className="form-control"
-							onChange={this.onFilterTextChange}
-							placeholder="Quick Search"
-						/> */}
 						<TextField
 							label="Quick Search"
 							variant="outlined"
 							className="form-control"
+							id="reset-form"
+							InputLabelProps={{
+								shrink: true,
+							  }}
+							type="string"
 							onChange={this.onFilterTextChange}
 						/>
 					</div>
@@ -508,21 +498,16 @@ class ClinicPatientGrid extends Component {
 					</div>
 					<div className="col grid-buttons">
 						<div>
-							{/* <label>Page Size</label> */}
-							{/* <input
-								type="number"
-								className="form-control"
-								onChange={this.onPageSizeChanged}
-								placeholder="Page Size"
-								id="page-size"
-							/> */}
 							<TextField
 								style={{ width: "100px", height: "40px" }}
 								label="Page Size"
 								variant="outlined"
 								className="form-control"
 								id="page-size"
-								size="small"
+								InputLabelProps={{
+									shrink: true,
+								  }}
+								type="number"
 								onChange={this.onPageSizeChanged}
 							/>
 						</div>
@@ -533,11 +518,6 @@ class ClinicPatientGrid extends Component {
 							>
 								<i class="far fa-save"></i> Save
 							</button>
-							{/* <button
-					className="btn btn-primary submit-btn button-info-grid"
-					onClick={() => this.restoreState()}
-				> Restore State
-				</button>*/}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}

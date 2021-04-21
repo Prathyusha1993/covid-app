@@ -275,8 +275,6 @@ class OrderGridDetails extends Component {
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
-		//e.target.reset();
-		//document.getElementById("reset-form").reset();
 	};
 
 	onBtExport = () => {
@@ -368,17 +366,15 @@ class OrderGridDetails extends Component {
 				</div>
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						{/* <input
-							type="search"
-							className="form-control"
-							onChange={this.onFilterTextChange}
-							placeholder="Quick Search"
-						/> */}
 						<TextField
 							label="Quick Search"
 							variant="outlined"
 							className="form-control"
 							id="reset-form"
+							InputLabelProps={{
+								shrink: true,
+							  }}
+							type="string"
 							onChange={this.onFilterTextChange}
 						/>
 					</div>
@@ -392,21 +388,17 @@ class OrderGridDetails extends Component {
 					</div>
 					<div className="col grid-buttons">
 						<div>
-							{/* <label>Page Size</label> */}
-							{/* <input
-								type="number"
-								className="form-control"
-								onChange={this.onPageSizeChanged}
-								placeholder="Page Size"
-								id="page-size"
-							/> */}
 							<TextField
-								style={{ width: "100px", height: "40px" }}
+								style={{ width: "100px"}}
 								label="Page Size"
 								variant="outlined"
 								className="form-control"
 								id="page-size"
-								size="small"
+								//size="small"
+								InputLabelProps={{
+									shrink: true,
+								  }}
+								type="number"
 								onChange={this.onPageSizeChanged}
 							/>
 						</div>
@@ -417,11 +409,6 @@ class OrderGridDetails extends Component {
 							>
 								<i class="far fa-save"></i> Save
 							</button>
-							{/* <button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.restoreState()}
-							> Restore State
-							</button>*/}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}
