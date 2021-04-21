@@ -375,6 +375,7 @@ class OrderGridDetails extends Component {
 								shrink: true,
 							  }}
 							type="string"
+							margin="dense"
 							onChange={this.onFilterTextChange}
 						/>
 					</div>
@@ -399,6 +400,7 @@ class OrderGridDetails extends Component {
 									shrink: true,
 								  }}
 								type="number"
+								margin="dense"
 								onChange={this.onPageSizeChanged}
 							/>
 						</div>

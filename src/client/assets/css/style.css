@@ -8817,7 +8817,8 @@ html {
 
 .button-info-grid {
   margin-left: 9px;
-  height: 55px
+  height: 40px;
+  margin-top: 8px;
 }
 
 .home-page-form {

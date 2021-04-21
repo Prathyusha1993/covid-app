@@ -142,6 +142,7 @@ class AuditGridDetails extends Component {
 								shrink: true,
 							  }}
 							type="string"
+							margin="dense"
 							onChange={this.onFilterTextChange}
 						/>
 					</div>
