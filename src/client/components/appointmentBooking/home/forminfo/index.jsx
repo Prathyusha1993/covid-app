@@ -52,7 +52,7 @@ class FormInfo extends Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				"toEmail" : "prathyusha9310@gmail.com",
+				"toEmail" : "kiran@ushealthtek.com",
 				"subject" : "Contact Us",
 				"body" : info
 			})

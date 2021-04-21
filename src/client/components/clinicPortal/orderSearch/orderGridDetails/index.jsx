@@ -113,6 +113,12 @@ class OrderGridDetails extends Component {
 					field: "provider",
 				},
 				{
+					headerName: "Facility Source",
+					minWidth: 150,
+					resizable: true,
+					field: "facilitySource",
+				},
+				{
 					headerName: "Received Date",
 					field: "receivedDate",
 					minWidth: 200,
@@ -269,6 +275,8 @@ class OrderGridDetails extends Component {
 
 	onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
+		//e.target.reset();
+		//document.getElementById("reset-form").reset();
 	};
 
 	onBtExport = () => {
@@ -359,11 +367,18 @@ class OrderGridDetails extends Component {
 				</div>
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						<input
+						{/* <input
 							type="search"
 							className="form-control"
 							onChange={this.onFilterTextChange}
 							placeholder="Quick Search"
+						/> */}
+						<TextField
+							label="Quick Search"
+							variant="outlined"
+							className="form-control"
+							//id="reset-form"
+							onChange={this.onFilterTextChange}
 						/>
 					</div>
 					<div>
@@ -377,12 +392,21 @@ class OrderGridDetails extends Component {
 					<div className="col grid-buttons">
 						<div>
 							{/* <label>Page Size</label> */}
-							<input
+							{/* <input
 								type="number"
 								className="form-control"
 								onChange={this.onPageSizeChanged}
 								placeholder="Page Size"
 								id="page-size"
+							/> */}
+							<TextField
+								style={{ width: "100px", height: "40px" }}
+								label="Page Size"
+								variant="outlined"
+								className="form-control"
+								id="page-size"
+								size="small"
+								onChange={this.onPageSizeChanged}
 							/>
 						</div>
 						<div>
@@ -397,8 +421,6 @@ class OrderGridDetails extends Component {
 								onClick={() => this.restoreState()}
 							> Restore State
 							</button>*/}
-							{/* <button className="btn btn-primary submit-btn button-info-grid"
-              					onClick={() => this.clearFilter()}>Clear Filter</button> */}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}

@@ -11,8 +11,9 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import moment from "moment";
-import MasterBtnCellRenderer from "./masterBtnCellRenderer";
+import TextField from "@material-ui/core/TextField";
 
+import MasterBtnCellRenderer from "./masterBtnCellRenderer";
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
 import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
 
@@ -454,9 +455,10 @@ class ClinicPatientGrid extends Component {
 		this.gridColumnApi.resetColumnState();
 	};
 
-	// clearFilter = () => {
-	//   this.gridApi.setFilterModel(null);
-	// };
+	clearFilter = () => {
+		this.gridApi.setFilterModel(null);
+		this.gridApi.setQuickFilter(null);
+	};
 
 	render() {
 		return (
@@ -483,22 +485,45 @@ class ClinicPatientGrid extends Component {
 
 				<div className="row" style={{ padding: " 12px" }}>
 					<div className="col-md-3">
-						<input
+						{/* <input
 							type="search"
 							className="form-control"
 							onChange={this.onFilterTextChange}
 							placeholder="Quick Search"
+						/> */}
+						<TextField
+							label="Quick Search"
+							variant="outlined"
+							className="form-control"
+							onChange={this.onFilterTextChange}
 						/>
+					</div>
+					<div>
+						<button
+							className="btn btn-primary submit-btn button-info-grid"
+							onClick={() => this.clearFilter()}
+						>
+							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
+						</button>
 					</div>
 					<div className="col grid-buttons">
 						<div>
 							{/* <label>Page Size</label> */}
-							<input
+							{/* <input
 								type="number"
 								className="form-control"
 								onChange={this.onPageSizeChanged}
 								placeholder="Page Size"
 								id="page-size"
+							/> */}
+							<TextField
+								style={{ width: "100px", height: "40px" }}
+								label="Page Size"
+								variant="outlined"
+								className="form-control"
+								id="page-size"
+								size="small"
+								onChange={this.onPageSizeChanged}
 							/>
 						</div>
 						<div>
@@ -513,15 +538,12 @@ class ClinicPatientGrid extends Component {
 					onClick={() => this.restoreState()}
 				> Restore State
 				</button>*/}
-
-							{/* <button className="btn btn-primary submit-btn button-info-grid"
-              					onClick={() => this.clearFilter()}>Clear Filter</button> */}
 							<button
 								className="btn btn-primary submit-btn button-info-grid"
 								onClick={() => this.resetState()}
 							>
 								{" "}
-								<i class="fa fa-repeat"></i> Reset
+								<i class="fa fa-repeat"></i> Default
 							</button>
 						</div>
 						<div>

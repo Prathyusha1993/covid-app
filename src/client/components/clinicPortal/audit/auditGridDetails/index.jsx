@@ -9,6 +9,7 @@ import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
 //service calls
 import { getAuditData } from "../../../../clinicPortalServices/auditService";
+import moment from "moment";
 
 class AuditGridDetails extends Component {
 	constructor(props) {
@@ -65,6 +66,9 @@ class AuditGridDetails extends Component {
 					field: "createdAt",
 					minWidth: 200,
 					resizable: true,
+					cellRenderer: (data) => {
+						return moment(data.createdAt).format('MM/DD/YYYY HH:mm:ss A')
+					}
 				},
 			],
 
