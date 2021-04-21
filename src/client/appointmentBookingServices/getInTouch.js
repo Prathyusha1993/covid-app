@@ -1,13 +1,7 @@
 
 
 export const getInTouchDetails = (toEmail, subject, body) =>  {
-    // var updatedInfo = {
-    //     firstName: info.firstName ,
-    //     lastName: info.lastName ,
-    //     mobile: info.mobile ,
-    //     email: info.email ,
-    //     testingNeeds: info.testingNeeds,
-    // }
+    
     return fetch(`https://www.mycovidnow.com/api/misc/v2/email`, {
         method: 'POST',
         headers: {

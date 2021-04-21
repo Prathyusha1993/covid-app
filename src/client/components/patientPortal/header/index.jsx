@@ -68,19 +68,11 @@ class PatientPortalHeader extends Component {
                 <>
                   <Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                      {/* <img
-												className="rounded-circle"
-												src={DOC_IMG}
-												width="31"
-												alt="Darren Elder"
-											/> */}
-                      {/* <a href="#0" className="booking-doc-img"> */}
                       <i
                         className="fa fa-user-circle fa-2x"
                         style={{ color: "#0369b3" }}
                         aria-hidden="true"
                       ></i>
-                      {/* </a> */}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>

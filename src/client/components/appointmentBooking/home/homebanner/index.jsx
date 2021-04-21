@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 class HomeBookAppoinment extends Component {
   render() {
+    const facheckStyle = {
+      color: "#0E5087"
+    }
     return (
       <section className="section section-banner" id="scroll-top">
         <div className="container">
@@ -22,7 +25,7 @@ class HomeBookAppoinment extends Component {
                   <p>
                     <i
                       class="fa fa-check"
-                      style={{ color: "#0E5087" }}
+                      style={facheckStyle}
                       aria-hidden="true"
                     ></i>
                     {"  "}
@@ -30,7 +33,7 @@ class HomeBookAppoinment extends Component {
                     <br />
                     <i
                       class="fa fa-check"
-                      style={{ color: "#0E5087" }}
+                      style={facheckStyle}
                       aria-hidden="true"
                     ></i>
                     {"  "}
@@ -38,7 +41,7 @@ class HomeBookAppoinment extends Component {
                     <br />
                     <i
                       class="fa fa-check"
-                      style={{ color: "#0E5087" }}
+                      style={facheckStyle}
                       aria-hidden="true"
                     ></i>
                     {"  "}
@@ -46,7 +49,7 @@ class HomeBookAppoinment extends Component {
                     <br />
                     <i
                       class="fa fa-check"
-                      style={{ color: "#0E5087" }}
+                      style={facheckStyle}
                       aria-hidden="true"
                     ></i>
                     {"  "}

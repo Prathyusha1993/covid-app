@@ -47,38 +47,7 @@ class FormInfo extends Component {
       showMessage: true,
     });
   };
-  /*
-	getInTouch = (e) => {
-			const info = {
-			firstName: this.state.firstName ,
-			lastName: this.state.lastName,
-			mobile: this.state.mobile,
-			email: this.state.email,
-			testingNeeds: this.state.testingNeeds,
-		}
-		e.preventDefault();
-		fetch('https://www.mycovidnow.com/api/misc/v2/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				"toEmail" : "kiran@ushealthtek.com",
-				"subject" : "Contact Us",
-				"body" : info
-			})
-		})
-		.then(response => response.json());
-		this.setState({
-					firstName: '',
-					lastName: '',
-					mobile:'',
-					email:'',
-					testingNeeds: '',
-					showMessage: true
-				});
-	}
-*/
+ 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -89,9 +58,6 @@ class FormInfo extends Component {
         <Form
           className="home-page-form"
           onSubmit={this.getInTouch}
-          //action="https://hipaa.jotform.com/jsform/210838200288049"
-          //method="post"
-          //autocomplete="off"
         >
           <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">

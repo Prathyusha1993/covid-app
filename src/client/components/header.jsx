@@ -24,6 +24,10 @@ const Header = (props) => {
 		root.classList.remove("menu-opened");
 	};
 
+	window.onbeforeunload = function() {
+		localStorage.clear();
+	 }
+
 	useEffect(() => {
 	  $(".main-nav a").on("click", function (e) {
 	    if ($(this).parent().hasClass("has-submenu")) {
@@ -58,7 +62,6 @@ const Header = (props) => {
 						className="navbar-brand "
 						style={{ marginRight: "100px" }}
 					>
-						{/* <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" /> */}
 						<img
 							src={AGT_MCN_LOGO}
 							width="400"
@@ -71,7 +74,6 @@ const Header = (props) => {
 				<div className="main-menu-wrapper">
 					<div className="menu-header">
 						<Link to="/home" className="menu-logo">
-							{/* <img src={AGT_MCN_LOGO} className="img-fluid" alt="Logo" />  */}
 							<img
 								src={AGT_MCN_LOGO}
 								width="400"
