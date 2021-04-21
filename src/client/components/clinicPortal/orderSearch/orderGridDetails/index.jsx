@@ -341,6 +341,7 @@ class OrderGridDetails extends Component {
 	clearFilter = () => {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
+		document.getElementById("reset-form").value="";
 	};
 
 	render() {
@@ -377,7 +378,7 @@ class OrderGridDetails extends Component {
 							label="Quick Search"
 							variant="outlined"
 							className="form-control"
-							//id="reset-form"
+							id="reset-form"
 							onChange={this.onFilterTextChange}
 						/>
 					</div>

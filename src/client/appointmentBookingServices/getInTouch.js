@@ -1,24 +1,24 @@
 
 
-export const getInTouchDetails = (toEmail, subject, info) =>  {
-    var updatedInfo = {
-        firstName: info.firstName ,
-        lastName: info.lastName ,
-        mobile: info.mobile ,
-        email: info.email ,
-        testingNeeds: info.testingNeeds,
-    }
+export const getInTouchDetails = (toEmail, subject, body) =>  {
+    // var updatedInfo = {
+    //     firstName: info.firstName ,
+    //     lastName: info.lastName ,
+    //     mobile: info.mobile ,
+    //     email: info.email ,
+    //     testingNeeds: info.testingNeeds,
+    // }
     return fetch(`https://www.mycovidnow.com/api/misc/v2/email`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            // 'toEmail': toEmail,
-            // 'subject': subject,
-            'toEmail': "prathyusha9310@gmail.com",
-            'subject': "Contact Us",
-            'body': updatedInfo,
+            'toEmail': toEmail,
+            'subject': subject,
+            // 'toEmail': "prathyusha9310@gmail.com",
+            // 'subject': "Contact Us",
+            'body': body,
         })
     })
     .then(response => {

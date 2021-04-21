@@ -66,14 +66,15 @@ class AuditGridDetails extends Component {
 					field: "createdAt",
 					minWidth: 200,
 					resizable: true,
-					cellRenderer: (data) => {
-						return moment(data.createdAt).format('MM/DD/YYYY HH:mm:ss A')
+					cellRenderer: (params) => {
+						return moment(params.data.createdAt).format('MM/DD/YYYY HH:mm:ss A')
 					}
 				},
 			],
 
 			defaultColDef: {
 				flex: 1,
+				filter:true,
 			},
 			rowData: null,
 		};
