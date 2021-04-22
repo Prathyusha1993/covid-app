@@ -17,12 +17,14 @@ import TextField from "@material-ui/core/TextField";
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
 
+ import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
+ import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
+
+
 //service calls
 import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
 import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
-import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
-import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -45,7 +47,7 @@ const getPatientInfo = (patientData, patientId) => {
 };
 
 class OrderGridDetails extends Component {
-	constructor(props) {
+    constructor(props) {
 		super(props);
 
 		this.state = {
@@ -81,6 +83,7 @@ class OrderGridDetails extends Component {
 					minWidth: 150,
 					field: "description",
 				},
+				
 				{
 					headerName: "Test Type",
 					minWidth: 150,
@@ -107,16 +110,16 @@ class OrderGridDetails extends Component {
 					resizable: true,
 				},
 				{
-					headerName: "Physician",
-					minWidth: 150,
-					resizable: true,
-					field: "provider",
-				},
-				{
 					headerName: "Facility Source",
 					minWidth: 150,
 					resizable: true,
 					field: "facilitySource",
+				},
+				{
+					headerName: "Physician",
+					minWidth: 150,
+					resizable: true,
+					field: "provider",
 				},
 				{
 					headerName: "Received Date",
@@ -140,15 +143,15 @@ class OrderGridDetails extends Component {
 			defaultColDef: {
 				flex: 1,
 				filter: true,
-				enableRowGroup: true,
-				enablePivot: true,
-				enableValue: true,
+				//enableRowGroup: true,
+				//enablePivot: true,
+				//enableValue: true,
 				sortable: true,
 			},
 			rowData: null,
-			sideBar: { toolPanels: ["columns"] },
-			rowGroupPanelShow: "always",
-			pivotPanelShow: "always",
+			//sideBar: { toolPanels: ["columns"] },
+			//rowGroupPanelShow: "always",
+			//pivotPanelShow: "always",
 			excelStyles: [
 				{
 					id: "header",
@@ -168,7 +171,7 @@ class OrderGridDetails extends Component {
 		};
 	}
 
-	onGridReady = (params) => {
+    onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
 		//console.log(params.columnApi);
@@ -176,6 +179,7 @@ class OrderGridDetails extends Component {
 		this.loadGridSchema();
 	};
 
+    
 	loadGridData = () => {
 		var facilityID = window.localStorage.getItem("FACILITY_ID");
 		//var facilityID = "";
@@ -213,6 +217,7 @@ class OrderGridDetails extends Component {
 										"MM/DD/YYYY hh:mm A"
 								  )
 								: "",
+						facilitySource: item.facility_source ? item.facility_source : "",
 						provider:
 							(item.provider && item.provider.first_name
 								? item.provider.first_name
@@ -229,7 +234,7 @@ class OrderGridDetails extends Component {
 								: "",
 						requisition:
 							item.lab_order_id && item.lab_order_id ? item.lab_order_id : "",
-						facilitySource: item.facility_source ? item.facility_source : "",
+						
 						code: item.code ? item.code : "",
 						codeType: item.code_type ? item.code_type : "",
 						pdfPath:
@@ -273,20 +278,20 @@ class OrderGridDetails extends Component {
 		});
 	};
 
-	onFilterTextChange = (e) => {
+    onFilterTextChange = (e) => {
 		this.gridApi.setQuickFilter(e.target.value);
 	};
 
-	onBtExport = () => {
+    onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
 	};
 
-	onPageSizeChanged = () => {
+    onPageSizeChanged = () => {
 		var value = document.getElementById("page-size").value;
 		this.gridApi.paginationSetPageSize(Number(value));
 	};
 
-	loadGridSchema = () => {
+    loadGridSchema = () => {
 		var userId = window.localStorage.getItem("USER_ID");
 		getOrderUserSettings(userId, this.state.gridName).then((orderUserInfo) => {
 			console.log("getSettings", orderUserInfo);
@@ -310,6 +315,7 @@ class OrderGridDetails extends Component {
 			const pageSize =
 				orderUserInfo.data &&
 				orderUserInfo.data.grid_state.find((item) => {
+                    
 					return item.grid_name === "Order";
 				}).page_size;
 			document.getElementById("page-size").value =
@@ -318,7 +324,7 @@ class OrderGridDetails extends Component {
 		});
 	};
 
-	saveState = () => {
+    saveState = () => {
 		var userId = window.localStorage.getItem("USER_ID");
 		const columnState = this.gridColumnApi.getColumnState();
 		var pageSize = document.getElementById("page-size").value;
@@ -332,17 +338,18 @@ class OrderGridDetails extends Component {
 		);
 	};
 
-	resetState = () => {
+    resetState = () => {
 		this.gridColumnApi.resetColumnState();
 	};
 
-	clearFilter = () => {
+    clearFilter = () => {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
 		document.getElementById("reset-form").value="";
 	};
 
-	render() {
+
+    render() {
 		return (
 			<div>
 				<div className="breadcrumb-bar">

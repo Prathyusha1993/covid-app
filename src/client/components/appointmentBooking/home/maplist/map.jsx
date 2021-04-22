@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import InfoWindowEx from "./InfoWindowEx";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
+import MapList from ".";
 
 export class GoogleMapsContainer extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export class GoogleMapsContainer extends Component {
   }
 
   onMarkerMounted = (element) => {
-    // console.log(element);
+     console.log(element);
     this.setState((prevState) => ({
       markerObjects: [...prevState.markerObjects, element],
     }));
@@ -33,10 +34,11 @@ export class GoogleMapsContainer extends Component {
 
   showDetails = (place) => {};
 
-  zoomClinic = () => {
+  markerBounce = () => {
     debugger;
     var element = this.state.markerObjects.find((i) => {
-      return i.marker.id == 12;
+      return i.marker.id == 5;
+      //return i.marker.id == this.props.places.id;
     });
     console.log(element);
     // var selPlace = this.props.places.find((i) => {
@@ -52,10 +54,12 @@ export class GoogleMapsContainer extends Component {
     console.log(this.state);
   };
 
+
   render() {
     return (
       <div className="map-container">
         {/* <a onClick={this.zoomClinic}> click here </a> */}
+        {/* <a onClick={this.markerBounce}> click here </a> */}
         <Map
           google={this.props.google}
           className={"map"}

@@ -9,6 +9,7 @@ class MapList extends Component {
     this.state = {};
   }
 
+
   render() {
     return (
       <section className="choose-us">
@@ -33,7 +34,7 @@ class MapList extends Component {
                               />
                             </div>
                             <div className="doc-info-cont">
-                              <h4 className="doc-name">{item.name}</h4>
+                              <h4 className="doc-name"><a href="#0" >{item.name}</a></h4>
 
                               <div className="clinic-details">
                                 <p className="doc-location">
