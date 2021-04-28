@@ -24,6 +24,16 @@ class PatientBirthInfo extends Component {
         }
 	}
 
+    continue = e => {
+		e.preventDefault();
+		this.props.nextStep();
+	}
+
+    back = e => {
+        e.preventDefault();
+		this.props.prevStep();
+    }
+
 	render() {
 		return (
 			<div>
@@ -141,10 +151,10 @@ class PatientBirthInfo extends Component {
                                             </div>
 											<div className="row next-button">
                                                 <div >
-                                                    <button className="btn-pagebreak-previous">Back</button>
+                                                    <button className="btn-pagebreak-previous" onClick={this.back}>Back</button>
                                                 </div>
                                                 <div >
-												<button className="btn-pagebreak-next">Next</button>
+												<button className="btn-pagebreak-next" onClick={this.continue}>Next</button>
                                                 </div>
 											</div>
 										</form>

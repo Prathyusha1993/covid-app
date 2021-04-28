@@ -19,6 +19,11 @@ class PatientInfo extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
+	continue = e => {
+		e.preventDefault();
+		this.props.nextStep();
+	}
+
 	render() {
 		return (
 			<div>
@@ -161,7 +166,7 @@ class PatientInfo extends Component {
 												</div>
 											</div>
 											<div className=" row next-button btn-patientinfo-next">
-												<button className="btn-pagebreak-next">Next</button>
+												<button className="btn-pagebreak-next" onClick={this.continue}>Next</button>
 											</div>
 										</form>
 									</div>

@@ -105,4 +105,111 @@ export const symptoms = [
         id:11,
         value: "Nausea or vomiting",
     },
+];
+
+export const insuranceProvider = [
+    {
+        id:1,
+        value:"Please Select"
+    },
+    {
+        id:2,
+        value:"Self/Pay"
+    },
+    {
+        id:3,
+        value:"Aetna "
+    },
+    {
+        id:4,
+        value:"Anthem Blue Cross Blue Shield "
+    },
+    {
+        id:5,
+        value:" Blue Shield Of California"
+    },
+    {
+        id:6,
+        value:"CareMore "
+    },
+    {
+        id:7,
+        value:" HealthNet"
+    },
+    {
+        id:8,
+        value:" Humana"
+    },
+    {
+        id:9,
+        value:" Inland Empire Health Plan"
+    },
+    {
+        id:10,
+        value:"Kaiser Permanente "
+    },
+    {
+        id:11,
+        value:"Medicare "
+    },
+    {
+        id:12,
+        value:"Molina Healthcare "
+    },
+    {
+        id:13,
+        value:"Oxford (UnitedHealthCare) "
+    },
+    {
+        id:14,
+        value:"SAG-AFTRA Health Plan"
+    },
+
+    {
+        id:15,
+        value:" SCAN Health Plan"
+    },
+    {
+        id:16,
+        value:" State of California (Medi-Cal)"
+    },
+    {
+        id:17,
+        value:"United Healthcare"
+    },
+    {
+        id:18,
+        value:"Other"
+    },
+];
+
+export const relation =[
+    {
+        id:1,
+        value:"Please Select"
+    },
+    {
+        id:2,
+        value:"Self"
+    },
+    {
+        id:3,
+        value:"Spouse"
+    },
+    {
+        id:4,
+        value:"Parent"
+    },
+    {
+        id:5,
+        value:"Child"
+    },
+    {
+        id:6,
+        value:"Other Adult"
+    },{
+        id:7,
+        value:"Adult"
+    },
+
 ]
