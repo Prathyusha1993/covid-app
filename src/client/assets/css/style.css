@@ -872,6 +872,8 @@ button.bg-danger:hover {
   margin-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(159, 159, 159, 0.17);
+  padding-bottom: 20px;
+   
 }
 .card-body {
   padding: 1rem;
@@ -4289,6 +4291,7 @@ html.menu-opened body {
 .dash-card .row > div {
   padding-left: 10px;
   padding-right: 10px;
+
 }
 .appointment-tab {
   margin-bottom: 30px;
@@ -7583,6 +7586,7 @@ html.menu-opened body {
   .card-body {
     padding: 1.25rem;
   }
+
   .card-header {
     padding: 0.75rem 1.25rem;
   }
@@ -8871,3 +8875,70 @@ html {
   padding: 10px;
 }
 
+.card-name {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 30px; 
+   margin-bottom: 30px;
+   padding-left: 20px;
+   padding-top: 20px;
+}
+
+.card-info {
+  font-weight: 500;
+}
+
+.signup-label-font {
+  font-weight: 600;
+}
+
+.form-bottom-border {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.next-button {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.btn-pagebreak-next {
+  /* float: right; */
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  background-color: #2e69ff;
+  border-color: #2e69ff;
+  color: #fff;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.checkbox-control {
+  padding-left: 7px;
+}
+
+.checkbox-control span {
+  padding-left: 8px;
+}
+
+.btn-pagebreak-previous {
+  background-color: #e5e7f2;
+  border-color: #e5e7f2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 4px;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+.btn-patientinfo-next {
+  float:right;
+}
