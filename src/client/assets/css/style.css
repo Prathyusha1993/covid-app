@@ -8942,3 +8942,46 @@ html {
 .btn-patientinfo-next {
   float:right;
 }
+
+.dropzone-icon {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.dropzone-browse-files {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropzone-files {
+  padding-top: 15px;
+
+}
+
+.btn-pagebreak-submit {
+  font-family: Inter, sans-serif;
+  border-color: #18bd5b;
+  color: #fff;
+  background-color: #18bd5b;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  outline: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  
+}
+
+.btn-pagebreak-submit:hover {
+  background-color: #16aa52;
+}

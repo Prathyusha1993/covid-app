@@ -1,25 +1,24 @@
 import React, { Component } from "react";
-import { identity, symptoms } from "../selectOptionsData";
-import { ethnicity } from "../selectOptionsData";
-import { race } from "../selectOptionsData";
+import DriverLicenseBrowse from "./driverLicenseBrowse";
 
 class PatientPhotoUploadInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            uploadFile:"",
+			uploadFile: "",
+            uploadDL: "",
+
 		};
 	}
 
 	handleChange = (e) => {
-            this.setState({ [e.target.name]: e.target.value });
-        
-	}
+		this.setState({ [e.target.name]: e.target.value });
+	};
 
-    back = e => {
-        e.preventDefault();
+	back = (e) => {
+		e.preventDefault();
 		this.props.prevStep();
-    }
+	};
 
 	render() {
 		return (
@@ -41,29 +40,63 @@ class PatientPhotoUploadInfo extends Component {
 										</div>
 										<form>
 											<div className="row" style={{ paddingBottom: "25px" }}>
-												<div className="col-md-6">
+												<div className="col-md-12">
 													<label className="signup-label-font">
-														Hoe would you like to submit your photos?
+														How would you like to submit your photos?
 													</label>
 													<div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="uploadFile"  value={this.state.uploadFile}/>
-                                                        <label class="form-check-label" >
-                                                        Upload file from computer
-                                                        </label>
-                                                    </div>
-													
+														<input
+															class="form-check-input"
+															type="radio"
+															name="uploadFile"
+															value={this.state.uploadFile}
+														/>
+														<label class="form-check-label">
+															Upload file from computer
+														</label>
+													</div>
 												</div>
-												
 											</div>
-											
-                                            
+
+                                            <div className="row" style={{ paddingBottom: "25px" }}>
+												<div className="col-md-12">
+													<label className="signup-label-font">
+                                                    Upload a photo of your driver's license <span className="text-danger"> *</span>
+													</label>
+                                                    <DriverLicenseBrowse />
+												</div>
+											</div>
+
+                                            <div className="row" style={{ paddingBottom: "25px" }}>
+												<div className="col-md-12">
+													<label className="signup-label-font">
+														Upload a photo of the front of your health insurance card <span className="text-danger"> *</span>
+													</label>
+                                                    <DriverLicenseBrowse />
+												</div>
+											</div>
+
+                                            <div className="row" style={{ paddingBottom: "25px" }}>
+												<div className="col-md-12">
+													<label className="signup-label-font">
+                                                    Upload a photo of the back of your health insurance card <span className="text-danger"> *</span>
+													</label>
+                                                    <DriverLicenseBrowse />
+												</div>
+											</div>
+
 											<div className="row next-button">
-                                                <div >
-                                                    <button className="btn-pagebreak-previous" onClick={this.back}>Back</button>
-                                                </div>
-                                                <div >
-												<button className="btn-pagebreak-next">Submit</button>
-                                                </div>
+												<div>
+													<button
+														className="btn-pagebreak-previous"
+														onClick={this.back}
+													>
+														Back
+													</button>
+												</div>
+												<div>
+													<button className="btn-pagebreak-submit">Submit</button>
+												</div>
 											</div>
 										</form>
 									</div>
