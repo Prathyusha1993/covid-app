@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import {insuranceProvider} from "../selectOptionsData";
-import {relation} from "../selectOptionsData";
+import { insuranceProvider } from "../selectOptionsData";
+import { relation } from "../selectOptionsData";
 
 class PatientInsuranceInfo extends Component {
 	constructor(props) {
@@ -11,25 +11,25 @@ class PatientInsuranceInfo extends Component {
 			memberId: "",
 			groupNum: "",
 			relation: "",
-            firstName:"",
-            lastName:"",
-            driverLic:"",
+			firstName: "",
+			lastName: "",
+			driverLic: "",
 		};
 	}
 
 	handleChange = (e) => {
-            this.setState({ [e.target.name]: e.target.value });
-	}
+		this.setState({ [e.target.name]: e.target.value });
+	};
 
-    continue = e => {
+	continue = (e) => {
 		e.preventDefault();
 		this.props.nextStep();
-	}
+	};
 
-    back = e => {
-        e.preventDefault();
+	back = (e) => {
+		e.preventDefault();
 		this.props.prevStep();
-    }
+	};
 
 	render() {
 		return (
@@ -53,20 +53,22 @@ class PatientInsuranceInfo extends Component {
 											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
-														Choose your Insurance Provider 
+														Choose your Insurance Provider
 													</label>
 													<select
 														name="insuranceProv1"
 														value={this.state.insuranceProv1}
 														onChange={this.handleChange}
 														className="form-control select"
-                                                        placeholder="Please Select"
+														placeholder="Please Select"
 														required
 													>
-                                                        {insuranceProvider.map((item) => {
-                                                            return <option value={item.id}>{item.value}</option>
-                                                        })}
-                                                    </select>
+														{insuranceProvider.map((item) => {
+															return (
+																<option value={item.id}>{item.value}</option>
+															);
+														})}
+													</select>
 												</div>
 											</div>
 											<div className="row" style={{ paddingBottom: "25px" }}>
@@ -75,7 +77,7 @@ class PatientInsuranceInfo extends Component {
 														Insurance Provider (If other)
 													</label>
 													<input
-                                                    type="text"
+														type="text"
 														name="insuranceProv2"
 														value={this.state.insuranceProv2}
 														onChange={this.handleChange}
@@ -84,13 +86,13 @@ class PatientInsuranceInfo extends Component {
 													/>
 												</div>
 											</div>
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
 														Insurance Member ID
 													</label>
 													<input
-                                                        type="text"
+														type="text"
 														name="memberId"
 														value={this.state.memberId}
 														onChange={this.handleChange}
@@ -99,13 +101,13 @@ class PatientInsuranceInfo extends Component {
 													/>
 												</div>
 											</div>
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
 														Insurance Group Number
 													</label>
 													<input
-                                                        type="text"
+														type="text"
 														name="groupNum"
 														value={this.state.groupNum}
 														onChange={this.handleChange}
@@ -114,7 +116,7 @@ class PatientInsuranceInfo extends Component {
 													/>
 												</div>
 											</div>
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
 														Relation to Insured
@@ -124,16 +126,18 @@ class PatientInsuranceInfo extends Component {
 														value={this.state.relation}
 														onChange={this.handleChange}
 														className="form-control select"
-                                                        placeholder="Please Select"
+														placeholder="Please Select"
 														required
 													>
-                                                        {relation.map((item) => {
-                                                            return <option value={item.id}>{item.value}</option>
-                                                        })}
-                                                    </select>
+														{relation.map((item) => {
+															return (
+																<option value={item.id}>{item.value}</option>
+															);
+														})}
+													</select>
 												</div>
 											</div>
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
 														What is the Name of The Insurance Holder?
@@ -162,13 +166,17 @@ class PatientInsuranceInfo extends Component {
 													<label className="home-page-label">last Name</label>
 												</div>
 											</div>
-                                            <div className="row form-bottom-border" style={{ paddingBottom: "25px" }}>
+											<div
+												className="row form-bottom-border"
+												style={{ paddingBottom: "25px" }}
+											>
 												<div className="col-md-6">
 													<label className="signup-label-font">
-														Driver's License # (required for filling an insurance claim)
+														Driver's License # (required for filling an
+														insurance claim)
 													</label>
 													<input
-                                                        type="text"
+														type="text"
 														name="driverLic"
 														value={this.state.driverLic}
 														onChange={this.handleChange}
@@ -178,12 +186,22 @@ class PatientInsuranceInfo extends Component {
 												</div>
 											</div>
 											<div className="row next-button">
-                                                <div >
-                                                    <button className="btn-pagebreak-previous" onClick={this.back}>Back</button>
-                                                </div>
-                                                <div >
-												<button className="btn-pagebreak-next" onClick={this.continue}>Next</button>
-                                                </div>
+												<div>
+													<button
+														className="btn-pagebreak-previous"
+														onClick={this.back}
+													>
+														Back
+													</button>
+												</div>
+												<div>
+													<button
+														className="btn-pagebreak-next"
+														onClick={this.continue}
+													>
+														Next
+													</button>
+												</div>
 											</div>
 										</form>
 									</div>

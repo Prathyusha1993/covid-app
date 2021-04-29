@@ -12,20 +12,45 @@ class PatientBirthInfo extends Component {
 			ethnicity: "",
 			race: "",
 			symptoms: "",
+            errors: [],
 		};
 	}
 
 	handleChange = (e) => {
+        var key = e.target.name;
+        var value = e.target.value;
+        var obj = {};
+        obj[key] = value;
         if(e.target.type === "checkbox"){
-            this.setState({ [e.target.name]: e.target.checked});
+            this.setState({ key: e.target.checked});
         }
         else {
-            this.setState({ [e.target.name]: e.target.value });
+            this.setState(obj);
         }
 	}
 
+    hasError = (key) => {
+		return this.state.errors.indexOf(key) !== -1;
+	};
+
     continue = e => {
 		e.preventDefault();
+        var errors = [];
+
+		if (this.state.sex === "") {
+			errors.push("sex");
+		}
+		if (this.state.dob === "") {
+			errors.push("dob");
+		}
+		if (this.state.ethnicity === "") {
+			errors.push("ethnicity");
+		}
+
+		this.setState({ errors: errors });
+		if (errors.length > 0) {
+			return false;
+		}
 		this.props.nextStep();
 	}
 
@@ -59,10 +84,15 @@ class PatientBirthInfo extends Component {
 														Biological Sex <span className="text-danger"> *</span>
 													</label>
 													<select
+                                                    autoComplete="off"
 														name="sex"
 														value={this.state.sex}
 														onChange={this.handleChange}
-														className="form-control select"
+                                                        className={
+															this.hasError("sex")
+																? "form-control select is-invalid"
+																: "form-control"
+														}
                                                         placeholder="Please Select"
 														required
 													>
@@ -71,19 +101,42 @@ class PatientBirthInfo extends Component {
                                                         })}
                                                     </select>
 													<label className="home-page-label">Please choose one</label>
+                                                    <div
+														className={
+															this.hasError("sex")
+																? "inline-errormsg"
+																: "hidden"
+														}
+													>
+														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+													</div>
 												</div>
 												<div className="col-md-6">
 													<label className="signup-label-font"> 
                                                     Date Of Birth <span className="text-danger"> *</span></label>
 													<input
+                                                    autoComplete="off"
 														type="date"
 														name="dob"
 														value={this.state.dob}
 														onChange={this.handleChange}
-														className="form-control"
+														className={
+															this.hasError("dob")
+																? "form-control is-invalid"
+																: "form-control"
+														}
 														required
 													/>
 													<label className="home-page-label">Date</label>
+                                                    <div
+														className={
+															this.hasError("dob")
+																? "inline-errormsg"
+																: "hidden"
+														}
+													>
+														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+													</div>
 												</div>
 											</div>
 											<div className="row" style={{ paddingBottom: "25px" }}>
@@ -92,10 +145,15 @@ class PatientBirthInfo extends Component {
 														What is your ethnicity?  <span className="text-danger"> *</span>
 													</label>
 													<select
+                                                    autoComplete="off"
 														name="ethnicity"
 														value={this.state.ethnicity}
 														onChange={this.handleChange}
-														className="form-control select"
+														className={
+															this.hasError("ethnicity")
+																? "form-control select is-invalid"
+																: "form-control"
+														}
                                                         placeholder="Please Select"
 														required
 													>
@@ -103,6 +161,15 @@ class PatientBirthInfo extends Component {
                                                             return <option>{item.type}</option>
                                                         })}
                                                     </select>
+                                                    <div
+														className={
+															this.hasError("lastName")
+																? "inline-errormsg"
+																: "hidden"
+														}
+													>
+														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+													</div>
 												</div>
 											</div>
                                             <div className="row" style={{ paddingBottom: "25px" }}>

@@ -6,13 +6,25 @@ class PatientPhotoUploadInfo extends Component {
 		super(props);
 		this.state = {
 			uploadFile: "",
-            uploadDL: "",
-
+			uploadDL: "",
+			errors: [],
 		};
 	}
 
 	handleChange = (e) => {
-		this.setState({ [e.target.name]: e.target.value });
+		var key = e.target.name;
+		var value = e.target.value;
+		var obj = {};
+		obj[key] = value;
+		this.setState(obj);
+	};
+
+	hasError = (key) => {
+		return this.state.errors.indexOf(key) !== -1;
+	};
+
+	handleSubmit = (e) => {
+		e.preventDefault();
 	};
 
 	back = (e) => {
@@ -58,30 +70,33 @@ class PatientPhotoUploadInfo extends Component {
 												</div>
 											</div>
 
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-12">
 													<label className="signup-label-font">
-                                                    Upload a photo of your driver's license <span className="text-danger"> *</span>
+														Upload a photo of your driver's license{" "}
+														<span className="text-danger"> *</span>
 													</label>
-                                                    <DriverLicenseBrowse />
+													<DriverLicenseBrowse />
 												</div>
 											</div>
 
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-12">
 													<label className="signup-label-font">
-														Upload a photo of the front of your health insurance card <span className="text-danger"> *</span>
+														Upload a photo of the front of your health insurance
+														card <span className="text-danger"> *</span>
 													</label>
-                                                    <DriverLicenseBrowse />
+													<DriverLicenseBrowse />
 												</div>
 											</div>
 
-                                            <div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-12">
 													<label className="signup-label-font">
-                                                    Upload a photo of the back of your health insurance card <span className="text-danger"> *</span>
+														Upload a photo of the back of your health insurance
+														card <span className="text-danger"> *</span>
 													</label>
-                                                    <DriverLicenseBrowse />
+													<DriverLicenseBrowse />
 												</div>
 											</div>
 
@@ -95,7 +110,12 @@ class PatientPhotoUploadInfo extends Component {
 													</button>
 												</div>
 												<div>
-													<button className="btn-pagebreak-submit">Submit</button>
+													<button
+														className="btn-pagebreak-submit"
+														onClick={this.handleSubmit}
+													>
+														Submit
+													</button>
 												</div>
 											</div>
 										</form>
