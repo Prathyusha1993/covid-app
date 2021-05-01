@@ -33,10 +33,10 @@ class DriverLicenseBrowse extends Component {
               
             </div>
             <aside>
-              {/* <h4>Files</h4> */}
-              <ul className="dropzone-files">{files} 
-              {/* <button><i class="fas fa-trash-alt"></i></button> */}
-              </ul>
+              <ul 
+              // className="dropzone-files"
+              >{files} </ul>
+              {/* <button className="dropzone-btn"><i class="fas fa-trash-alt"></i></button> */}
             </aside>
           </section>
         )}

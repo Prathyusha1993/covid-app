@@ -3,59 +3,68 @@ import { Form, Button, Col } from "react-bootstrap";
 import { getInTouchDetails } from "../../../../appointmentBookingServices/getInTouch";
 
 class FormInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      mobile: "",
-      email: "",
-      testingNeeds: "",
-      toEmail: "",
-      subject: "Contact Us",
-      showMessage: false,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			firstName: "",
+			lastName: "",
+			mobile: "",
+			email: "",
+			testingNeeds: "",
+			toEmail: "",
+			subject: "Contact Us",
+			showMessage: false,
+			errors: [],
+		};
+	}
 
-  getInTouch = (e) => {
-    e.preventDefault();
+	hasError = (key) => {
+		return this.state.errors.indexOf(key) !== -1;
+	};
 
-    var body =
-      "First Name - " +
-      this.state.firstName +
-      "\n" +
-      "Last Name - " +
-      this.state.lastName +
-      "\n" +
-      "Mobile - " +
-      this.state.mobile +
-      "\n" +
-      "Email - " +
-      this.state.email +
-      "\n" +
-      "Testing Needs - " +
-      this.state.testingNeeds +
-      "\n";
+	getInTouch = (e) => {
+		e.preventDefault();
+		var body =
+			"First Name - " +
+			this.state.firstName +
+			"\n" +
+			"Last Name - " +
+			this.state.lastName +
+			"\n" +
+			"Mobile - " +
+			this.state.mobile +
+			"\n" +
+			"Email - " +
+			this.state.email +
+			"\n" +
+			"Testing Needs - " +
+			this.state.testingNeeds +
+			"\n";
 
-    getInTouchDetails(this.state.toEmail, this.state.subject, body);
-    this.setState({
-      firstName: "",
-      lastName: "",
-      mobile: "",
-      email: "",
-      testingNeeds: "",
-      showMessage: true,
-    });
-  };
- 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
 
-  render() {
-    return (
-      <div style={{ paddingTop: "50px" }}>
-        <Form
+		getInTouchDetails(this.state.toEmail, this.state.subject, body);
+		this.setState({
+			firstName: "",
+			lastName: "",
+			mobile: "",
+			email: "",
+			testingNeeds: "",
+			showMessage: true,
+		});
+	};
+
+	handleChange = (e) => {
+		var key = e.target.name;
+		var value = e.target.value;
+		var obj = {};
+		obj[key] = value;
+		this.setState(obj);
+	};
+
+	render() {
+		return (
+			<div style={{ paddingTop: "50px" }}>
+				<Form
           className="home-page-form"
           onSubmit={this.getInTouch}
         >
@@ -136,9 +145,11 @@ class FormInfo extends Component {
             </p>
           )}
         </Form>
-      </div>
-    );
-  }
+
+				
+			</div>
+		);
+	}
 }
 
 export default FormInfo;

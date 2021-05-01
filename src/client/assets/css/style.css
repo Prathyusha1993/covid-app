@@ -873,6 +873,7 @@ button.bg-danger:hover {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(159, 159, 159, 0.17);
   padding-bottom: 20px;
+  font-family: Inter, sans-serif;
    
 }
 .card-body {
@@ -8876,7 +8877,7 @@ html {
 }
 
 .card-name {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #dad5d5;
   padding-bottom: 30px; 
    margin-bottom: 30px;
    padding-left: 20px;
@@ -8892,7 +8893,7 @@ html {
 }
 
 .form-bottom-border {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #dad5d5;
 }
 
 .next-button {
@@ -8919,7 +8920,7 @@ html {
 }
 
 .checkbox-control {
-  padding-left: 7px;
+  padding-left: 25px;
 }
 
 .checkbox-control span {
@@ -8961,8 +8962,12 @@ html {
 }
 
 .dropzone-files {
-  padding-top: 15px;
-
+  padding: 7px;
+  width:680px;
+  border: 1px solid #dae6ff;
+  background-color: #dae6ff;
+  margin-top: 10px;
+  list-style-type: none;
 }
 
 .btn-pagebreak-submit {
@@ -8984,4 +8989,29 @@ html {
 
 .btn-pagebreak-submit:hover {
   background-color: #16aa52;
+}
+
+.inline-errormsg {
+  color: white;
+  font-size: 12px;
+  width:130px;
+  padding:2px;
+  border: 1px solid #f23a3c;
+  background-color: #f23a3c;
+  margin-top: 8px;
+  font-family: Inter, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.dropzone-btn {
+  float: right;
+  margin-left: 120px;
+  
+}
+
+.row-bg-color {
+  background-color: #f7f7f7;
 }

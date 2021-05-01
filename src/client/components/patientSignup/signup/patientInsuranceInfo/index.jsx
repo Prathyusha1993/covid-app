@@ -41,7 +41,7 @@ class PatientInsuranceInfo extends Component {
 								<DoctorSidebar />
 							</div> */}
 							<div className="col-md-6 col-lg-7 col-xl-7">
-								<div className="card">
+								<div className="card row-bg-color">
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Insurance Information</h2>

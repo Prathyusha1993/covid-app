@@ -16,6 +16,7 @@ class PatientInfo extends Component {
 		};
 	}
 
+
 	handleChange = (e) => {
 		var key = e.target.name;
 		var value = e.target.value;
@@ -30,7 +31,6 @@ class PatientInfo extends Component {
 
 	continue = (e) => {
 		e.preventDefault();
-
 		var errors = [];
 
 		if (this.state.firstName === "") {
@@ -39,7 +39,10 @@ class PatientInfo extends Component {
 		if (this.state.lastName === "") {
 			errors.push("lastName");
 		}
-		if (this.state.email === "") {
+		const expression = /\S+@\S+/;
+    	var validEmail = expression.test(String(this.state.email).toLowerCase());
+
+		if (!validEmail) {
 			errors.push("email");
 		}
 		if (this.state.phone === "") {
@@ -75,7 +78,7 @@ class PatientInfo extends Component {
 								<DoctorSidebar />
 							</div> */}
 							<div className="col-md-6 col-lg-7 col-xl-7">
-								<div className="card">
+								<div className="card row-bg-color ">
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Your Information</h2>
@@ -84,11 +87,10 @@ class PatientInfo extends Component {
 											</p>
 										</div>
 										<form>
-											<div className="row" style={{ paddingBottom: "25px" }}>
+											<div className="row " style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label
 														className="signup-label-font"
-														htmlFor="firstName"
 													>
 														Full Name <span className="text-danger"> *</span>
 													</label>
@@ -113,7 +115,7 @@ class PatientInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 												<div className="col-md-6">
@@ -133,15 +135,6 @@ class PatientInfo extends Component {
 														required
 													/>
 													<label className="home-page-label">last Name</label>
-													<div
-														className={
-															this.hasError("lastName")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
-													</div>
 												</div>
 											</div>
 											<div className="row" style={{ paddingBottom: "25px" }}>
@@ -173,7 +166,7 @@ class PatientInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required and enter valid email.</i>
 													</div>
 												</div>
 												<div className="col-md-6">
@@ -182,7 +175,7 @@ class PatientInfo extends Component {
 													</label>
 													<input
 														autoComplete="off"
-														type="text"
+														type="tel"
 														name="phone"
 														value={this.state.phone}
 														onChange={this.handleChange}
@@ -191,6 +184,8 @@ class PatientInfo extends Component {
 																? "form-control is-invalid"
 																: "form-control"
 														}
+														pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
+														placeholder="(xxx) xxx-xxxx"
 														required
 													/>
 													<div
@@ -200,7 +195,7 @@ class PatientInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 											</div>
@@ -225,15 +220,6 @@ class PatientInfo extends Component {
 													<label className="home-page-label">
 														Street Address
 													</label>
-													<div
-														className={
-															this.hasError("address")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
-													</div>
 												</div>
 												<div className="row">
 													<div className="col-md-6">
@@ -252,15 +238,7 @@ class PatientInfo extends Component {
 															required
 														/>
 														<label className="home-page-label"> City </label>
-														<div
-															className={
-																this.hasError("city")
-																	? "inline-errormsg"
-																	: "hidden"
-															}
-														>
-															{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
-														</div>
+														
 													</div>
 													<div className="col-md-6">
 														<label> </label>
@@ -278,15 +256,7 @@ class PatientInfo extends Component {
 															required
 														/>
 														<label className="home-page-label"> State </label>
-														<div
-															className={
-																this.hasError("state")
-																	? "inline-errormsg"
-																	: "hidden"
-															}
-														>
-															{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
-														</div>
+														
 													</div>
 												</div>
 												<div class="form-group">
@@ -312,7 +282,7 @@ class PatientInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 											</div>

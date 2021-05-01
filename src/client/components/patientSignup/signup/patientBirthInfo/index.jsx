@@ -22,7 +22,7 @@ class PatientBirthInfo extends Component {
         var obj = {};
         obj[key] = value;
         if(e.target.type === "checkbox"){
-            this.setState({ key: e.target.checked});
+            this.setState({ [e.target.name]: e.target.checked});
         }
         else {
             this.setState(obj);
@@ -45,6 +45,9 @@ class PatientBirthInfo extends Component {
 		}
 		if (this.state.ethnicity === "") {
 			errors.push("ethnicity");
+		}
+		if (this.state.race === "") {
+			errors.push("race");
 		}
 
 		this.setState({ errors: errors });
@@ -69,7 +72,7 @@ class PatientBirthInfo extends Component {
 								<DoctorSidebar />
 							</div> */}
 							<div className="col-md-6 col-lg-7 col-xl-7">
-								<div className="card">
+								<div className="card  row-bg-color">
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Required Intake Information</h2>
@@ -108,7 +111,7 @@ class PatientBirthInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 												<div className="col-md-6">
@@ -135,7 +138,7 @@ class PatientBirthInfo extends Component {
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 											</div>
@@ -163,12 +166,12 @@ class PatientBirthInfo extends Component {
                                                     </select>
                                                     <div
 														className={
-															this.hasError("lastName")
+															this.hasError("ethnicity")
 																? "inline-errormsg"
 																: "hidden"
 														}
 													>
-														{/* <i class="fa fa-exclamation-circle" aria-hidden="true"></i>This field is required */}
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
 													</div>
 												</div>
 											</div>
@@ -179,19 +182,36 @@ class PatientBirthInfo extends Component {
 													</label>{" "}
                                                     <ul style={{listStyleType: 'none', paddingLeft: '7px'}}>
                                                     {race.map((item) => {
-                                                        return (<li key={item.id} className="checkbox-control">
+                                                        return (<li key={item.id} 
+														 className="checkbox-control"
+														>
                                                             <label >
                                                                 <input type="checkbox" 
                                                                 name="race"
                                                                 value={this.state.race}
                                                                 onChange={this.handleChange}
-                                                                required/>
-                                                                <span>{item.value}</span>
+																className={
+																	this.hasError("race")
+																		? "form-check-input is-invalid"
+																		: "form-check-input"
+																}
+                                                                required={true}                        
+																/>
+                                                                <span >{item.value}</span>
                                                             </label>
                                                             </li>
                                                         )
                                                     })}
                                                     </ul>
+													<div
+														className={
+															this.hasError("race")
+																? "inline-errormsg"
+																: "hidden"
+														}
+													>
+														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
+													</div>
 												</div>
                                             </div>
                                             <div className="row form-bottom-border" style={{ paddingBottom: "20px" }}>
@@ -207,6 +227,7 @@ class PatientBirthInfo extends Component {
                                                                 name="symptoms"
                                                                 value={this.state.symptoms}
                                                                 onChange={this.handleChange}
+																className="form-check-input"
                                                                 required/>
                                                                 <span>{item.value}</span>
                                                             </label>
