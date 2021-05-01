@@ -1,7 +1,9 @@
 import { serviceConstants } from "../patientPortalServices/constants";
-
+import { getUserAuthToken } from "../utils/util";
 export const saveOrderEditData = (editParams) => {
+
 	if(! editParams) throw "Order obj is null";
+	var token  = getUserAuthToken();
 	var updatedOrder  = {
 		test_info: {		   
 			sample: editParams.sample ,
@@ -19,10 +21,11 @@ export const saveOrderEditData = (editParams) => {
 	   
 	};
 	console.log(updatedOrder);	
-	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/`, {
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
 		},
 		
 		body: JSON.stringify(updatedOrder),
@@ -31,7 +34,7 @@ export const saveOrderEditData = (editParams) => {
 
 export const updateResultPDF = (params) => {
 	if(! params) throw "Order obj is null";
-
+	var token  = getUserAuthToken();
 	var updatedOrder= {
 		patient_name:params.patientName,
 		date_of_birth:params.dob,
@@ -51,10 +54,11 @@ export const updateResultPDF = (params) => {
 		test_type: params.testType,
 	};
 	console.log(updatedOrder);	
-	return fetch(`${serviceConstants.API_HOST_NAME}/order/v2/update/`, {
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/update/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
 		},
 		
 		body: JSON.stringify(updatedOrder),

@@ -1,8 +1,8 @@
-
+import { serviceConstants } from "../patientPortalServices/constants";
 
 export const getInTouchDetails = (toEmail, subject, body) =>  {
     
-    return fetch(`https://www.mycovidnow.com/api/misc/v2/email`, {
+    return fetch(`${serviceConstants.API_HOST_NAME}/notifications/v1/email`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

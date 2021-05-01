@@ -19,7 +19,7 @@ import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRende
 
 import {
 	fetchPatientMasterData,
-	fetchPatientExpandableData,
+	fetchPatientExpandableData, exportPatients
 } from "../../../../clinicPortalServices/patientSearchService";
 import { getPatientUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { savePatientSettings } from "../../../../clinicPortalServices/saveStateSettings";
@@ -30,7 +30,7 @@ const getPatientInfo = (patientData, patientId) => {
 			return item._id === patientId;
 		});
 		return {
-			gender: foundPatientInfo.gender,
+			gender: foundPatientInfo.gender ||'',
 			mrn: foundPatientInfo.mrn,
 			dob: foundPatientInfo.date_of_birth,
 			email: foundPatientInfo.email,
@@ -242,6 +242,7 @@ class ClinicPatientGrid extends Component {
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
+					console.log("getting details", params);
 					Promise.all([
 						fetchPatientExpandableData(params.data._id),
 						fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")),
@@ -320,7 +321,7 @@ class ClinicPatientGrid extends Component {
 										patientData.data,
 										item.patient_id._id
 									);
-									returnData.gender = patientInfo ? patientInfo.gender : "";
+									returnData.gender = patientInfo ? (patientInfo.gender||'') : "";
 									returnData.mrn = patientInfo ? patientInfo.mrn : "";
 									returnData.dob =
 										patientInfo && patientInfo.dob
@@ -384,6 +385,7 @@ class ClinicPatientGrid extends Component {
 
 	onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
+		exportPatients();
 	};
 
 	onPageSizeChanged = () => {

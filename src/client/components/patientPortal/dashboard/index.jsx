@@ -4,7 +4,7 @@ import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
 import { serviceConstants } from "../../../patientPortalServices/constants";
-import { fetchDashboardDetails } from "../../../patientPortalServices/dashboardService";
+import { fetchDashboardDetails,resultsViewed } from "../../../patientPortalServices/dashboardService";
 
 class PatientPortalDashboard extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class PatientPortalDashboard extends Component {
       key: 1,
       result: [],
       pdfPath: "",
-      selectedDate: "",
+      selectedDateId: "",
       orderDates: [],
       value: "",
     };
@@ -31,7 +31,7 @@ class PatientPortalDashboard extends Component {
       if (data.data != null && data.data.length > 0) {
         this.setState({
           result: data.data,
-          selectedDate: data.data[0].order_date,
+          selectedDateId: data.data[0]._id,
           pdfPath:
             data.data[0].results != null &&
             data.data[0].results.pdf_path != null &&
@@ -42,14 +42,15 @@ class PatientPortalDashboard extends Component {
       } else {
         this.setState({
           result: null,
-          selectedDate: "",
+          selectedDateId: "",
           pdfPath: "",
         });
       }
     });
   }
 
-  handleDateClick = (pdfPath, date, dataValue) => {
+  handleDateClick = (pdfPath, dateId, dataValue) => {
+    resultsViewed({"_id": dateId});
     // const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
     var constructedUrl = "";
 
@@ -58,7 +59,7 @@ class PatientPortalDashboard extends Component {
 
     this.setState({
       pdfPath: constructedUrl,
-      selectedDate: date,
+      selectedDateId: dateId,
       value: dataValue,
     });
   };
@@ -102,7 +103,7 @@ class PatientPortalDashboard extends Component {
                           <Dates
                             result={this.state.result}
                             handleDateClick={this.handleDateClick}
-                            selectedDate={this.state.selectedDate}
+                            selectedDateId={this.state.selectedDateId}
                           />
                           <br />
                           <PdfViewer

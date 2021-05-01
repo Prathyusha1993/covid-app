@@ -30,7 +30,7 @@ class SignUp extends Component {
 		const { step } = this.state;
 		switch (step) {
 			default:
-				return <h1>User Forms not working. Enable Javascript!</h1>;
+				return <h1>User Forms not working.</h1>;
 			case 1:
 				return <PatientInfo nextStep={this.nextStep} />;
 			case 2:

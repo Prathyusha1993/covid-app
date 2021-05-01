@@ -14,7 +14,7 @@ class Dates extends Component {
 				<ul className="clearfix">
 					{this.props.result.map((item, index) => {
 						let linkClassName = "timing";
-						if (this.props.selectedDate === item.order_date) {
+						if (this.props.selectedDateId === item._id) {
 							linkClassName = "timing selected";
 						}
 						return (
@@ -23,12 +23,13 @@ class Dates extends Component {
 									<Link
 										className={linkClassName}
 										to="#0"
-										id={item.order_date}
+										id={item._id}
 										key={item._id}
 										onClick={() => {
 											this.props.handleDateClick(
 												item.results != null ? item.results.pdf_path : "",
-												item.order_date,
+												//item.order_date,
+												item._id,
 												item.results != null ? item.results.value : ""
 											);
 										}}

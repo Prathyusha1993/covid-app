@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { isUserLoggedIn } from "../../../utils/util";
 import Dropdown from "react-bootstrap/Dropdown";
 //import DOC_IMG from "../../../assets/images/doctors/doctor-thumb-02.jpg";
+import {logout} from "../../../clinicPortalServices/loginService";
 
 let pathnames = window.location.pathname;
 const url = pathnames.split("/").slice(0, -1).join("/");
@@ -20,8 +21,10 @@ class PatientPortalHeader extends Component {
   }
 
   logout = () => {
+    logout();
     window.localStorage.removeItem("FACILITY_ID");
     window.localStorage.removeItem("AUTH-TOKEN");
+    
   };
   render() {
     return (

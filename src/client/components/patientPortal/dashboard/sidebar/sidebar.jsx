@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import SocialShare from "./../../../socialShare";
+import {logout} from "../../../../patientPortalServices/loginService";
 
 export const DashboardSidebar = () => {
   const dob = window.localStorage.getItem("USER_DOB");
@@ -13,7 +14,7 @@ export const DashboardSidebar = () => {
       moment().diff(moment(dob, "YYYY/MM/DD"), "years") +
       " years";
   }
-
+ 
   return (
     <div className="profile-sidebar">
       <div className="widget-profile pro-widget-content">
@@ -68,7 +69,7 @@ export const DashboardSidebar = () => {
 				</a>
 			</li> */}
             <li>
-              <Link to="/patientportal/">
+              <Link to="/patientportal/" onClick={logout}>
                 <i className="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
               </Link>

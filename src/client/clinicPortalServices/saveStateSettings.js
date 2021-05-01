@@ -1,5 +1,5 @@
 import { serviceConstants } from "../patientPortalServices/constants";
-
+import { getUserAuthToken } from "../utils/util";
 export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 	console.log('columnState-saved',columnState);
 	var saveObject = {
@@ -17,12 +17,14 @@ export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 		],
 	};
 	console.log(saveObject);
+	var token  = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,
 		{
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Authorization" : "Bearer " + token
 			},
 			body: JSON.stringify(saveObject),
 		}
@@ -48,12 +50,14 @@ export const savePatientSettings = (userId, gridName, columnState, pageSize) => 
 		],
 	};
 	console.log(saveObject);
+	var token  = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,
 		{
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
+				"Authorization" : "Bearer " + token
 			},
 			body: JSON.stringify(saveObject),
 		}

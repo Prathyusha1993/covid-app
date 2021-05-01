@@ -1,5 +1,5 @@
 import { serviceConstants } from "../patientPortalServices/constants";
-
+import { getUserAuthToken } from "../utils/util";
 export const authenticateAndFetchUserDetails = (username, password) => {
 	debugger;
 	return fetch(`${serviceConstants.API_HOST_NAME}/user/v1/authenticate`, {
@@ -24,4 +24,17 @@ export const authenticateAndFetchUserDetails = (username, password) => {
 		.then((response) => {
 			return response.data;
 		});
+};
+
+export const logout = () => {
+	debugger;
+	console.log("calling logout api");
+	var token  = getUserAuthToken();
+	return fetch(`${serviceConstants.API_HOST_NAME}/user/v1/logout`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
+		}
+	}).then((response) => response.json());
 };

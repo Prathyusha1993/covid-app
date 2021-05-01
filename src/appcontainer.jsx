@@ -21,9 +21,6 @@ import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/cl
 import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
 import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDetails/index.jsx";
 
-//Patient Signup
-import SignUp from "./client/components/patientSignup/signup/index.jsx";
-
 //import AppUniversal from "./admin/app-universal";
 
 const AppContainer = function (props) {
@@ -35,8 +32,7 @@ const AppContainer = function (props) {
 			//basename={`${config.publicPath}`}       by p - commented
 			>
 				<div>
-					{url === "patientportal" || url === "clinic" || url === "patientsignup" ? 
-					 (
+					{url === "patientportal" || url === "clinic" ? (
 						<Route render={(props) => <PatientPortalHeader {...props} />} />
 					) : (
 						<Route render={(props) => <Header {...props} />} />
@@ -65,11 +61,6 @@ const AppContainer = function (props) {
 						/>
 						<Route path="/clinic/orders" exact component={OrderGridDetails} />
 						<Route path="/clinic/audit" exact component={AuditGridDetails} />
-						<Route
-							path="/patientsignup"
-							exact
-							component={SignUp}
-						/>
 
 						<Route path="(/|/home)" exact component={Home} />
 					</Switch>

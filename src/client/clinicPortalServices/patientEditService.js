@@ -1,8 +1,8 @@
 import { serviceConstants } from "../patientPortalServices/constants";
-
+import { getUserAuthToken } from "../utils/util";
 export const updatePatientData = (editParams) => {
 	console.log(editParams);
-	
+	var token  = getUserAuthToken();
 	var updatedPatient = {
 		_id: editParams._id,
 		first_name:
@@ -22,11 +22,12 @@ export const updatePatientData = (editParams) => {
 			country: editParams && editParams.country ? editParams.country : ""
 		}
 	}
-	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v2/`, {
+	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/`, {
 		
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
 		},
 		body: JSON.stringify(updatedPatient),
 	}).then((response) => response.json());

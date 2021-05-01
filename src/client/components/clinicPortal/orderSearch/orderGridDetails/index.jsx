@@ -22,7 +22,7 @@ import PdfResultRenderer from "./pdfResultRenderer";
 
 
 //service calls
-import { fetchOrderMasterData } from "../../../../clinicPortalServices/orderSearchService";
+import { fetchOrderMasterData,exportOrders } from "../../../../clinicPortalServices/orderSearchService";
 import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
 
@@ -36,8 +36,9 @@ const getPatientInfo = (patientData, patientId) => {
 		const foundPatientInfo = patientData.find((item) => {
 			return item._id === patientId;
 		});
+		if(foundPatientInfo==null) return {};
 		return {
-			gender: foundPatientInfo.gender,
+			gender: foundPatientInfo.gender ||'',
 			mrn: foundPatientInfo.mrn,
 			dob: foundPatientInfo.date_of_birth,
 			email: foundPatientInfo.email,
@@ -260,7 +261,7 @@ class OrderGridDetails extends Component {
 							patientData.data,
 							item.patient_id._id
 						);
-						returnData.gender = patientInfo ? patientInfo.gender : "";
+						returnData.gender = patientInfo ? (patientInfo.gender||'') : "";
 						returnData.mrn = patientInfo ? patientInfo.mrn : "";
 						returnData.dob =
 							patientInfo && patientInfo.dob
@@ -284,6 +285,7 @@ class OrderGridDetails extends Component {
 
     onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
+		exportOrders();
 	};
 
     onPageSizeChanged = () => {
@@ -294,7 +296,7 @@ class OrderGridDetails extends Component {
     loadGridSchema = () => {
 		var userId = window.localStorage.getItem("USER_ID");
 		getOrderUserSettings(userId, this.state.gridName).then((orderUserInfo) => {
-			console.log("getSettings", orderUserInfo);
+			//console.log("getSettings", orderUserInfo);
 			// const columnState = userInfo.data.grid_state[0].columns;
 
 			const columnState =

@@ -44,29 +44,32 @@ class PatientPortalLoginContainer extends Component {
 				this.setState({
 					isAuthenticationfailed: "NO",
 				});
-				window.localStorage.setItem("PATIENT_ID", res.data[0]._id);
-				window.localStorage.setItem("USER_EMAIL", res.data[0].email);
-				window.localStorage.setItem("USER_DOB", res.data[0].date_of_birth);
-				window.localStorage.setItem(
-					"USER_ADDRESS1",
-					res.data[0].address.address1 +
-						(res.data[0].address.address2 != ""
-							? ", " + res.data[0].address.address2
-							: "")
-				);
-				window.localStorage.setItem(
-					"USER_ADDRESS2",
-					res.data[0].address.city +
-						", " +
-						res.data[0].address.state +
-						", " +
-						res.data[0].address.zip
-				);
-				window.localStorage.setItem(
-					"USER_NAME",
-					res.data[0].first_name + " " + res.data[0].last_name
-				);
-				window.location.href = "/patientportal/dashboard";
+				if(res.data && res.data.patients && res.data.patients.length > 0){
+					window.localStorage.setItem("PATIENT_ID", res.data.patients[0]._id);
+					window.localStorage.setItem("USER_EMAIL", res.data.patients[0].email);
+					window.localStorage.setItem("USER_DOB", res.data.patients[0].date_of_birth);
+					window.localStorage.setItem(
+						"USER_ADDRESS1",
+						res.data.patients[0].address.address1 +
+							(res.data.patients[0].address.address2 != ""
+								? ", " + res.data.patients[0].address.address2
+								: "")
+					);
+					window.localStorage.setItem(
+						"USER_ADDRESS2",
+						res.data.patients[0].address.city +
+							", " +
+							res.data.patients[0].address.state +
+							", " +
+							res.data.patients[0].address.zip
+					);
+					window.localStorage.setItem(
+						"USER_NAME",
+						res.data.patients[0].first_name + " " + res.data.patients[0].last_name
+					);
+					window.localStorage.setItem("PATIENT-AUTH-TOKEN", res.data.token);
+					window.location.href = "/patientportal/dashboard";
+				}
 			})
 			.catch((err) => {
 				console.log(err);

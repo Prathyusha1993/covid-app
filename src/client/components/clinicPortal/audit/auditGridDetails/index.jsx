@@ -33,21 +33,26 @@ class AuditGridDetails extends Component {
 					headerName: "Action",
 					minWidth: 150,
 					field: "action",
+					resizable: true,
+					hide:true
 				},
 				{
 					headerName: "Identifier",
 					minWidth: 150,
 					field: "identifier",
+					resizable: true,
 				},
 				{
 					headerName: "Event Type",
 					minWidth: 150,
 					field: "event_type",
+					resizable: true,
 				},
 				{
 					headerName: "Application",
 					minWidth: 150,
 					field: "application",
+					resizable: true,
 				},
 				{
 					headerName: "User Name",
@@ -73,7 +78,7 @@ class AuditGridDetails extends Component {
 					minWidth: 200,
 					resizable: true,
 					cellRenderer: (params) => {
-						return moment(params.data.createdAt).format('MM/DD/YYYY HH:mm:ss A')
+						return moment(params.data.createdAt).format('MM/DD/YYYY hh:mm:ss A')
 					}
 				},
 			],
