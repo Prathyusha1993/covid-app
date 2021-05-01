@@ -18,10 +18,6 @@ class FormInfo extends Component {
 		};
 	}
 
-	hasError = (key) => {
-		return this.state.errors.indexOf(key) !== -1;
-	};
-
 	getInTouch = (e) => {
 		e.preventDefault();
 		var body =
@@ -41,7 +37,9 @@ class FormInfo extends Component {
 			this.state.testingNeeds +
 			"\n";
 
-
+    if(this.validate()) {
+      console.log(this.state);
+    // }
 		getInTouchDetails(this.state.toEmail, this.state.subject, body);
 		this.setState({
 			firstName: "",
@@ -51,6 +49,7 @@ class FormInfo extends Component {
 			testingNeeds: "",
 			showMessage: true,
 		});
+  }
 	};
 
 	handleChange = (e) => {
@@ -60,6 +59,22 @@ class FormInfo extends Component {
 		obj[key] = value;
 		this.setState(obj);
 	};
+
+  validate = (key) => {
+    let errors = {};
+    let isValid = true;
+
+    if(!this.state.firstName){
+      isValid = false;
+      errors[key] = "Please enter your name";
+    }
+
+    this.setState({
+      errors: errors
+    });
+
+    return isValid;
+  }
 
 	render() {
 		return (
