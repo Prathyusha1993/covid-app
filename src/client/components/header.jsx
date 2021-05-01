@@ -127,6 +127,12 @@ const Header = (props) => {
 								Clinic Login{" "}
 							</a>
 						</li>{" "}
+						<li className="nav-item">
+							<a href="/patientsignup" className="top-nav-button">
+								{" "}
+								Patient SignUp{" "}
+							</a>
+						</li>{" "}
 				</ul>
 			</nav>
 		</header>

@@ -872,6 +872,9 @@ button.bg-danger:hover {
   margin-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(159, 159, 159, 0.17);
+  padding-bottom: 20px;
+  font-family: Inter, sans-serif;
+   
 }
 .card-body {
   padding: 1rem;
@@ -4289,6 +4292,7 @@ html.menu-opened body {
 .dash-card .row > div {
   padding-left: 10px;
   padding-right: 10px;
+
 }
 .appointment-tab {
   margin-bottom: 30px;
@@ -7583,6 +7587,7 @@ html.menu-opened body {
   .card-body {
     padding: 1.25rem;
   }
+
   .card-header {
     padding: 0.75rem 1.25rem;
   }
@@ -8871,3 +8876,142 @@ html {
   padding: 10px;
 }
 
+.card-name {
+  border-bottom: 1px solid #dad5d5;
+  padding-bottom: 30px; 
+   margin-bottom: 30px;
+   padding-left: 20px;
+   padding-top: 20px;
+}
+
+.card-info {
+  font-weight: 500;
+}
+
+.signup-label-font {
+  font-weight: 600;
+}
+
+.form-bottom-border {
+  border-bottom: 1px solid #dad5d5;
+}
+
+.next-button {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.btn-pagebreak-next {
+  /* float: right; */
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  background-color: #2e69ff;
+  border-color: #2e69ff;
+  color: #fff;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.checkbox-control {
+  padding-left: 25px;
+}
+
+.checkbox-control span {
+  padding-left: 8px;
+}
+
+.btn-pagebreak-previous {
+  background-color: #e5e7f2;
+  border-color: #e5e7f2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 4px;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+.btn-patientinfo-next {
+  float:right;
+}
+
+.dropzone-icon {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.dropzone-browse-files {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropzone-files {
+  padding: 7px;
+  width:680px;
+  border: 1px solid #dae6ff;
+  background-color: #dae6ff;
+  margin-top: 10px;
+  list-style-type: none;
+}
+
+.btn-pagebreak-submit {
+  font-family: Inter, sans-serif;
+  border-color: #18bd5b;
+  color: #fff;
+  background-color: #18bd5b;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  outline: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  
+}
+
+.btn-pagebreak-submit:hover {
+  background-color: #16aa52;
+}
+
+.inline-errormsg {
+  color: white;
+  font-size: 12px;
+  width:130px;
+  padding:2px;
+  border: 1px solid #f23a3c;
+  background-color: #f23a3c;
+  margin-top: 8px;
+  font-family: Inter, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.dropzone-btn {
+  float: right;
+  margin-left: 120px;
+  
+}
+
+.row-bg-color {
+  background-color: #f7f7f7;
+}
