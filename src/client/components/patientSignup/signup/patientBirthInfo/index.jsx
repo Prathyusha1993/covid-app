@@ -199,8 +199,9 @@ class PatientBirthInfo extends Component {
 																<li key={item.id} className="checkbox-control">
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
-																			type="checkbox"
-																			checked={values.race}
+																			type="radio"
+                                                                            name="groupOptions"
+																			value={values.race}
 																			onChange={this.props.handleChange("race")}
 																			required
 																		/>
