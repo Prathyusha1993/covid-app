@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { getInTouchDetails } from "../../../../appointmentBookingServices/getInTouch";
-import {phoneNumberFormatter} from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../utils/util";
 
 class FormInfo extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class FormInfo extends Component {
                 this.state.testingNeeds +
                 "\n";
 
-                console.log('body', body);
+            console.log('body', body);
             getInTouchDetails(this.state.toEmail, this.state.subject, body);
             this.setState({
                 firstName: "",
@@ -63,16 +63,16 @@ class FormInfo extends Component {
     };
 
     handleChange = (e) => {
-		var key = e.target.name;
-		var value = e.target.value;
-		var obj = {};		
-        if(key === 'mobile') {
-            this.setState(prevState=> ({ mobile: phoneNumberFormatter(value, prevState.mobile) }));
+        var key = e.target.name;
+        var value = e.target.value;
+        var obj = {};
+        if (key === 'mobile') {
+            this.setState(prevState => ({ mobile: phoneNumberFormatter(value, prevState.mobile) }));
         } else {
             obj[key] = value;
             this.setState(obj);
-        }        
-	};
+        }
+    };
 
     render() {
         return (
