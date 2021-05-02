@@ -9015,3 +9015,15 @@ html {
 .row-bg-color {
   background-color: #f7f7f7;
 }
+
+.qrscan-reader {
+  width: 40%;
+  margin-left: 30%;
+}
+
+.qrscn-reader-p {
+  padding-top: 10px;
+  margin-left: 35%;
+  color: green;
+  font-size: 17px;
+}

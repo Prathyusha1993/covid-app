@@ -18,14 +18,14 @@ class QrScanReader extends Component {
   }
   render() {
     return (
-      <div style={{position: 'relative'}}>
+      <div >
         <QrReader
           delay={300}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ width: '40%', marginLeft:'30%' }}
+          className="qrscan-reader"
         />
-        <p style={{paddingTop: '10px', marginLeft: '40%'}}>Decoded QR Code: {this.state.result}</p>
+        <p className="qrscn-reader-p">Decoded QR Code: {this.state.result}</p>
       </div>
     )
   }
