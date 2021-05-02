@@ -151,6 +151,7 @@ class PatientInfo extends Component {
 														required
 														type="tel"
 														value={values.phone}
+                                                        placeholder="(XXX) XXX-XXXX"
 														onChange={this.props.handleChange("phone")}
 													/>
 													<Form.Control.Feedback
