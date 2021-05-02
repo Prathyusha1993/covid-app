@@ -59,7 +59,7 @@ class PatientPortalHeader extends Component {
                       <a href="/clinic/audit"> Audit </a>
                     </li>
                     <li>
-                      <a href="/clinic/unassignedpatient">
+                      <a href="/clinic/unassignedpatients">
                         {" "}
                         Unassigned Patients{" "}
                       </a>

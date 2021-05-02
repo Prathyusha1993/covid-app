@@ -29,59 +29,60 @@ import SignUp from "./client/components/patientSignup/signup/index.jsx";
 //import AppUniversal from "./admin/app-universal";
 
 const AppContainer = function (props) {
-	if (props) {
-		const url = props.location.pathname.split("/")[1];
+  if (props) {
+    const url = props.location.pathname.split("/")[1];
 
-		return (
-			<Router
-			//basename={`${config.publicPath}`}       by p - commented
-			>
-				<div>
-					{url === "patientportal" || url === "clinic" || url === "patientsignup" ? 
-					 (
-						<Route render={(props) => <PatientPortalHeader {...props} />} />
-					) : (
-						<Route render={(props) => <Header {...props} />} />
-					)}
+    return (
+      <Router
+      //basename={`${config.publicPath}`}       by p - commented
+      >
+        <div>
+          {url === "patientportal" ||
+          url === "clinic" ||
+          url === "patientsignup" ? (
+            <Route render={(props) => <PatientPortalHeader {...props} />} />
+          ) : (
+            <Route render={(props) => <Header {...props} />} />
+          )}
 
-					<Switch>
-						<Route
-							path="/patientportal"
-							exact
-							component={PatientPortalLoginContainer}
-						/>
-						<Route
-							path="/patientportal/dashboard"
-							exact
-							component={PatientPortalDashboard}
-						/>
-						<Route
-							path="/clinic"
-							exact
-							component={ClinicPortalLoginContainer}
-						/>
-						<Route
-							path="/clinic/patients"
-							exact
-							component={ClinicPatientGrid}
-						/>
-						<Route path="/clinic/orders" exact component={OrderGridDetails} />
-						<Route path="/clinic/audit" exact component={AuditGridDetails} />
-						<Route path="/clinic/unassignedpatient" exact component={UnassignedPatientGridDetails} />
-						<Route
-							path="/patientsignup"
-							exact
-							component={SignUp}
-						/>
+          <Switch>
+            <Route
+              path="/patientportal"
+              exact
+              component={PatientPortalLoginContainer}
+            />
+            <Route
+              path="/patientportal/dashboard"
+              exact
+              component={PatientPortalDashboard}
+            />
+            <Route
+              path="/clinic"
+              exact
+              component={ClinicPortalLoginContainer}
+            />
+            <Route
+              path="/clinic/patients"
+              exact
+              component={ClinicPatientGrid}
+            />
+            <Route path="/clinic/orders" exact component={OrderGridDetails} />
+            <Route path="/clinic/audit" exact component={AuditGridDetails} />
+            <Route
+              path="/clinic/unassignedpatients"
+              exact
+              component={UnassignedPatientGridDetails}
+            />
+            <Route path="/patientsignup" exact component={SignUp} />
 
-						<Route path="(/|/home)" exact component={Home} />
-					</Switch>
-					<Route render={(props) => <Footer {...props} />} />
-				</div>
-			</Router>
-		);
-	}
-	return null;
+            <Route path="(/|/home)" exact component={Home} />
+          </Switch>
+          <Route render={(props) => <Footer {...props} />} />
+        </div>
+      </Router>
+    );
+  }
+  return null;
 };
 
 export default AppContainer;
