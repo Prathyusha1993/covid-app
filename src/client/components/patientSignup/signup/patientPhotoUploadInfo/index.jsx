@@ -1,31 +1,28 @@
 import React, { Component } from "react";
 import DriverLicenseBrowse from "./driverLicenseBrowse";
+import { Form, Col, Button } from "react-bootstrap";
 
 class PatientPhotoUploadInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			uploadFile: "",
-			uploadDL: "",
-			errors: [],
+			
+		
 		};
 	}
 
-	handleChange = (e) => {
-		var key = e.target.name;
-		var value = e.target.value;
-		var obj = {};
-		obj[key] = value;
-		this.setState(obj);
-	};
+	// handleChange = (e) => {
+	// 	var key = e.target.name;
+	// 	var value = e.target.value;
+	// 	var obj = {};
+	// 	obj[key] = value;
+	// 	this.setState(obj);
+	// };
 
-	hasError = (key) => {
-		return this.state.errors.indexOf(key) !== -1;
-	};
+	// hasError = (key) => {
+	// 	return this.state.errors.indexOf(key) !== -1;
+	// };
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-	};
 
 	back = (e) => {
 		e.preventDefault();
@@ -33,6 +30,7 @@ class PatientPhotoUploadInfo extends Component {
 	};
 
 	render() {
+		
 		return (
 			<div>
 				<div className="content">
@@ -50,7 +48,100 @@ class PatientPhotoUploadInfo extends Component {
 												Driver's License, Insurance card
 											</p>
 										</div>
-										<form>
+										<Form
+											id="patientBirthForm"
+											noValidate
+											validated={this.state.validated}
+										>
+											<Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													as={Col} md="12"
+													controlId="exampleForm.SelectCustom"
+												>
+													<Form.Label className="signup-label-font">
+													Upload a photo of your driver's license{" "}
+														<span className="text-danger"> *</span>
+													</Form.Label>
+													<DriverLicenseBrowse />
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													as={Col} md="12"
+													controlId="exampleForm.SelectCustom"
+												>
+													<Form.Label className="signup-label-font">
+													Upload a photo of the front of your health insurance
+														<span className="text-danger"> *</span>
+													</Form.Label>
+													<DriverLicenseBrowse />
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row  className="form-bottom-border" style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													as={Col} md="12"
+													controlId="exampleForm.SelectCustom"
+												>
+													<Form.Label className="signup-label-font">
+													Upload a photo of the back of your health insurance
+														<span className="text-danger"> *</span>
+													</Form.Label>
+													<DriverLicenseBrowse />
+												</Form.Group>
+											</Form.Row>
+											
+											<div className=" row next-button ">
+												<div>
+													<Button
+														className="btn-pagebreak-previous"
+														onClick={this.back}
+													>
+														Back
+													</Button>
+												</div>
+												<div>
+													<Button
+														className="btn-pagebreak-next"
+														type="submit"
+														onClick={this.props.handleSubmit}
+													>
+														Submit
+													</Button>
+												</div>
+											</div>
+										</Form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										{/* <form>
 											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-12">
 													<label className="signup-label-font">
@@ -118,7 +209,7 @@ class PatientPhotoUploadInfo extends Component {
 													</button>
 												</div>
 											</div>
-										</form>
+										</form> */}
 									</div>
 								</div>
 							</div>

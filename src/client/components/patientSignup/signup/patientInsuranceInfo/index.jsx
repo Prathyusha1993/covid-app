@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Form, Col, Button } from "react-bootstrap";
 import { insuranceProvider } from "../selectOptionsData";
 import { relation } from "../selectOptionsData";
 
@@ -6,24 +7,25 @@ class PatientInsuranceInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            insuranceProv1: "",
-            insuranceProv2: "",
-            memberId: "",
-            groupNum: "",
-            relation: "",
-            firstName: "",
-            lastName: "",
-            driverLic: "",
+            validated: false
         };
     }
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    };
+    // handleChange = (e) => {
+    //     this.setState({ [e.target.name]: e.target.value });
+    // };
 
     continue = (e) => {
-        e.preventDefault();
-        this.props.nextStep();
+        const form = document.getElementById("patientInsuranceForm");
+		if (form.checkValidity() === false) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.setState({
+				validated: true,
+			});
+		} else {
+			this.props.nextStep();
+		}
     };
 
     back = (e) => {
@@ -32,6 +34,7 @@ class PatientInsuranceInfo extends Component {
     };
 
     render() {
+        const {values} = this.props;
         return (
             <div>
                 <div className="content">
@@ -49,7 +52,212 @@ class PatientInsuranceInfo extends Component {
                                                 If you are not self paying, please provide information
 											</p>
                                         </div>
-                                        <form>
+                                        <Form
+											id="patientInsuranceForm"
+											noValidate
+											validated={this.state.validated}
+										>
+											<Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Choose your Insurance Provider
+													</Form.Label>
+
+													<Form.Control
+														as="select"
+														required
+														type="text"
+														value={values.insuranceProv1}
+														onChange={this.props.handleChange("insuranceProv1")}
+													>
+														{insuranceProvider.map((item) => {
+                                                            return (
+                                                                <option value={item.id}>{item.value}</option>
+                                                            );
+                                                        })}
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+                                            {
+                                                values.insuranceProv1 === '2'
+                                                ? null
+                                                : 
+                                                <div>
+                                                <Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Insurance Provider (If Other)
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.insuranceProv2}
+														onChange={this.props.handleChange("insuranceProv2")}
+													>
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+
+                                            <Form.Row  style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Insurance Member ID
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.memberId}
+														onChange={this.props.handleChange("memberId")}
+													>
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+
+                                            <Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Insurance Group Number
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.groupNum}
+														onChange={this.props.handleChange("groupNum")}
+													>
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+
+                                            <Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Relation to Insured
+													</Form.Label>
+
+													<Form.Control
+														as="select"
+														required
+														type="text"
+														value={values.relation}
+														onChange={this.props.handleChange("relation")}
+													>
+                                                        {relation.map((item) => {
+                                                                    return (
+                                                                        <option value={item.id}>{item.value}</option>
+                                                                    );
+                                                                })}
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+
+                                            <Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    What is the Name of The Insurance Holder?
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.insuranceFirstName}
+														onChange={this.props.handleChange("insuranceFirstName")}
+													>
+													</Form.Control>
+                                                    <Form.Label className="home-page-label">First Name</Form.Label>
+												</Form.Group>
+                                                <Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                   
+													</Form.Label>
+
+													<Form.Control
+                                                    style={{ marginTop: "8px" }}
+														required
+														type="text"
+														value={values.insuranceLastName}
+														onChange={this.props.handleChange("insuranceLastName")}
+													>
+													</Form.Control>
+                                                    <Form.Label className="home-page-label">Last Name</Form.Label>
+												</Form.Group>
+											</Form.Row>
+
+                                            <Form.Row className="form-bottom-border" style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													 as={Col} md="6"
+													controlId="formGridEmail"
+												>
+													<Form.Label className="signup-label-font">
+                                                    Driver's License # (required for filling an
+                                                                insurance claim)
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.driverLic}
+														onChange={this.props.handleChange("driverLic")}
+													>
+                                                        
+													</Form.Control>
+												</Form.Group>
+											</Form.Row>
+                                                </div>
+
+                                            }
+											
+
+											
+
+											
+											<div className=" row next-button ">
+												<div>
+													<Button
+														className="btn-pagebreak-previous"
+														onClick={this.back}
+													>
+														Back
+													</Button>
+												</div>
+												<div>
+													<Button
+														className="btn-pagebreak-next"
+														type="submit"
+														onClick={this.continue}
+													>
+														Next
+													</Button>
+												</div>
+											</div>
+										</Form>
+
+
+
+                                        {/* <form>
                                             <div className="row" style={{ paddingBottom: "25px" }}>
                                                 <div className="col-md-6">
                                                     <label className="signup-label-font">
@@ -210,7 +418,7 @@ class PatientInsuranceInfo extends Component {
 													</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form> */}
                                     </div>
                                 </div>
                             </div>

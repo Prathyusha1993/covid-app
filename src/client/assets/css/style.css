@@ -8938,6 +8938,13 @@ html {
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 10px;
+  color: black;
+}
+
+.btn-pagebreak-previous:hover {
+  background-color: #e5e7f2;
+  border-color: #e5e7f2;
+  color: black;
 }
 
 .btn-patientinfo-next {
@@ -9000,6 +9007,7 @@ html {
   background-color: #f23a3c;
   margin-top: 8px;
   font-family: Inter, sans-serif;
+  border-radius: 4px;
 }
 
 .hidden {

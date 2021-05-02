@@ -23,13 +23,16 @@ export const identity = [
 
 export const ethnicity = [
     {
-		type: "Please Select",
+        value: "",
+		desc: "Please Select",
 	},
 	{
-		type: "Hispanic or Latino",
+        value: "1",
+		desc: "Hispanic or Latino",
 	},
 	{
-		type: "Not Hispanic or Latino",
+        value: "2",
+		desc: "Not Hispanic or Latino",
 	},
 ];
 

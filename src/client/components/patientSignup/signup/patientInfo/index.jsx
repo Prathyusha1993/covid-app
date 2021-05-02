@@ -1,108 +1,52 @@
 import React, { Component } from "react";
-import {phoneNumberFormatter} from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../utils/util";
+import { Form, Button, Col } from "react-bootstrap";
 
 class PatientInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			firstName: "",
-			lastName: "",
-			email: "",
-			phone: "",
-			address: "",
-			city: "",
-			state: "",
-			zipCode: "",
 			errors: [],
+			firstName: "",
+			validated: false,
 		};
 	}
 
+	// handleChange = (e) => {
+	// 	var key = e.target.name;
+	// 	var value = e.target.value;
+	// 	var obj = {};
+	//     if(key === 'phone') {
+	//         this.setState(prevState=> ({ phone: phoneNumberFormatter(value, prevState.phone) }));
+	//     } else {
+	//         obj[key] = value;
+	//         this.setState(obj);
+	//     }
+	// };
 
-	handleChange = (e) => {
-		var key = e.target.name;
-		var value = e.target.value;
-		var obj = {};		
-        if(key === 'phone') {
-            this.setState(prevState=> ({ phone: phoneNumberFormatter(value, prevState.phone) }));
-        } else {
-            obj[key] = value;
-            this.setState(obj);
-        }
-	};
-
-    normalizeInput = (value, previousValue) => {
-        // return nothing if no value
-        if (!value) return value; 
-      
-        // only allows 0-9 inputs
-        const currentValue = value.replace(/[^\d]/g, '');
-        const cvLength = currentValue.length; 
-      
-        if (!previousValue || value.length > previousValue.length) {
-      
-          // returns: "x", "xx", "xxx"
-          if (cvLength < 4) return currentValue; 
-      
-          // returns: "(xxx)", "(xxx) x", "(xxx) xx", "(xxx) xxx",
-          if (cvLength < 7) return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3)}`; 
-      
-          // returns: "(xxx) xxx-", (xxx) xxx-x", "(xxx) xxx-xx", "(xxx) xxx-xxx", "(xxx) xxx-xxxx"
-          return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`; 
-        }
-      };
-
-	hasError = (key) => {
-		return this.state.errors.indexOf(key) !== -1;
-	};
 
 	continue = (e) => {
-		e.preventDefault();
-		var errors = [];
-
-		if (this.state.firstName === "") {
-			errors.push("firstName");
+		// const form = e.currentTarget;
+		const form = document.getElementById("patientInfoForm");
+		if (form.checkValidity() === false) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.setState({
+				validated: true,
+			});
+		} else {
+			this.props.nextStep();
 		}
-		if (this.state.lastName === "") {
-			errors.push("lastName");
-		}
-		const expression = /\S+@\S+/;
-    	var validEmail = expression.test(String(this.state.email).toLowerCase());
-
-		if (!validEmail) {
-			errors.push("email");
-		}
-		if (this.state.phone === "") {
-			errors.push("phone");
-		}
-		if (this.state.address === "") {
-			errors.push("address");
-		}
-		if (this.state.city === "") {
-			errors.push("city");
-		}
-		if (this.state.state === "") {
-			errors.push("state");
-		}
-		if (this.state.zipCode === "") {
-			errors.push("zipCode");
-		}
-
-		this.setState({ errors: errors });
-		if (errors.length > 0) {
-			return false;
-		}
-		this.props.nextStep();
 	};
 
+
 	render() {
+		const { values } = this.props;
 		return (
 			<div>
 				<div className="content">
 					<div className="container-fluid">
 						<div className="row" style={{ justifyContent: "center" }}>
-							{/* <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-								<DoctorSidebar />
-							</div> */}
 							<div className="col-md-6 col-lg-7 col-xl-7">
 								<div className="card row-bg-color ">
 									<div className="card-body">
@@ -112,7 +56,198 @@ class PatientInfo extends Component {
 												As the patient please enter your information
 											</p>
 										</div>
-										<form>
+										<Form
+											id="patientInfoForm"
+											noValidate
+											validated={this.state.validated}
+										>
+											<Form.Row style={{ paddingBottom: "25px" }}>
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														Full Name <span className="text-danger"> *</span>
+													</Form.Label>
+
+													<Form.Control
+														required
+														type="text"
+														value={values.firstName}
+														onChange={this.props.handleChange("firstName")}
+													/>
+													<Form.Label className="home-page-label">
+														First Name
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label></Form.Label>
+													<Form.Control
+														required
+														type="text"
+														style={{ marginTop: "8px" }}
+														value={values.lastName}
+														onChange={this.props.handleChange("lastName")}
+													/>
+													<Form.Label className="home-page-label">
+														Last Name
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row style={{ paddingBottom: "25px" }}>
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														E mail <span className="text-danger"> *</span>
+													</Form.Label>
+													<Form.Control
+														required
+														type="text"
+														value={values.email}
+														onChange={this.props.handleChange("email")}
+													/>
+													<Form.Label className="home-page-label">
+														{" "}
+														example@example.com{" "}
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														Phone <span className="text-danger"> *</span>{" "}
+													</Form.Label>
+													<Form.Control
+														required
+														type="tel"
+														value={values.phone}
+														onChange={this.props.handleChange("phone")}
+													/>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+											</Form.Row>
+											<div className="form-bottom-border">
+												<Form.Group controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														Address <span className="text-danger"> *</span>{" "}
+													</Form.Label>
+													<Form.Control
+														required
+														type="text"
+														value={values.address}
+														onChange={this.props.handleChange("address")}
+													/>
+													<Form.Label className="home-page-label">
+														Street Address
+													</Form.Label>
+												</Form.Group>
+
+												<Form.Row>
+													<Form.Group as={Col} controlId="formGridEmail">
+														<Form.Label></Form.Label>
+														<Form.Control
+															required
+															type="text"
+															value={values.city}
+															onChange={this.props.handleChange("city")}
+														/>
+														<Form.Label className="home-page-label">
+															{" "}
+															City
+														</Form.Label>
+													</Form.Group>
+
+													<Form.Group as={Col} controlId="formGridEmail">
+														<Form.Label></Form.Label>
+														<Form.Control
+															required
+															type="text"
+															value={values.state}
+															onChange={this.props.handleChange("state")}
+														/>
+														<Form.Label className="home-page-label">
+															State
+														</Form.Label>
+													</Form.Group>
+												</Form.Row>
+
+												<Form.Group controlId="formGridEmail">
+													<Form.Label></Form.Label>
+													<Form.Control
+														required
+														type="number"
+														value={values.zipCode}
+														onChange={this.props.handleChange("zipCode")}
+													/>
+													<Form.Label className="home-page-label">
+														Zip Code
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+											</div>
+											<div className=" row next-button btn-patientinfo-next">
+												<Button
+													className="btn-pagebreak-next"
+													type="submit"
+													onClick={this.continue}
+												>
+													Next
+												</Button>
+											</div>
+										</Form>
+										{/* <form
+											noValidate
+											validated={values.validated}>
 											<div className="row " style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label
@@ -123,9 +258,8 @@ class PatientInfo extends Component {
 													<input
 														autoComplete="off"
 														type="text"
-														name="firstName"
-														value={this.state.firstName}
-														onChange={this.handleChange}
+														value={values.firstName}
+														onChange={this.props.handleChange("firstName")}
 														className={
 															this.hasError("firstName")
 																? "form-control is-invalid"
@@ -150,9 +284,8 @@ class PatientInfo extends Component {
 														autoComplete="off"
 														style={{ marginTop: "8px" }}
 														type="text"
-														name="lastName"
-														value={this.state.lastName}
-														onChange={this.handleChange}
+														value={values.lastName}
+														onChange={this.props.handleChange("lastName")}
 														className={
 															this.hasError("lastName")
 																? "form-control is-invalid"
@@ -172,8 +305,8 @@ class PatientInfo extends Component {
 														autoComplete="off"
 														type="text"
 														name="email"
-														value={this.state.email}
-														onChange={this.handleChange}
+														value={values.email}
+														onChange={this.props.handleChange("email")}
 														className={
 															this.hasError("email")
 																? "form-control is-invalid"
@@ -203,8 +336,8 @@ class PatientInfo extends Component {
 														autoComplete="off"
 														type="tel"
 														name="phone"
-														value={this.state.phone}
-														onChange={this.handleChange}
+														value={values.phone}
+														onChange={this.props.handleChange("phone")}
 														className={
 															this.hasError("phone")
 																? "form-control is-invalid"
@@ -238,8 +371,8 @@ class PatientInfo extends Component {
 																: "form-control"
 														}
 														name="address"
-														value={this.state.address}
-														onChange={this.handleChange}
+														value={values.address}
+														onChange={this.props.handleChange("address")}
 														required
 													/>
 													<label className="home-page-label">
@@ -253,8 +386,8 @@ class PatientInfo extends Component {
 															autoComplete="off"
 															type="text"
 															name="city"
-															value={this.state.city}
-															onChange={this.handleChange}
+															value={values.city}
+															onChange={this.props.handleChange("city")}
 															className={
 																this.hasError("city")
 																	? "form-control is-invalid"
@@ -271,8 +404,8 @@ class PatientInfo extends Component {
 															autoComplete="off"
 															type="text"
 															name="state"
-															value={this.state.state}
-															onChange={this.handleChange}
+															value={values.state}
+															onChange={this.props.handleChange("state")}
 															className={
 																this.hasError("state")
 																	? "form-control is-invalid"
@@ -295,8 +428,8 @@ class PatientInfo extends Component {
 																: "form-control"
 														}
 														name="zipCode"
-														value={this.state.zipCode}
-														onChange={this.handleChange}
+														value={values.zipCode}
+														onChange={this.props.handleChange("zipCode")}
 														required
 													/>
 													<label className="home-page-label"> Zip Code </label>
@@ -319,7 +452,7 @@ class PatientInfo extends Component {
 													Next
 												</button>
 											</div>
-										</form>
+										</form> */}
 									</div>
 								</div>
 							</div>

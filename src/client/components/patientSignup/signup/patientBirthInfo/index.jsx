@@ -2,67 +2,62 @@ import React, { Component } from "react";
 import { identity, symptoms } from "../selectOptionsData";
 import { ethnicity } from "../selectOptionsData";
 import { race } from "../selectOptionsData";
+import { Form, Button, Col, FormCheck } from "react-bootstrap";
 
 class PatientBirthInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			sex: "",
-			dob: "",
-			ethnicity: "",
-			race: "",
-			symptoms: "",
-            errors: [],
+			validated: false,
 		};
 	}
 
-	handleChange = (e) => {
-        var key = e.target.name;
-        var value = e.target.value;
-        var obj = {};
-        obj[key] = value;
-        if(e.target.type === "checkbox"){
-            this.setState({ [e.target.name]: e.target.checked});
-        }
-        else {
-            this.setState(obj);
-        }
-	}
 
-    hasError = (key) => {
-		return this.state.errors.indexOf(key) !== -1;
+	continue = (e) => {
+		const form = document.getElementById("patientBirthForm");
+		// if(!this.props.values.race) {
+		// 	alert('select race');
+		// }
+		
+		if (form.checkValidity() === false) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.setState({
+				validated: true,
+			});
+		} else {
+			this.props.nextStep();
+		}
+		// e.preventDefault();
+		// var errors = [];
+
+		// if (this.state.sex === "") {
+		// 	errors.push("sex");
+		// }
+		// if (this.state.dob === "") {
+		// 	errors.push("dob");
+		// }
+		// if (this.state.ethnicity === "") {
+		// 	errors.push("ethnicity");
+		// }
+		// if (this.state.race === "") {
+		// 	errors.push("race");
+		// }
+
+		// this.setState({ errors: errors });
+		// if (errors.length > 0) {
+		// 	return false;
+		// }
+		// this.props.nextStep();
 	};
 
-    continue = e => {
+	back = (e) => {
 		e.preventDefault();
-        var errors = [];
-
-		if (this.state.sex === "") {
-			errors.push("sex");
-		}
-		if (this.state.dob === "") {
-			errors.push("dob");
-		}
-		if (this.state.ethnicity === "") {
-			errors.push("ethnicity");
-		}
-		if (this.state.race === "") {
-			errors.push("race");
-		}
-
-		this.setState({ errors: errors });
-		if (errors.length > 0) {
-			return false;
-		}
-		this.props.nextStep();
-	}
-
-    back = e => {
-        e.preventDefault();
 		this.props.prevStep();
-    }
+	};
 
 	render() {
+		const { values } = this.props;
 		return (
 			<div>
 				<div className="content">
@@ -75,12 +70,230 @@ class PatientBirthInfo extends Component {
 								<div className="card  row-bg-color">
 									<div className="card-body">
 										<div className="card-name">
-											<h2 className="card-title">Required Intake Information</h2>
-											<p className="card-info">
-												Date Of Birth
-											</p>
+											<h2 className="card-title">
+												Required Intake Information
+											</h2>
+											<p className="card-info">Date Of Birth</p>
 										</div>
-										<form>
+										<Form
+											id="patientBirthForm"
+											noValidate
+											validated={this.state.validated}
+										>
+											<Form.Row style={{ paddingBottom: "15px" }}>
+												<Form.Group
+													as={Col}
+													controlId="exampleForm.SelectCustom"
+												>
+													<Form.Label className="signup-label-font">
+														Biological Sex{" "}
+														<span className="text-danger"> *</span>
+													</Form.Label>
+
+													<Form.Control
+														as="select"
+														required
+														type="text"
+														value={values.sex}
+														onChange={this.props.handleChange("sex")}
+													>
+														{identity.map((item) => {
+															return (
+																<option value={item.value}>
+																	{item.gender}
+																</option>
+															);
+														})}
+													</Form.Control>
+													<Form.Label className="home-page-label">
+														Please choose one
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label></Form.Label>
+													<Form.Control
+														required
+														type="date"
+														style={{ marginTop: "8px" }}
+														value={values.dob}
+														onChange={this.props.handleChange("dob")}
+													/>
+													<Form.Label className="home-page-label">
+														Date
+													</Form.Label>
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row style={{ paddingBottom: "5px" }}>
+												<Form.Group
+													as={Col} md="6"
+													controlId="exampleForm.SelectCustom"
+												>
+													<Form.Label className="signup-label-font">
+														What is your ethnicity?{" "}
+														<span className="text-danger"> *</span>
+													</Form.Label>
+													<Form.Control
+														as="select"
+														required
+														type="text"
+														value={values.ethnicity}
+														onChange={this.props.handleChange("ethnicity")}
+													>
+														{ethnicity.map((item) => {
+															return <option value={item.value}>{item.desc}</option>;
+														})}
+													</Form.Control>
+
+													<Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback>
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row style={{ paddingBottom: "0px" }}>
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														What is your race?{" "}
+														<span className="text-danger"> *</span>
+													</Form.Label>
+													<ul
+														style={{
+															listStyleType: "none",
+															paddingLeft: "7px",
+														}}
+													>
+														{race.map((item) => {
+															return (
+																<li key={item.id} className="checkbox-control">
+																	{/* <Form.Label> */}
+																		<FormCheck.Input
+																			type="checkbox"
+																			checked={values.race}
+																			onChange={this.props.handleChange("race")}
+																			required
+																		/>
+																		<span>{item.value}</span>
+																	{/* </Form.Label> */}
+																</li>
+															);
+														})}
+													</ul>
+													{
+														this.state.validated && !values.race 
+														? <div className="inline-errormsg">
+															<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+															</div>
+														: null
+													}
+													
+													{/* <Form.Control.Feedback
+														type="invalid"
+														className="inline-errormsg"
+													>
+														<i
+															class="fa fa-exclamation-circle"
+															aria-hidden="true"
+														>
+															This field is required.
+														</i>
+													</Form.Control.Feedback> */}
+												</Form.Group>
+											</Form.Row>
+
+											<Form.Row
+												style={{ paddingBottom: "20px" }}
+												className="form-bottom-border"
+											>
+												<Form.Group as={Col} controlId="formGridEmail">
+													<Form.Label className="signup-label-font">
+														Symptoms 
+													</Form.Label>
+													<ul
+														style={{
+															listStyleType: "none",
+															paddingLeft: "7px",
+														}}
+													>
+														{symptoms.map((item) => {
+															return (
+																<li key={item.id} className="checkbox-control">
+																	{/* <Form.Label> */}
+																		<FormCheck.Input
+																			type="checkbox"
+																			checked={values.symptoms}
+																			onChange={this.props.handleChange(
+																				"symptoms"
+																			)}
+																			required
+																		/>
+																		<span>{item.value}</span>
+																	{/* </Form.Label> */}
+																</li>
+															);
+														})}
+													</ul>
+													
+												</Form.Group>
+											</Form.Row>
+											<div className=" row next-button ">
+												<div>
+													<Button
+														className="btn-pagebreak-previous"
+														onClick={this.back}
+													>
+														Back
+													</Button>
+												</div>
+												<div>
+													<Button
+														className="btn-pagebreak-next"
+														type="submit"
+														onClick={this.continue}
+													>
+														Next
+													</Button>
+												</div>
+											</div>
+										</Form>
+
+										{/* <form>
 											<div className="row" style={{ paddingBottom: "25px" }}>
 												<div className="col-md-6">
 													<label className="signup-label-font">
@@ -245,7 +458,7 @@ class PatientBirthInfo extends Component {
 												<button className="btn-pagebreak-next" onClick={this.continue}>Next</button>
                                                 </div>
 											</div>
-										</form>
+										</form> */}
 									</div>
 								</div>
 							</div>
