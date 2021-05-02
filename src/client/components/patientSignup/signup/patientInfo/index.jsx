@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {phoneNumberFormatter} from "../../../../utils/util";
 
 class PatientInfo extends Component {
 	constructor(props) {
@@ -20,10 +21,35 @@ class PatientInfo extends Component {
 	handleChange = (e) => {
 		var key = e.target.name;
 		var value = e.target.value;
-		var obj = {};
-		obj[key] = value;
-		this.setState(obj);
+		var obj = {};		
+        if(key === 'phone') {
+            this.setState(prevState=> ({ phone: phoneNumberFormatter(value, prevState.phone) }));
+        } else {
+            obj[key] = value;
+            this.setState(obj);
+        }
 	};
+
+    normalizeInput = (value, previousValue) => {
+        // return nothing if no value
+        if (!value) return value; 
+      
+        // only allows 0-9 inputs
+        const currentValue = value.replace(/[^\d]/g, '');
+        const cvLength = currentValue.length; 
+      
+        if (!previousValue || value.length > previousValue.length) {
+      
+          // returns: "x", "xx", "xxx"
+          if (cvLength < 4) return currentValue; 
+      
+          // returns: "(xxx)", "(xxx) x", "(xxx) xx", "(xxx) xxx",
+          if (cvLength < 7) return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3)}`; 
+      
+          // returns: "(xxx) xxx-", (xxx) xxx-x", "(xxx) xxx-xx", "(xxx) xxx-xxx", "(xxx) xxx-xxxx"
+          return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`; 
+        }
+      };
 
 	hasError = (key) => {
 		return this.state.errors.indexOf(key) !== -1;
@@ -184,8 +210,7 @@ class PatientInfo extends Component {
 																? "form-control is-invalid"
 																: "form-control"
 														}
-														pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
-														placeholder="(xxx) xxx-xxxx"
+														placeholder="(XXX) XXX-XXXX"
 														required
 													/>
 													<div
