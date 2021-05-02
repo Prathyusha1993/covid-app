@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {phoneNumberFormatter} from "../../../../utils/util";
 
 class PatientInfo extends Component {
 	constructor(props) {
@@ -22,7 +23,7 @@ class PatientInfo extends Component {
 		var value = e.target.value;
 		var obj = {};		
         if(key === 'phone') {
-            this.setState(prevState=> ({ phone: this.normalizeInput(value, prevState.phone) }));
+            this.setState(prevState=> ({ phone: phoneNumberFormatter(value, prevState.phone) }));
         } else {
             obj[key] = value;
             this.setState(obj);
@@ -209,8 +210,7 @@ class PatientInfo extends Component {
 																? "form-control is-invalid"
 																: "form-control"
 														}
-														pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
-														placeholder="(xxx) xxx-xxxx"
+														placeholder="(XXX) XXX-XXXX"
 														required
 													/>
 													<div
