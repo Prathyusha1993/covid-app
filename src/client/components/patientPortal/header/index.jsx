@@ -59,6 +59,9 @@ class PatientPortalHeader extends Component {
                     <li>
                       <a href="/clinic/audit"> Audit </a>
                     </li>
+                    <li>
+                      <a href="/clinic/unassignedpatient"> UnassignedPatient </a>
+                    </li>
                   </ul>
                 </div>
               </Navbar.Brand>
