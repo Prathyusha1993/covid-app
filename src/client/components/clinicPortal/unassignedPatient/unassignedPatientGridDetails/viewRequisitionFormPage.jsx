@@ -7,6 +7,7 @@ import {
 import moment from "moment";
 import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
+import Barcode from "../barcode";
 
 export default class ViewRequisitionFormpage extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class ViewRequisitionFormpage extends Component {
       collectedDate:'',
       receivedDate:'',
       result:'',
-      released:''
+      released:""
     };
   }
 
@@ -133,6 +134,7 @@ export default class ViewRequisitionFormpage extends Component {
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Physician</label>
+                    {/* physician should be dropdown and a endpoint api call */}
                     <input
                       style={formStyle}
                       type="text"
@@ -200,7 +202,7 @@ export default class ViewRequisitionFormpage extends Component {
                     </select>
                   </div>
                 </div>
-                <div className="col-12 col-md-6">
+                {/* <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Requisition</label>
                     <input
@@ -212,7 +214,7 @@ export default class ViewRequisitionFormpage extends Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Sample</label>
@@ -224,6 +226,12 @@ export default class ViewRequisitionFormpage extends Component {
                       value={this.state.sample}
                       onChange={this.handleChange}
                     />
+                  </div>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="form-group">
+                    {/* <label>Sample</label> */}
+                    <Barcode />
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
