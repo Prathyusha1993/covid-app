@@ -52,6 +52,7 @@ class PatientInfo extends Component {
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Your Information</h2>
+											<button>Create Requisition</button>
 											<p className="card-info">
 												As the patient please enter your information
 											</p>

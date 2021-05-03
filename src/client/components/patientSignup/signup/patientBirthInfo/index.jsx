@@ -73,6 +73,7 @@ class PatientBirthInfo extends Component {
 											<h2 className="card-title">
 												Required Intake Information
 											</h2>
+											<button>Create Requisition</button>
 											<p className="card-info">Date Of Birth</p>
 										</div>
 										<Form

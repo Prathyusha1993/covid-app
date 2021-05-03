@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import QrReader from "react-qr-reader";
 import { Modal, Button } from "react-bootstrap";
-import ViewPatientSignUp from "../unassignedPatientGridDetails/viewPatientSignUp";
+import SignUp from "../../../patientSignup/signup";
 
-class QrScanReader extends Component {
+class ViewPatientSignUp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,27 +19,21 @@ class QrScanReader extends Component {
 		this.setState({ show: false });
 	};
 
-	handleScan = (data) => {
-		if (data) {
-			this.setState({
-				result: data,
-			});
-		}
-	};
-	handleError = (err) => {
-		console.error(err);
-	};
+	
 	render() {
 		return (
 			<div>
-				<button
+				{/* <button
 					onClick={this.handleShow}
 					// style={{ border: "none", backgroundColor: "transparent" }}
           className="btn btn-primary submit-btn button-info-grid"
 				>
           
           <i class="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
-				</button>
+				</button> */}
+                <button  onClick={this.handleShow} className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
+								Decoded QR Code: {this.props.result}
+							</button>
 
 				<Modal
 					size="lg"
@@ -50,23 +43,10 @@ class QrScanReader extends Component {
 					onHide={this.handleClose}
 				>
 					<Modal.Header closeButton>
-						<Modal.Title>Scan QR Code</Modal.Title>
+						<Modal.Title>Patient Sign Up Form</Modal.Title>
 					</Modal.Header>
-					<Modal.Body>
-						<div>
-							<QrReader
-								delay={300}
-								onError={this.handleError}
-								onScan={this.handleScan}
-								className="qrscan-reader"
-							/>
-                <ViewPatientSignUp 
-                  result = {this.state.result}
-                  />
-							{/* <button  className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
-								Decoded QR Code: {this.state.result}
-							</button> */}
-						</div>
+					<Modal.Body id="requisition-btn">
+                        <SignUp />
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={this.handleClose}>
@@ -82,4 +62,4 @@ class QrScanReader extends Component {
 	}
 }
 
-export default QrScanReader;
+export default ViewPatientSignUp;
