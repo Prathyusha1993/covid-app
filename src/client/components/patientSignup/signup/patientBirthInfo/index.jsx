@@ -165,7 +165,11 @@ class PatientBirthInfo extends Component {
 														onChange={this.props.handleChange("ethnicity")}
 													>
 														{ethnicity.map((item) => {
-															return <option value={item.value}>{item.desc}</option>;
+															return <option 
+                                                                value={item.value} 
+                                                                selected={values.ethnicity === item.value}>
+                                                                    {item.desc}
+                                                                </option>;
 														})}
 													</Form.Control>
 
@@ -206,7 +210,8 @@ class PatientBirthInfo extends Component {
 																			// onChange={this.props.handleChange("race")}
 
                                                                             name="groupOptions"
-																			value={values.race}
+                                                                            checked={values.race === item.value}
+																			value={item.value}
 																			onChange={this.props.handleChange("race")}
 
 																			required
@@ -264,11 +269,11 @@ class PatientBirthInfo extends Component {
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
 																			type="checkbox"
-																			value={values.symptoms}
+																			checked={values.symptoms.findIndex((elem) => elem === item.value) !== -1}
 																			onChange={this.props.handleChange(
 																				"symptoms"
 																			)}
-																			required
+																			value={item.value}
 																		/>
 																		<span>{item.value}</span>
 																	{/* </Form.Label> */}

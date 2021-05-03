@@ -27,11 +27,11 @@ export const ethnicity = [
 		desc: "Please Select",
 	},
 	{
-        value: "1",
+        value: "Hispanic or Latino",
 		desc: "Hispanic or Latino",
 	},
 	{
-        value: "2",
+        value: "Not Hispanic or Latino",
 		desc: "Not Hispanic or Latino",
 	},
 ];
