@@ -230,17 +230,18 @@ class UnassignedPatientGridDetails extends Component {
             </button>
           </div>
           <div className="col grid-buttons">
-            <div>
+            <QrScanReader />
+            {/* <div>
               <button
                 className="btn btn-primary submit-btn button-info-grid"
                 onClick={() => this.handleQRShowButton()}
               >
                 <i class="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
-        {this.state.showQrScanner && <QrScanReader />}
+        {/* {this.state.showQrScanner && <QrScanReader />} */}
         <div
           style={{
             width: "100%",
