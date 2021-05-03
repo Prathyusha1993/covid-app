@@ -8970,11 +8970,14 @@ html {
 
 .dropzone-files {
   padding: 7px;
-  width:680px;
+  width:670px;
   border: 1px solid #dae6ff;
   background-color: #dae6ff;
   margin-top: 10px;
   list-style-type: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 4px;
 }
 
 .btn-pagebreak-submit {
@@ -8988,6 +8991,8 @@ html {
   padding-bottom: 10px;
   border-radius: 4px;
   outline: 0;
+  position:relative;
+  float: right;
   display: flex;
   justify-content: flex-end;
   margin-right: 30px;
@@ -9016,8 +9021,14 @@ html {
 
 .dropzone-btn {
   float: right;
-  margin-left: 120px;
-  
+  margin-left: 620px;
+  padding: 3px;
+  border:1px solid #dae6ff;
+  position: absolute;
+  margin-bottom: 7px;
+}
+.dropzone-btn:hover {
+  color: red;
 }
 
 .row-bg-color {
@@ -9040,4 +9051,10 @@ html {
 
 .button-requisition {
   margin-left: 290px;
+}
+
+.submit-success-msg {
+  color:darkgreen;
+  margin-right: 180px;
+  margin-top: 10px;
 }

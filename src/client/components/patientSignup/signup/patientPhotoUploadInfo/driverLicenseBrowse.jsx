@@ -5,11 +5,21 @@ class DriverLicenseBrowse extends Component {
   constructor() {
     super();
     this.onDrop = (files) => {
-      this.setState({files})
+      this.setState({
+        files,
+        showFile: true
+      });
     };
     this.state = {
-      files: []
+      files: [],
+      showFile: false
     };
+  }
+
+  fileDeleteBtn = () => {
+    this.setState({files: [],
+    showFile: false
+  });
   }
 
   render() {
@@ -33,10 +43,13 @@ class DriverLicenseBrowse extends Component {
               
             </div>
             <aside>
+              {this.state.showFile === true ? 
               <ul 
-              // className="dropzone-files"
-              >{files} </ul>
-              {/* <button className="dropzone-btn"><i class="fas fa-trash-alt"></i></button> */}
+               className="dropzone-files row"
+              >{files} <button onClick={this.fileDeleteBtn} className="dropzone-btn"><i class="fas fa-trash-alt"></i></button></ul> : null
+              }
+              
+              
             </aside>
           </section>
         )}

@@ -14,6 +14,7 @@ class SignUp extends Component {
       this.props && this.props.patientDetails ? this.props.patientDetails : "";
     this.state = {
       step: 1,
+      showMessage: false,
       patientId: -1,
       firstName: patientDetails ? patientDetails.firstName : "",
       lastName: patientDetails ? patientDetails.lastName : "",
@@ -168,6 +169,7 @@ class SignUp extends Component {
     else {
       patientSignup(patientInfo).then((data) => {
         console.log("patientSignup success");
+        this.setState({showMessage: true})
       });
     }
   };
@@ -290,6 +292,7 @@ class SignUp extends Component {
       insuredLastName,
       driverLic,
       classStyle,
+      showMessage,
     } = this.state;
     const values = {
       firstName,
@@ -314,6 +317,7 @@ class SignUp extends Component {
       insuredLastName,
       driverLic,
       classStyle,
+      showMessage,
     };
     switch (step) {
       default:

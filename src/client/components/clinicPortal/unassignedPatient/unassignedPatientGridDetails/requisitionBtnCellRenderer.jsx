@@ -5,8 +5,6 @@ import {
   updateResultPDF,
 } from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
-import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import SignUp from "../../../patientSignup/signup";
 import ViewRequisitionFormpage from "./viewRequisitionFormPage";
 import { insuranceProvider } from "../../../patientSignup/signup/selectOptionsData";

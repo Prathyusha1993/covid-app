@@ -159,12 +159,12 @@ class PatientInsuranceInfo extends Component {
                                 {relation.map((item) => {
                                   return (
                                     <option value={item.value}>
-                                      {item.value}
+                                      {item.desc}
                                     </option>
                                   );
                                 })}
                               </Form.Control>
-                              <Form.Control.Feedback
+                              {/* <Form.Control.Feedback
                                 type="invalid"
                                 className="inline-errormsg"
                               >
@@ -174,7 +174,7 @@ class PatientInsuranceInfo extends Component {
                                 >
                                   This field is required.
                                 </i>
-                              </Form.Control.Feedback>
+                              </Form.Control.Feedback> */}
                             </Form.Group>
                           </Form.Row>
 
