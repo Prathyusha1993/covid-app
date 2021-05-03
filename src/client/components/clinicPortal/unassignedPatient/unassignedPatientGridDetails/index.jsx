@@ -9,6 +9,7 @@ import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import QrScanReader from "../qrScanReader";
+import RequisitionBtnCellRenderer from "./requisitionBtnCellRenderer";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -31,13 +32,12 @@ class UnassignedPatientGridDetails extends Component {
         FiltersToolPanelModule,
       ],
       columnDefs: [
-        /*{
-			headerName: "Edit",
-			minWidth: 80,
-			maxWidth: 80,
+        {
+			headerName: "Requistion",
+			minWidth: 150,
 			cellStyle: { textAlign: "center" },
-			cellRenderer: "masterBtnCellRenderer",
-		},*/
+			cellRenderer: "requisitionBtnCellRenderer",
+		},
 
         {
           headerName: "First Name",
@@ -135,12 +135,12 @@ class UnassignedPatientGridDetails extends Component {
           },
         },
       ],
-      /*frameworkComponents: {
-		masterBtnCellRenderer: MasterBtnCellRenderer,
-	},*/
-      /*paginationNumberFormatter: function (params) {
-		return "[" + params.value.toLocaleString() + "]";
-	},*/
+      frameworkComponents: {
+		requisitionBtnCellRenderer: RequisitionBtnCellRenderer,
+	},
+  //     paginationNumberFormatter: function (params) {
+	// 	return "[" + params.value.toLocaleString() + "]";
+	// },
       defaultColDef: {
         flex: 1,
         filter: true,
@@ -265,6 +265,7 @@ class UnassignedPatientGridDetails extends Component {
               rowData={this.state.rowData}
               pagination={true}
               paginationAutoPageSize={true}
+              frameworkComponents={this.state.frameworkComponents}
               //paginationPageSize={20}
             />
           </div>

@@ -122,11 +122,11 @@ class PatientBirthInfo extends Component {
 												</Form.Group>
 
 												<Form.Group as={Col} controlId="formGridEmail">
-													<Form.Label></Form.Label>
+													<Form.Label>Date of Birth
+														<span className="text-danger"> *</span></Form.Label>
 													<Form.Control
 														required
 														type="date"
-														style={{ marginTop: "8px" }}
 														value={values.dob}
 														onChange={this.props.handleChange("dob")}
 													/>
@@ -199,9 +199,9 @@ class PatientBirthInfo extends Component {
 																<li key={item.id} className="checkbox-control">
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
-																			type="checkbox"
-																			checked={values.race}
-																			onChange={this.props.handleChange("race")}
+																			type="radio"
+																			value={values.race}
+																			// onChange={this.props.handleChange("race")}
 																			required
 																		/>
 																		<span>{item.value}</span>
@@ -257,7 +257,7 @@ class PatientBirthInfo extends Component {
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
 																			type="checkbox"
-																			checked={values.symptoms}
+																			value={values.symptoms}
 																			onChange={this.props.handleChange(
 																				"symptoms"
 																			)}
