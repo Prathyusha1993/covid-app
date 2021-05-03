@@ -75,14 +75,14 @@ class PatientInsuranceInfo extends Component {
 													>
 														{insuranceProvider.map((item) => {
                                                             return (
-                                                                <option value={item.id}>{item.value}</option>
+                                                                <option value={item.value}>{item.value}</option>
                                                             );
                                                         })}
 													</Form.Control>
 												</Form.Group>
 											</Form.Row>
                                             {
-                                                values.insuranceProv1 === '2'
+                                                values.insuranceProv1 === 'Self/Pay'
                                                 ? null
                                                 : 
                                                 <div>
