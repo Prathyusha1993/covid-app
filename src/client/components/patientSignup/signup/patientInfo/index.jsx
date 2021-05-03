@@ -13,19 +13,6 @@ class PatientInfo extends Component {
 		};
 	}
 
-	// handleChange = (e) => {
-	// 	var key = e.target.name;
-	// 	var value = e.target.value;
-	// 	var obj = {};
-	//     if(key === 'phone') {
-	//         this.setState(prevState=> ({ phone: phoneNumberFormatter(value, prevState.phone) }));
-	//     } else {
-	//         obj[key] = value;
-	//         this.setState(obj);
-	//     }
-	// };
-
-
 	continue = (e) => {
 		// const form = e.currentTarget;
 		const form = document.getElementById("patientInfoForm");
@@ -44,7 +31,6 @@ class PatientInfo extends Component {
 	// 	this.setState({ viewModal: e.currentTarget.id})
 	// }
 
-
 	render() {
 		const { values } = this.props;
 		return (
@@ -57,7 +43,7 @@ class PatientInfo extends Component {
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Your Information</h2>
-											
+
 											<p className="card-info">
 												As the patient please enter your information
 											</p>
@@ -165,7 +151,7 @@ class PatientInfo extends Component {
 														required
 														type="tel"
 														value={values.phone}
-                                                        placeholder="(XXX) XXX-XXXX"
+														placeholder="(XXX) XXX-XXXX"
 														onChange={this.props.handleChange("phone")}
 													/>
 													<Form.Control.Feedback
@@ -260,214 +246,6 @@ class PatientInfo extends Component {
 												</Button>
 											</div>
 										</Form>
-										{/* <form
-											noValidate
-											validated={values.validated}>
-											<div className="row " style={{ paddingBottom: "25px" }}>
-												<div className="col-md-6">
-													<label
-														className="signup-label-font"
-													>
-														Full Name <span className="text-danger"> *</span>
-													</label>
-													<input
-														autoComplete="off"
-														type="text"
-														value={values.firstName}
-														onChange={this.props.handleChange("firstName")}
-														className={
-															this.hasError("firstName")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														required
-													/>
-													<label className="home-page-label">First Name</label>
-													<div
-														className={
-															this.hasError("firstName")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
-													</div>
-												</div>
-												<div className="col-md-6">
-													<label> </label>
-													<input
-														autoComplete="off"
-														style={{ marginTop: "8px" }}
-														type="text"
-														value={values.lastName}
-														onChange={this.props.handleChange("lastName")}
-														className={
-															this.hasError("lastName")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														required
-													/>
-													<label className="home-page-label">last Name</label>
-												</div>
-											</div>
-											<div className="row" style={{ paddingBottom: "25px" }}>
-												<div className="col-md-6">
-													<label className="signup-label-font">
-														E-mail <span className="text-danger"> *</span>
-													</label>
-													<input
-														autoComplete="off"
-														type="text"
-														name="email"
-														value={values.email}
-														onChange={this.props.handleChange("email")}
-														className={
-															this.hasError("email")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														required
-													/>
-													<label className="home-page-label">
-														{" "}
-														example@example.com{" "}
-													</label>
-													<div
-														className={
-															this.hasError("email")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required and enter valid email.</i>
-													</div>
-												</div>
-												<div className="col-md-6">
-													<label className="signup-label-font">
-														Phone <span className="text-danger"> *</span>{" "}
-													</label>
-													<input
-														autoComplete="off"
-														type="tel"
-														name="phone"
-														value={values.phone}
-														onChange={this.props.handleChange("phone")}
-														className={
-															this.hasError("phone")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														placeholder="(XXX) XXX-XXXX"
-														required
-													/>
-													<div
-														className={
-															this.hasError("phone")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
-													</div>
-												</div>
-											</div>
-											<div className="form-bottom-border">
-												<div class="form-group">
-													<label className="signup-label-font">
-														Address <span className="text-danger"> *</span>{" "}
-													</label>
-													<input
-														autoComplete="off"
-														type="text"
-														className={
-															this.hasError("address")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														name="address"
-														value={values.address}
-														onChange={this.props.handleChange("address")}
-														required
-													/>
-													<label className="home-page-label">
-														Street Address
-													</label>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label> </label>
-														<input
-															autoComplete="off"
-															type="text"
-															name="city"
-															value={values.city}
-															onChange={this.props.handleChange("city")}
-															className={
-																this.hasError("city")
-																	? "form-control is-invalid"
-																	: "form-control"
-															}
-															required
-														/>
-														<label className="home-page-label"> City </label>
-														
-													</div>
-													<div className="col-md-6">
-														<label> </label>
-														<input
-															autoComplete="off"
-															type="text"
-															name="state"
-															value={values.state}
-															onChange={this.props.handleChange("state")}
-															className={
-																this.hasError("state")
-																	? "form-control is-invalid"
-																	: "form-control"
-															}
-															required
-														/>
-														<label className="home-page-label"> State </label>
-														
-													</div>
-												</div>
-												<div class="form-group">
-													<label> </label>
-													<input
-														autoComplete="off"
-														type="number"
-														className={
-															this.hasError("zipCode")
-																? "form-control is-invalid"
-																: "form-control"
-														}
-														name="zipCode"
-														value={values.zipCode}
-														onChange={this.props.handleChange("zipCode")}
-														required
-													/>
-													<label className="home-page-label"> Zip Code </label>
-													<div
-														className={
-															this.hasError("zipCode")
-																? "inline-errormsg"
-																: "hidden"
-														}
-													>
-														<i class="fa fa-exclamation-circle" aria-hidden="true">This field is required.</i>
-													</div>
-												</div>
-											</div>
-											<div className=" row next-button btn-patientinfo-next">
-												<button
-													className="btn-pagebreak-next"
-													onClick={this.continue}
-												>
-													Next
-												</button>
-											</div>
-										</form> */}
 									</div>
 								</div>
 							</div>
