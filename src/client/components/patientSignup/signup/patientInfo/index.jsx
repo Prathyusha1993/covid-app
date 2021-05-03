@@ -122,7 +122,7 @@ class PatientInfo extends Component {
 													</Form.Label>
 													<Form.Control
 														required
-														type="text"
+														type="email"
 														value={values.email}
 														onChange={this.props.handleChange("email")}
 													/>
@@ -138,7 +138,7 @@ class PatientInfo extends Component {
 															class="fa fa-exclamation-circle"
 															aria-hidden="true"
 														>
-															This field is required.
+															Enter a valid email.
 														</i>
 													</Form.Control.Feedback>
 												</Form.Group>
@@ -151,6 +151,7 @@ class PatientInfo extends Component {
 														required
 														type="tel"
 														value={values.phone}
+                                                        placeholder="(XXX) XXX-XXXX"
 														onChange={this.props.handleChange("phone")}
 													/>
 													<Form.Control.Feedback

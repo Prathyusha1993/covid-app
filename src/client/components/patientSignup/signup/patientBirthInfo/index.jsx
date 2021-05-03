@@ -200,8 +200,14 @@ class PatientBirthInfo extends Component {
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
 																			type="radio"
-																			value={values.race}
+
+																			//value={values.race}
 																			// onChange={this.props.handleChange("race")}
+
+                                                                            name="groupOptions"
+																			value={values.race}
+																			onChange={this.props.handleChange("race")}
+
 																			required
 																		/>
 																		<span>{item.value}</span>

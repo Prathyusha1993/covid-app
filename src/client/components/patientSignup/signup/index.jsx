@@ -34,26 +34,26 @@ class SignUp extends Component {
 		};
 	}
 
-	handleChange = input => (e) => {
-		// var key = e.target.name;
-		// var value = e.target.value;
-		// var obj = {};
-		// if (key === "phone") {
-		// 	this.setState((prevState) => ({
-		// 		phone: phoneNumberFormatter(value, prevState.phone),
-		// 	}));
-		// } else {
-		// 	obj[key] = value;
-		if(e.target.type === "checkbox"){
-			        this.setState({ [input]: e.target.checked});
-			    }
-			    else {
-			        this.setState({ [input]: e.target.value});
-			    }
-			
-	};
-	
-
+    handleChange = input => (e) => {
+        // var key = e.target.name;
+        // var value = e.target.value;
+        // var obj = {};
+        // if (key === "phone") {
+        // 	this.setState((prevState) => ({
+        // 		phone: phoneNumberFormatter(value, prevState.phone),
+        // 	}));
+        // } else {
+        // 	obj[key] = value;
+        if (e.target.type === "checkbox") {
+            this.setState({ [input]: e.target.checked });
+        } else if(input === 'phone') {
+            this.setState((prevState) => ({
+				phone: phoneNumberFormatter(e.target.value, prevState.phone),
+			}));
+        } else {
+            this.setState({ [input]: e.target.value });
+        }
+    };
 
 	nextStep = (e) => {
 		const { step } = this.state;
