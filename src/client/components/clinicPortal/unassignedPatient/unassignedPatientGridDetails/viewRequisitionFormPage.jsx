@@ -232,6 +232,7 @@ export default class ViewRequisitionFormpage extends Component {
                   <div className="form-group">
                     {/* <label>Sample</label> */}
                     <Barcode />
+                    <button className="btn btn-primary submit-btn button-info-grid">Auto Generate</button>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
