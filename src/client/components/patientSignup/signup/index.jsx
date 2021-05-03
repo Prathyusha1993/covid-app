@@ -37,7 +37,9 @@ class SignUp extends Component {
       insuredFirstName: patientDetails ? patientDetails.insuredFirstName : "",
       insuredLastName: patientDetails ? patientDetails.insuredLastName : "",
       driverLic: patientDetails ? patientDetails.driverLic : "",
-      classStyle: patientDetails ? patientDetails.classStyle : "",
+      classStyle: patientDetails
+        ? patientDetails.classStyle
+        : "col-md-6 col-lg-7 col-xl-7",
     };
 
     // TODO: temp code for dev purpose, remove later
