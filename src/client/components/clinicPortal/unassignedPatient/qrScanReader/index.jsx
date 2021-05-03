@@ -24,6 +24,7 @@ class QrScanReader extends Component {
 		if (data) {
 			this.setState({
 				result: data,
+        // show: false
 			});
 		}
 	};
@@ -62,6 +63,7 @@ class QrScanReader extends Component {
 							/>
                 <ViewPatientSignUp 
                   result = {this.state.result}
+                  // closeQrScanner = {this.handleClose}
                   />
 							{/* <button  className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
 								Decoded QR Code: {this.state.result}

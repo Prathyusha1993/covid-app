@@ -9,6 +9,7 @@ class PatientInfo extends Component {
 			errors: [],
 			firstName: "",
 			validated: false,
+			viewModal: "",
 		};
 	}
 
@@ -39,6 +40,10 @@ class PatientInfo extends Component {
 		}
 	};
 
+	// requisitionBtn = (e) => {
+	// 	this.setState({ viewModal: e.currentTarget.id})
+	// }
+
 
 	render() {
 		const { values } = this.props;
@@ -52,10 +57,18 @@ class PatientInfo extends Component {
 									<div className="card-body">
 										<div className="card-name">
 											<h2 className="card-title">Your Information</h2>
-											<button>Create Requisition</button>
+											
 											<p className="card-info">
 												As the patient please enter your information
 											</p>
+											{/* {
+												this.state.viewModal === "requisition-btn" 
+												
+											? <div id="requisition-btn" onClick={this.requisitionBtn} className="button-requisition">
+											<button >Create Requisition</button>
+										</div>
+										: null
+											} */}
 										</div>
 										<Form
 											id="patientInfoForm"

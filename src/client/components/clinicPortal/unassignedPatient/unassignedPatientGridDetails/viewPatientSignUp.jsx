@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import SignUp from "../../../patientSignup/signup";
+import ViewRequisitionFormpage from "./viewRequisitionFormPage";
 
 class ViewPatientSignUp extends Component {
 	constructor(props) {
@@ -31,9 +32,12 @@ class ViewPatientSignUp extends Component {
           
           <i class="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
 				</button> */}
-                <button  onClick={this.handleShow} className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
+				<div onClick={this.handleShow}>
+				<button className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
 								Decoded QR Code: {this.props.result}
 							</button>
+				</div>
+                
 
 				<Modal
 					size="lg"
@@ -43,9 +47,13 @@ class ViewPatientSignUp extends Component {
 					onHide={this.handleClose}
 				>
 					<Modal.Header closeButton>
-						<Modal.Title>Patient Sign Up Form</Modal.Title>
+						<Modal.Title 
+						id="contained-modal-title-vcenter"
+						>Patient Sign Up Form</Modal.Title>
 					</Modal.Header>
 					<Modal.Body id="requisition-btn">
+						{/* <button className="btn btn-primary submit-btn button-info-grid button-requisition">Create Requisition</button> */}
+						<ViewRequisitionFormpage />
                         <SignUp />
 					</Modal.Body>
 					<Modal.Footer>
