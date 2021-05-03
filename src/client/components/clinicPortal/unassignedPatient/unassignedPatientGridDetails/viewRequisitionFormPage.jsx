@@ -8,27 +8,32 @@ import moment from "moment";
 import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import Barcode from "../barcode";
+import { fetchPhysicians } from "../../../../clinicPortalServices/physicianService";
 
 export default class ViewRequisitionFormpage extends Component {
   constructor(props) {
     super(props);
     //console.log(props);
+    var patientDetails =
+      this.props && this.props.patientDetails ? this.props.patientDetails : "";
     this.state = {
       show: false,
-      patientName:"",
-      mrn:"",
-      dob:"",
-      gender:"",
-      provider:"",
-      facilitySource:'',
-      description:'',
-      testType:'',
-      requisition:'',
-      sample:'',
-      collectedDate:'',
-      receivedDate:'',
-      result:'',
-      released:""
+      patientName: patientDetails
+        ? patientDetails.firstName + " " + patientDetails.lastName
+        : "",
+      mrn: patientDetails ? patientDetails.mrn : "",
+      dob:
+        patientDetails && patientDetails.dob
+          ? moment(patientDetails.dob, "YYYY-MM-DD").format("MM/DD/YYYY")
+          : "",
+      gender: patientDetails ? patientDetails.sex : "",
+      provider: "",
+      facilitySource: "",
+      description: "",
+      testType: "",
+      sample: "",
+      collectedDate: "",
+      collectorName: "",
     };
   }
 
@@ -37,13 +42,28 @@ export default class ViewRequisitionFormpage extends Component {
   };
 
   handleClose = () => {
-    this.setState({ show: false});
+    this.setState({ show: false });
   };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  
+
+  loadDataForModal = () => {
+    console.log("loadDataForModal");
+    this.getPhysicians();
+  };
+
+  getPhysicians = () => {
+    var facilityId = "605d5a61177b981d99677ea3"; // window.localStorage.getItem("FACILITY_ID");
+
+    fetchPhysicians(facilityId).then((data) => {
+      console.log(data);
+      this.setState({ physicians: data.data });
+    });
+
+    console.log(this.state);
+  };
 
   render() {
     const formStyle = {
@@ -57,12 +77,13 @@ export default class ViewRequisitionFormpage extends Component {
         <button
           onClick={this.handleShow}
           className="btn btn-primary submit-btn button-info-grid button-requisition"
-        //   style={{ border: "none", backgroundColor: "transparent" }}
+          //   style={{ border: "none", backgroundColor: "transparent" }}
         >
           Create Requisition
         </button>
 
         <Modal
+          onEnter={this.loadDataForModal}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -232,7 +253,9 @@ export default class ViewRequisitionFormpage extends Component {
                   <div className="form-group">
                     {/* <label>Sample</label> */}
                     <Barcode />
-                    <button className="btn btn-primary submit-btn button-info-grid">Auto Generate</button>
+                    <button className="btn btn-primary submit-btn button-info-grid">
+                      Auto Generate
+                    </button>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -254,50 +277,15 @@ export default class ViewRequisitionFormpage extends Component {
 
                 <div className="col-12 col-md-6">
                   <div className="form-group">
-                    <label>Received Date</label>
+                    <label>Collector Name</label>
                     <input
                       style={formStyle}
                       type="text"
                       className="form-control"
-                      name="receivedDate"
-                      value={this.state.receivedDate}
+                      name="collectorName"
+                      value={this.state.collectorName}
                       onChange={this.handleChange}
                     />
-                    <label style={{ fontSize: "13px" }}>
-                      Date format - MM/DD/YYYY hh:mi AM/PM
-                    </label>
-                  </div>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Result</label>
-                    <select
-                      style={formStyle}
-                      className="form-control select"
-                      name="result"
-                      value={this.state.result}
-                      onChange={this.handleChange}
-                    >
-                      {results.map((res) => {
-                        return <option>{res.result}</option>;
-                      })}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Released Date</label>
-                    <input
-                      style={formStyle}
-                      type="text"
-                      className="form-control"
-                      name="released"
-                      value={this.state.released}
-                      onChange={this.handleChange}
-                    />
-                    <label style={{ fontSize: "13px" }}>
-                      Date format - MM/DD/YYYY hh:mi AM/PM
-                    </label>
                   </div>
                 </div>
               </div>

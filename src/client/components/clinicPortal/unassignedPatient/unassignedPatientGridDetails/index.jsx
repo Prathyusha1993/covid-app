@@ -33,11 +33,12 @@ class UnassignedPatientGridDetails extends Component {
       ],
       columnDefs: [
         {
-			headerName: "Requistion",
-			minWidth: 150,
-			cellStyle: { textAlign: "center" },
-			cellRenderer: "requisitionBtnCellRenderer",
-		},
+          headerName: "Requistion",
+          minWidth: 120,
+          maxWidth: 120,
+          cellStyle: { textAlign: "center" },
+          cellRenderer: "requisitionBtnCellRenderer",
+        },
 
         {
           headerName: "First Name",
@@ -136,11 +137,11 @@ class UnassignedPatientGridDetails extends Component {
         },
       ],
       frameworkComponents: {
-		requisitionBtnCellRenderer: RequisitionBtnCellRenderer,
-	},
-  //     paginationNumberFormatter: function (params) {
-	// 	return "[" + params.value.toLocaleString() + "]";
-	// },
+        requisitionBtnCellRenderer: RequisitionBtnCellRenderer,
+      },
+      //     paginationNumberFormatter: function (params) {
+      // 	return "[" + params.value.toLocaleString() + "]";
+      // },
       defaultColDef: {
         flex: 1,
         filter: true,
