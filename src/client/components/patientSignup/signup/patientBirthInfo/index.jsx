@@ -122,11 +122,11 @@ class PatientBirthInfo extends Component {
 												</Form.Group>
 
 												<Form.Group as={Col} controlId="formGridEmail">
-													<Form.Label></Form.Label>
+													<Form.Label>Date of Birth
+														<span className="text-danger"> *</span></Form.Label>
 													<Form.Control
 														required
 														type="date"
-														style={{ marginTop: "8px" }}
 														value={values.dob}
 														onChange={this.props.handleChange("dob")}
 													/>
@@ -204,10 +204,15 @@ class PatientBirthInfo extends Component {
 																	{/* <Form.Label> */}
 																		<FormCheck.Input
 																			type="radio"
+
+																			//value={values.race}
+																			// onChange={this.props.handleChange("race")}
+
                                                                             name="groupOptions"
                                                                             checked={values.race === item.value}
 																			value={item.value}
 																			onChange={this.props.handleChange("race")}
+
 																			required
 																		/>
 																		<span>{item.value}</span>

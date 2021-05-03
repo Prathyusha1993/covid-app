@@ -9025,13 +9025,15 @@ html {
 }
 
 .qrscan-reader {
-  width: 40%;
+  width: 45%;
   margin-left: 30%;
 }
 
-.qrscn-reader-p {
+.qrscn-reader-btn {
   padding-top: 10px;
   margin-left: 35%;
-  color: green;
   font-size: 17px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  align-items: center;
 }
