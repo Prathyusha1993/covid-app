@@ -15,7 +15,8 @@ class SignUp extends Component {
     this.state = {
       step: 1,
       showMessage: false,
-      patientId: -1,
+      message: "",
+      patientId: patientDetails ? patientDetails.patientId : "",
       firstName: patientDetails ? patientDetails.firstName : "",
       lastName: patientDetails ? patientDetails.lastName : "",
       email: patientDetails ? patientDetails.email : "",
@@ -160,16 +161,21 @@ class SignUp extends Component {
       driverLic: this.state.driverLic,
     };
     //update existing patient info from clinic login
-    if (this.props && this.props.patient_Id) {
+    if (this.props && this.state.patientId) {
       updateUnassignedPatientDetails(patientInfo).then((data) => {
         console.log("patientUpdate success");
+        this.setState({ showMessage: true });
+        this.setState({ message: "Updated the changes successfully!!" });
       });
     }
     //new patient sign up
     else {
       patientSignup(patientInfo).then((data) => {
         console.log("patientSignup success");
-        this.setState({showMessage: true})
+        this.setState({ showMessage: true });
+        this.setState({
+          message: "Thank you for contacting us, You're all signed up.",
+        });
       });
     }
   };
@@ -293,6 +299,7 @@ class SignUp extends Component {
       driverLic,
       classStyle,
       showMessage,
+      message,
     } = this.state;
     const values = {
       firstName,
@@ -318,6 +325,7 @@ class SignUp extends Component {
       driverLic,
       classStyle,
       showMessage,
+      message,
     };
     switch (step) {
       default:
