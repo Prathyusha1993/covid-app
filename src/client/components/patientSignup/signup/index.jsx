@@ -42,6 +42,9 @@ class SignUp extends Component {
       classStyle: patientDetails
         ? patientDetails.classStyle
         : "col-md-6 col-lg-7 col-xl-7",
+      driverLicFile: "",
+      insuranceFrontPageFile: "",
+      insuranceBackPageFile: "",
     };
 
     // TODO: temp code for dev purpose, remove later
@@ -72,6 +75,9 @@ class SignUp extends Component {
       insuredLastName: "InsLast",
       driverLic: "DL789",
       classStyle: "col-md-12 col-lg-7 col-xl-7",
+      driverLicFile:"",
+        insuranceFrontPageFile:"",
+        insuranceBackPageFile:"",
     };
 	*/
     this.getPatientDetails();
@@ -159,6 +165,9 @@ class SignUp extends Component {
       insuredFirstName: this.state.insuredFirstName,
       insuredLastName: this.state.insuredLastName,
       driverLic: this.state.driverLic,
+      driverLicFile: this.state.driverLicFile,
+      insuranceFrontPageFile: this.state.insuranceFrontPageFile,
+      insuranceBackPageFile: this.state.insuranceBackPageFile,
     };
     //update existing patient info from clinic login
     if (this.props && this.state.patientId) {
@@ -300,6 +309,9 @@ class SignUp extends Component {
       classStyle,
       showMessage,
       message,
+      driverLicFile,
+      insuranceFrontPageFile,
+      insuranceBackPageFile,
     } = this.state;
     const values = {
       firstName,
@@ -326,6 +338,9 @@ class SignUp extends Component {
       classStyle,
       showMessage,
       message,
+      driverLicFile,
+      insuranceFrontPageFile,
+      insuranceBackPageFile,
     };
     switch (step) {
       default:

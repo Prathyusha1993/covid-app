@@ -72,7 +72,9 @@ class PatientInsuranceInfo extends Component {
                         >
                           {insuranceProvider.map((item) => {
                             return (
-                              <option value={item.value}>{item.value}</option>
+                              <option value={item.value} key={item.value}>
+                                {item.value}
+                              </option>
                             );
                           })}
                         </Form.Control>
@@ -135,7 +137,7 @@ class PatientInsuranceInfo extends Component {
                             >
                               {relation.map((item) => {
                                 return (
-                                  <option value={item.value}>
+                                  <option value={item.value} key={item.value}>
                                     {item.desc}
                                   </option>
                                 );

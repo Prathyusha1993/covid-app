@@ -36,6 +36,11 @@ export const patientSignup = (patientDetails) => {
             "insurance_provider": patientDetails.insuranceProv1.toLowerCase() == "other" ? patientDetails.insuranceProv2:patientDetails.insuranceProv1,
             "relation_to_insured":patientDetails.relation,
             "is_active": true
+        },
+        "images":{
+            "drivers_license": patientDetails.driverLicFile,
+            "insurance_front": patientDetails.insuranceFrontPageFile,
+            "insurance_back": patientDetails.insuranceBackPageFile
         }
     };
     console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
