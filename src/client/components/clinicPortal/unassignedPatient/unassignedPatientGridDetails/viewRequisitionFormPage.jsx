@@ -139,8 +139,8 @@ export default class ViewRequisitionFormpage extends Component {
     saveRequisitionChanges(reqInfo). then((changedReqDetails) => {
       this.setState({
         reqInfo: changedReqDetails,
+        showMessage: true,
         show: false,
-        showMessage: true
       });
     });
   };
