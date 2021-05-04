@@ -60,33 +60,6 @@ export default class RequisitionBtnCellRenderer extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleOrderEditChanges = () => {
-    const editParams = {};
-    saveOrderEditData(editParams).then((userDetails) => {
-      this.setState({
-        editParams: userDetails,
-        show: false,
-      });
-
-      // call refresh grid function
-      //this.props.data.refreshGrid();
-      this.state.refreshGrid();
-
-      editParams.collectedDate = editParams.collectedDate
-        ? moment(editParams.collectedDate, "YYYYMMDDHHmmss").format(
-            "MM/DD/YYYY hh:mm A"
-          )
-        : "";
-      editParams.receivedDate = editParams.receivedDate
-        ? moment(editParams.receivedDate, "YYYYMMDDHHmmss").format(
-            "MM/DD/YYYY hh:mm A"
-          )
-        : "";
-      //call this method to generate/update the result letter pdf
-      updateResultPDF(editParams).then((data) => {});
-    });
-  };
-
   getPatientDetails = () => {
     if (this.state.patientId) {
       console.log(this.state.patientId);
