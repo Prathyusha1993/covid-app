@@ -227,7 +227,7 @@ class UnassignedPatientGridDetails extends Component {
               className="btn btn-primary submit-btn button-info-grid"
               onClick={() => this.clearFilter()}
             >
-              <i class="fa fa-times" aria-hidden="true"></i> Clear Filter
+              <i className="fa fa-times" aria-hidden="true"></i> Clear Filter
             </button>
           </div>
           <div className="col grid-buttons">

@@ -15,7 +15,8 @@ class SignUp extends Component {
     this.state = {
       step: 1,
       showMessage: false,
-      patientId: -1,
+      message: "",
+      patientId: patientDetails ? patientDetails.patientId : "",
       firstName: patientDetails ? patientDetails.firstName : "",
       lastName: patientDetails ? patientDetails.lastName : "",
       email: patientDetails ? patientDetails.email : "",
@@ -41,6 +42,9 @@ class SignUp extends Component {
       classStyle: patientDetails
         ? patientDetails.classStyle
         : "col-md-6 col-lg-7 col-xl-7",
+      driverLicFile: "",
+      insuranceFrontPageFile: "",
+      insuranceBackPageFile: "",
     };
 
     // TODO: temp code for dev purpose, remove later
@@ -71,6 +75,9 @@ class SignUp extends Component {
       insuredLastName: "InsLast",
       driverLic: "DL789",
       classStyle: "col-md-12 col-lg-7 col-xl-7",
+      driverLicFile:"",
+        insuranceFrontPageFile:"",
+        insuranceBackPageFile:"",
     };
 	*/
     this.getPatientDetails();
@@ -158,18 +165,26 @@ class SignUp extends Component {
       insuredFirstName: this.state.insuredFirstName,
       insuredLastName: this.state.insuredLastName,
       driverLic: this.state.driverLic,
+      driverLicFile: this.state.driverLicFile,
+      insuranceFrontPageFile: this.state.insuranceFrontPageFile,
+      insuranceBackPageFile: this.state.insuranceBackPageFile,
     };
     //update existing patient info from clinic login
-    if (this.props && this.props.patient_Id) {
+    if (this.props && this.state.patientId) {
       updateUnassignedPatientDetails(patientInfo).then((data) => {
         console.log("patientUpdate success");
+        this.setState({ showMessage: true });
+        this.setState({ message: "Updated the changes successfully!!" });
       });
     }
     //new patient sign up
     else {
       patientSignup(patientInfo).then((data) => {
         console.log("patientSignup success");
-        this.setState({showMessage: true})
+        this.setState({ showMessage: true });
+        this.setState({
+          message: "Thank you for contacting us, You're all signed up.",
+        });
       });
     }
   };
@@ -293,6 +308,10 @@ class SignUp extends Component {
       driverLic,
       classStyle,
       showMessage,
+      message,
+      driverLicFile,
+      insuranceFrontPageFile,
+      insuranceBackPageFile,
     } = this.state;
     const values = {
       firstName,
@@ -318,6 +337,10 @@ class SignUp extends Component {
       driverLic,
       classStyle,
       showMessage,
+      message,
+      driverLicFile,
+      insuranceFrontPageFile,
+      insuranceBackPageFile,
     };
     switch (step) {
       default:

@@ -16,7 +16,7 @@ export default class RequisitionBtnCellRenderer extends Component {
     //console.log(props);
     this.state = {
       show: false,
-      patient_Id: props.data._id,
+      patientId: props.data._id,
       physicians: [],
       patientDetails: {
         patientId: -1,
@@ -88,10 +88,10 @@ export default class RequisitionBtnCellRenderer extends Component {
   };
 
   getPatientDetails = () => {
-    if (this.state.patient_Id) {
-      console.log(this.state.patient_Id);
+    if (this.state.patientId) {
+      console.log(this.state.patientId);
 
-      fetchUnassignedPatientDetails(this.state.patient_Id).then((data) => {
+      fetchUnassignedPatientDetails(this.state.patientId).then((data) => {
         console.log(data.data[0]);
 
         if (data && data.data[0]) {
@@ -165,7 +165,7 @@ export default class RequisitionBtnCellRenderer extends Component {
           onClick={this.getPatientDetails}
           style={{ border: "none", backgroundColor: "transparent" }}
         >
-          <i class="fas fa-notes-medical"></i>
+          <i className="fas fa-notes-medical"></i>
         </button>
 
         <Modal
@@ -180,10 +180,18 @@ export default class RequisitionBtnCellRenderer extends Component {
             <Modal.Title>Patient Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ViewRequisitionFormpage
-              patientDetails={this.state.patientDetails}
-            />
-            <SignUp patientDetails={this.state.patientDetails} />
+            <div className="row">
+              <div className="col-12">
+                <ViewRequisitionFormpage
+                  patientDetails={this.state.patientDetails}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <SignUp patientDetails={this.state.patientDetails} />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>

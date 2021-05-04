@@ -39,7 +39,7 @@ class QrScanReader extends Component {
           // style={{ border: "none", backgroundColor: "transparent" }}
           className="btn btn-primary submit-btn button-info-grid"
         >
-          <i class="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
+          <i className="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
         </button>
 
         <Modal
@@ -48,6 +48,7 @@ class QrScanReader extends Component {
           centered
           show={this.state.show}
           onHide={this.handleClose}
+          id="scanQRcodeModal"
         >
           <Modal.Header closeButton>
             <Modal.Title>Scan QR Code</Modal.Title>

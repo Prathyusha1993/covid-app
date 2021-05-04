@@ -1,6 +1,18 @@
 import { getUserAuthToken } from "../utils/util";
 import { serviceConstants } from "../patientPortalServices/constants";
 
+export const generateUniqueKey = () => {
+	var token  = getUserAuthToken();
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/uniquekey`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
+		},
+	})
+	.then((response) => response.json());
+}
+
 export const saveRequisitionChanges = (reqInfo) => {
 	if(! reqInfo) throw "Order obj is null";
 	var token  = getUserAuthToken();
@@ -17,6 +29,7 @@ export const saveRequisitionChanges = (reqInfo) => {
             test_type: reqInfo.testType,
             sample:reqInfo.sample,
             collected: reqInfo.collectedDate,
+            collector_name: reqInfo.collectorName,
             received: reqInfo.receivedDate,
             requisition: reqInfo.requisition,
             covid_detected: reqInfo.covidDetected,
@@ -40,7 +53,8 @@ export const saveRequisitionChanges = (reqInfo) => {
         lab_order_id: reqInfo.labOrderId,
         lab_source: reqInfo.labSource
 	};
-	console.log(updatedRequisition);	
+	console.log("updatedRequisition",JSON.stringify(updatedRequisition));	
+    
 	return fetch(` ${serviceConstants.API_HOST_NAME}/order/v1/`, {
 		method: "POST",
 		headers: {

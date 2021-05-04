@@ -44,6 +44,12 @@ class ViewPatientSignUp extends Component {
   handleShow = () => {
     this.getPatientDetails();
     //this.setState({ show: true });
+    /*
+    var modal = document.getElementById("scanQRcodeModal");
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    modal.setAttribute("style", "display: none");
+    modal.setAttribute("show", "false");*/
   };
 
   handleClose = () => {
@@ -145,10 +151,19 @@ class ViewPatientSignUp extends Component {
           </Modal.Header>
           <Modal.Body id="requisition-btn">
             {/* <button className="btn btn-primary submit-btn button-info-grid button-requisition">Create Requisition</button> */}
-            <ViewRequisitionFormpage
-              patientDetails={this.state.patientDetails}
-            />
-            <SignUp patientDetails={this.state.patientDetails} />
+
+            <div className="row">
+              <div className="col-12">
+                <ViewRequisitionFormpage
+                  patientDetails={this.state.patientDetails}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <SignUp patientDetails={this.state.patientDetails} />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
