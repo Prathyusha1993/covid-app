@@ -238,6 +238,7 @@ export default class ViewRequisitionFormpage extends Component {
                   <div className="form-group">
                     <label>Physician</label>
                     <select
+                      required
                       style={formStyle}
                       type="text"
                       className="form-control select"
