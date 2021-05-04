@@ -12,3 +12,7 @@ export const fetchPhysicians = (facilityId) => {
 	}).then((response) => response.json());
 };
 
+export const generateUniqueKey = () => {
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/uniquekey`)
+	.then((response) => response.json());
+}

@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import {
-  saveOrderEditData,
-  updateResultPDF,
-} from "../../../../clinicPortalServices/orderEditService";
 import moment from "moment";
 import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import Barcode from "../barcode";
-import { fetchPhysicians } from "../../../../clinicPortalServices/physicianService";
+import { fetchPhysicians, generateUniqueKey } from "../../../../clinicPortalServices/physicianService";
+import { saveRequisitionChanges } from "../../../../clinicPortalServices/requisitionService";
 
 export default class ViewRequisitionFormpage extends Component {
   constructor(props) {
@@ -17,6 +14,7 @@ export default class ViewRequisitionFormpage extends Component {
     var patientDetails =
       this.props && this.props.patientDetails ? this.props.patientDetails : "";
     this.state = {
+      showMessage: false,
       show: false,
       patientName: patientDetails
         ? patientDetails.firstName + " " + patientDetails.lastName
@@ -27,13 +25,38 @@ export default class ViewRequisitionFormpage extends Component {
           ? moment(patientDetails.dob, "YYYY-MM-DD").format("MM/DD/YYYY")
           : "",
       gender: patientDetails ? patientDetails.sex : "",
-      provider: "",
+      provider: [],
       facilitySource: "",
       description: "",
       testType: "",
       sample: "",
       collectedDate: "",
       collectorName: "",
+      uniqueKey: "",
+      receivedDate:"",
+      requisition:"",
+      covidDetected:"",
+      testInfoCode:"",
+      testInfoCodeType:"",
+      testInfoDescription:"",
+      value:"",
+      comments:"",
+      pdfPath:"",
+      resultDate:"",
+      released:"",
+      releasedBy:"",
+      patientId:"",
+      facilityId:"",
+      orderDate:"",
+      facilityOrderId:"",
+      labOrderId:"",
+      labSource:"",
+      providerFirstName:"",
+      providerLastName:"",
+      providerNPI:"",
+      resultCode:"",
+      resultCodeType:"",
+      resultDesc:""
     };
   }
 
@@ -52,17 +75,74 @@ export default class ViewRequisitionFormpage extends Component {
   loadDataForModal = () => {
     console.log("loadDataForModal");
     this.getPhysicians();
+    this.autoGenerateKey();
   };
 
   getPhysicians = () => {
     var facilityId = "605d5a61177b981d99677ea3"; // window.localStorage.getItem("FACILITY_ID");
 
-    fetchPhysicians(facilityId).then((data) => {
-      console.log(data);
-      this.setState({ physicians: data.data });
+    fetchPhysicians(facilityId).then((response) => {
+      console.log(response);
+      // this.setState({ physicians: response.data });
+      this.setState({ provider: response.data });
+      console.log(this.state.provider);
     });
+    // console.log(this.state);
+  };
 
-    console.log(this.state);
+  autoGenerateKey = () => {
+    generateUniqueKey().then((response) => {
+      console.log(response);
+      this.setState({uniqueKey: response.data});
+    });
+  };
+
+  handleRequisitionChanges = () => {
+    const reqInfo = {
+      providerFirstName: this.state.providerFirstName,
+      providerLastName: this.state.providerLastName,
+      providerNPI: this.state.providerNPI,
+      testInfoCode: this.state.code,
+      testInfoCodeType:this.state.testInfoCodeType,
+      testInfoDescription: this.state.testInfoDescription,
+      testType: this.state.testType,
+      sample: this.state.sample,
+      collectedDate: this.state.collectedDate
+      ? moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
+          "YYYYMMDDHHmmss"
+        )
+      : "",
+      receivedDate: this.state.receivedDate
+      ? moment(this.state.receivedDate, "MM/DD/YYYY hh:mm A").format(
+          "YYYYMMDDHHmmss"
+        )
+      : "",
+      requisition: this.state.requisition,
+      covidDetected: this.state.covidDetected,
+      resultCode: this.state.resultCode,
+      resultCodeType: this.state.resultCodeType,
+      resultDesc: this.state.resultDesc,
+      value: this.state.value,
+      comments: this.state.comments,
+      pdfPath: this.state.pdfPath,
+      resultDate: this.state.resultDate,
+      released: this.state.released,
+      releasedBy: this.state.releasedBy,
+      patientId: this.state.patientId,
+      facilityId: this.state.facilityId,
+      orderDate: this.state.orderDate,
+      facilityOrderId: this.state.facilityOrderId,
+      facilitySource: this.state.facilitySource,
+      labOrderId: this.state.labOrderId,
+      labSource: this.state.labSource
+    };
+    saveRequisitionChanges(reqInfo). then((changedReqDetails) => {
+      this.setState({
+        reqInfo: changedReqDetails,
+        show: false,
+        showMessage: true
+      });
+    });
   };
 
   render() {
@@ -72,12 +152,14 @@ export default class ViewRequisitionFormpage extends Component {
       borderRight: "none",
       borderRadius: "0px",
     };
+    // let options = this.state.provider.map((item) => {
+    //   return item.first_name + " " + item.last_name;
+    // });
     return (
       <div>
         <button
           onClick={this.handleShow}
           className="btn btn-primary submit-btn button-info-grid button-requisition"
-          //   style={{ border: "none", backgroundColor: "transparent" }}
         >
           Create Requisition
         </button>
@@ -155,16 +237,21 @@ export default class ViewRequisitionFormpage extends Component {
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Physician</label>
-                    {/* physician should be dropdown and a endpoint api call */}
-                    <input
+                    <select
                       style={formStyle}
                       type="text"
-                      className="form-control"
+                      className="form-control select"
                       name="provider"
-                      disabled
                       value={this.state.provider}
                       onChange={this.handleChange}
-                    />
+                      // options={options}
+                    >
+                      {/* for dropdown api call goes here */}
+                      {this.state.provider && this.state.provider.map((test) => {
+                        return <option>{test.first_name + " " + test.last_name}</option>
+                      })}
+                      
+                    </select>
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -175,7 +262,7 @@ export default class ViewRequisitionFormpage extends Component {
                       type="text"
                       className="form-control"
                       name="facilitySource"
-                      disabled
+                      //disabled
                       value={this.state.facilitySource}
                       onChange={this.handleChange}
                     />
@@ -198,15 +285,6 @@ export default class ViewRequisitionFormpage extends Component {
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Test Type</label>
-                    {/* <input
-											style={formStyle}
-											type="text"
-											disabled
-											className="form-control"
-											name="testType"
-											value={this.state.testType}
-											onChange={this.handleChange}
-										/> */}
                     <select
                       style={formStyle}
                       className="form-control select"
@@ -214,9 +292,6 @@ export default class ViewRequisitionFormpage extends Component {
                       value={this.state.testType}
                       onChange={this.handleChange}
                     >
-                      {/* <option>Select</option>
-                      <option>Nasal Swab</option>
-                      <option>Nasopharyngeal Swab</option> */}
                       {testTypes.map((test) => {
                         return <option>{test.testType}</option>;
                       })}
@@ -251,11 +326,11 @@ export default class ViewRequisitionFormpage extends Component {
                 </div>
                 <div className="col-12 col-md-6">
                   <div className="form-group">
-                    {/* <label>Sample</label> */}
                     <Barcode />
-                    <button className="btn btn-primary submit-btn button-info-grid">
+                    <button onclick={this.autoGenerateKey} className="btn btn-primary submit-btn button-info-grid">
                       Auto Generate
                     </button>
+                    key: {this.state.uniqueKey && this.state.uniqueKey}
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
@@ -295,9 +370,13 @@ export default class ViewRequisitionFormpage extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.handleOrderEditChanges}>
+            <Button variant="primary" onClick={this.handleRequisitionChanges}>
               Save Changes
             </Button>
+            {/* here pdfpath link should be updated */}
+            {this.state.showMessage && (
+              <p className="submit-success-msg">Your changes are succesfully saved!</p>
+            )}
           </Modal.Footer>
         </Modal>
       </div>
