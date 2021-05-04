@@ -48,6 +48,7 @@ class QrScanReader extends Component {
           centered
           show={this.state.show}
           onHide={this.handleClose}
+          id="scanQRcodeModal"
         >
           <Modal.Header closeButton>
             <Modal.Title>Scan QR Code</Modal.Title>

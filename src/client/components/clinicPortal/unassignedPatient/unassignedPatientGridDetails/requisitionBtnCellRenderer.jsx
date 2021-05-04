@@ -180,10 +180,18 @@ export default class RequisitionBtnCellRenderer extends Component {
             <Modal.Title>Patient Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ViewRequisitionFormpage
-              patientDetails={this.state.patientDetails}
-            />
-            <SignUp patientDetails={this.state.patientDetails} />
+            <div className="row">
+              <div className="col-12">
+                <ViewRequisitionFormpage
+                  patientDetails={this.state.patientDetails}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <SignUp patientDetails={this.state.patientDetails} />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>

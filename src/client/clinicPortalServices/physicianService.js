@@ -12,12 +12,3 @@ export const fetchPhysicians = (facilityId) => {
 	}).then((response) => response.json());
 };
 
-export const generateUniqueKey = () => {
-	var token  = getUserAuthToken();
-	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/uniquekey`, {
-		headers: {
-			"Authorization" : "Bearer " + token
-		},
-	})
-	.then((response) => response.json());
-}
