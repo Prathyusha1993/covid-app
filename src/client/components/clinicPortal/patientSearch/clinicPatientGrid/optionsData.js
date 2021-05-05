@@ -49,6 +49,10 @@ export const results = [
 
 export const states = [
 	{
+		value: "",
+		state: "Please Select",
+	},
+	{
 		value: "AL",
 		state: "Alabama",
 	},

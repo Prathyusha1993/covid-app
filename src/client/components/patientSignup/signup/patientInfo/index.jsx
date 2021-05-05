@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { phoneNumberFormatter } from "../../../../utils/util";
 import { Form, Button, Col } from "react-bootstrap";
+import { states } from "../../../clinicPortal/patientSearch/clinicPatientGrid/optionsData";
 
 class PatientInfo extends Component {
   constructor(props) {
@@ -199,14 +200,19 @@ class PatientInfo extends Component {
                           </Form.Label>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Group as={Col} controlId="exampleForm.SelectCustom">
                           <Form.Label></Form.Label>
                           <Form.Control
+                            as="select"
                             required
                             type="text"
                             value={values.state}
                             onChange={this.props.handleChange("state")}
-                          />
+                          >
+                            {states.map((state) => {
+                              return <option value={state.value}>{state.state}</option>
+                            })}
+                          </Form.Control>
                           <Form.Label className="home-page-label">
                             State
                           </Form.Label>

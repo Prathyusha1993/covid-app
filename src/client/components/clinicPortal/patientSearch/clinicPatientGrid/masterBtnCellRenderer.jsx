@@ -306,7 +306,7 @@ export default class MasterBtnCellRenderer extends Component {
 										>
 											{states.map((state) => {
 												return (
-													<option key={state.value} value={state.value}>
+													<option value={state.value}>
 														{state.state}
 													</option>
 												);
