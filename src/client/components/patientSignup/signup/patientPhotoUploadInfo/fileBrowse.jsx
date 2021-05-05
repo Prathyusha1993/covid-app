@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 
 class FileBrowse extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onDrop = (files) => {
       this.setState({
         files,
@@ -21,6 +21,7 @@ class FileBrowse extends Component {
   };
 
   render() {
+    console.log("driverfile", this.props.driverLicFile);
     const files = this.state.files.map((file) => (
       <li key={file.name}>
         {file.name} - {file.size} bytes
@@ -28,17 +29,20 @@ class FileBrowse extends Component {
     ));
 
     return (
-      <Dropzone onDrop={this.onDrop}>
-        {({ getRootProps, getInputProps }) => (
+      <Dropzone onDrop={this.onDrop}
+      accept="image/png, image/jpeg, image/jpg, image/tiff, image/bmp, application/pdf " multiple={false}>
+        {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <section className="container">
             <div {...getRootProps({ className: "dropzone" })}>
               <input {...getInputProps()} />
+              
               <div className="dropzone-icon">
                 <i class="fas fa-cloud-upload-alt"></i>
               </div>
               <h4 className="dropzone-browse-files">Browse Files</h4>
               <p className="dropzone-browse-files">
-                Drag 'n' drop files here, or click to select files
+              {!isDragActive && 'Drag n drop files here, or click to select files!'}
+              {isDragReject && "File type not accepted, sorry!"}
               </p>
             </div>
             <aside>

@@ -42,44 +42,45 @@ class SignUp extends Component {
       classStyle: patientDetails
         ? patientDetails.classStyle
         : "col-md-6 col-lg-7 col-xl-7",
+      // driverLicFile: "EAD COPY",
       driverLicFile: "",
       insuranceFrontPageFile: "",
       insuranceBackPageFile: "",
     };
 
     // TODO: temp code for dev purpose, remove later
-    /*
-    this.state = {
-      step: 1,
-      patientId: -1,
-      firstName: "John",
-      lastName: "Grisham",
-      email: "example@something.com",
-      phone: "1234567890",
-      address: "12 bell st",
-      city: "San Jose",
-      state: "CA",
-      zipCode: "95134",
-      sex: "M",
-      dob: "1990-01-01",
-      ethnicity: "Hispanic or Latino",
-      race: "White",
-      symptoms: ["Fever or chills", "Cough"],
-      insuranceId: -1,
-      insuranceProv1: "Other",
-      insuranceProv2: "Oth Ins",
-      memberId: "mem123",
-      groupNum: "grp456",
-      relation: "Adult",
-      insuredFirstName: "InsFirst",
-      insuredLastName: "InsLast",
-      driverLic: "DL789",
-      classStyle: "col-md-12 col-lg-7 col-xl-7",
-      driverLicFile:"",
-        insuranceFrontPageFile:"",
-        insuranceBackPageFile:"",
-    };
-	*/
+    
+    // this.state = {
+    //   step: 1,
+    //   patientId: -1,
+    //   firstName: "John",
+    //   lastName: "Grisham",
+    //   email: "example@something.com",
+    //   phone: "1234567890",
+    //   address: "12 bell st",
+    //   city: "San Jose",
+    //   state: "CA",
+    //   zipCode: "95134",
+    //   sex: "M",
+    //   dob: "1990-01-01",
+    //   ethnicity: "Hispanic or Latino",
+    //   race: "White",
+    //   symptoms: ["Fever or chills", "Cough"],
+    //   insuranceId: -1,
+    //   insuranceProv1: "Other",
+    //   insuranceProv2: "Oth Ins",
+    //   memberId: "mem123",
+    //   groupNum: "grp456",
+    //   relation: "Adult",
+    //   insuredFirstName: "InsFirst",
+    //   insuredLastName: "InsLast",
+    //   driverLic: "DL789",
+    //   classStyle: "col-md-12 col-lg-7 col-xl-7",
+    //   driverLicFile:"EAD COPY",
+    //     insuranceFrontPageFile:"",
+    //     insuranceBackPageFile:"",
+    // };
+	
     this.getPatientDetails();
   }
 

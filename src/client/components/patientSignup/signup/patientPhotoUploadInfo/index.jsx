@@ -8,18 +8,6 @@ class PatientPhotoUploadInfo extends Component {
     this.state = {};
   }
 
-  // handleChange = (e) => {
-  // 	var key = e.target.name;
-  // 	var value = e.target.value;
-  // 	var obj = {};
-  // 	obj[key] = value;
-  // 	this.setState(obj);
-  // };
-
-  // hasError = (key) => {
-  // 	return this.state.errors.indexOf(key) !== -1;
-  // };
-
   back = (e) => {
     e.preventDefault();
     this.props.prevStep();
@@ -27,14 +15,11 @@ class PatientPhotoUploadInfo extends Component {
 
   render() {
     const { values } = this.props;
+    
     return (
       <div>
         <div className="content">
           <div className="row" style={{ justifyContent: "center" }}>
-            {/* <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-								<DoctorSidebar />
-							</div> */}
-            {/* <div className="col-md-6 col-lg-7 col-xl-7"> */}
             <div className={values.classStyle}>
               <div className="card row-bg-color">
                 <div className="card-body">
@@ -59,7 +44,11 @@ class PatientPhotoUploadInfo extends Component {
                           Upload a photo of your driver's license{" "}
                           <span className="text-danger"> *</span>
                         </Form.Label>
-                        <FileBrowse />
+                        <FileBrowse 
+                          driverLicFile = {this.props.values.driverLicFile && this.props.values.driverLicFile}
+                          insuranceFrontPageFile = {this.props.values.insuranceFrontPageFile && this.props.values.insuranceFrontPageFile}
+                          insuranceBackPageFile = {this.props.values.insuranceBackPageFile && this.props.values.insuranceBackPageFile}
+                        />
                       </Form.Group>
                     </Form.Row>
                     {this.props.values.insuranceProv1 === "Self/Pay" ? null : (
