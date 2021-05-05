@@ -76,7 +76,6 @@ export default class RequisitionBtnCellRenderer extends Component {
                 i.value.toLowerCase() ===
                 insurance.insurance_provider.toLowerCase()
             );
-            console.log(index);
             if (index > -1) {
               insurance.insuranceProv1 = insurance.insurance_provider;
               insurance.insuranceProv2 = "";

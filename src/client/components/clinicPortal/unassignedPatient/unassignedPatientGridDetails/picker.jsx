@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import DateTimePicker from 'react-datetime-picker';
+import React, { useState } from "react";
+import DateTimePicker from "react-datetime-picker";
 
-function Picker() {
-  const [value, onChange] = useState(new Date());
+const Picker = function (props) {
+  const handleChange = (event) => {
+    props.onChange(event);
+  };
 
   return (
     <div>
-      <DateTimePicker
-        onChange={onChange}
-        value={value}
-      />
+      <DateTimePicker onChange={handleChange} value={props.dtValue} />
     </div>
   );
-}
+};
 
 export default Picker;

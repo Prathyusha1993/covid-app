@@ -55,7 +55,7 @@ export const saveRequisitionChanges = (reqInfo) => {
 	};
 	console.log("updatedRequisition",JSON.stringify(updatedRequisition));	
     
-	return fetch(` ${serviceConstants.API_HOST_NAME}/order/v1/`, {
+	return fetch(` ${serviceConstants.API_HOST_NAME}/order/v1/requisition`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
