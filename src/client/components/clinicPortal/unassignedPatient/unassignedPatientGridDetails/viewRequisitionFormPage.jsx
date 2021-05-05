@@ -9,6 +9,7 @@ import {
 	saveRequisitionChanges,
 	generateUniqueKey,
 } from "../../../../clinicPortalServices/requisitionService";
+import Picker from "./picker";
 
 export default class ViewRequisitionFormpage extends Component {
 	constructor(props) {
@@ -148,10 +149,10 @@ export default class ViewRequisitionFormpage extends Component {
 		if (this.state.sample === "") {
 			errors.push("sample");
 		}
-    this.setState({ errors: errors });
-    if(errors.length > 0){
-      return false;
-    }
+		this.setState({ errors: errors });
+		if (errors.length > 0) {
+			return false;
+		}
 
 		console.log("selectedProvider", this.state);
 		const reqInfo = {
@@ -291,22 +292,6 @@ export default class ViewRequisitionFormpage extends Component {
 										onChange={this.handleChange}
 									/>
 								</div>
-								{/* <div className="col-12 col-md-6">
-                  <div className="form-group">
-                    <label>Physician</label>
-                    <select
-                      required
-                      style={formStyle}
-                      type="text"
-                      className="form-control select"
-                      name="provider"
-                      value={this.state.provider}
-                      onChange={this.handleChange}
-                      // options={options}
-                    >
-                      
-                      {this.state.provider && this.state.provider.map((test) => {
-                        return <option>{test.first_name + " " + test.last_name}</option>*/}
 							</div>
 							<div className="col-12 col-md-6">
 								<div className="form-group">
@@ -320,7 +305,7 @@ export default class ViewRequisitionFormpage extends Component {
 										name="selectedProviderId"
 										value={this.state.selectedProviderId}
 										onChange={this.handleChange}
-                    className={
+										className={
 											this.hasError("selectedProviderId")
 												? "form-control select is-invalid"
 												: "form-control"
@@ -339,7 +324,9 @@ export default class ViewRequisitionFormpage extends Component {
 									</select>
 									<div
 										className={
-											this.hasError("selectedProviderId") ? "inline-errormsg" : "hidden"
+											this.hasError("selectedProviderId")
+												? "inline-errormsg"
+												: "hidden"
 										}
 									>
 										<i class="fa fa-exclamation-circle" aria-hidden="true">
@@ -387,7 +374,7 @@ export default class ViewRequisitionFormpage extends Component {
 										name="testType"
 										value={this.state.testType}
 										onChange={this.handleChange}
-                    className={
+										className={
 											this.hasError("testType")
 												? "form-control select is-invalid"
 												: "form-control"
@@ -399,7 +386,7 @@ export default class ViewRequisitionFormpage extends Component {
 											);
 										})}
 									</select>
-                  <div
+									<div
 										className={
 											this.hasError("testType") ? "inline-errormsg" : "hidden"
 										}
@@ -426,14 +413,15 @@ export default class ViewRequisitionFormpage extends Component {
 							<div className="col-12 col-md-6">
 								<div className="form-group">
 									<label>Collected Date</label>
-									<input
+									{/* <input
 										style={formStyle}
-										type="text"
+										type="date"
 										className="form-control"
 										name="collectedDate"
 										value={this.state.collectedDate}
 										onChange={this.handleChange}
-									/>
+									/> */}
+									<Picker  />
 									<label style={{ fontSize: "13px" }}>
 										Date format - MM/DD/YYYY hh:mi AM/PM
 									</label>
@@ -465,13 +453,13 @@ export default class ViewRequisitionFormpage extends Component {
 										name="sample"
 										value={this.state.sample}
 										onChange={this.handleChange}
-                    className={
+										className={
 											this.hasError("sample")
 												? "form-control is-invalid"
 												: "form-control"
 										}
 									/>
-                  <div
+									<div
 										className={
 											this.hasError("sample") ? "inline-errormsg" : "hidden"
 										}
