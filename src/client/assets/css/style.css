@@ -9055,6 +9055,7 @@ html {
 
 .submit-success-msg {
   color:darkgreen;
-  margin-right: 180px;
+  margin-right: 250px;
   margin-top: 10px;
+  position: absolute;
 }

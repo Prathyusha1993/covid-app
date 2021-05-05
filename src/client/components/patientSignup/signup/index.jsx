@@ -173,18 +173,20 @@ class SignUp extends Component {
     if (this.props && this.state.patientId) {
       updateUnassignedPatientDetails(patientInfo).then((data) => {
         console.log("patientUpdate success");
-        this.setState({ showMessage: true });
-        this.setState({ message: "Updated the changes successfully!!" });
+        this.setState({ 
+          showMessage: true,
+          message: "Updated the changes successfully!!"
+         });
       });
     }
     //new patient sign up
     else {
       patientSignup(patientInfo).then((data) => {
         console.log("patientSignup success");
-        this.setState({ showMessage: true });
-        this.setState({
-          message: "Thank you for contacting us, You're all signed up.",
-        });
+        this.setState({ 
+          showMessage: true,
+          message: "Thank you for contacting us, You're all signed up."
+         });
       });
     }
   };

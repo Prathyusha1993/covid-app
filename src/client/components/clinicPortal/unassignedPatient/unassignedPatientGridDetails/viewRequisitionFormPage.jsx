@@ -44,6 +44,7 @@ export default class ViewRequisitionFormpage extends Component {
 			testInfoCode: "SARS-CoV-2",
 			testInfoCodeType: "",
 			testInfoDescription: "Rt-PCR Test",
+			// testInfoDescription: "",
 			value: "",
 			comments: "",
 			pdfPath: "",
@@ -64,6 +65,7 @@ export default class ViewRequisitionFormpage extends Component {
 			resultCode: "",
 			resultCodeType: "",
 			resultDesc: "",
+			errors: [],
 		};
 	}
 
@@ -75,8 +77,17 @@ export default class ViewRequisitionFormpage extends Component {
 		this.setState({ show: false });
 	};
 
+	hasError = (key) => {
+		return this.state.errors.indexOf(key) !== -1;
+	};
+
 	handleChange = (e) => {
-		this.setState({ [e.target.name]: e.target.value });
+		// this.setState({ [e.target.name]: e.target.value });
+		var key = e.target.name;
+		var value = e.target.value;
+		var obj = {};
+		obj[key] = value;
+		this.setState(obj);
 		if (e.target.name == "selectedProviderId") {
 			console.log(e.target.value);
 			var index = this.state.providers.findIndex(
@@ -85,11 +96,9 @@ export default class ViewRequisitionFormpage extends Component {
 			if (index > -1) {
 				this.setState({
 					providerFirstName: this.state.providers[index].first_name,
-				});
-				this.setState({
 					providerLastName: this.state.providers[index].last_name,
+					providerNPI: this.state.providers[index].npi,
 				});
-				this.setState({ providerNPI: this.state.providers[index].npi });
 			}
 		}
 	};
@@ -117,12 +126,33 @@ export default class ViewRequisitionFormpage extends Component {
 		console.log("autoGenerateKey");
 		generateUniqueKey().then((response) => {
 			console.log(response);
-			this.setState({ uniqueKey: response.data });
-			this.setState({ sample: response.data });
+			this.setState({
+				uniqueKey: response.data,
+				sample: response.data,
+			});
+			// this.setState({ sample: response.data });
 		});
 	};
 
 	handleRequisitionChanges = () => {
+		let errors = [];
+
+		if (this.state.selectedProviderId === "") {
+			errors.push("selectedProviderId");
+		}
+
+		if (this.state.testType === "") {
+			errors.push("testType");
+		}
+
+		if (this.state.sample === "") {
+			errors.push("sample");
+		}
+    this.setState({ errors: errors });
+    if(errors.length > 0){
+      return false;
+    }
+
 		console.log("selectedProvider", this.state);
 		const reqInfo = {
 			providerFirstName: this.state.providerFirstName,
@@ -168,7 +198,7 @@ export default class ViewRequisitionFormpage extends Component {
 			this.setState({
 				reqInfo: changedReqDetails,
 				showMessage: true,
-				show: false,
+				// show: false,
 			});
 		});
 	};
@@ -185,86 +215,83 @@ export default class ViewRequisitionFormpage extends Component {
 		// });
 		return (
 			<div>
-				 
-         <button
-          onClick={this.handleShow}
-          className="btn btn-primary submit-btn button-info-grid pull-right"
-        >
-          Create Requisition
-        </button>
-        
-        
+				<button
+					onClick={this.handleShow}
+					className="btn btn-primary submit-btn button-info-grid pull-right"
+				>
+					Create Requisition
+				</button>
 
-        <Modal
-          onEnter={this.loadDataForModal}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={this.state.show}
-          onHide={this.handleClose}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Create Requisition Form</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* <form> */}
-            <div className="row form-row">
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Patient Name</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    disabled
-                    className="form-control"
-                    name="patientName"
-                    value={this.state.patientName}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>MRN</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    disabled
-                    className="form-control"
-                    name="mrn"
-                    value={this.state.mrn}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Date Of Birth</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    disabled
-                    className="form-control"
-                    name="dob"
-                    value={this.state.dob}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Gender</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    disabled
-                    className="form-control"
-                    name="gender"
-                    value={this.state.gender}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                {/* <div className="col-12 col-md-6">
+				<Modal
+					onEnter={this.loadDataForModal}
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={this.state.show}
+					onHide={this.handleClose}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>Create Requisition Form</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{/* <form> */}
+						<div className="row form-row">
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Patient Name</label>
+									<input
+										style={formStyle}
+										type="text"
+										disabled
+										className="form-control"
+										name="patientName"
+										value={this.state.patientName}
+										onChange={this.handleChange}
+									/>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>MRN</label>
+									<input
+										style={formStyle}
+										type="text"
+										disabled
+										className="form-control"
+										name="mrn"
+										value={this.state.mrn}
+										onChange={this.handleChange}
+									/>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Date Of Birth</label>
+									<input
+										style={formStyle}
+										type="text"
+										disabled
+										className="form-control"
+										name="dob"
+										value={this.state.dob}
+										onChange={this.handleChange}
+									/>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Gender</label>
+									<input
+										style={formStyle}
+										type="text"
+										disabled
+										className="form-control"
+										name="gender"
+										value={this.state.gender}
+										onChange={this.handleChange}
+									/>
+								</div>
+								{/* <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Physician</label>
                     <select
@@ -280,34 +307,49 @@ export default class ViewRequisitionFormpage extends Component {
                       
                       {this.state.provider && this.state.provider.map((test) => {
                         return <option>{test.first_name + " " + test.last_name}</option>*/}
-              </div> 
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Physician</label>
-                  <select
-                    style={formStyle}
-                    type="text"
-                    className="form-control select"
-                    name="selectedProviderId"
-                    value={this.state.selectedProviderId}
-                    onChange={this.handleChange}
-                    // options={options}
-                  >
-                    {/* for dropdown api call goes here */}
-                    <option value="-1">Please select</option>
-                    {this.state.providers &&
-                      this.state.providers.map((prov) => {
-                        return (
-                          <option value={prov._id}>
-                            {prov.first_name + " " + prov.last_name}
-                          </option>
-                        );
-                      })}
-                  </select>
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                {/* <div className="form-group">
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>
+										Physician <span className="text-danger"> *</span>{" "}
+									</label>
+									<select
+										required
+										style={formStyle}
+										type="text"
+										name="selectedProviderId"
+										value={this.state.selectedProviderId}
+										onChange={this.handleChange}
+                    className={
+											this.hasError("selectedProviderId")
+												? "form-control select is-invalid"
+												: "form-control"
+										}
+									>
+										{/* for dropdown api call goes here */}
+										<option value="-1">Please select</option>
+										{this.state.providers &&
+											this.state.providers.map((prov) => {
+												return (
+													<option value={prov._id}>
+														{prov.first_name + " " + prov.last_name}
+													</option>
+												);
+											})}
+									</select>
+									<div
+										className={
+											this.hasError("selectedProviderId") ? "inline-errormsg" : "hidden"
+										}
+									>
+										<i class="fa fa-exclamation-circle" aria-hidden="true">
+											This field is required.
+										</i>
+									</div>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								{/* <div className="form-group">
                     <label>Facility</label>
                     <input
                       style={formStyle}
@@ -319,38 +361,56 @@ export default class ViewRequisitionFormpage extends Component {
                       onChange={this.handleChange}
                     />
                   </div> */}
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Test Description</label>
-                  <input
-                    type="text"
-                    style={formStyle}
-                    className="form-control"
-                    name="description"
-                    disabled
-                    value={this.state.testInfoDescription}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Test Type</label>
-                  <select
-                    style={formStyle}
-                    className="form-control select"
-                    name="testType"
-                    value={this.state.testType}
-                    onChange={this.handleChange}
-                  >
-                    {testTypes.map((test) => {
-                      return <option>{test.testType}</option>;
-                    })}
-                  </select>
-                </div>
-              </div>
-              {/* <div className="col-12 col-md-6">
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Test Description </label>
+									<input
+										type="text"
+										style={formStyle}
+										className="form-control"
+										name="description"
+										disabled
+										value={this.state.testInfoDescription}
+										onChange={this.handleChange}
+									/>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>
+										Test Type <span className="text-danger"> *</span>{" "}
+									</label>
+									<select
+										required
+										style={formStyle}
+										name="testType"
+										value={this.state.testType}
+										onChange={this.handleChange}
+                    className={
+											this.hasError("testType")
+												? "form-control select is-invalid"
+												: "form-control"
+										}
+									>
+										{testTypes.map((test) => {
+											return (
+												<option value={test.value}>{test.testType}</option>
+											);
+										})}
+									</select>
+                  <div
+										className={
+											this.hasError("testType") ? "inline-errormsg" : "hidden"
+										}
+									>
+										<i class="fa fa-exclamation-circle" aria-hidden="true">
+											This field is required.
+										</i>
+									</div>
+								</div>
+							</div>
+							{/* <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Requisition</label>
                     <input
@@ -363,79 +423,95 @@ export default class ViewRequisitionFormpage extends Component {
                     />
                   </div>
                 </div> */}
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Collected Date</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    className="form-control"
-                    name="collectedDate"
-                    value={this.state.collectedDate}
-                    onChange={this.handleChange}
-                  />
-                  <label style={{ fontSize: "13px" }}>
-                    Date format - MM/DD/YYYY hh:mi AM/PM
-                  </label>
-                </div>
-              </div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Collected Date</label>
+									<input
+										style={formStyle}
+										type="text"
+										className="form-control"
+										name="collectedDate"
+										value={this.state.collectedDate}
+										onChange={this.handleChange}
+									/>
+									<label style={{ fontSize: "13px" }}>
+										Date format - MM/DD/YYYY hh:mi AM/PM
+									</label>
+								</div>
+							</div>
 
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Collector Name</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    className="form-control"
-                    name="collectorName"
-                    value={this.state.collectorName}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  <label>Sample</label>
-                  <input
-                    style={formStyle}
-                    type="text"
-                    className="form-control "
-                    name="sample"
-                    value={this.state.sample}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="form-group">
-                  {/* <Barcode /> */}
-                  <button
-                    onClick={this.autoGenerateKey}
-                    className="btn btn-primary submit-btn button-info-grid"
-                  >
-                    Auto Generate
-                  </button>
-                  {/* key: {this.state.uniqueKey && this.state.uniqueKey} */}
-                </div>
-              </div>
-            </div>
-            {/* </form> */}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleRequisitionChanges}>
-              Save Changes
-            </Button>
-            {/* here pdfpath link should be updated */}
-            {this.state.showMessage && (
-              <p className="submit-success-msg">
-                Your changes are succesfully saved!
-              </p>
-            )}
-          </Modal.Footer>
-        </Modal>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>Collector Name</label>
+									<input
+										style={formStyle}
+										type="text"
+										className="form-control"
+										name="collectorName"
+										value={this.state.collectorName}
+										onChange={this.handleChange}
+									/>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									<label>
+										Sample <span className="text-danger"> *</span>{" "}
+									</label>
+									<input
+										required
+										style={formStyle}
+										type="text"
+										name="sample"
+										value={this.state.sample}
+										onChange={this.handleChange}
+                    className={
+											this.hasError("sample")
+												? "form-control is-invalid"
+												: "form-control"
+										}
+									/>
+                  <div
+										className={
+											this.hasError("sample") ? "inline-errormsg" : "hidden"
+										}
+									>
+										<i class="fa fa-exclamation-circle" aria-hidden="true">
+											This field is required.
+										</i>
+									</div>
+								</div>
+							</div>
+							<div className="col-12 col-md-6">
+								<div className="form-group">
+									{/* <Barcode /> */}
+									<button
+										onClick={this.autoGenerateKey}
+										className="btn btn-primary submit-btn button-info-grid"
+									>
+										Auto Generate
+									</button>
+									{/* key: {this.state.uniqueKey && this.state.uniqueKey} */}
+								</div>
+							</div>
+						</div>
+						{/* </form> */}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="secondary" onClick={this.handleClose}>
+							Close
+						</Button>
+						<Button variant="primary" onClick={this.handleRequisitionChanges}>
+							Save Changes
+						</Button>
+						{/* here pdfpath link should be updated */}
+						{this.state.showMessage && (
+							<p className="submit-success-msg">
+								Your changes are succesfully saved!
+							</p>
+						)}
+					</Modal.Footer>
+				</Modal>
 			</div>
 		);
 	}

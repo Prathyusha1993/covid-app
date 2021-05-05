@@ -19,9 +19,15 @@ export const identity = [
 
 export const testTypes = [
 	{
+		value: "",
+		testType: "Please Select"
+	},
+	{
+		value: "Nasal Swab",
 		testType: "Nasal Swab",
 	},
 	{
+		value: "Nasopharyngeal Swab",
 		testType: "Nasopharyngeal Swab",
 	}
 ];
