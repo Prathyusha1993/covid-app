@@ -4,12 +4,13 @@ import Dropzone from "react-dropzone";
 class FileBrowse extends Component {
   constructor(props) {
     super(props);
-    this.onDrop = (files) => {
-      this.setState({
-        files,
-        showFile: true,
-      });
-    };
+    // this.onDrop = (files) => {
+    //   this.setState({
+    //     files,
+    //     showFile: true,
+       
+    //   });
+    // };
     this.state = {
       files: [],
       showFile: false,
@@ -18,6 +19,15 @@ class FileBrowse extends Component {
 
   fileDeleteBtn = () => {
     this.setState({ files: [], showFile: false });
+  };
+
+  onDrop = (files) => {
+    this.setState({
+      files,
+      showFile: true,
+    });
+    console.log('fileName', files[0].name);
+    this.props.handleFileChange(files[0].name);
   };
 
   render() {

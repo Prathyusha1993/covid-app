@@ -45,9 +45,8 @@ class PatientPhotoUploadInfo extends Component {
                           <span className="text-danger"> *</span>
                         </Form.Label>
                         <FileBrowse 
-                          driverLicFile = {this.props.values.driverLicFile && this.props.values.driverLicFile}
-                          insuranceFrontPageFile = {this.props.values.insuranceFrontPageFile && this.props.values.insuranceFrontPageFile}
-                          insuranceBackPageFile = {this.props.values.insuranceBackPageFile && this.props.values.insuranceBackPageFile}
+                          driverLicFile = {values.driverLicFile}
+                          handleFileChange = {this.props.handleReadFile("driverLicFile")}
                         />
                       </Form.Group>
                     </Form.Row>
@@ -64,7 +63,10 @@ class PatientPhotoUploadInfo extends Component {
                               insurance
                               <span className="text-danger"> *</span>
                             </Form.Label>
-                            <FileBrowse />
+                            <FileBrowse 
+                            insuranceFrontPageFile = { values.insuranceFrontPageFile }
+                            handleFileChange = {this.props.handleReadFile("insuranceFrontPageFile")}
+                            />
                           </Form.Group>
                         </Form.Row>
 
@@ -82,7 +84,10 @@ class PatientPhotoUploadInfo extends Component {
                               insurance
                               <span className="text-danger"> *</span>
                             </Form.Label>
-                            <FileBrowse />
+                            <FileBrowse 
+                            insuranceBackPageFile = { values.insuranceBackPageFile }
+                            handleFileChange = {this.props.handleReadFile("insuranceBackPageFile")}
+                            />
                           </Form.Group>
                         </Form.Row>
                       </div>
