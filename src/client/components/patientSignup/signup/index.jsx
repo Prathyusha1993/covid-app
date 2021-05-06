@@ -7,7 +7,6 @@ import { phoneNumberFormatter } from "../../../utils/util";
 import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
 import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
 import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
-import { getUserAuthToken } from "../../../utils/util";
 import moment from "moment";
 
 class SignUp extends Component {
