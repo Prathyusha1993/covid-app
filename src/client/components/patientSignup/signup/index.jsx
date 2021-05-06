@@ -7,80 +7,81 @@ import { phoneNumberFormatter } from "../../../utils/util";
 import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
 import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
 import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
+import { getUserAuthToken } from "../../../utils/util";
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
     var patientDetails =
       this.props && this.props.patientDetails ? this.props.patientDetails : "";
-    // this.state = {
-    //   step: 1,
-    //   showMessage: false,
-    //   message: "",
-    //   patientId: patientDetails ? patientDetails.patientId : "",
-    //   firstName: patientDetails ? patientDetails.firstName : "",
-    //   lastName: patientDetails ? patientDetails.lastName : "",
-    //   email: patientDetails ? patientDetails.email : "",
-    //   phone: patientDetails ? patientDetails.phone : "",
-    //   address: patientDetails ? patientDetails.address : "",
-    //   city: patientDetails ? patientDetails.city : "",
-    //   state: patientDetails ? patientDetails.state : "",
-    //   zipCode: patientDetails ? patientDetails.zipCode : "",
-    //   sex: patientDetails ? patientDetails.sex : "",
-    //   dob: patientDetails ? patientDetails.dob : "",
-    //   ethnicity: patientDetails ? patientDetails.ethnicity : "",
-    //   race: patientDetails ? patientDetails.race : "",
-    //   symptoms: patientDetails ? patientDetails.symptoms : [],
-    //   insuranceId: patientDetails ? patientDetails.insuranceId : "",
-    //   insuranceProv1: patientDetails ? patientDetails.insuranceProv1 : "",
-    //   insuranceProv2: patientDetails ? patientDetails.insuranceProv2 : "",
-    //   memberId: patientDetails ? patientDetails.memberId : "",
-    //   groupNum: patientDetails ? patientDetails.groupNum : "",
-    //   relation: patientDetails ? patientDetails.relation : "",
-    //   insuredFirstName: patientDetails ? patientDetails.insuredFirstName : "",
-    //   insuredLastName: patientDetails ? patientDetails.insuredLastName : "",
-    //   driverLic: patientDetails ? patientDetails.driverLic : "",
-    //   classStyle: patientDetails
-    //     ? patientDetails.classStyle
-    //     : "col-md-6 col-lg-7 col-xl-7",
-    //   // driverLicFile: "EAD COPY",
-    //   driverLicFile: "",
-    //   insuranceFrontPageFile: "",
-    //   insuranceBackPageFile: "",
-    // };
+    this.state = {
+      step: 1,
+      showMessage: false,
+      message: "",
+      patientId: patientDetails ? patientDetails.patientId : "",
+      firstName: patientDetails ? patientDetails.firstName : "",
+      lastName: patientDetails ? patientDetails.lastName : "",
+      email: patientDetails ? patientDetails.email : "",
+      phone: patientDetails ? patientDetails.phone : "",
+      address: patientDetails ? patientDetails.address : "",
+      city: patientDetails ? patientDetails.city : "",
+      state: patientDetails ? patientDetails.state : "",
+      zipCode: patientDetails ? patientDetails.zipCode : "",
+      sex: patientDetails ? patientDetails.sex : "",
+      dob: patientDetails ? patientDetails.dob : "",
+      ethnicity: patientDetails ? patientDetails.ethnicity : "",
+      race: patientDetails ? patientDetails.race : "",
+      symptoms: patientDetails ? patientDetails.symptoms : [],
+      insuranceId: patientDetails ? patientDetails.insuranceId : "",
+      insuranceProv1: patientDetails ? patientDetails.insuranceProv1 : "",
+      insuranceProv2: patientDetails ? patientDetails.insuranceProv2 : "",
+      memberId: patientDetails ? patientDetails.memberId : "",
+      groupNum: patientDetails ? patientDetails.groupNum : "",
+      relation: patientDetails ? patientDetails.relation : "",
+      insuredFirstName: patientDetails ? patientDetails.insuredFirstName : "",
+      insuredLastName: patientDetails ? patientDetails.insuredLastName : "",
+      driverLic: patientDetails ? patientDetails.driverLic : "",
+      classStyle: patientDetails
+        ? patientDetails.classStyle
+        : "col-md-6 col-lg-7 col-xl-7",
+      // driverLicFile: "EAD COPY",
+      driverLicFile: patientDetails ? patientDetails.driverLicFile : "",
+      insuranceFrontPageFile: patientDetails ? patientDetails.insuranceFrontPageFile : "",
+      insuranceBackPageFile: patientDetails ? patientDetails.insuranceBackPageFile : "",
+    };
 
     // TODO: temp code for dev purpose, remove later
     
-    this.state = {
-      step: 1,
-      patientId: -1,
-      firstName: "John",
-      lastName: "Grisham",
-      email: "example@something.com",
-      phone: "1234567890",
-      address: "12 bell st",
-      city: "San Jose",
-      state: "CA",
-      zipCode: "95134",
-      sex: "M",
-      dob: "1990-01-01",
-      ethnicity: "Hispanic or Latino",
-      race: "White",
-      symptoms: ["Fever or chills", "Cough"],
-      insuranceId: -1,
-      insuranceProv1: "Other",
-      insuranceProv2: "Oth Ins",
-      memberId: "mem123",
-      groupNum: "grp456",
-      relation: "Adult",
-      insuredFirstName: "InsFirst",
-      insuredLastName: "InsLast",
-      driverLic: "DL789",
-      classStyle: "col-md-12 col-lg-7 col-xl-7",
-      driverLicFile:"",
-        insuranceFrontPageFile:"",
-        insuranceBackPageFile:"",
-    };
+    // this.state = {
+    //   step: 1,
+    //   patientId: -1,
+    //   firstName: "John",
+    //   lastName: "Grisham1310",
+    //   email: "example@something.com",
+    //   phone: "1234567890",
+    //   address: "12 bell st",
+    //   city: "San Jose",
+    //   state: "CA",
+    //   zipCode: "95134",
+    //   sex: "M",
+    //   dob: "1990-01-01",
+    //   ethnicity: "Hispanic or Latino",
+    //   race: "White",
+    //   symptoms: ["Fever or chills", "Cough"],
+    //   insuranceId: -1,
+    //   insuranceProv1: "Other",
+    //   insuranceProv2: "Oth Ins",
+    //   memberId: "mem123",
+    //   groupNum: "grp456",
+    //   relation: "Adult",
+    //   insuredFirstName: "InsFirst",
+    //   insuredLastName: "InsLast",
+    //   driverLic: "DL789",
+    //   classStyle: "col-md-12 col-lg-7 col-xl-7",
+    //   driverLicFile:"",
+    //     insuranceFrontPageFile:"",
+    //     insuranceBackPageFile:"",
+    // };
 	
     this.getPatientDetails();
   }
@@ -149,26 +150,27 @@ class SignUp extends Component {
     });
   };
 
-  // fileUpload(file){
-  //   const url = 'http://example.com/file-upload';
-  //   const formData = new FormData();
-  //   formData.append('file',file)
-  //   const config = {
-  //       headers: {
-  //           'content-type': 'multipart/form-data'
-  //       }
-  //   }
-  //   return  post(url, formData,config)
-  // }
-
-  handleFileUpload = (e, file) => {
-    e.preventDefault();
+  handleFileUpload = () => {
+    const token  = getUserAuthToken();
     const formData = new FormData();
-    formData.append('images', file);
-    patientUploadImages(this.state.driverLic, this.state.insuranceFrontPageFile, this.state.insuranceBackPageFile)
-    .then((response) => {
-      console.log("patientuploadPhotos");
+    formData.append('images', this.state.driverLicFile);
+    console.log('check', this.state.driverLicFile);
+    formData.append('images', this.state.insuranceFrontPageFile);
+    formData.append('images', this.state.insuranceBackPageFile);
+    fetch('https://www.mycovidnow.com/api/patientinsurance/v1/uploadimages/',{
+      method: 'POST',
+        headers: {
+            "Content-Type": "undefined",
+            "Authorization" : "Bearer " + token
+        },
+        body: formData, 
+    }).then((success) => {
+      console.log("success");
     })
+    // patientUploadImages(formData)
+    // .then((success) => {
+    //   console.log("success");
+    // })
 
   }
 
@@ -217,6 +219,7 @@ class SignUp extends Component {
     else {
       patientSignup(patientInfo).then((data) => {
         console.log("patientSignup success");
+        this.handleFileUpload();
         this.setState({ 
           showMessage: true,
           message: "Thank you for contacting us, You're all signed up."
@@ -313,6 +316,9 @@ class SignUp extends Component {
         insuredLastName: patientDetails.insuredLastName,
         driverLic: patientDetails.driverLic,
         classStyle: "col-md-12 col-lg-7 col-xl-12",
+        driverLicFile: patientDetails.driverLicFile,
+        insuranceFrontPageFile: patientDetails.insuranceFrontPageFile,
+        insuranceBackPageFile: patientDetails.insuranceBackPageFile,
       });
     }
   };

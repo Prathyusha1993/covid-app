@@ -31,7 +31,6 @@ class FileBrowse extends Component {
   };
 
   render() {
-    console.log("driverfile", this.props.driverLicFile);
     const files = this.state.files.map((file) => (
       <li key={file.name}>
         {file.name} - {file.size} bytes
