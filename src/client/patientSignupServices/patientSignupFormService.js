@@ -57,12 +57,10 @@ export const patientSignup = (patientDetails) => {
 
 
 export const patientUploadImages = (formData) => {
-    const token  = getUserAuthToken();
     return fetch(`${serviceConstants.API_HOST_NAME}/patientinsurance/v1/uploadimages/`, {
         method: 'POST',
         headers: {
             "Content-Type": "undefined",
-            "Authorization" : "Bearer " + token
         },
         body: formData, 
     })

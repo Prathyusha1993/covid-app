@@ -213,7 +213,6 @@ class SignUp extends Component {
 	// YYYYMMDDHHmmss122000
 
 	handleFileUpload = () => {
-		const token = getUserAuthToken();
 		const formData = new FormData();
 		//file obj anf file name should be passed, third parameter file name
 		// this.setState({
@@ -237,20 +236,19 @@ class SignUp extends Component {
 			this.state.insuranceBackPageFile,
 			this.state.insuranceBackPageFileName
 		);
-		fetch("https://www.mycovidnow.com/api/patientinsurance/v1/uploadimages/", {
-			method: "POST",
-			headers: {
-				"Content-Type": "undefined",
-				Authorization: "Bearer " + token,
-			},
-			body: formData,
-		}).then((success) => {
-			console.log("success");
-		});
-		// patientUploadImages(formData)
-		// .then((success) => {
-		//   console.log("success");
-		// })
+		// fetch("https://www.mycovidnow.com/api/patientinsurance/v1/uploadimages/", {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "undefined",
+		// 	},
+		// 	body: formData,
+		// }).then((success) => {
+		// 	console.log("success");
+		// });
+		patientUploadImages(formData)
+		.then((success) => {
+		  console.log("success");
+		})
 	};
 
 	handleSubmit = () => {
