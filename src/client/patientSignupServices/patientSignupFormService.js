@@ -1,5 +1,6 @@
 
 import { serviceConstants } from "../patientPortalServices/constants";
+import { getUserAuthToken } from "../utils/util";
 
 export const patientSignup = (patientDetails) => {
     console.log("patientSignup",patientDetails);
@@ -52,4 +53,17 @@ export const patientSignup = (patientDetails) => {
         body: JSON.stringify(patientInfo)
         
     })
-}
+};
+
+
+export const patientUploadImages = (formData) => {
+    const token  = getUserAuthToken();
+    return fetch(`${serviceConstants.API_HOST_NAME}/patientinsurance/v1/uploadimages/`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "undefined",
+            "Authorization" : "Bearer " + token
+        },
+        body: formData, 
+    })
+};

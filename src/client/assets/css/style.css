@@ -8970,7 +8970,8 @@ html {
 
 .dropzone-files {
   padding: 7px;
-  width:670px;
+  /* width:700px; */
+  margin: auto;
   border: 1px solid #dae6ff;
   background-color: #dae6ff;
   margin-top: 10px;
@@ -8978,6 +8979,7 @@ html {
   border-radius: 5px;
   margin-left: 5px;
   margin-right: 4px;
+  position: relative;
 }
 
 .btn-pagebreak-submit {
@@ -9021,11 +9023,13 @@ html {
 
 .dropzone-btn {
   float: right;
-  margin-left: 620px;
+  /* margin-left: 750px; */
+  margin-left: 95%;
   padding: 3px;
   border:1px solid #dae6ff;
   position: absolute;
   margin-bottom: 7px;
+  /* margin: auto; */
 }
 .dropzone-btn:hover {
   color: red;

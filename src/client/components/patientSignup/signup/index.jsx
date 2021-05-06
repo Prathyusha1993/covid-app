@@ -6,6 +6,7 @@ import PatientPhotoUploadInfo from "./patientPhotoUploadInfo";
 import { phoneNumberFormatter } from "../../../utils/util";
 import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
 import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
+import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
 
 class SignUp extends Component {
   constructor(props) {
@@ -147,6 +148,29 @@ class SignUp extends Component {
       step: step - 1,
     });
   };
+
+  // fileUpload(file){
+  //   const url = 'http://example.com/file-upload';
+  //   const formData = new FormData();
+  //   formData.append('file',file)
+  //   const config = {
+  //       headers: {
+  //           'content-type': 'multipart/form-data'
+  //       }
+  //   }
+  //   return  post(url, formData,config)
+  // }
+
+  handleFileUpload = (e, file) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('images', file);
+    patientUploadImages(this.state.driverLic, this.state.insuranceFrontPageFile, this.state.insuranceBackPageFile)
+    .then((response) => {
+      console.log("patientuploadPhotos");
+    })
+
+  }
 
   handleSubmit = () => {
     console.log("handlesubmit");
