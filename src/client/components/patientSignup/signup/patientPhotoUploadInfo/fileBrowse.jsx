@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
 
@@ -27,7 +28,10 @@ class FileBrowse extends Component {
       showFile: true,
     });
     console.log('fileName', files[0].name);
-    this.props.handleFileChange(files[0].name);
+    // moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
+    //   "YYYYMMDDHHmmss"
+    // )
+    this.props.handleFileChange(files[0] );
   };
 
   render() {

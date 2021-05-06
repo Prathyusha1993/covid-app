@@ -39,9 +39,9 @@ export const patientSignup = (patientDetails) => {
             "is_active": true
         },
         "images":{
-            "drivers_license": patientDetails.driverLicFile,
-            "insurance_front": patientDetails.insuranceFrontPageFile,
-            "insurance_back": patientDetails.insuranceBackPageFile
+            "drivers_license": patientDetails.driverLicFileName,
+            "insurance_front": patientDetails.insuranceFrontPageFileName,
+            "insurance_back": patientDetails.insuranceBackPageFileName
         }
     };
     console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
