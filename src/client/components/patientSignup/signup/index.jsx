@@ -102,7 +102,11 @@ class SignUp extends Component {
 		// 	 insuranceBackPageFileName:  "",
 		// };
 
-		this.getPatientDetails();
+		// this.getPatientDetails();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.getPatientDetails(nextProps);
 	}
 
 	handleChange = (input) => (e) => {
@@ -288,10 +292,10 @@ class SignUp extends Component {
 		}
 	};
 
-	getPatientDetails = () => {
-		console.log("signup-props", this.props);
-		if (this.props && this.props.patientDetails) {
-			var patientDetails = this.props.patientDetails;
+	getPatientDetails = (props) => {
+		console.log("signup-props", props);
+		if (props && props.patientDetails) {
+			var patientDetails = props.patientDetails;
 			this.setState({
 				patientId: patientDetails.patientId,
 				firstName: patientDetails.firstName,
@@ -355,10 +359,9 @@ class SignUp extends Component {
 			driverLicFile,
 			insuranceFrontPageFile,
 			insuranceBackPageFile,
-      driverLicFileName,
-      insuranceFrontPageFileName,
-      insuranceBackPageFileName,
-
+			driverLicFileName,
+			insuranceFrontPageFileName,
+			insuranceBackPageFileName,
 		} = this.state;
 		const values = {
 			firstName,
@@ -388,9 +391,9 @@ class SignUp extends Component {
 			driverLicFile,
 			insuranceFrontPageFile,
 			insuranceBackPageFile,
-      driverLicFileName,
-      insuranceFrontPageFileName,
-      insuranceBackPageFileName,
+			driverLicFileName,
+			insuranceFrontPageFileName,
+			insuranceBackPageFileName,
 		};
 		switch (step) {
 			default:

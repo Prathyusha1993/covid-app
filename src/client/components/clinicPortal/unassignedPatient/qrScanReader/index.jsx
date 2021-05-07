@@ -4,84 +4,61 @@ import { Modal, Button } from "react-bootstrap";
 import ViewPatientSignUp from "../unassignedPatientGridDetails/viewPatientSignUp";
 
 class QrScanReader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      patientId: "60903a9f513609de503835c6", // "No result",
-      show: false,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			patientId: "60903a9f513609de503835c6", // "No result"
+		};
+	}
 
-  handleShow = () => {
-    this.setState({ show: true });
-  };
-
-  handleClose = () => {
-    this.setState({ show: false });
-  };
-
-  handleScan = (data) => {
-    if (data) {
-      this.setState({
-        patientId: "60903a9f513609de503835c6", // data,
-        // show: false
-      });
-    }
-  };
-  handleError = (err) => {
-    console.error(err);
-  };
-  render() {
-    return (
-      <div>
-        <button
-          onClick={this.handleShow}
-          // style={{ border: "none", backgroundColor: "transparent" }}
-          className="btn btn-primary submit-btn button-info-grid"
-        >
-          <i className="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
-        </button>
-
-        <Modal
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={this.state.show}
-          onHide={this.handleClose}
-          id="scanQRcodeModal"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Scan QR Code</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div>
-              <QrReader
-                delay={300}
-                onError={this.handleError}
-                onScan={this.handleScan}
-                className="qrscan-reader"
-              />
-              <ViewPatientSignUp
-                patientId={this.state.patientId}
-                // closeQrScanner = {this.handleClose}
-              />
-              {/* <button  className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid">
-								Decoded QR Code: {this.state.result}
-							</button> */}
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            {/* <Button variant="primary" onClick={this.handleOrderEditChanges}>
-							Save Changes
-						</Button> */}
-          </Modal.Footer>
-        </Modal>
-      </div>
-    );
-  }
+	handleError = (err) => {
+		console.error(err);
+	};
+  
+	render() {
+		return (
+			<div>
+				<Modal
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={this.props.show}
+					onHide={this.props.hideQrScannerHandler}
+					id="scanQRcodeModal"
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>Scan QR Code</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{this.props.show ? (
+							<div>
+								<QrReader
+									delay={300}
+									onError={this.handleError}
+									onScan={this.props.onQrCodeScanHandler}
+									className="qrscan-reader"
+								/>
+								<button
+									className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid"
+									onClick={this.props.showPatientSignupHandler}
+								>
+									Decoded QR Code: {this.props.scannedPatientId}
+								</button>
+							</div>
+						) : null}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							variant="secondary"
+							onClick={this.props.hideQrScannerHandler}
+						>
+							Close
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			</div>
+		);
+	}
 }
 
 export default QrScanReader;
