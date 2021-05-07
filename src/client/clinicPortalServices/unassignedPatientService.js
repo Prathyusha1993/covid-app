@@ -62,7 +62,12 @@ export const updateUnassignedPatientDetails = (patientDetails) => {
             "insurance_provider": patientDetails.insuranceProv1.toLowerCase() == "other" ? patientDetails.insuranceProv2:patientDetails.insuranceProv1,
             "relation_to_insured":patientDetails.relation,
             "is_active": true,
-            "patient" : patientDetails.patientId
+            "patient" : patientDetails.patientId,
+            "images":{
+                "drivers_license": patientDetails.driverLicFileName,
+                "insurance_front": patientDetails.insuranceFrontPageFileName,
+                "insurance_back": patientDetails.insuranceBackPageFileName,
+            }
         }
     };
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/insurance`, {

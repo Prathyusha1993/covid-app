@@ -202,6 +202,8 @@ class UnassignedPatientGridDetails extends Component {
 			this.setState({
 				scannedPatientId: "60903a9f513609de503835c6", // data,
 			});
+      //need to pass viewpatientsignup show property
+      //this.showPatientSignupHandler();
 		}
 	};
 

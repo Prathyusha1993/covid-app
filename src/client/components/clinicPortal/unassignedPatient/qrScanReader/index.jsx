@@ -14,7 +14,7 @@ class QrScanReader extends Component {
 	handleError = (err) => {
 		console.error(err);
 	};
-  
+
 	render() {
 		return (
 			<div>
@@ -38,6 +38,7 @@ class QrScanReader extends Component {
 									onScan={this.props.onQrCodeScanHandler}
 									className="qrscan-reader"
 								/>
+                {/* comment this decode qr code button once bar code works fine */}
 								<button
 									className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid"
 									onClick={this.props.showPatientSignupHandler}

@@ -104,6 +104,10 @@ class ViewPatientSignUp extends Component {
 						insuredFirstName: insurance ? insurance.insured_first_name : "",
 						insuredLastName: insurance ? insurance.insured_last_name : "",
 						driverLic: insurance ? insurance.insured_drivers_license : "",
+            //need to set particular file names from api.
+            driverLicFileName: "",
+			      insuranceFrontPageFileName: "",
+			      insuranceBackPageFileName: "",
 						classStyle: "col-md-12 col-lg-7 col-xl-12",
 					};
 					this.setState({ patientDetails: patientInfo });
