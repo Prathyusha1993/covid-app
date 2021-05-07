@@ -169,7 +169,7 @@ export default class RequisitionBtnCellRenderer extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            {/* <Button variant="primary" onClick={this.handleOrderEditChanges}>
+            {/* <Button variant="primary" >
               Save Changes
             </Button> */}
           </Modal.Footer>

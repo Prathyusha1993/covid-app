@@ -9063,3 +9063,20 @@ html {
 	margin-right: 30px;
 	font-weight: bold;
 }
+
+.upload-image-href {
+	text-decoration: underline;
+	margin-left: 15px;
+}
+
+.upload-image-href a:visited{
+	color:green;
+}
+
+.upload-image-href a:hover{
+	color:pink;
+}
+
+.upload-image-href a:active{
+	color:blue;
+}

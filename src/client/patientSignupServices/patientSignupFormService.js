@@ -36,13 +36,13 @@ export const patientSignup = (patientDetails) => {
             "insured_drivers_license":patientDetails.driverLic,
             "insurance_provider": patientDetails.insuranceProv1.toLowerCase() == "other" ? patientDetails.insuranceProv2:patientDetails.insuranceProv1,
             "relation_to_insured":patientDetails.relation,
-            "is_active": true
+            "is_active": true,
+            "images":{
+                "drivers_license": patientDetails.driverLicFileName,
+                "insurance_front": patientDetails.insuranceFrontPageFileName,
+                "insurance_back": patientDetails.insuranceBackPageFileName,
+            }
         },
-        "images":{
-            "drivers_license": patientDetails.driverLicFileName,
-            "insurance_front": patientDetails.insuranceFrontPageFileName,
-            "insurance_back": patientDetails.insuranceBackPageFileName
-        }
     };
     console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
     return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/insurance`, {
@@ -59,9 +59,6 @@ export const patientSignup = (patientDetails) => {
 export const patientUploadImages = (formData) => {
     return fetch(`${serviceConstants.API_HOST_NAME}/patientinsurance/v1/uploadimages/`, {
         method: 'POST',
-        headers: {
-            "Content-Type": "undefined",
-        },
         body: formData, 
     })
 };

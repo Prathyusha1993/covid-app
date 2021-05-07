@@ -44,7 +44,16 @@ class SignUp extends Component {
 			classStyle: patientDetails
 				? patientDetails.classStyle
 				: "col-md-6 col-lg-7 col-xl-7",
-			// driverLicFile: "EAD COPY",
+			driverLicFile: "",
+			insuranceFrontPageFile: "",
+			insuranceBackPageFile: "",
+			driverLicFileName: patientDetails ? patientDetails.driverLicFile : "",
+			insuranceFrontPageFileName: patientDetails
+				? patientDetails.insuranceFrontPageFile
+				: "",
+			insuranceBackPageFileName: patientDetails
+				? patientDetails.insuranceBackPageFile
+				: "",
 			driverLicFile: "",
 			insuranceFrontPageFile: "",
 			insuranceBackPageFile: "",
@@ -88,6 +97,9 @@ class SignUp extends Component {
 		//   driverLicFile:"",
 		//     insuranceFrontPageFile:"",
 		//     insuranceBackPageFile:"",
+		//     driverLicFileName: "",
+		// 	 insuranceFrontPageFileName: "",
+		// 	 insuranceBackPageFileName:  "",
 		// };
 
 		this.getPatientDetails();
@@ -129,21 +141,12 @@ class SignUp extends Component {
 		}
 	};
 
-	// handleReadFile = input => (e) =>{
-	//   this.setState({ [input] : e.target.file})
-	// }
-	// handleReadFile = input => (fileName) =>{
-	//   console.log('signupFileName', input, fileName);
-	//   this.setState({ [input] : fileName});
-	// }
-
 	handleReadFile = (input) => (file) => {
 		console.log("signupFileName", input, file);
 		this.setState({ [input]: file });
 		switch (input) {
 			case "driverLicFile":
-				this.setState((prevState) => ({
-					// str.substring(0, str.lastIndexOf(".")) + "_2021" + str.substring(str.lastIndexOf("."));
+				this.setState({
 					driverLicFileName:
 						this.state.driverLicFile.name.substring(
 							0,
@@ -154,7 +157,7 @@ class SignUp extends Component {
 						this.state.driverLicFile.name.substring(
 							this.state.driverLicFile.name.lastIndexOf(".")
 						),
-				}));
+				});
 				break;
 
 			case "insuranceFrontPageFile":
@@ -208,17 +211,8 @@ class SignUp extends Component {
 		});
 	};
 
-	// exisiting file name
-	// YYYYMMDDHHmmss122000
-
 	handleFileUpload = () => {
 		const formData = new FormData();
-		//file obj anf file name should be passed, third parameter file name
-		// this.setState({
-		//   driverLicFileName: this.state.driverLicFile.name + '_' + moment(new Date(), "MM/DD/YYYY hh:mm:ss").format('YYYYMMDDHHMMss'),
-		//   insuranceFrontPageFileName: this.state.insuranceFrontPageFile.name + '_' + moment(new Date(), "MM/DD/YYYY hh:mm:ss").format('YYYYMMDDHHMMss'),
-		//   insuranceBackPageFileName: this.state.insuranceBackPageFile.name  + '_' + moment(new Date(), "MM/DD/YYYY hh:mm:ss").format('YYYYMMDDHHMMss')
-		// })
 		formData.append(
 			"images",
 			this.state.driverLicFile,
@@ -235,19 +229,9 @@ class SignUp extends Component {
 			this.state.insuranceBackPageFile,
 			this.state.insuranceBackPageFileName
 		);
-		// fetch("https://www.mycovidnow.com/api/patientinsurance/v1/uploadimages/", {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "undefined",
-		// 	},
-		// 	body: formData,
-		// }).then((success) => {
-		// 	console.log("success");
-		// });
-		patientUploadImages(formData)
-		.then((success) => {
-		  console.log("success");
-		})
+		patientUploadImages(formData).then((success) => {
+			console.log("success");
+		});
 	};
 
 	handleSubmit = () => {
@@ -303,66 +287,7 @@ class SignUp extends Component {
 			});
 		}
 	};
-	/*
-  getPatientDetails = () => {
-    if (this.props && this.props.patient_Id) {
-      console.log(this.props.patient_Id);
 
-      fetchUnassignedPatientDetails(this.props.patient_Id).then((data) => {
-        console.log(data.data[0]);
-
-        if (data && data.data[0]) {
-          var patientDetails = data.data[0];
-          var insurance = patientDetails.insurance[0];
-          var index = insuranceProvider.findIndex(
-            (i) =>
-              i.value.toLowerCase() ===
-              insurance.insurance_provider.toLowerCase()
-          );
-          console.log(index);
-          if (index > -1) {
-            insurance.insuranceProv1 = insurance.insurance_provider;
-            insurance.insuranceProv2 = "";
-          } else {
-            insurance.insuranceProv1 = "Other";
-            insurance.insuranceProv2 = insurance.insurance_provider;
-          }
-          this.setState({
-            patientId: patientDetails._id,
-            firstName: patientDetails.first_name,
-            lastName: patientDetails.last_name,
-            email: patientDetails.email,
-            phone: patientDetails.mobile,
-            address:
-              patientDetails.address.address1 +
-              " " +
-              patientDetails.address.address2,
-            city: patientDetails.address.city,
-            state: patientDetails.address.state,
-            zipCode: patientDetails.address.zip,
-            sex: patientDetails.gender,
-            dob: patientDetails.date_of_birth,
-            ethnicity: patientDetails.ethnicity,
-            race: patientDetails.race,
-            symptoms:
-              patientDetails.health_info &&
-              patientDetails.health_info[0].symptoms,
-            insuranceId: insurance._id,
-            insuranceProv1: insurance.insuranceProv1,
-            insuranceProv2: insurance.insuranceProv2,
-            memberId: insurance.insured_member_id,
-            groupNum: insurance.insured_group_number,
-            relation: insurance.relation_to_insured,
-            insuredFirstName: insurance.insured_first_name,
-            insuredLastName: insurance.insured_last_name,
-            driverLic: insurance.insured_drivers_license,
-            classStyle: "col-md-12 col-lg-7 col-xl-12",
-          });
-        }
-      });
-    }
-  };
-  */
 	getPatientDetails = () => {
 		console.log("signup-props", this.props);
 		if (this.props && this.props.patientDetails) {
@@ -430,6 +355,10 @@ class SignUp extends Component {
 			driverLicFile,
 			insuranceFrontPageFile,
 			insuranceBackPageFile,
+      driverLicFileName,
+      insuranceFrontPageFileName,
+      insuranceBackPageFileName,
+
 		} = this.state;
 		const values = {
 			firstName,
@@ -459,6 +388,9 @@ class SignUp extends Component {
 			driverLicFile,
 			insuranceFrontPageFile,
 			insuranceBackPageFile,
+      driverLicFileName,
+      insuranceFrontPageFileName,
+      insuranceBackPageFileName,
 		};
 		switch (step) {
 			default:
