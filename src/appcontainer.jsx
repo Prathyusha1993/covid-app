@@ -25,6 +25,7 @@ import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDe
 
 //Patient Signup
 import SignUp from "./client/components/patientSignup/signup/index.jsx";
+import PatientQrComponent from "./client/components/patientSignup/signup/patientQrComponent/index.jsx";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -74,6 +75,9 @@ const AppContainer = function (props) {
               component={UnassignedPatientGridDetails}
             /> */}
             <Route path="/patientsignup" exact component={SignUp} />
+
+            {/* here id should come dynamically */}
+            {/* <Route path="/patient/qr/:id " exact component={PatientQrComponent} /> */}
 
             <Route path="(/|/home)" exact component={Home} />
           </Switch>
