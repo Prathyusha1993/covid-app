@@ -273,9 +273,6 @@ export default class ViewRequisitionFormpage extends Component {
 			borderRight: "none",
 			borderRadius: "0px",
 		};
-		// let options = this.state.provider.map((item) => {
-		//   return item.first_name + " " + item.last_name;
-		// });
 		return (
 			<div>
 				{/* <button
@@ -430,14 +427,17 @@ export default class ViewRequisitionFormpage extends Component {
 													: "form-control"
 											}
 										/>
-										<div class="input-group-append">
+										<div >
+											<div>
 											<button
-												class="btn btn-primary submit-btn button-info-grid"
+												className="btn btn-primary submit-btn button-info-grid"
 												type="button"
 												onClick={this.autoGenerateKey}
 											>
 												Auto Generate
 											</button>
+											<Barcode />
+											</div>
 										</div>
 									</div>
 									<div

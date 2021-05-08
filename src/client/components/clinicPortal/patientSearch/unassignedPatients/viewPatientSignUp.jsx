@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import SignUp from "../../../patientSignup/signup";
-import ViewRequisitionFormpage from "./viewRequisitionFormPage";
+import ViewRequisitionFormpage from "../unassignedPatients/viewRequisitionFormPage";
 import { insuranceProvider } from "../../../patientSignup/signup/selectOptionsData";
 import { fetchUnassignedPatientDetails } from "../../../../clinicPortalServices/unassignedPatientService";
 
@@ -104,14 +104,22 @@ class ViewPatientSignUp extends Component {
 						insuredFirstName: insurance ? insurance.insured_first_name : "",
 						insuredLastName: insurance ? insurance.insured_last_name : "",
 						driverLic: insurance ? insurance.insured_drivers_license : "",
-            //need to set particular file names from api.
-            driverLicFileName: "",
-			      insuranceFrontPageFileName: "",
-			      insuranceBackPageFileName: "",
+						driverLicFileName:
+							insurance && insurance.images
+								? insurance.images.drivers_license
+								: "",
+						insuranceFrontPageFileName:
+							insurance && insurance.images
+								? insurance.images.insurance_front
+								: "",
+						insuranceBackPageFileName:
+							insurance && insurance.images
+								? insurance.images.insurance_back
+								: "",
 						classStyle: "col-md-12 col-lg-7 col-xl-12",
 					};
 					this.setState({ patientDetails: patientInfo });
-          this.props.setPatientDetails(patientInfo);
+					this.props.setPatientDetails(patientInfo);
 				}
 			});
 		}

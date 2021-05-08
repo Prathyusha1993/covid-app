@@ -9080,3 +9080,10 @@ html {
 .upload-image-href a:active{
 	color:blue;
 }
+
+canvas.drawing,
+canvas.drawingBuffer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
