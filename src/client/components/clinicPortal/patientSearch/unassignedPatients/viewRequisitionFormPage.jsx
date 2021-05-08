@@ -427,14 +427,17 @@ export default class ViewRequisitionFormpage extends Component {
 													: "form-control"
 											}
 										/>
-										<div class="input-group-append">
+										<div >
+											<div>
 											<button
-												class="btn btn-primary submit-btn button-info-grid"
+												className="btn btn-primary submit-btn button-info-grid"
 												type="button"
 												onClick={this.autoGenerateKey}
 											>
 												Auto Generate
 											</button>
+											<Barcode />
+											</div>
 										</div>
 									</div>
 									<div

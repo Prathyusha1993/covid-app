@@ -1,96 +1,61 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import BarcodeScannerComponent from "react-webcam-barcode-scanner";
+import React, { Component } from 'react';
+import ScanBarResult from './scanBarResult';
+import { Button, Modal } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ScanBarComponent from './scanBarComponent';
 
-function Barcode ()  {
-	const [data, setData] = React.useState("Not Found");
-  const [smShow, setSmShow] = useState(false);
-  const [lgShow, setLgShow] = useState(false);
+class Barcode extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: [],
+      scanCode: '',
+      modal: false,
+      scanSuccess: false
+    };
+    this._onDetected = this._onDetected.bind(this);
+    this._toggle = this._toggle.bind(this);
+  }
 
-  return (
-    <>
-      
-      <Button onClick={() => setLgShow(true)}
-      className="btn btn-primary submit-btn button-info-grid">
-        <i class="fa fa-qrcode" aria-hidden="true"></i> Bar Code Scanner</Button>
-      
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-          Bar Code Scanner
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <>
-      <BarcodeScannerComponent
-        width={500}
-        height={500}
-        onUpdate={(err, result) => {
-          if (result) setData(result.text)
-          else setData('Not Found')
-        }}
-        style={{marginLeft: '30px'}}
-      />
-      <p className="qrscn-reader-btn">Decoded Barcode: {data}</p>
-    </>
+  render() {
+    return (
+      <div>
+        <Button variant="info" block onClick={this._toggle} className="btn btn-primary submit-btn button-info-grid">
+		<i class="fa fa-qrcode" aria-hidden="true"></i> Scan Barcode
+        </Button>
 
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-		// <div>
-		// 	<button
-		// 		onClick={this.handleShow}
-		// 		// style={{ border: "none", backgroundColor: "transparent" }}
-		// 		className="btn btn-primary submit-btn button-info-grid"
-		// 	>
-		// 		<i class="fa fa-qrcode" aria-hidden="true"></i> Bar Code Scanner
-		// 	</button>
+        {this.state.scanSuccess ? (
+          <ScanBarResult key="scanResult" text={this.state.scanCode} />
+        ) : null}
+        {/* <input id="scanner_result" type="text" value={this.state.scanCode} />
+        <input id="scanner_result" type="text" value={this.state.result} />
+        <input id="scanner_result" type="text" value={this.state.scanSuccess} /> */}
 
-		// 	<Modal
-		// 		size="lg"
-		// 		aria-labelledby="contained-modal-title-vcenter"
-		// 		centered
-		// 		show={this.state.show}
-		// 		onHide={this.handleClose}
-		// 	>
-		// 		<Modal.Header closeButton>
-		// 			<Modal.Title>Bar Code Scanner</Modal.Title>
-		// 		</Modal.Header>
-		// 		<Modal.Body>
-		// 			<div>
-		// 				<>
-		// 					<BarcodeScannerComponent
-		// 						width={500}
-		// 						height={500}
-		// 						onUpdate={this.handleScan}
-    //             // {(err, result) => {
-		// 						// 	if (result) setData(result.text);
-		// 						// 	else setData("Not Found");
-		// 						// }}
-		// 					/>
+        <Modal show={this.state.modal} onHide={this._toggle}>
+          <Modal.Header closeButton="true" />
+          <Modal.Body>
+            <ScanBarComponent handleScan={this._onDetected} />
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  }
 
-		// 					<p>Decoded barcode: {this.state.data}</p>
-		// 				</>
-		// 			</div>
-		// 		</Modal.Body>
-		// 		<Modal.Footer>
-		// 			<Button variant="secondary" onClick={this.handleClose}>
-		// 				Close
-		// 			</Button>
-		// 			{/* <Button variant="primary" onClick={this.handleOrderEditChanges}>
-		// 					Save Changes
-		// 				</Button> */}
-		// 		</Modal.Footer>
-		// 	</Modal>
-		// </div>
-	
+  _toggle = () => {
+    this.setState(prevState => ({
+      modal: !prevState.modal,
+      scanSuccess: false
+    }));
+  }
+
+  _onDetected = (result) => {
+    this.setState({
+      modal: false,
+      scanCode: result ? result.codeResult.code : '',
+      scanSuccess: result ? true : false,
+      results: result
+    });
+  }
 }
-
 
 export default Barcode;
