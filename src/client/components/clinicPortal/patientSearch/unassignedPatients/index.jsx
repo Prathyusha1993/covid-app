@@ -13,7 +13,7 @@ import RequisitionBtnCellRenderer from "./requisitionBtnCellRenderer";
 
 import TextField from "@material-ui/core/TextField";
 import ViewPatientSignUp from "./viewPatientSignUp";
-import ViewRequisitionFormpage from "./viewRequisitionFormPage";
+import ViewRequisitionFormPage from "./viewRequisitionFormPage";
 
 //service calls
 import { fetchUnassignedPatientData } from "../../../../clinicPortalServices/unassignedPatientService";
@@ -28,7 +28,7 @@ class UnassignedPatientGridDetails extends Component {
 			showPatientSignup: false,
 			showCreateRequisition: false,
 			scannedPatientId: "",
-      patientDetails: {},
+			patientDetails: {},
 			modules: [
 				ClientSideRowModelModule,
 				MasterDetailModule,
@@ -202,8 +202,8 @@ class UnassignedPatientGridDetails extends Component {
 			this.setState({
 				scannedPatientId: "60903a9f513609de503835c6", // data,
 			});
-      //need to pass viewpatientsignup show property
-      //this.showPatientSignupHandler();
+			//need to pass viewpatientsignup show property
+			//this.showPatientSignupHandler();
 		}
 	};
 
@@ -221,9 +221,9 @@ class UnassignedPatientGridDetails extends Component {
 		});
 	};
 
-  showCreateRequisitionHandler = () => {
+	showCreateRequisitionHandler = () => {
 		this.setState({
-			showCreateRequisition: true
+			showCreateRequisition: true,
 		});
 		this.hidePatientSignupHandler();
 	};
@@ -234,11 +234,11 @@ class UnassignedPatientGridDetails extends Component {
 		});
 	};
 
-  setPatientDetails = (patientDetails) => {
-    this.setState({
-      patientDetails: patientDetails
-    });
-  }
+	setPatientDetails = (patientDetails) => {
+		this.setState({
+			patientDetails: patientDetails,
+		});
+	};
 
 	render() {
 		return (
@@ -304,13 +304,13 @@ class UnassignedPatientGridDetails extends Component {
 							closeQrScanner={this.handleClose}
 							show={this.state.showPatientSignup}
 							hidePatientSignupHandler={this.hidePatientSignupHandler}
-              showCreateRequisitionHandler={this.showCreateRequisitionHandler}  
-              setPatientDetails={this.setPatientDetails}            
+							showCreateRequisitionHandler={this.showCreateRequisitionHandler}
+							setPatientDetails={this.setPatientDetails}
 						/>
-            <ViewRequisitionFormpage
+						<ViewRequisitionFormPage
 							show={this.state.showCreateRequisition}
 							hideCreateRequisitionHandler={this.hideCreateRequisitionHandler}
-              patientDetails={this.state.patientDetails}
+							patientDetails={this.state.patientDetails}
 						/>
 					</div>
 				</div>

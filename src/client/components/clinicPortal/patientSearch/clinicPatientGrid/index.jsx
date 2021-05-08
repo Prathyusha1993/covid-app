@@ -19,10 +19,14 @@ import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRende
 
 import {
 	fetchPatientMasterData,
-	fetchPatientExpandableData, exportPatients
+	fetchPatientExpandableData,
+	exportPatients,
 } from "../../../../clinicPortalServices/patientSearchService";
 import { getPatientUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { savePatientSettings } from "../../../../clinicPortalServices/saveStateSettings";
+import QrScanReader from "../qrScanReader/index.jsx";
+import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
+import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
 
 const getPatientInfo = (patientData, patientId) => {
 	if (patientData && patientData.length > 0) {
@@ -30,7 +34,7 @@ const getPatientInfo = (patientData, patientId) => {
 			return item._id === patientId;
 		});
 		return {
-			gender: foundPatientInfo.gender ||'',
+			gender: foundPatientInfo.gender || "",
 			mrn: foundPatientInfo.mrn,
 			dob: foundPatientInfo.date_of_birth,
 			email: foundPatientInfo.email,
@@ -44,6 +48,11 @@ class ClinicPatientGrid extends Component {
 		super(props);
 
 		this.state = {
+			showQrScanner: false,
+			showPatientSignup: false,
+			showCreateRequisition: false,
+			scannedPatientId: "60903a9f513609de503835c6", //ToDo: remove later
+			patientDetails: {},
 			modules: [
 				ClientSideRowModelModule,
 				MasterDetailModule,
@@ -321,7 +330,9 @@ class ClinicPatientGrid extends Component {
 										patientData.data,
 										item.patient_id._id
 									);
-									returnData.gender = patientInfo ? (patientInfo.gender||'') : "";
+									returnData.gender = patientInfo
+										? patientInfo.gender || ""
+										: "";
 									returnData.mrn = patientInfo ? patientInfo.mrn : "";
 									returnData.dob =
 										patientInfo && patientInfo.dob
@@ -450,7 +461,62 @@ class ClinicPatientGrid extends Component {
 	clearFilter = () => {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
-		document.getElementById("reset-form").value="";
+		document.getElementById("reset-form").value = "";
+	};
+
+	showQrScannerHandler = () => {
+		this.setState({
+			showQrScanner: true,
+		});
+	};
+
+	onQrCodeScanHandler = (data) => {
+		if (data) {
+			this.setState({
+				scannedPatientId: "60903a9f513609de503835c6", // data,
+			});
+			//need to pass viewpatientsignup show property
+			//this.showPatientSignupHandler();
+		}
+	};
+
+	hideQrScannerHandler = () => {
+		this.setState({
+			showQrScanner: false,
+		});
+	};
+
+	showPatientSignupHandler = () => {
+		this.setState({
+			showPatientSignup: true,
+			//scannedPatientId: "60903a9f513609de503835c6", // TODO: remove later
+		});
+		this.hideQrScannerHandler();
+	};
+
+	hidePatientSignupHandler = () => {
+		this.setState({
+			showPatientSignup: false,
+		});
+	};
+
+	setPatientDetails = (patientDetails) => {
+		this.setState({
+			patientDetails: patientDetails,
+		});
+	};
+
+	showCreateRequisitionHandler = () => {
+		this.setState({
+			showCreateRequisition: true,
+		});
+		this.hidePatientSignupHandler();
+	};
+
+	hideCreateRequisitionHandler = () => {
+		this.setState({
+			showCreateRequisition: false,
+		});
 	};
 
 	render() {
@@ -485,7 +551,7 @@ class ClinicPatientGrid extends Component {
 							id="reset-form"
 							InputLabelProps={{
 								shrink: true,
-							  }}
+							}}
 							type="string"
 							margin="dense"
 							onChange={this.onFilterTextChange}
@@ -499,6 +565,34 @@ class ClinicPatientGrid extends Component {
 							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
 						</button>
 					</div>
+					<div>
+						<button
+							onClick={this.showQrScannerHandler}
+							className="btn btn-primary submit-btn button-info-grid"
+						>
+							<i className="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
+						</button>
+					</div>
+					<QrScanReader
+							show={this.state.showQrScanner}
+							onQrCodeScanHandler={this.onQrCodeScanHandler}
+							hideQrScannerHandler={this.hideQrScannerHandler}
+							scannedPatientId={this.state.scannedPatientId}
+							showPatientSignupHandler={this.showPatientSignupHandler}
+						/>
+						<ViewPatientSignUp
+							patientId={this.state.scannedPatientId}
+							//closeQrScanner={this.handleClose}
+							show={this.state.showPatientSignup}
+							hidePatientSignupHandler={this.hidePatientSignupHandler}
+							showCreateRequisitionHandler={this.showCreateRequisitionHandler}
+							setPatientDetails={this.setPatientDetails}
+						/>
+						<ViewRequisitionFormPage
+							show={this.state.showCreateRequisition}
+							hideCreateRequisitionHandler={this.hideCreateRequisitionHandler}
+							patientDetails={this.state.patientDetails}
+						/>
 					<div className="col grid-buttons">
 						<div>
 							<TextField
@@ -509,7 +603,7 @@ class ClinicPatientGrid extends Component {
 								id="page-size"
 								InputLabelProps={{
 									shrink: true,
-								  }}
+								}}
 								type="number"
 								margin="dense"
 								onChange={this.onPageSizeChanged}

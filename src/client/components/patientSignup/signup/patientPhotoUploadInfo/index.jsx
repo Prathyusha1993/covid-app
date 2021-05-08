@@ -58,7 +58,7 @@ class PatientPhotoUploadInfo extends Component {
                         ) : ""
                         } */}
 
-												{values.driverLicFile && values.driverLicFile.path && values.driverLicFile &&
+												{values.patientId && values.driverLicFile && values.driverLicFile.path && values.driverLicFile &&
 												values.driverLicFile.path.length > 0 ? (
 													<a className="upload-image-href" href={url1} target="_blank">
 														Link to Uploaded File
@@ -86,7 +86,7 @@ class PatientPhotoUploadInfo extends Component {
 															insurance
 															<span className="text-danger"> *</span>
 														</Form.Label>
-														{values.insuranceFrontPageFile && values.insuranceFrontPageFile.path && values.insuranceFrontPageFile &&
+														{values.patientId && values.insuranceFrontPageFile && values.insuranceFrontPageFile.path && values.insuranceFrontPageFile &&
 														values.insuranceFrontPageFile.path.length > 0 ? (
 															<a className="upload-image-href" href={url2} target="_blank">
 																Link to Uploaded File
@@ -117,7 +117,7 @@ class PatientPhotoUploadInfo extends Component {
 															insurance
 															<span className="text-danger"> *</span>
 														</Form.Label>
-														{values.insuranceBackPageFile && values.insuranceBackPageFile.path && values.insuranceBackPageFile &&
+														{values.patientId && values.insuranceBackPageFile && values.insuranceBackPageFile.path && values.insuranceBackPageFile &&
 														values.insuranceBackPageFile.path.length > 0 ? (
 															<a className="upload-image-href" href={url3} target="_blank">
 																Link to Uploaded File

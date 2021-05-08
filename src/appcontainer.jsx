@@ -21,7 +21,7 @@ import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/cl
 import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
 import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDetails/index.jsx";
 
-import UnassignedPatientGridDetails from "./client/components/clinicPortal/unassignedPatient/unassignedPatientGridDetails/index.jsx";
+//import UnassignedPatientGridDetails from "./client/components/clinicPortal/unassignedPatient/unassignedPatientGridDetails/index.jsx";
 
 //Patient Signup
 import SignUp from "./client/components/patientSignup/signup/index.jsx";
@@ -68,11 +68,11 @@ const AppContainer = function (props) {
             />
             <Route path="/clinic/orders" exact component={OrderGridDetails} />
             <Route path="/clinic/audit" exact component={AuditGridDetails} />
-            <Route
+            {/* <Route
               path="/clinic/unassignedpatients"
               exact
               component={UnassignedPatientGridDetails}
-            />
+            /> */}
             <Route path="/patientsignup" exact component={SignUp} />
 
             <Route path="(/|/home)" exact component={Home} />

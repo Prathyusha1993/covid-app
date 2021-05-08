@@ -273,9 +273,6 @@ export default class ViewRequisitionFormpage extends Component {
 			borderRight: "none",
 			borderRadius: "0px",
 		};
-		// let options = this.state.provider.map((item) => {
-		//   return item.first_name + " " + item.last_name;
-		// });
 		return (
 			<div>
 				{/* <button
