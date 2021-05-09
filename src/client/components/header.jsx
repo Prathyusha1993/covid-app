@@ -133,6 +133,12 @@ const Header = (props) => {
 								Patient SignUp{" "}
 							</a>
 						</li>{" "}
+						{/* <li className="nav-item">
+							<a href="/patient/qr" className="top-nav-button">
+								{" "}
+								Patient Qr Response{" "}
+							</a>
+						</li>{" "} */}
 				</ul>
 			</nav>
 		</header>

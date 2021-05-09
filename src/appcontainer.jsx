@@ -77,7 +77,10 @@ const AppContainer = function (props) {
             <Route path="/patientsignup" exact component={SignUp} />
 
             {/* here id should come dynamically */}
-            {/* <Route path="/patient/qr/:id " exact component={PatientQrComponent} /> */}
+            {/* <Route path="/patient/qr/:id" exact component={PatientQrComponent} /> */}
+            <Route exact path="/patient/qr/:id" render={({match}) => (
+              <PatientQrComponent patientId={match.params.id} />
+            )} />
 
             <Route path="(/|/home)" exact component={Home} />
           </Switch>
