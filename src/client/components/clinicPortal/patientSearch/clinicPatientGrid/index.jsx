@@ -51,7 +51,7 @@ class ClinicPatientGrid extends Component {
 			showQrScanner: false,
 			showPatientSignup: false,
 			showCreateRequisition: false,
-			scannedPatientId: "60903a9f513609de503835c6", //ToDo: remove later
+			scannedPatientId: "", //ToDo: remove later
 			patientDetails: {},
 			modules: [
 				ClientSideRowModelModule,
@@ -489,7 +489,7 @@ class ClinicPatientGrid extends Component {
 	showPatientSignupHandler = () => {
 		this.setState({
 			showPatientSignup: true,
-			//scannedPatientId: "60903a9f513609de503835c6", // TODO: remove later
+			scannedPatientId: "60903a9f513609de503835c6", // TODO: remove later
 		});
 		this.hideQrScannerHandler();
 	};

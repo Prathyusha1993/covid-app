@@ -41,16 +41,16 @@ class ViewPatientSignUp extends Component {
 	}
 
 	// componentDidMount() {
-	// 	this.getPatientDetails(this.props.patientId);
+	// 	this.fetchPatientDetails(this.props.patientId);
 	// }
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.patientId && this.props.patientId !== nextProps.patientId) {
-			this.getPatientDetails(nextProps.patientId);
+			this.fetchPatientDetails(nextProps.patientId);
 		}
 	}
 
-	getPatientDetails = (patientId) => {
+	fetchPatientDetails = (patientId) => {
 		console.log("patientId", patientId);
 		if (patientId && patientId.toLowerCase() !== "no result") {
 			fetchUnassignedPatientDetails(patientId).then((data) => {
@@ -129,7 +129,7 @@ class ViewPatientSignUp extends Component {
 		return (
 			<div>
 				<Modal
-					//onEnter={this.getPatientDetails}
+					//onEnter={this.fetchPatientDetails}
 					size="lg"
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
