@@ -54,10 +54,10 @@ class ViewPatientSignUp extends Component {
   }
 
   fetchPatientDetails = (patientId) => {
-    console.log("patientId", patientId);
+    //console.log("patientId", patientId);
     if (patientId && patientId.toLowerCase() !== "no result") {
       fetchUnassignedPatientDetails(patientId).then((data) => {
-        console.log(data && data.data[0]);
+        //console.log(data && data.data[0]);
 
         if (data && Array.isArray(data.data) && data.data[0]) {
           let patientDetails = data.data[0];
@@ -68,7 +68,7 @@ class ViewPatientSignUp extends Component {
                 i.value.toLowerCase() ===
                 insurance.insurance_provider.toLowerCase()
             );
-            console.log(index);
+            //console.log(index);
             if (index > -1) {
               insurance.insuranceProv1 = insurance.insurance_provider;
               insurance.insuranceProv2 = "";

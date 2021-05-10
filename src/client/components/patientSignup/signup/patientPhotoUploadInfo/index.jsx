@@ -38,7 +38,7 @@ class PatientPhotoUploadInfo extends Component {
     const url1 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.driverLicFileName}`;
     const url2 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.insuranceFrontPageFileName}`;
     const url3 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.insuranceBackPageFileName}`;
-    console.log(url1);
+    //console.log(url1);
 
     return (
       <div>

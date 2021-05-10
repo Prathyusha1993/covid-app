@@ -20,7 +20,7 @@ export const saveOrderEditData = (editParams) => {
 		lab_order_id: editParams.requisition
 	   
 	};
-	console.log(updatedOrder);	
+	//console.log(updatedOrder);	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/`, {
 		method: "POST",
 		headers: {
@@ -53,7 +53,7 @@ export const updateResultPDF = (params) => {
 		released_by:params.releasedBy,
 		test_type: params.testType,
 	};
-	console.log(updatedOrder);	
+	//console.log(updatedOrder);	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/update/`, {
 		method: "POST",
 		headers: {

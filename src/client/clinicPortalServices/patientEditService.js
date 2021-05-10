@@ -1,7 +1,7 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken } from "../utils/util";
 export const updatePatientData = (editParams) => {
-	console.log(editParams);
+	//console.log(editParams);
 	var token  = getUserAuthToken();
 	var updatedPatient = {
 		_id: editParams._id,

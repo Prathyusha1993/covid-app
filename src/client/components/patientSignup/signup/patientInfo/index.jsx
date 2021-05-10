@@ -35,7 +35,7 @@ class PatientInfo extends Component {
 
   render() {
     const { values } = this.props;
-    console.log("values", values);
+    //console.log("values", values);
     return (
       <div>
         <div className="content">

@@ -3,8 +3,8 @@ import { getUserAuthToken } from "../utils/util";
 export const fetchPatientMasterData = (facilityId) => {
 	//debugger;
 	var token  = getUserAuthToken();
-	console.log("facility_id", facilityId);
-	debugger;
+	//console.log("facility_id", facilityId);
+	//debugger;
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/search`, {
 		method: "POST",
 		headers: {

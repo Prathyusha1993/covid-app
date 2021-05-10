@@ -251,7 +251,7 @@ class ClinicPatientGrid extends Component {
           defaultColDef: { flex: 1, filter: true },
         },
         getDetailRowData: function (params) {
-          console.log("getting details", params);
+          //console.log("getting details", params);
           Promise.all([
             fetchPatientExpandableData(params.data._id),
             fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")),
@@ -377,7 +377,7 @@ class ClinicPatientGrid extends Component {
   }
 
   onGridReady = (params) => {
-    console.log(params);
+    //console.log(params);
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.loadGridData();
@@ -411,14 +411,14 @@ class ClinicPatientGrid extends Component {
     var userId = window.localStorage.getItem("USER_ID");
     getPatientUserSettings(userId, this.state.gridName).then(
       (patientUserInfo) => {
-        console.log("getSettings", patientUserInfo);
+        //console.log("getSettings", patientUserInfo);
 
         const columnState =
           patientUserInfo.data &&
           patientUserInfo.data.grid_state.find((item) => {
             return item.grid_name === "Patient";
           }).columns;
-        console.log("columnState-retrieved", columnState);
+        //console.log("columnState-retrieved", columnState);
         if (columnState) {
           this.gridColumnApi.applyColumnState({
             state: columnState,
@@ -444,7 +444,7 @@ class ClinicPatientGrid extends Component {
     var userId = window.localStorage.getItem("USER_ID");
     const columnState = this.gridColumnApi.getColumnState();
     var pageSize = document.getElementById("page-size").value;
-    console.log("columnState", columnState);
+    //console.log("columnState", columnState);
 
     savePatientSettings(
       userId,
@@ -452,7 +452,7 @@ class ClinicPatientGrid extends Component {
       columnState,
       pageSize
     ).then(() => {
-      console.log("saveSettings success");
+      //console.log("saveSettings success");
       alert("Settings saved successfully !!");
     });
   };

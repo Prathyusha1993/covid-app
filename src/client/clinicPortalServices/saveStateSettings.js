@@ -1,7 +1,7 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken } from "../utils/util";
 export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
-	console.log('columnState-saved',columnState);
+	//console.log('columnState-saved',columnState);
 	var saveObject = {
 		//user_id: "6062151112591a26d4bb6685",
 		user_id: userId,
@@ -16,7 +16,7 @@ export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 			},
 		],
 	};
-	console.log(saveObject);
+	//console.log(saveObject);
 	var token  = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,
@@ -34,7 +34,7 @@ export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 
 
 export const savePatientSettings = (userId, gridName, columnState, pageSize) => {
-	console.log('columnState-saved',columnState);
+	//console.log('columnState-saved',columnState);
 	var saveObject = {
 		//user_id: "6062151112591a26d4bb6685",
 		user_id: userId,
@@ -49,7 +49,7 @@ export const savePatientSettings = (userId, gridName, columnState, pageSize) => 
 			},
 		],
 	};
-	console.log(saveObject);
+	//console.log(saveObject);
 	var token  = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,

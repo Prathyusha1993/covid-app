@@ -3,7 +3,7 @@ import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken } from "../utils/util";
 
 export const patientSignup = (patientDetails) => {
-    console.log("patientSignup",patientDetails);
+    //console.log("patientSignup",patientDetails);
     var patientInfo = {
         "first_name":patientDetails.firstName,
         "last_name":patientDetails.lastName,
@@ -44,7 +44,7 @@ export const patientSignup = (patientDetails) => {
             }
         },
     };
-    console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
+    //console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
     return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/insurance`, {
         method: 'POST',
         headers: {

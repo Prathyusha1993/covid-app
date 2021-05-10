@@ -16,8 +16,8 @@ export const fetchDashboardDetails = (patientInfo) => {
   }
 
   export const resultsViewed = (orderInfo) => {
-    console.log("resultsViewed");
-    console.log(orderInfo);
+    //console.log("resultsViewed");
+    //console.log(orderInfo);
     var token  = getPatientAuthToken();
      return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/patient/resultsviewed`, {
          method: 'POST',

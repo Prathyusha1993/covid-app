@@ -23,10 +23,10 @@ class PatientQrComponent extends Component {
   }
 
   fetchPatientDetails = () => {
-    console.log("enter");
+    //console.log("enter");
     fetchUnassignedPatientDetails(this.state.patientId)
       .then((data) => {
-        console.log("response data", data);
+        //console.log("response data", data);
         let patientDetails = data.data[0];
         let patientFullName =
           patientDetails.first_name + " " + patientDetails.last_name;

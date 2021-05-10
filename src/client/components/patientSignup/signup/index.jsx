@@ -147,7 +147,7 @@ class SignUp extends Component {
   };
 
   handleReadFile = (input) => (file) => {
-    console.log("signupFileName", input, file);
+    //console.log("signupFileName", input, file);
     this.setState({ [input]: file });
     switch (input) {
       case "driverLicFile":
@@ -206,7 +206,7 @@ class SignUp extends Component {
     this.setState({
       step: step + 1,
     });
-    console.log("state", this.state);
+    //console.log("state", this.state);
   };
 
   prevStep = () => {
@@ -225,7 +225,7 @@ class SignUp extends Component {
         this.state.driverLicFileName
       );
     }
-    console.log("check", this.state.driverLicFile);
+    //console.log("check", this.state.driverLicFile);
     if (
       this.state.insuranceFrontPageFile &&
       this.state.insuranceFrontPageFileName
@@ -247,12 +247,12 @@ class SignUp extends Component {
       );
     }
     patientUploadImages(formData).then((success) => {
-      console.log("success");
+      //console.log("success");
     });
   };
 
   handleSubmit = () => {
-    console.log("handlesubmit");
+    //console.log("handlesubmit");
 
     var patientInfo = {
       patientId: this.state.patientId,
@@ -285,7 +285,7 @@ class SignUp extends Component {
     //update existing patient info from clinic login
     if (this.props && this.state.patientId) {
       updateUnassignedPatientDetails(patientInfo).then((data) => {
-        console.log("patientUpdate success");
+        //console.log("patientUpdate success");
         this.setState({
           showMessage: true,
           message: "Updated the changes successfully!!",
@@ -295,8 +295,8 @@ class SignUp extends Component {
     //new patient sign up
     else {
       patientSignup(patientInfo).then((data) => {
-        console.log("patientsignupdetails", data);
-        console.log("patientSignup success");
+        //console.log("patientsignupdetails", data);
+        //console.log("patientSignup success");
         this.handleFileUpload();
         // this.setState({
         // 	showMessage: true,
@@ -308,7 +308,7 @@ class SignUp extends Component {
   };
 
   getPatientDetails = (props) => {
-    console.log("signup-props", props);
+    //console.log("signup-props", props);
     if (props && props.patientDetails) {
       var patientDetails = props.patientDetails;
       this.setState({

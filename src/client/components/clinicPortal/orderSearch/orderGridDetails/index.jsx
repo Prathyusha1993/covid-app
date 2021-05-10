@@ -308,7 +308,7 @@ class OrderGridDetails extends Component {
         orderUserInfo.data.grid_state.find((item) => {
           return item.grid_name === "Order";
         }).columns;
-      console.log("columnState-retrieved", columnState);
+      //console.log("columnState-retrieved", columnState);
       if (columnState) {
         this.gridColumnApi.applyColumnState({
           state: columnState,
@@ -333,11 +333,11 @@ class OrderGridDetails extends Component {
     var userId = window.localStorage.getItem("USER_ID");
     const columnState = this.gridColumnApi.getColumnState();
     var pageSize = document.getElementById("page-size").value;
-    console.log("columnState", columnState);
+    //console.log("columnState", columnState);
 
     saveOrderSettings(userId, this.state.gridName, columnState, pageSize).then(
       () => {
-        console.log("saveSettings success");
+        //console.log("saveSettings success");
         alert("Settings saved successfully !!");
       }
     );
