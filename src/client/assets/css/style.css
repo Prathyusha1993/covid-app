@@ -9092,6 +9092,10 @@ canvas.drawingBuffer {
 	align-items: center;
 	margin-top: 20px;
 	font-size:17px;
+	/* image-rendering: auto;
+	image-rendering: crisp-edges; */
+	image-rendering: pixelated;
+	  
 }
 
 .img-text-data-stream {
@@ -9102,4 +9106,23 @@ canvas.drawingBuffer {
 
 .fax-button {
 	margin-left: 8px;
+	border: none;
+	background-color: transparent;
 }
+
+.edit-order-btn {
+	border: none;
+	background-color: transparent;
+}
+
+.order-edit-formstyle {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 0px;
+}
+
+.label-patient-details {
+	font-weight: bold;
+}
+

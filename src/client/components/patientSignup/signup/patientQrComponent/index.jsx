@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getUserAuthToken } from "../../../../utils/util";
 import { fetchPatientQrResponse } from "../../../../patientSignupServices/patientSignupFormService";
+import {fetchUnassignedPatientDetails} from "../../../../clinicPortalServices/unassignedPatientService"
 
 class PatientQrComponent extends Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class PatientQrComponent extends Component {
 			//patientId: "60903a9f513609de503835c6",
 			patientId: this.props.patientId,
 			dataStream: "",
+			patientName: ""
 		};
 	}
 
@@ -17,7 +19,21 @@ class PatientQrComponent extends Component {
 		fetchPatientQrResponse(this.props.patientId).then((dataStream) => {
 			this.setState({ dataStream: dataStream });
 		});
-	}
+		this.fetchPatientDetails();
+	};
+
+
+	fetchPatientDetails = () => {
+		console.log("enter");
+			fetchUnassignedPatientDetails(this.state.patientId).then((data) => {
+				console.log('response data', data);
+					let patientDetails = data.data[0];
+					let patientFullName =  patientDetails.first_name + " " + patientDetails.last_name;
+					this.setState({ patientName: patientFullName });
+			}).catch(error => {
+				console.log(error);
+			}) 
+	};
 
 	render() {
 		return (
@@ -27,10 +43,10 @@ class PatientQrComponent extends Component {
 				</div>
 				<div >
 					<div className="img-text-data-stream">
-						<label>Patient Id: {this.state.patientId}</label>
+						<label className="label-patient-details">Patient Id: {this.state.patientId} </label>
 					</div>
 					<div className="img-text-data-stream">
-						<label>Patient Name: 'should come from api'</label>
+						<label className="label-patient-details">Patient Name: {this.state.patientName}</label>
 					</div>
 				</div>
 			</div>

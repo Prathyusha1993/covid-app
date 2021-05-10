@@ -42,7 +42,7 @@ const AppContainer = function (props) {
           {url === "patientportal" ||
           url === "clinic" ||
           url === "patientsignup" || 
-          url === "patient/qr/:id" ? (
+          url === "patient" ? (
             <Route render={(props) => <PatientPortalHeader {...props} />} />
           ) : (
             <Route render={(props) => <Header {...props} />} />

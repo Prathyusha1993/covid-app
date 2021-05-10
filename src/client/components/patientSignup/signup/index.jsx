@@ -283,6 +283,7 @@ class SignUp extends Component {
 		//new patient sign up
 		else {
 			patientSignup(patientInfo).then((data) => {
+				console.log('patientsignupdetails', data)
 				console.log("patientSignup success");
 				this.handleFileUpload();
 				// this.setState({

@@ -48,7 +48,7 @@ class ViewPatientSignUp extends Component {
 		if (nextProps.patientId && this.props.patientId !== nextProps.patientId) {
 			this.fetchPatientDetails(nextProps.patientId);
 		}
-	}
+	};
 
 	fetchPatientDetails = (patientId) => {
 		console.log("patientId", patientId);
@@ -147,10 +147,6 @@ class ViewPatientSignUp extends Component {
 							<div>
 								<div className="row">
 									<div className="col-12">
-										{/* <ViewRequisitionFormpage
-									patientDetails={this.state.patientDetails}
-                  showCreateRequisitionHandler={this.props.showCreateRequisitionHandler}
-								/> */}
 										<button
 											onClick={this.props.showCreateRequisitionHandler}
 											className="btn btn-primary submit-btn button-info-grid pull-right"

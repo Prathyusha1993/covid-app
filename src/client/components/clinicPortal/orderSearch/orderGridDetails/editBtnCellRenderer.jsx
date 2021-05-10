@@ -8,6 +8,7 @@ import moment from "moment";
 import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -184,6 +185,18 @@ export default class EditBtnCellRenderer extends Component {
 		});
 	};
 
+	renderTooltipEdit = (props) => (
+		<Tooltip id="button-tooltip" {...props}>
+			Edit Order
+		</Tooltip>
+	);
+
+	renderTooltipFax = (props) => (
+		<Tooltip id="button-tooltip" {...props}>
+			Fax Order
+		</Tooltip>
+	);
+
 	render() {
 		const formStyle = {
 			borderTop: "none",
@@ -194,25 +207,30 @@ export default class EditBtnCellRenderer extends Component {
 
 		return (
 			<div>
-				<button
-        type="button"
-					data-toggle="tooltip"
-					data-placement="top"
-					title="Edit Order"
-					onClick={this.handleShow}
-					style={{ border: "none", backgroundColor: "transparent" }}
+				<OverlayTrigger
+					placement="top"
+					delay={{ show: 100, hide: 400 }}
+					overlay={this.renderTooltipEdit}
 				>
-					<i class="fas fa-pen"></i>
-				</button>
-
-				<button
-					title="Fax Order"
-					className="fax-button"
-					onClick={this.handleFax}
-					style={{ border: "none", backgroundColor: "transparent" }}
+					<button
+						onClick={this.handleShow}
+            className="edit-order-btn"
+					>
+						<i class="fas fa-pen"></i>
+					</button>
+				</OverlayTrigger>
+				<OverlayTrigger
+					placement="top"
+					delay={{ show: 100, hide: 400 }}
+					overlay={this.renderTooltipFax}
 				>
-					<i class="fa fa-fax" aria-hidden="true"></i>
-				</button>
+					<button
+						className="fax-button"
+						onClick={this.handleFax}
+					>
+						<i class="fa fa-fax" aria-hidden="true"></i>
+					</button>
+				</OverlayTrigger>
 
 				<Modal
 					size="lg"
@@ -231,10 +249,10 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Patient Name</label>
 										<input
-											style={formStyle}
+											
 											type="text"
 											disabled
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="patientName"
 											value={this.state.patientName}
 											onChange={this.handleChange}
@@ -245,10 +263,10 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>MRN</label>
 										<input
-											style={formStyle}
+											
 											type="text"
 											disabled
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="mrn"
 											value={this.state.mrn}
 											onChange={this.handleChange}
@@ -259,10 +277,10 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Date Of Birth</label>
 										<input
-											style={formStyle}
+											
 											type="text"
 											disabled
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="dob"
 											value={this.state.dob}
 											onChange={this.handleChange}
@@ -273,10 +291,10 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Gender</label>
 										<input
-											style={formStyle}
+											
 											type="text"
 											disabled
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="gender"
 											value={this.state.gender}
 											onChange={this.handleChange}
@@ -287,9 +305,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Physician</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="provider"
 											disabled
 											value={this.state.provider}
@@ -301,9 +319,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Facility</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="facilitySource"
 											disabled
 											value={this.state.facilitySource}
@@ -316,8 +334,8 @@ export default class EditBtnCellRenderer extends Component {
 										<label>Test Description</label>
 										<input
 											type="text"
-											style={formStyle}
-											className="form-control"
+											
+											className="form-control order-edit-formstyle"
 											name="description"
 											disabled
 											value={this.state.description}
@@ -329,7 +347,7 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Test Type</label>
 										{/* <input
-											style={formStyle}
+											
 											type="text"
 											disabled
 											className="form-control"
@@ -338,8 +356,8 @@ export default class EditBtnCellRenderer extends Component {
 											onChange={this.handleChange}
 										/> */}
 										<select
-											style={formStyle}
-											className="form-control select"
+											
+											className="form-control select order-edit-formstyle"
 											name="testType"
 											value={this.state.testType}
 											onChange={this.handleChange}
@@ -357,9 +375,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Requisition</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="requisition"
 											value={this.state.requisition}
 											onChange={this.handleChange}
@@ -370,9 +388,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Sample</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control "
+											className="form-control order-edit-formstyle"
 											name="sample"
 											value={this.state.sample}
 											onChange={this.handleChange}
@@ -383,9 +401,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Collected Date</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="collectedDate"
 											value={this.state.collectedDate}
 											onChange={this.handleChange}
@@ -400,9 +418,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Received Date</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="receivedDate"
 											value={this.state.receivedDate}
 											onChange={this.handleChange}
@@ -416,8 +434,8 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Result</label>
 										<select
-											style={formStyle}
-											className="form-control select"
+											
+											className="form-control select order-edit-formstyle"
 											name="result"
 											value={this.state.result}
 											onChange={this.handleChange}
@@ -432,9 +450,9 @@ export default class EditBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Released Date</label>
 										<input
-											style={formStyle}
+											
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="released"
 											value={this.state.released}
 											onChange={this.handleChange}
