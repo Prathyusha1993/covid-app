@@ -20,13 +20,14 @@ class PatientPhotoUploadInfo extends Component {
   continue = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    document.getElementById("btnSubmit").disabled = true;
+
     if (
       this.props.values.driverLicFileName !== "" &&
       (this.props.values.insuranceProv1 === "Self/Pay" ||
         (this.props.values.insuranceBackPageFileName !== "" &&
           this.props.values.insuranceFrontPageFileName !== ""))
     ) {
+      document.getElementById("btnSubmit").disabled = true;
       this.props.handleSubmit();
     }
   };

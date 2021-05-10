@@ -68,13 +68,13 @@ export const updateResultPDF = (params) => {
 //need to pass the url after coming
 export const fetchOrderFaxData = (orderId) => {
 	var token  = getUserAuthToken();
-	return fetch(`url`, {
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/fax/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 			"Authorization" : "Bearer " + token
 		},
 		
-		body: JSON.stringify(orderId),
+		body: JSON.stringify({order_id : orderId}),
 	}).then((response) => response.json());
 };

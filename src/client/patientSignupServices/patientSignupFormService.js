@@ -65,7 +65,7 @@ export const patientUploadImages = (formData) => {
 
 
 export const fetchPatientQrResponse = (patientId) => {
-    return fetch(`${serviceConstants.API_HOST_NAME}/notifications/qrcode/${patientId}`, {
+    return fetch(`${serviceConstants.API_HOST_NAME}/notifications/v1/qrcode/${patientId}`, {
         method: 'POST',
     })
     .then((response) => response.json());

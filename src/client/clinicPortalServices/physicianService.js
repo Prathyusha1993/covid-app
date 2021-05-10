@@ -8,7 +8,7 @@ export const fetchPhysicians = (facilityId) => {
 			"Content-Type": "application/json",
 			"Authorization" : "Bearer " + token
 		},
-		body: JSON.stringify({facility: facilityId}),
+		body: JSON.stringify({facility_id: facilityId}),
 	}).then((response) => response.json());
 };
 
