@@ -436,7 +436,7 @@ export default class ViewRequisitionFormpage extends Component {
 											>
 												Auto Generate
 											</button>
-											<Barcode />
+											{/* <Barcode /> */}
 											</div>
 										</div>
 									</div>

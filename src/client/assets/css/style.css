@@ -9091,10 +9091,15 @@ canvas.drawingBuffer {
 	justify-content: center;
 	align-items: center;
 	margin-top: 20px;
+	font-size:17px;
 }
 
 .img-text-data-stream {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.fax-button {
+	margin-left: 8px;
 }
