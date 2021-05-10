@@ -20,8 +20,13 @@ class PatientQrComponent extends Component {
 
 	render() {
 		return (
-			<div>
-				<img src={this.state.dataStream}></img>
+			<div style={{height:'100vh'}}>
+				<div className="img-data-stream">
+					<img  src={this.state.dataStream} />
+				</div>
+				<div className="img-text-data-stream">
+					Patient Name: 'should come from api'
+				</div>
 			</div>
 		);
 	}

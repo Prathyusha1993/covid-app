@@ -473,10 +473,10 @@ class ClinicPatientGrid extends Component {
 	onQrCodeScanHandler = (data) => {
 		if (data) {
 			this.setState({
-				scannedPatientId: "60903a9f513609de503835c6", // data,
+				scannedPatientId: data,
 			});
 			//need to pass viewpatientsignup show property
-			//this.showPatientSignupHandler();
+			this.showPatientSignupHandler();
 		}
 	};
 
@@ -489,7 +489,7 @@ class ClinicPatientGrid extends Component {
 	showPatientSignupHandler = () => {
 		this.setState({
 			showPatientSignup: true,
-			scannedPatientId: "60903a9f513609de503835c6", // TODO: remove later
+			//scannedPatientId: "60903a9f513609de503835c6", // TODO: remove later
 		});
 		this.hideQrScannerHandler();
 	};

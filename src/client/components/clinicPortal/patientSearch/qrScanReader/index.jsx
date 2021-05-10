@@ -7,7 +7,7 @@ class QrScanReader extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			patientId: "60903a9f513609de503835c6", // "No result"
+			patientId: ""
 		};
 	}
 
@@ -39,12 +39,12 @@ class QrScanReader extends Component {
 									className="qrscan-reader"
 								/>
                 {/* comment this decode qr code button once qr code works fine */}
-								<button
+								{/* <button
 									className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid"
 									onClick={this.props.showPatientSignupHandler}
 								>
 									Decoded QR Code: {this.props.scannedPatientId}
-								</button>
+								</button> */}
 							</div>
 						) : null}
 					</Modal.Body>

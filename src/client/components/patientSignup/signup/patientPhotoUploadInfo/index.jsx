@@ -7,7 +7,11 @@ class PatientPhotoUploadInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
-	}
+	};
+
+	componentDidMount() {
+		window.scrollTo(0, 0);
+	  }
 
 	back = (e) => {
 		e.preventDefault();
@@ -16,8 +20,6 @@ class PatientPhotoUploadInfo extends Component {
 
 	render() {
 		const { values } = this.props;
-		// const url = `${serviceConstants.HOST_NAME}/files/patient/images/${values.driverLicFileName}`;
-		// driverlic_20210506110545.jpg   ${values.driverLicFileName}`;
 
 		const url1 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.driverLicFileName}`;
 		const url2 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.insuranceFrontPageFileName}`;
@@ -156,13 +158,13 @@ class PatientPhotoUploadInfo extends Component {
 													</Button>
 												</div>
 
-												<div>
+												{/* <div>
 													{this.props.values.showMessage && (
 														<p className="submit-success-msg">
 															{this.props.values.message}
 														</p>
 													)}
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</Form>

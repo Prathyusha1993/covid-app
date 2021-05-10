@@ -8,6 +8,7 @@ import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/un
 import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
 import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
 import moment from "moment";
+import { Redirect } from "react-router";
 
 class SignUp extends Component {
 	constructor(props) {
@@ -284,10 +285,11 @@ class SignUp extends Component {
 			patientSignup(patientInfo).then((data) => {
 				console.log("patientSignup success");
 				this.handleFileUpload();
-				this.setState({
-					showMessage: true,
-					message: "Thank you for contacting us, You're all signed up.",
-				});
+				// this.setState({
+				// 	showMessage: true,
+				// 	message: "Thank you for contacting us, You're all signed up.",
+				// });
+				window.location.href = "/patientsignup/confirmation";
 			});
 		}
 	};
@@ -332,6 +334,7 @@ class SignUp extends Component {
 		const { step } = this.state;
 
 		const {
+			patientId,
 			firstName,
 			lastName,
 			email,
@@ -364,6 +367,7 @@ class SignUp extends Component {
 			insuranceBackPageFileName,
 		} = this.state;
 		const values = {
+			patientId,
 			firstName,
 			lastName,
 			email,
