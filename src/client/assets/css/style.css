@@ -8876,10 +8876,10 @@ html {
 
 .card-name {
 	border-bottom: 1px solid #dad5d5;
-	padding-bottom: 30px;
+	/* padding-bottom: 30px; */
 	margin-bottom: 30px;
 	padding-left: 20px;
-	padding-top: 20px;
+	/* padding-top: 20px; */
 }
 
 .card-info {
@@ -9055,13 +9055,11 @@ html {
 }
 
 .submit-success-msg {
-	color: darkgreen;
-	/* margin-right: 250px; */
+	color: green;
 	margin-top: 50px;
-	/* position: absolute; */
-	position: relative;
-	margin-right: 30px;
 	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
 }
 
 .upload-image-href {
@@ -9081,9 +9079,50 @@ html {
 	color:blue;
 }
 
-canvas.drawing,
+/* canvas.drawing,
 canvas.drawingBuffer {
   position: absolute;
   left: 0;
   top: 0;
+} */
+
+.img-data-stream {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	font-size:17px;
+	/* image-rendering: auto;
+	image-rendering: crisp-edges; */
+	image-rendering: pixelated;
+	  
 }
+
+.img-text-data-stream {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.fax-button {
+	margin-left: 8px;
+	border: none;
+	background-color: transparent;
+}
+
+.edit-order-btn {
+	border: none;
+	background-color: transparent;
+}
+
+.order-edit-formstyle {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 0px;
+}
+
+.label-patient-details {
+	font-weight: bold;
+}
+

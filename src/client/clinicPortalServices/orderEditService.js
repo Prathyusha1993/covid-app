@@ -1,7 +1,7 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken } from "../utils/util";
-export const saveOrderEditData = (editParams) => {
 
+export const saveOrderEditData = (editParams) => {
 	if(! editParams) throw "Order obj is null";
 	var token  = getUserAuthToken();
 	var updatedOrder  = {
@@ -62,5 +62,19 @@ export const updateResultPDF = (params) => {
 		},
 		
 		body: JSON.stringify(updatedOrder),
+	}).then((response) => response.json());
+};
+
+//need to pass the url after coming
+export const fetchOrderFaxData = (orderId) => {
+	var token  = getUserAuthToken();
+	return fetch(`url`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
+		},
+		
+		body: JSON.stringify(orderId),
 	}).then((response) => response.json());
 };

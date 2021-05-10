@@ -26,6 +26,7 @@ import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDe
 //Patient Signup
 import SignUp from "./client/components/patientSignup/signup/index.jsx";
 import PatientQrComponent from "./client/components/patientSignup/signup/patientQrComponent/index.jsx";
+import PatientConfirmation from "./client/components/patientSignup/signup/patientConfirmation/index.jsx";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -40,7 +41,8 @@ const AppContainer = function (props) {
         <div>
           {url === "patientportal" ||
           url === "clinic" ||
-          url === "patientsignup" ? (
+          url === "patientsignup" || 
+          url === "patient" ? (
             <Route render={(props) => <PatientPortalHeader {...props} />} />
           ) : (
             <Route render={(props) => <Header {...props} />} />
@@ -76,8 +78,8 @@ const AppContainer = function (props) {
             /> */}
             <Route path="/patientsignup" exact component={SignUp} />
 
-            {/* here id should come dynamically */}
-            {/* <Route path="/patient/qr/:id" exact component={PatientQrComponent} /> */}
+            <Route path="/patientsignup/confirmation" exact component={PatientConfirmation} />
+            
             <Route exact path="/patient/qr/:id" render={({match}) => (
               <PatientQrComponent patientId={match.params.id} />
             )} />

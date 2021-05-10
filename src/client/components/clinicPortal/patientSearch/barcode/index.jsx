@@ -20,8 +20,8 @@ class Barcode extends Component {
   render() {
     return (
       <div>
-        <Button variant="info" block onClick={this._toggle} className="btn btn-primary submit-btn button-info-grid">
-		<i class="fa fa-qrcode" aria-hidden="true"></i> Scan Barcode
+        <Button variant="info" block onClick={this._toggle}>
+          Scan Barcode
         </Button>
 
         {this.state.scanSuccess ? (
@@ -41,14 +41,14 @@ class Barcode extends Component {
     );
   }
 
-  _toggle = () => {
+  _toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal,
       scanSuccess: false
     }));
   }
 
-  _onDetected = (result) => {
+  _onDetected(result) {
     this.setState({
       modal: false,
       scanCode: result ? result.codeResult.code : '',

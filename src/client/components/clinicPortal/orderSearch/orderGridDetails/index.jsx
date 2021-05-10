@@ -67,9 +67,9 @@ class OrderGridDetails extends Component {
 			pageSize: "",
 			columnDefs: [
 				{
-					headerName: "Edit",
-					minWidth: 80,
-					maxWidth: 80,
+					headerName: "Actions",
+					minWidth: 100,
+					// maxWidth: 150,
 					cellStyle: { textAlign: "center" },
 					cellRenderer: "editBtnCellRenderer",
 				},

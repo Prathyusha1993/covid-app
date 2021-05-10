@@ -21,8 +21,6 @@ class ScanBarComponent extends Component {
         inputStream: {
           type: 'LiveStream',
           constraints: {
-            // width: { min: 800, max: 1280 },
-            // height: { min: 600, max: 720 },
             width: { min: 200, max: 500 },
             height: { min: 100, max: 300 },
             aspectRatio: { min: 4 / 3, max: 16 / 9 },
@@ -80,6 +78,30 @@ class ScanBarComponent extends Component {
 
     Quagga.stop();
     return this.props.handleScan(code);
+    // The code below does not execute fast enough before the next scan occurs
+    /*
+    if (!(Object.keys(code).length === 0) && code !== '') {
+      const errors = result.codeResult.decodedCodes
+        .filter(_ => _.error !== undefined)
+        .map(_ => _.error);
+      const median = this._getMedian(errors);
+      if (median < 0.08) {
+        // probably correct
+        Quagga.stop();
+        console.log(code);
+        console.log(median);
+        return this.props.handleScan(code);
+      } else {
+        // probably wrong
+        console.log(code);
+        console.log(median);
+      }
+    } else {
+      Quagga.stop();
+      console.log(code);
+      return this.props.handleScan(code);
+    }
+    */
   }
 
   _getMedian(arr) {
