@@ -218,22 +218,34 @@ class SignUp extends Component {
 
   handleFileUpload = () => {
     const formData = new FormData();
-    formData.append(
-      "images",
-      this.state.driverLicFile,
-      this.state.driverLicFileName
-    );
+    if (this.state.driverLicFile && this.state.driverLicFileName) {
+      formData.append(
+        "images",
+        this.state.driverLicFile,
+        this.state.driverLicFileName
+      );
+    }
     console.log("check", this.state.driverLicFile);
-    formData.append(
-      "images",
-      this.state.insuranceFrontPageFile,
+    if (
+      this.state.insuranceFrontPageFile &&
       this.state.insuranceFrontPageFileName
-    );
-    formData.append(
-      "images",
-      this.state.insuranceBackPageFile,
+    ) {
+      formData.append(
+        "images",
+        this.state.insuranceFrontPageFile,
+        this.state.insuranceFrontPageFileName
+      );
+    }
+    if (
+      this.state.insuranceBackPageFile &&
       this.state.insuranceBackPageFileName
-    );
+    ) {
+      formData.append(
+        "images",
+        this.state.insuranceBackPageFile,
+        this.state.insuranceBackPageFileName
+      );
+    }
     patientUploadImages(formData).then((success) => {
       console.log("success");
     });
