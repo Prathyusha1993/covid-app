@@ -112,77 +112,95 @@ export const symptoms = [
 
 export const insuranceProvider = [
 	{
-		id: 1,
-		value: "Please Select",
+		id:1,
+		value: "",
+		desc:"Please Select"
 	},
 	{
-		id: 2,
+		id:2,
 		value: "Self/Pay",
+		desc: "Self/Pay",
 	},
 	{
 		id: 3,
-		value: "Aetna ",
+		value: "Aetna",
+		desc: "Aetna",
 	},
 	{
 		id: 4,
-		value: "Anthem Blue Cross Blue Shield ",
+		value: "Anthem Blue Cross Blue Shield",
+		desc: "Anthem Blue Cross Blue Shield",
 	},
 	{
 		id: 5,
-		value: " Blue Shield Of California",
+		value: "Blue Shield Of California",
+		desc: "Blue Shield Of California",
 	},
 	{
 		id: 6,
-		value: "CareMore ",
+		value: "CareMore",
+		desc: "CareMore",
 	},
 	{
 		id: 7,
-		value: " HealthNet",
+		value: "HealthNet",
+		desc: "HealthNet",
 	},
 	{
 		id: 8,
-		value: " Humana",
+		value: "Humana",
+		desc: "Humana",
 	},
 	{
 		id: 9,
-		value: " Inland Empire Health Plan",
+		value: "Inland Empire Health Plan",
+		desc: "Inland Empire Health Plan",
 	},
 	{
 		id: 10,
-		value: "Kaiser Permanente ",
+		value: "Kaiser Permanente",
+		desc: "Kaiser Permanente",
 	},
 	{
 		id: 11,
-		value: "Medicare ",
+		value: "Medicare",
+		desc: "Medicare",
 	},
 	{
 		id: 12,
-		value: "Molina Healthcare ",
+		value: "Molina Healthcare",
+		desc: "Molina Healthcare",
 	},
 	{
 		id: 13,
-		value: "Oxford (UnitedHealthCare) ",
+		value: "Oxford (UnitedHealthCare)",
+		desc: "Oxford (UnitedHealthCare)",
 	},
 	{
 		id: 14,
 		value: "SAG-AFTRA Health Plan",
+		desc: "SAG-AFTRA Health Plan",
 	},
 
 	{
 		id: 15,
-		value: " SCAN Health Plan",
+		value: "SCAN Health Plan",
+		desc: "SCAN Health Plan",
 	},
 	{
 		id: 16,
-		value: " State of California (Medi-Cal)",
+		value: "State of California (Medi-Cal)",
+		desc: "State of California (Medi-Cal)",
 	},
 	{
 		id: 17,
 		value: "United Healthcare",
+		desc: "United Healthcare",
 	},
 	{
 		id: 18,
 		value: "Other",
+		desc: "Other",
 	},
 ];
 
