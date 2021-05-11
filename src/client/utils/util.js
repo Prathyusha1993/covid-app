@@ -7,6 +7,13 @@ export const getUserAuthToken = () => {
     return window.localStorage.getItem('AUTH-TOKEN');
 }
 
+export const getUserRole = () => {
+    return window.localStorage.getItem('USER_ROLE');
+}
+export const getUserID = () => {
+    return window.localStorage.getItem('USER_ID');
+}
+
 export const getPatientAuthToken = () => {
     return window.localStorage.getItem('PATIENT-AUTH-TOKEN');
 }

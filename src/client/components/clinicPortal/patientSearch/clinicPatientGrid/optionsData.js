@@ -46,7 +46,24 @@ export const results = [
 		result: " "
 	}
 ];
-
+export const resultsSearch = [
+	{
+		code: "all",
+		value: "All",
+	},
+	{
+		code: "positive",
+		value: "Positive",
+	},
+	{
+		code: "negative",
+		value: "Negative",
+	},
+	{
+		code: "inconclusive",
+		value: "Inconclusive",
+	},
+];
 export const states = [
 	{
 		value: "",

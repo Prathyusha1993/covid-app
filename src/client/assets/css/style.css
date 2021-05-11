@@ -9125,3 +9125,7 @@ canvas.drawingBuffer {
 .label-patient-details {
   font-weight: bold;
 }
+.MuiSelect-selectMenu {
+  height: 5px !important;
+  min-height: 5px !important;
+}
