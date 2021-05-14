@@ -1822,8 +1822,9 @@ button.bg-danger:hover {
 }
 .logo {
   display: inline-block;
-  margin-right: 30px;
-  width: 160px;
+  margin-right: 100px;
+  width: 400px;
+  height: 45px;
 }
 .header-contact-img {
   display: inline-block;
@@ -2102,6 +2103,7 @@ button.bg-danger:hover {
 }
 .menu-logo img {
   height: 40px;
+  width: 200px;
 }
 .menu-close {
   font-size: 18px;
@@ -7615,7 +7617,7 @@ html.menu-opened body {
   .navbar-brand.logo {
     width: 100%;
     text-align: center;
-    margin-right: 0;
+    margin-right: 0 !important;
   }
   .navbar-brand.logo img {
     height: 40px;

@@ -6,7 +6,7 @@ import { locations } from "./data";
 
 export class GoogleMapsContainer extends Component {
   constructor(props) {
-    debugger;
+    //debugger;
     super(props);
     this.state = {
       showingInfoWindow: false,
@@ -36,7 +36,7 @@ export class GoogleMapsContainer extends Component {
   showDetails = (place) => {};
 
   markerBounce = (id) => {
-    debugger;
+    //debugger;
     var element = this.state.markerObjects.find((i) => {
       return i.marker.id == id;
       //return i.marker.id == this.props.places.id;

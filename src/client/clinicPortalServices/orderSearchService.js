@@ -2,7 +2,7 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken } from "../utils/util";
 export const fetchOrderMasterData = (facilityId) => {
-	debugger;
+	//debugger;
 	var token  = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/search`, {
 		method: "POST",
@@ -15,7 +15,7 @@ export const fetchOrderMasterData = (facilityId) => {
 };
 
 export const exportOrders = () => {
-	debugger;
+	//debugger;
 	var token  = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/export`, {
 		method: "POST",
@@ -27,7 +27,7 @@ export const exportOrders = () => {
 };
 
 export const searchOrders = (filters) => {
-	debugger;
+	//debugger;
 	var token  = getUserAuthToken();
 	var filterParams = {
 		facility_id: filters.facility_id,

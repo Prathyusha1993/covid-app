@@ -24,7 +24,7 @@ class ClinicPortalLoginContainer extends Component {
     e.preventDefault();
     authenticateAndFetchUserDetails(this.state.userName, this.state.password)
       .then((userInfo) => {
-        debugger;
+        //debugger;
         //console.log(userInfo);
         if (!userInfo || (userInfo && userInfo.token.length === 0)) {
           this.setState({
