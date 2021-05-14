@@ -200,6 +200,7 @@ class OrderGridDetails extends Component {
 
   loadFacilities = () => {
     fetchFacilities().then((response) => {
+      //console.log("orders-facilities", response);
       this.setState({ facilities: response.data });
     });
   };
@@ -465,13 +466,13 @@ class OrderGridDetails extends Component {
                   variant="outlined"
                   style={{ width: "100%", marginTop: "5px" }}
                 >
-                  <InputLabel id="facility-label">Facility</InputLabel>
+                  <InputLabel id="facility-label">Select Facility</InputLabel>
                   <Select
                     labelId="facility-label"
                     id="facility-select"
                     value={this.state.searchFilters.facility_id}
                     onChange={this.handleFiltersChange}
-                    label="Facility"
+                    label="Select Facility"
                     className="form-Control"
                     name="facility_id"
                   >
@@ -479,13 +480,15 @@ class OrderGridDetails extends Component {
                     {this.state.facilities.map((fac) => {
                       return (
                         <MenuItem
-                          value={
-                            this.state.user_role &&
-                            this.state.user_role.toLowerCase().trim() ==
-                              "superadmin"
-                              ? fac._id
-                              : fac.facility
-                          }
+                          key={fac._id}
+                          // value={
+                          //   this.state.user_role &&
+                          //   this.state.user_role.toLowerCase().trim() ==
+                          //     "superadmin"
+                          //     ? fac._id
+                          //     : fac.facility
+                          // }
+                          value={fac._id}
                         >
                           {fac.name}
                         </MenuItem>

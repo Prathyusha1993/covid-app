@@ -12,6 +12,10 @@ import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import moment from "moment";
 import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 import MasterBtnCellRenderer from "./masterBtnCellRenderer";
 import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
@@ -27,6 +31,7 @@ import { savePatientSettings } from "../../../../clinicPortalServices/saveStateS
 import QrScanReader from "../qrScanReader/index.jsx";
 import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
+import { fetchFacilities } from "../../../../clinicPortalServices/facilityService";
 
 const getPatientInfo = (patientData, patientId) => {
   if (patientData && patientData.length > 0) {
@@ -48,6 +53,9 @@ class ClinicPatientGrid extends Component {
     super(props);
 
     this.state = {
+      searchFilters: {
+        facility_id: "",
+      },
       showQrScanner: false,
       showPatientSignup: false,
       showCreateRequisition: false,
@@ -373,8 +381,41 @@ class ClinicPatientGrid extends Component {
       ],
       rowData: null,
       expandableRowData: null,
+      facilities: [],
     };
+    this.loadFacilities();
   }
+
+  loadFacilities = () => {
+    fetchFacilities().then((response) => {
+      //console.log("facilities", response);
+      this.setState({ facilities: response.data });
+      const filters = this.state.searchFilters;
+      filters.facility_id =
+        this.facilities && this.facilities.length > 0
+          ? this.facilities[0]._id
+          : "";
+      this.setState({ searchFilters: filters });
+    });
+  };
+
+  handleFiltersChange = (e) => {
+    //debugger;
+    this.setState({ rowData: [] });
+    const filters = this.state.searchFilters;
+    /*switch (e.target.name) {      
+      case "facility_id": {
+        filters.facility_id = e.target.value;
+        break;
+      }
+    }*/
+    if (e.target.name == "facility_id") {
+      filters.facility_id = e.target.value;
+    }
+
+    this.setState({ searchFilters: filters });
+    this.loadGridData();
+  };
 
   onGridReady = (params) => {
     //console.log(params);
@@ -385,12 +426,16 @@ class ClinicPatientGrid extends Component {
   };
 
   loadGridData = () => {
+    //debugger;
     //need to pass facility_id as input
-    fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")).then(
-      (data) => {
-        this.setState({ rowData: data.data });
-      }
-    );
+    //var facility_id = window.localStorage.getItem("FACILITY_ID");
+    var facility_id =
+      this.state.searchFilters.facility_id == ""
+        ? window.localStorage.getItem("FACILITY_ID")
+        : this.state.searchFilters.facility_id;
+    fetchPatientMasterData(facility_id).then((data) => {
+      this.setState({ rowData: data.data });
+    });
   };
 
   onFilterTextChange = (e) => {
@@ -547,6 +592,42 @@ class ClinicPatientGrid extends Component {
 
         <div className="row" style={{ padding: " 12px" }}>
           <div className="col-md-3">
+            <FormControl
+              variant="outlined"
+              style={{ width: "100%", marginTop: "5px" }}
+            >
+              <InputLabel id="facility-label">Select Facility</InputLabel>
+              <Select
+                labelId="facility-label"
+                id="facility-select"
+                value={this.state.searchFilters.facility_id}
+                onChange={this.handleFiltersChange}
+                label="Select Facility"
+                className="form-Control"
+                name="facility_id"
+              >
+                <MenuItem value=""> Select Facility </MenuItem>
+                {this.state.facilities.map((fac) => {
+                  return (
+                    <MenuItem
+                      key={fac._id}
+                      // value={
+                      //   this.state.user_role &&
+                      //   this.state.user_role.toLowerCase().trim() ==
+                      //     "superadmin"
+                      //     ? fac._id
+                      //     : fac.facility
+                      // }
+                      value={fac._id}
+                    >
+                      {fac.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </div>
+          <div className="col-md-2">
             <TextField
               label="Quick Search"
               variant="outlined"
