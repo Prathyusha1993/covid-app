@@ -7621,6 +7621,8 @@ html.menu-opened body {
   }
   .navbar-brand.logo img {
     height: 40px;
+    width: 300px;
+    margin-left: 20px;
   }
   .search-box form {
     display: block;
