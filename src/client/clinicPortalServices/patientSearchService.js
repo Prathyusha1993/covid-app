@@ -31,7 +31,7 @@ export const fetchPatientExpandableData = (patientId) => {
 };
 
 export const exportPatients = () => {
-	debugger;
+	//debugger;
 	var token  = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/export`, {
 		method: "POST",

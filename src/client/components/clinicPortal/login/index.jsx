@@ -5,6 +5,7 @@ class ClinicPortalLoginContainer extends Component {
   constructor(props) {
     window.localStorage.removeItem("FACILITY_ID");
     window.localStorage.removeItem("AUTH-TOKEN");
+    window.localStorage.removeItem("USER-ROLE");
     super(props);
     this.state = {
       password: "",
@@ -23,7 +24,7 @@ class ClinicPortalLoginContainer extends Component {
     e.preventDefault();
     authenticateAndFetchUserDetails(this.state.userName, this.state.password)
       .then((userInfo) => {
-        debugger;
+        //debugger;
         //console.log(userInfo);
         if (!userInfo || (userInfo && userInfo.token.length === 0)) {
           this.setState({
@@ -39,6 +40,7 @@ class ClinicPortalLoginContainer extends Component {
         //window.localStorage.setItem("USER_ID", '6062151112591a26d4bb6685');
 
         window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
+        window.localStorage.setItem("USER_ROLE", userInfo.user.role);
         if (userInfo.user.facilities.length > 0)
           window.localStorage.setItem(
             "FACILITY_ID",

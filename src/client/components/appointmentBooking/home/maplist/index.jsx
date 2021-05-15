@@ -5,17 +5,16 @@ import { serviceConstants } from "../../../../patientPortalServices/constants";
 import { locations } from "./data";
 
 export class GoogleMapsContainer extends Component {
-	constructor(props) {
-		debugger;
-		super(props);
-		this.state = {
-			showingInfoWindow: false,
-			activeMarker: {},
-			selectedPlace: {},
-			markerObjects: [],
-		};
-		this.markerBounce = this.markerBounce.bind(this);
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+      markerObjects: [],
+    };
+    this.markerBounce = this.markerBounce.bind(this);
+  }
 
 	onMarkerMounted = (element) => {
 		this.setState((prevState) => ({
@@ -33,12 +32,12 @@ export class GoogleMapsContainer extends Component {
 
 	showDetails = (place) => {};
 
-	markerBounce = (id) => {
-		debugger;
-		var element = this.state.markerObjects.find((i) => {
-			return i.marker.id == id;
-			//return i.marker.id == this.props.places.id;
-		});
+  markerBounce = (id) => {
+    var element = this.state.markerObjects.find((i) => {
+      return i.marker.id == id;
+      //return i.marker.id == this.props.places.id;
+    });
+    //console.log(element);
 
 		this.setState({
 			selectedPlace: element.marker.place_,
