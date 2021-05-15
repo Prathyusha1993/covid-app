@@ -101,7 +101,10 @@ class AuditGridDetails extends Component {
 	loadAuditGridData = () => {
 		getAuditData().then((data) => {
 			this.setState({ rowData: data.data });
-		});
+		})
+		.catch((error) => {
+			console.log(error);
+		})
 	};
 
 	onFilterTextChange = (e) => {

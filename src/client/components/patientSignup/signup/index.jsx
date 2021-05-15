@@ -285,30 +285,28 @@ class SignUp extends Component {
     //update existing patient info from clinic login
     if (this.props && this.state.patientId) {
       updateUnassignedPatientDetails(patientInfo).then((data) => {
-        //console.log("patientUpdate success");
         this.setState({
           showMessage: true,
           message: "Updated the changes successfully!!",
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
     }
     //new patient sign up
     else {
       patientSignup(patientInfo).then((data) => {
-        //console.log("patientsignupdetails", data);
-        //console.log("patientSignup success");
         this.handleFileUpload();
-        // this.setState({
-        // 	showMessage: true,
-        // 	message: "Thank you for contacting us, You're all signed up.",
-        // });
         window.location.href = "/patientsignup/confirmation";
+      })
+      .catch((error) => {
+        console.log(error);
       });
     }
   };
 
   getPatientDetails = (props) => {
-    //console.log("signup-props", props);
     if (props && props.patientDetails) {
       var patientDetails = props.patientDetails;
       this.setState({
