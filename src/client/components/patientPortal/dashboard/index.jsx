@@ -46,7 +46,10 @@ class PatientPortalDashboard extends Component {
           pdfPath: "",
         });
       }
-    });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   handleDateClick = (pdfPath, dateId, dataValue) => {

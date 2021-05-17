@@ -13,8 +13,6 @@ class Home extends Component {
       <div>
         <div className="main-wrapper">
           <HomeBanner />
-          {/* <PopularSection /> */}
-          {/* <Features /> */}
           <br />
           <SearchTestLoc />
           <br />

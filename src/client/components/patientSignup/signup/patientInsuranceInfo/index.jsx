@@ -36,7 +36,7 @@ class PatientInsuranceInfo extends Component {
   render() {
     const { values } = this.props;
     return (
-      <div>
+      <div style={{height: '125vh'}}>
         <div className="content">
           <div className="row" style={{ justifyContent: "center" }}>
             <div className={values.classStyle}>
