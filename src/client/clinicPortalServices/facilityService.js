@@ -4,7 +4,7 @@ import { getUserAuthToken,getUserRole,getUserID } from "../utils/util";
 export const fetchFacilities = () => {	
 	var token  = getUserAuthToken();
     var userRole = getUserRole();
-    if(userRole && userRole.toLowerCase().trim()=="superadmin"){
+    if(userRole && userRole.toLowerCase().trim()==="superadmin"){
         return fetch(`${serviceConstants.API_HOST_NAME}/facility/v1`, {
             method: "GET",
             headers: {

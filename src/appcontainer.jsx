@@ -28,6 +28,7 @@ import ClinicFacilityGrid from "./client/components/clinicPortal/facility/clinic
 import SignUp from "./client/components/patientSignup/signup/index.jsx";
 import PatientQrComponent from "./client/components/patientSignup/signup/patientQrComponent/index.jsx";
 import PatientConfirmation from "./client/components/patientSignup/signup/patientConfirmation/index.jsx";
+import ClinicPhysicianGrid from "./client/components/clinicPortal/physician/clinicPhysicianGrid/index.jsx";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -73,6 +74,7 @@ const AppContainer = function (props) {
             <Route path="/clinic/orders" exact component={OrderGridDetails} />
             <Route path="/clinic/audit" exact component={AuditGridDetails} />
             <Route path="/clinic/facility" exact component={ClinicFacilityGrid} />
+            <Route path="/clinic/physician" exact component={ClinicPhysicianGrid} />
             
             <Route path="/patientsignup" exact component={SignUp} />
 

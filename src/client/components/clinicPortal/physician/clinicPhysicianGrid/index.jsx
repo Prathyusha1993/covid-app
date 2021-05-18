@@ -13,13 +13,13 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
 import TextField from "@material-ui/core/TextField";
-import EditFacility from "./editFacility";
+import EditPhysician from "./editPhysician";
 
 //service calls
-import { getFacilityData } from "../../../../clinicPortalServices/facilityGridServices";
-import AddFacility from "./addFacility";
+import { getPhysicianData } from "../../../../clinicPortalServices/physicianService";
+import AddPhysician from "./addPhysician";
 
-class ClinicFacilityGrid extends Component {
+class ClinicPhysicianGrid extends Component {
 	constructor(props) {
 		super(props);
 
@@ -39,40 +39,46 @@ class ClinicFacilityGrid extends Component {
 				{
 					headerName: "Actions",
 					minWidth: 100,
+                    maxWidth: 100,
 					cellStyle: { textAlign: "center" },
-					cellRenderer: "editFacility",
-				},
-				{
-					headerName: "Code",
-					minWidth: 150,
-					field: "code",
-					resizable: true,
-					//hide: true,
+					cellRenderer: "editPhysician",
 				},
 				{
 					headerName: "Name",
 					minWidth: 150,
-					field: "name",
 					resizable: true,
+					valueGetter: function addColumns(params) {
+							return (
+								params.data.first_name +
+								" " +
+								params.data.last_name 
+							);
+					},
 				},
 				{
+					headerName: "NPI",
+					minWidth: 150,
+					field: "npi",
+					resizable: true,
+				},
+                {
 					headerName: "Address",
 					minWidth: 200,
 					resizable: true,
 					valueGetter: function addColumns(params) {
 						if (params.data.address) {
 							return (
-								params.data.address.address1 +
+								params.data.address && params.data.address.address1 +
 								" " +
-								params.data.address.address2 +
+								params.data.address && params.data.address.address2 +
 								" " +
-								params.data.address.city +
+								params.data.address && params.data.address.city +
 								" " +
-								params.data.address.state +
+								params.data.address && params.data.address.state +
 								" " +
-								params.data.address.zip +
+								params.data.address && params.data.address.zip +
 								" " +
-								params.data.address.country
+								params.data.address && params.data.address.country
 							);
 						} else {
 							return "";
@@ -87,64 +93,27 @@ class ClinicFacilityGrid extends Component {
 					},
 				},
 				{
-					headerName: "Contact Name",
-					minWidth: 150,
-					field: "contact_name",
-					resizable: true,
-				},
-				{
-					headerName: "Phone #",
-					field: "phone_no",
+					headerName: "Mobile #",
+					field: "mobile",
 					minWidth: 150,
 					resizable: true,
-					cellRenderer: function (params) {
-						return params.data.phone_no
+                    cellRenderer: function (params) {
+						return params.data.mobile
 						  ? '<span><i class="fas fa-phone-alt"></i> ' +
-							  params.data.phone_no +
+							  params.data.mobile +
 							  "</span>"
 						  : "";
 					  },
 				},
 				{
-					headerName: "Email",
-					field: "contact_email",
+					headerName: "Facility",
+					field: "facility_id._id",
 					minWidth: 150,
-					resizable: true,
-					cellRenderer: function (params) {
-						return params.data.contact_email
-						  ? '<span><i class="fas fa-envelope"></i> ' +
-							  params.data.contact_email +
-							  "</span>"
-						  : "";
-					  },
-				},
-				{
-					headerName: "Fax #",
-					minWidth: 150,
-					resizable: true,
-					field: "fax_no",
-				},
-				{
-					headerName: "Fax Type",
-					field: "fax_type",
-					minWidth: 150,
-					resizable: true,
-				},
-				{
-					headerName: "Email Notifications",
-					field: "email_notifications_enabled",
-					minWidth: 170,
-					resizable: true,
-				},
-				{
-					headerName: "Environmental Monitoring",
-					field: "environmental_monitoring_enabled",
-					minWidth: 200,
 					resizable: true,
 				},
 			],
             frameworkComponents: {
-                editFacility: EditFacility,
+                editPhysician: EditPhysician,
               },
 
 			defaultColDef: {
@@ -159,11 +128,11 @@ class ClinicFacilityGrid extends Component {
 	onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
-		this.loadFacilityGridData();
+		this.loadPhysicianGridData();
 	};
 
-	loadFacilityGridData = () => {
-		getFacilityData()
+	loadPhysicianGridData = () => {
+		getPhysicianData()
 			.then((response) => {
 				this.setState({ rowData: response.data });
 			})
@@ -199,11 +168,11 @@ class ClinicFacilityGrid extends Component {
 											<a href="/">Home</a>
 										</li>
 										<li className="breadcrumb-item active" aria-current="page">
-											Facility
+											Physician
 										</li>
 									</ol>
 								</nav>
-								<h2 className="breadcrumb-title">Facility</h2>
+								<h2 className="breadcrumb-title">Physician</h2>
 							</div>
 						</div>
 					</div>
@@ -239,7 +208,7 @@ class ClinicFacilityGrid extends Component {
 							>
 								<i class="fas fa-user-plus"></i> Add Facility
 							</button> */}
-                            <AddFacility />
+                            <AddPhysician />
 						</div>
 						<div>
 							<button
@@ -284,4 +253,4 @@ class ClinicFacilityGrid extends Component {
 	}
 }
 
-export default ClinicFacilityGrid;
+export default ClinicPhysicianGrid;

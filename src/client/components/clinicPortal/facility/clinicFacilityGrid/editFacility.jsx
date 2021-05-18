@@ -30,8 +30,8 @@ export default class EditFacility extends Component {
 			emailNotification: "",
 			environmentalMonitoring: "",
 			faxType: "",
-			isActive: "",
-            errors:[],
+			isActive: true,
+			errors: [],
 		};
 	}
 
@@ -39,73 +39,73 @@ export default class EditFacility extends Component {
 		this.setState({ show: true });
 	};
 
-	  handleClose = () => {
-	    // const intialState = {
-	    //   orderId: this.props.data.orderId,
-	    //   gender: this.props.data.gender ? this.props.data.gender : "",
-	    //   dob: this.props.data.dob ? this.props.data.dob : "",
-	    //   mrn: this.props.data.mrn ? this.props.data.mrn : "",
-	    //   provider:
-	    //     this.props.data && this.props.data.provider
-	    //       ? this.props.data.provider
-	    //       : "",
-	    //   facilitySource: this.props.data.facilitySource
-	    //     ? this.props.data.facilitySource
-	    //     : "",
-	    //   receivedDate:
-	    //     this.props.data && this.props.data.receivedDate
-	    //       ? this.props.data.receivedDate
-	    //       : "",
-	    //   description:
-	    //     this.props.data && this.props.data.description
-	    //       ? this.props.data.description
-	    //       : "",
-	    //   testType:
-	    //     this.props.data && this.props.data.testType
-	    //       ? this.props.data.testType
-	    //       : "",
-	    //   sample:
-	    //     this.props.data && this.props.data.sample ? this.props.data.sample : "",
-	    //   result:
-	    //     this.props.data && this.props.data.result ? this.props.data.result : "",
-	    //   collectedDate:
-	    //     this.props.data && this.props.data.collectedDate
-	    //       ? this.props.data.collectedDate
-	    //       : "",
+	handleClose = () => {
+		// const intialState = {
+		//   orderId: this.props.data.orderId,
+		//   gender: this.props.data.gender ? this.props.data.gender : "",
+		//   dob: this.props.data.dob ? this.props.data.dob : "",
+		//   mrn: this.props.data.mrn ? this.props.data.mrn : "",
+		//   provider:
+		//     this.props.data && this.props.data.provider
+		//       ? this.props.data.provider
+		//       : "",
+		//   facilitySource: this.props.data.facilitySource
+		//     ? this.props.data.facilitySource
+		//     : "",
+		//   receivedDate:
+		//     this.props.data && this.props.data.receivedDate
+		//       ? this.props.data.receivedDate
+		//       : "",
+		//   description:
+		//     this.props.data && this.props.data.description
+		//       ? this.props.data.description
+		//       : "",
+		//   testType:
+		//     this.props.data && this.props.data.testType
+		//       ? this.props.data.testType
+		//       : "",
+		//   sample:
+		//     this.props.data && this.props.data.sample ? this.props.data.sample : "",
+		//   result:
+		//     this.props.data && this.props.data.result ? this.props.data.result : "",
+		//   collectedDate:
+		//     this.props.data && this.props.data.collectedDate
+		//       ? this.props.data.collectedDate
+		//       : "",
 
-	    //   requisition:
-	    //     this.props.data && this.props.data.requisition
-	    //       ? this.props.data.requisition
-	    //       : "",
-	    //   code: this.props.data && this.props.data.code ? this.props.data.code : "",
-	    //   codeType:
-	    //     this.props.data && this.props.data.codeType
-	    //       ? this.props.data.codeType
-	    //       : "",
-	    //   patientName:
-	    //     this.props.data && this.props.data.patientName
-	    //       ? this.props.data.patientName
-	    //       : "",
-	    //   email:
-	    //     this.props.data && this.props.data.email ? this.props.data.email : "",
-	    //   mobile:
-	    //     this.props.data && this.props.data.mobile ? this.props.data.mobile : "",
-	    //   pdfPath:
-	    //     this.props.data && this.props.data.pdfPath
-	    //       ? this.props.data.pdfPath
-	    //       : "",
-	    //   released:
-	    //     this.props.data && this.props.data.released
-	    //       ? this.props.data.released
-	    //       : "",
-	    //   releasedBy:
-	    //     this.props.data && this.props.data.releasedBy
-	    //       ? this.props.data.releasedBy
-	    //       : "",
-	    // };
-	    // this.setState({ show: false, ...intialState });
-        this.setState({ show: false });
-	  };
+		//   requisition:
+		//     this.props.data && this.props.data.requisition
+		//       ? this.props.data.requisition
+		//       : "",
+		//   code: this.props.data && this.props.data.code ? this.props.data.code : "",
+		//   codeType:
+		//     this.props.data && this.props.data.codeType
+		//       ? this.props.data.codeType
+		//       : "",
+		//   patientName:
+		//     this.props.data && this.props.data.patientName
+		//       ? this.props.data.patientName
+		//       : "",
+		//   email:
+		//     this.props.data && this.props.data.email ? this.props.data.email : "",
+		//   mobile:
+		//     this.props.data && this.props.data.mobile ? this.props.data.mobile : "",
+		//   pdfPath:
+		//     this.props.data && this.props.data.pdfPath
+		//       ? this.props.data.pdfPath
+		//       : "",
+		//   released:
+		//     this.props.data && this.props.data.released
+		//       ? this.props.data.released
+		//       : "",
+		//   releasedBy:
+		//     this.props.data && this.props.data.releasedBy
+		//       ? this.props.data.releasedBy
+		//       : "",
+		// };
+		// this.setState({ show: false, ...intialState });
+		this.setState({ show: false });
+	};
 
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
@@ -114,6 +114,10 @@ export default class EditFacility extends Component {
 	hasError = (key) => {
 		return this.state.errors.indexOf(key) !== -1;
 	};
+
+    handleToggleEnabled = () => {
+        this.setState({ isActive: true});
+    }
 
 	// handleOrderEditChanges = () => {
 	// 	const editParams = {
@@ -169,29 +173,29 @@ export default class EditFacility extends Component {
 	// 	});
 	// };
 
-    handleFaxChanges = () => {
-        let errors = [];
+	handleFacilityChanges = () => {
+		let errors = [];
 
-    if (this.state.name === "") {
-      errors.push("name");
-    }
+		if (this.state.name === "") {
+			errors.push("name");
+		}
 
-    if (this.state.code === "") {
-      errors.push("code");
-    }
+		if (this.state.code === "") {
+			errors.push("code");
+		}
 
-    if (this.state.isActive === "") {
-      errors.push("isActive");
-    }
-    this.setState({ errors: errors });
-    if (errors.length > 0) {
-      return false;
-    }
-    };
+		if (this.state.isActive === "") {
+			errors.push("isActive");
+		}
+		this.setState({ errors: errors });
+		if (errors.length > 0) {
+			return false;
+		}
+	};
 
 	renderTooltipEdit = (props) => (
 		<Tooltip id="button-tooltip" {...props}>
-			Edit Order
+			Edit Facility
 		</Tooltip>
 	);
 
@@ -223,7 +227,9 @@ export default class EditFacility extends Component {
 							<div className="row form-row">
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Name <span className="text-danger"> *</span>{" "}</label>
+										<label>
+											Name <span className="text-danger"> *</span>{" "}
+										</label>
 										<input
 											type="text"
 											name="name"
@@ -250,7 +256,9 @@ export default class EditFacility extends Component {
 								</div>
 								<div className="col-12 col-md-6">
 									<div className="form-group">
-										<label>Code <span className="text-danger"> *</span>{" "}</label>
+										<label>
+											Code <span className="text-danger"> *</span>{" "}
+										</label>
 										<input
 											type="text"
 											name="code"
@@ -258,7 +266,7 @@ export default class EditFacility extends Component {
 											onChange={this.handleChange}
 											required
 											className={
-												this.hasError("name")
+												this.hasError("code")
 													? "form-control is-invalid"
 													: "form-control order-edit-formstyle"
 											}
@@ -374,20 +382,31 @@ export default class EditFacility extends Component {
 									</div>
 								</div>
 								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>is Active <span className="text-danger"> *</span>{" "}</label>
+									<div className="form-group custom-control custom-switch">
+										<label className="custom-control-label" for="customSwitch1">
+											is Active <span className="text-danger "> *</span>{" "}
+										</label>
 										<input
-											type="checkbox"
+											type="switch"
 											name="isActive"
-											value={this.state.isActive}
-											onChange={this.handleChange}
+                                            id="customSwitch1"
+											defaultValue={this.state.isActive}
+											onChange={this.handleToggleEnabled}
 											required
 											className={
 												this.hasError("isActive")
-													? "form-control is-invalid"
-													: "form-control order-edit-formstyle"
+													? "custom-control-input is-invalid"
+													: "custom-control-input order-edit-formstyle"
 											}
 										/>
+                                        
+										{/* <FormCheck
+											id="switchEnabled"
+											type="switch"
+											checked={this.state.settings.enabled}
+											onChange={this.toggleEnabled}
+											label="Enable"
+										/> */}
 										<div
 											className={
 												this.hasError("isActive") ? "inline-errormsg" : "hidden"
@@ -406,7 +425,7 @@ export default class EditFacility extends Component {
 						<Button variant="secondary" onClick={this.handleClose}>
 							Close
 						</Button>
-						<Button variant="primary" onClick={this.handleFaxChanges}>
+						<Button variant="primary" onClick={this.handleFacilityChanges}>
 							Save Changes
 						</Button>
 					</Modal.Footer>
