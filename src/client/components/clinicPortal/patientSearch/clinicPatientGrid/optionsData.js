@@ -64,6 +64,30 @@ export const resultsSearch = [
 		value: "Inconclusive",
 	},
 ];
+
+export const faxTypes =[
+	{
+		value: "Please Select",
+		testType: "Please Select"
+	},
+	{
+		value: "NoFax",
+		faxType: "NoFax",
+	},
+	{
+		value: "FaxAll",
+		faxType: "FaxAll",
+	},
+	{
+		value: "FaxPositive",
+		faxType: "FaxPositive",
+	},
+	{
+		value: "ManualFax",
+		faxType: "ManualFax",
+	},
+];
+
 export const states = [
 	{
 		value: "",

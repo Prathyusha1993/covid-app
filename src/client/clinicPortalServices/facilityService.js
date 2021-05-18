@@ -1,5 +1,6 @@
 import { serviceConstants } from "../patientPortalServices/constants";
 import { getUserAuthToken,getUserRole,getUserID } from "../utils/util";
+
 export const fetchFacilities = () => {	
 	var token  = getUserAuthToken();
     var userRole = getUserRole();
