@@ -16,7 +16,7 @@ import TextField from "@material-ui/core/TextField";
 import EditPhysician from "./editPhysician";
 
 //service calls
-import { getPhysicianData } from "../../../../clinicPortalServices/physicianService";
+import { getPhysicianData } from "../../../../clinicPortalServices/physicianServices";
 import AddPhysician from "./addPhysician";
 
 class ClinicPhysicianGrid extends Component {
@@ -107,7 +107,7 @@ class ClinicPhysicianGrid extends Component {
 				},
 				{
 					headerName: "Facility",
-					field: "facility_id._id",
+					field: "facility_id.name",
 					minWidth: 150,
 					resizable: true,
 				},

@@ -4,7 +4,7 @@ import { getUserAuthToken } from "../utils/util";
 
 export const patientSignup = (patientDetails) => {
     //console.log("patientSignup",patientDetails);
-    var patientInfo = {
+    let patientInfo = {
         "first_name":patientDetails.firstName,
         "last_name":patientDetails.lastName,
         "email":patientDetails.email,

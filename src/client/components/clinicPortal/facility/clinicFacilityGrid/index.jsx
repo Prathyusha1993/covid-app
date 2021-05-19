@@ -13,17 +13,30 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
 import TextField from "@material-ui/core/TextField";
-import EditFacility from "./editFacility";
+import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
-import { getFacilityData } from "../../../../clinicPortalServices/facilityGridServices";
-import AddFacility from "./addFacility";
+import { getFacilityData } from "../../../../clinicPortalServices/facilityServices";
+//import FacilityDetails from "./facilityDetails";
 
 class ClinicFacilityGrid extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			show: false,
+			name: "",
+			code: "",
+			contactName: "",
+			phoneNum: "",
+			contactEmail: "",
+			faxNum: "",
+			address: "",
+			emailNotification: "",
+			environmentalMonitoring: "",
+			faxType: "",
+			isActive: "",
+			errors: [],
 			modules: [
 				ClientSideRowModelModule,
 				MasterDetailModule,
@@ -40,7 +53,7 @@ class ClinicFacilityGrid extends Component {
 					headerName: "Actions",
 					minWidth: 100,
 					cellStyle: { textAlign: "center" },
-					cellRenderer: "editFacility",
+					cellRenderer: "editBtnCellRenderer",
 				},
 				{
 					headerName: "Code",
@@ -144,7 +157,7 @@ class ClinicFacilityGrid extends Component {
 				},
 			],
             frameworkComponents: {
-                editFacility: EditFacility,
+                editBtnCellRenderer: EditBtnCellRenderer,
               },
 
 			defaultColDef: {
@@ -184,6 +197,14 @@ class ClinicFacilityGrid extends Component {
 
 	onBtExport = () => {
 		this.gridApi.exportDataAsExcel({});
+	};
+
+	handleShow = () => {
+		this.setState({ show: true });
+	};
+
+	handleClose = () => {
+		this.setState({ show: false });
 	};
 
 	render() {
@@ -239,7 +260,7 @@ class ClinicFacilityGrid extends Component {
 							>
 								<i class="fas fa-user-plus"></i> Add Facility
 							</button> */}
-                            <AddFacility />
+                            {/* <AddFacility /> */}
 						</div>
 						<div>
 							<button
@@ -249,6 +270,10 @@ class ClinicFacilityGrid extends Component {
 								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
 							</button>
 						</div>
+						{/* <EditBtnCellRenderer 
+						show={this.state.show}
+						handleShow={this.handleShow}
+						handleClose={this.handleClose}/> */}
 					</div>
 				</div>
 				<div

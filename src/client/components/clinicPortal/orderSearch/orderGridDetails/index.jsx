@@ -37,7 +37,7 @@ import {
 import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
 import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService"; //fetchFacilities
-import { fetchFacilities } from "../../../../clinicPortalServices/facilityService";
+import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
 import { results } from "./../../patientSearch/clinicPatientGrid/optionsData";
 import { getUserRole } from "../../../../utils/util";
@@ -199,7 +199,7 @@ class OrderGridDetails extends Component {
   }
 
   loadFacilities = () => {
-    fetchFacilities().then((response) => {
+    fetchFacilitiesForOrders().then((response) => {
       //console.log("orders-facilities", response);
       this.setState({ facilities: response.data });
     });

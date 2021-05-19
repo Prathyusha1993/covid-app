@@ -49,9 +49,6 @@ class PatientQrComponent extends Component {
               Patient Id: {this.state.patientId}{" "}
             </label>
           </div>
-          {/* <div className="img-text-data-stream">
-						<label className="label-patient-details">Patient Name: {this.state.patientName}</label>
-					</div> */}
         </div>
       </div>
     );

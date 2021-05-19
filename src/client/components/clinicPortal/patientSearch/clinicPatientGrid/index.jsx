@@ -31,7 +31,7 @@ import { savePatientSettings } from "../../../../clinicPortalServices/saveStateS
 import QrScanReader from "../qrScanReader/index.jsx";
 import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
-import { fetchFacilities } from "../../../../clinicPortalServices/facilityService";
+import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
 
 const getPatientInfo = (patientData, patientId) => {
   if (patientData && patientData.length > 0) {
@@ -387,7 +387,7 @@ class ClinicPatientGrid extends Component {
   }
 
   loadFacilities = () => {
-    fetchFacilities().then((response) => {
+    fetchFacilitiesForOrders().then((response) => {
       //console.log("facilities", response);
       this.setState({ facilities: response.data });
       const filters = this.state.searchFilters;
