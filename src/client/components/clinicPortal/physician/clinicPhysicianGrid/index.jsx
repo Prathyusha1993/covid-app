@@ -18,6 +18,7 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 //service calls
 import { getPhysicianData } from "../../../../clinicPortalServices/physicianServices";
 import PhysicianDetails from "./physicianDetails";
+import AddPhysician from './addPhysician';
 
 class ClinicPhysicianGrid extends Component {
 	constructor(props) {
@@ -202,13 +203,7 @@ class ClinicPhysicianGrid extends Component {
 					</div>
 					<div className="col grid-buttons">
 						<div>
-							{/* <button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.handleAddFacility()}
-							>
-								<i class="fas fa-user-plus"></i> Add Facility
-							</button> */}
-                            {/* <AddPhysician /> */}
+                            <AddPhysician />
 						</div>
 						<div>
 							<button

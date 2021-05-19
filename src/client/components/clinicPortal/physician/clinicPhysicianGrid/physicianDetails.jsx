@@ -1,16 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
-import {
-	saveOrderEditData,
-	updateResultPDF,
-} from "../../../../clinicPortalServices/orderEditService";
-import moment from "moment";
-import {
-	faxTypes,
-	results,
-} from "../../patientSearch/clinicPatientGrid/optionsData";
-import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
+import { states } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 export default class PhysicianDetails extends Component {
@@ -25,14 +15,15 @@ export default class PhysicianDetails extends Component {
 			code: "",
 			npi: "",
 			mobile: "",
-			address: "",
+			address1: "",
+			address2: "",
+			city: "",
+			state: "",
+			zip: "",
+			country: "",
 			facilityId: "",
 			errors: [],
 		};
-	}
-
-	handleShow = () => {
-		this.setState({ show: true });
 	};
 
 	handleClose = () => {
@@ -47,15 +38,13 @@ export default class PhysicianDetails extends Component {
 		return this.state.errors.indexOf(key) !== -1;
 	};
 
-	
-
-    handleNewPhysician = () => {
+	updateAndCreatePhysician = () => {
 		let errors = [];
 
 		if (this.state.firstName === "") {
 			errors.push("firstName");
 		}
-        if (this.state.lastName === "") {
+		if (this.state.lastName === "") {
 			errors.push("lastName");
 		}
 
@@ -72,164 +61,212 @@ export default class PhysicianDetails extends Component {
 	render() {
 		return (
 			<div>
-				<div>
-					<button
-						onClick={this.handleShow}
-						className="btn btn-primary submit-btn button-info-grid "
-					>
-						<i class="fas fa-user-plus"></i> Add Physician
-					</button>
-				</div>
-
-				<Modal
-					size="lg"
-					aria-labelledby="contained-modal-title-vcenter"
-					centered
-					show={this.state.show}
-					onHide={this.handleClose}
-				>
-					<Modal.Header closeButton>
-						<Modal.Title>Add Physician Information</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<form>
-							<div className="row form-row">
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>
-											First Name <span className="text-danger"> *</span>{" "}
-										</label>
-										<input
-											type="text"
-											name="firstName"
-											value={this.state.firstName}
-											onChange={this.handleChange}
-											required
-											className={
-												this.hasError("firstName")
-													? "form-control is-invalid"
-													: "form-control order-edit-formstyle"
-											}
-										/>
-										<div
-											className={
-												this.hasError("firstName")
-													? "inline-errormsg"
-													: "hidden"
-											}
-										>
-											<i class="fa fa-exclamation-circle" aria-hidden="true">
-												This field is required.
-											</i>
-										</div>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>
-											Last Name <span className="text-danger"> *</span>{" "}
-										</label>
-										<input
-											type="text"
-											name="lastName"
-											value={this.state.lastName}
-											onChange={this.handleChange}
-											required
-											className={
-												this.hasError("lastName")
-													? "form-control is-invalid"
-													: "form-control order-edit-formstyle"
-											}
-										/>
-										<div
-											className={
-												this.hasError("lastName") ? "inline-errormsg" : "hidden"
-											}
-										>
-											<i class="fa fa-exclamation-circle" aria-hidden="true">
-												This field is required.
-											</i>
-										</div>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>
-											Code 
-										</label>
-										<input
-											type="text"
-											name="code"
-											value={this.state.code}
-											onChange={this.handleChange}
-											className="form-control order-edit-formstyle"
-										/>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>NPI <span className="text-danger"> *</span>{" "}</label>
-										<input
-											type="text"
-											name="npi"
-											value={this.state.npi}
-											onChange={this.handleChange}
-											className={
-												this.hasError("npi")
-													? "form-control is-invalid"
-													: "form-control order-edit-formstyle"
-											}
-										/>
-										<div
-											className={
-												this.hasError("npi") ? "inline-errormsg" : "hidden"
-											}
-										>
-											<i class="fa fa-exclamation-circle" aria-hidden="true">
-												This field is required.
-											</i>
-										</div>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>Phone Number</label>
-										<input
-											type="number"
-											name="mobile"
-											value={this.state.mobile}
-											onChange={this.handleChange}
-											className="form-control order-edit-formstyle"
-										/>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>Address</label>
-										<input
-											type="text"
-											name="address"
-											value={this.state.address}
-											onChange={this.handleChange}
-											className="form-control order-edit-formstyle"
-										/>
-									</div>
-								</div>
-								<div className="col-12 col-md-6">
-									<div className="form-group">
-										<label>Facility Id</label>
-										<input
-											type="text"
-											name="facilityId"
-											value={this.state.facilityId}
-											onChange={this.handleChange}
-											className="form-control order-edit-formstyle"
-										/>
-									</div>
+				<form>
+					<div className="row form-row">
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>
+									First Name <span className="text-danger"> *</span>{" "}
+								</label>
+								<input
+									type="text"
+									name="firstName"
+									value={this.state.firstName}
+									onChange={this.handleChange}
+									required
+									className={
+										this.hasError("firstName")
+											? "form-control is-invalid"
+											: "form-control order-edit-formstyle"
+									}
+								/>
+								<div
+									className={
+										this.hasError("firstName") ? "inline-errormsg" : "hidden"
+									}
+								>
+									<i class="fa fa-exclamation-circle" aria-hidden="true">
+										This field is required.
+									</i>
 								</div>
 							</div>
-						</form>
-					</Modal.Body>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>
+									Last Name <span className="text-danger"> *</span>{" "}
+								</label>
+								<input
+									type="text"
+									name="lastName"
+									value={this.state.lastName}
+									onChange={this.handleChange}
+									required
+									className={
+										this.hasError("lastName")
+											? "form-control is-invalid"
+											: "form-control order-edit-formstyle"
+									}
+								/>
+								<div
+									className={
+										this.hasError("lastName") ? "inline-errormsg" : "hidden"
+									}
+								>
+									<i class="fa fa-exclamation-circle" aria-hidden="true">
+										This field is required.
+									</i>
+								</div>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Code</label>
+								<input
+									type="text"
+									name="code"
+									value={this.state.code}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>
+									NPI <span className="text-danger"> *</span>{" "}
+								</label>
+								<input
+									type="text"
+									name="npi"
+									value={this.state.npi}
+									onChange={this.handleChange}
+									className={
+										this.hasError("npi")
+											? "form-control is-invalid"
+											: "form-control order-edit-formstyle"
+									}
+								/>
+								<div
+									className={
+										this.hasError("npi") ? "inline-errormsg" : "hidden"
+									}
+								>
+									<i class="fa fa-exclamation-circle" aria-hidden="true">
+										This field is required.
+									</i>
+								</div>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Phone Number</label>
+								<input
+									type="number"
+									name="mobile"
+									value={this.state.mobile}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Address1</label>
+								<input
+									type="text"
+									name="address1"
+									value={this.state.address1}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Address2</label>
+								<input
+									type="text"
+									name="address2"
+									value={this.state.address2}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>City</label>
+								<input
+									type="text"
+									name="city"
+									value={this.state.city}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>State</label>
+								<select
+									className="form-control select order-edit-formstyle"
+									name="state"
+									value={this.state.state}
+									onChange={this.handleChange}
+								>
+									{states.map((state) => {
+										return <option value={state.value}>{state.state}</option>;
+									})}
+								</select>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Zip Code</label>
+								<input
+									type="text"
+									name="zip"
+									value={this.state.zip}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
+								<label>Facility Id</label>
+								<input
+									type="text"
+									name="facilityId"
+									value={this.state.facilityId}
+									onChange={this.handleChange}
+									className="form-control order-edit-formstyle"
+								/>
+							</div>
+						</div>
+					</div>
+					<div
+						className="row col-12"
+						style={{
+							float: "right",
+							paddingTop: "10px",
+							borderTop: "1px solid black",
+						}}
+					>
+						<Button variant="secondary" onClick={this.props.handleClose}>
+							Close
+						</Button>
+						<Button
+							style={{ marginLeft: "10px" }}
+							variant="primary"
+							onClick={this.updateAndCreatePhysician}
+						>
+							Save Changes
+						</Button>
+					</div>
+				</form>
+				{/* </Modal.Body>
 					<Modal.Footer>
 						<Button variant="secondary" onClick={this.handleClose}>
 							Close
@@ -238,7 +275,7 @@ export default class PhysicianDetails extends Component {
 							Save Changes
 						</Button>
 					</Modal.Footer>
-				</Modal>
+				</Modal> */}
 			</div>
 		);
 	}
