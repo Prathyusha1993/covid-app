@@ -43,7 +43,7 @@ export default class EditBtnCellRenderer extends Component {
 
 	componentDidMount() {
 		this.loadFacilityDetails();
-	}
+	};
 
 	loadFacilityDetails = () => {
 		getFacilityDataById(this.state.facilityId)

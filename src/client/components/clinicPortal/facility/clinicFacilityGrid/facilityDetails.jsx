@@ -126,8 +126,8 @@ export default class FacilityDetails extends Component {
 			faxType: this.state.faxType,
 			isActive: this.state.isActive,
 		};
-		console.log(facilityInfo);
-		return;
+		// console.log(facilityInfo);
+		// return;
 		if (this.props && this.state.id) {
 			updateFacility(facilityInfo)
 				.then((response) => {

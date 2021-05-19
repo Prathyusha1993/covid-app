@@ -2,29 +2,63 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { states } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import {updatePhysician, createPhysician} from '../../../../clinicPortalServices/physicianServices';
+import {fetchFacilitiesForOrders} from '../../../../clinicPortalServices/facilityServices';
 
 export default class PhysicianDetails extends Component {
 	constructor(props) {
 		super(props);
 		//console.log(props);
+		let physicianDetails =
+			this.props && this.props.physicianDetails
+				? this.props.physicianDetails
+				: "";
 		this.state = {
 			show: false,
-			//refreshGrid: props.data.refreshGrid,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address1: "",
-			address2: "",
-			city: "",
-			state: "",
-			zip: "",
-			country: "",
-			facilityId: "",
+			showMessage: false,
+			message: "",
+			physicianId: this.props.physicianId,
+			firstName: physicianDetails ? physicianDetails.first_name : "",
+			lastName: physicianDetails ? physicianDetails.last_name : "",
+			code: physicianDetails ? physicianDetails.code : "",
+			npi: physicianDetails ? physicianDetails.npi : "",
+			mobile: physicianDetails ? physicianDetails.mobile : "",
+			address1:
+				physicianDetails && physicianDetails.address
+					? physicianDetails.address.address1
+					: "",
+			address2:
+				physicianDetails && physicianDetails.address
+					? physicianDetails.address.address2
+					: "",
+			city:
+				physicianDetails && physicianDetails.address
+					? physicianDetails.address.city
+					: "",
+			state:
+				physicianDetails && physicianDetails.address
+					? physicianDetails.address.state
+					: "",
+			// zip: physicianDetails && physicianDetails.address ? physicianDetails.address.zip:"",
+			country:
+				physicianDetails && physicianDetails.address
+					? physicianDetails.address.country
+					: "",
+			facilityId:
+				physicianDetails && physicianDetails.facility_id
+					? physicianDetails.facility_id.name
+					: "",
 			errors: [],
+			facilities:[],
 		};
 	};
+
+	componentDidMount(){
+		fetchFacilitiesForOrders().then((response) => {
+			//console.log("orders-facilities", response);
+			this.setState({ facilities: response.data });
+		  });
+	};	
 
 	handleClose = () => {
 		this.setState({ show: false });
@@ -55,6 +89,45 @@ export default class PhysicianDetails extends Component {
 		this.setState({ errors: errors });
 		if (errors.length > 0) {
 			return false;
+		}
+
+		let physicianInfo = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			code: this.state.code,
+			npi: this.state.npi,
+			mobile: this.state.mobile,
+			address1: this.state.address1,
+			address2: this.state.address2,
+			city: this.state.city,
+			state: this.state.state,
+			country: this.state.country,
+			facilityId: this.state.facilityId,
+		};
+		// console.log(facilityInfo);
+		// return;
+		if ( this.state.physicianId) {
+			updatePhysician(physicianInfo)
+				.then((response) => {
+					this.setState({
+						showMessage: true,
+						message: "Updated the changes successfully!!",
+					});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			createPhysician(physicianInfo)
+				.then((response) => {
+					this.setState({
+						showMessage: true,
+						message: "Thank you.",
+					});
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	};
 
@@ -236,13 +309,23 @@ export default class PhysicianDetails extends Component {
 						<div className="col-12 col-md-6">
 							<div className="form-group">
 								<label>Facility Id</label>
-								<input
+								{/* <input
 									type="text"
 									name="facilityId"
 									value={this.state.facilityId}
 									onChange={this.handleChange}
 									className="form-control order-edit-formstyle"
-								/>
+								/> */}
+								<select
+									className="form-control select order-edit-formstyle"
+									name="facilityId"
+									value={this.state.facilityId}
+									onChange={this.handleChange}
+								>
+									{this.state.facilities.map((facility) => {
+										return <option value={facility._id}>{facility.name}</option>;
+									})}
+								</select>
 							</div>
 						</div>
 					</div>

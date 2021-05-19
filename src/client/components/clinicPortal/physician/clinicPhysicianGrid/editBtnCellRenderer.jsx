@@ -19,10 +19,14 @@ export default class EditBtnCellRenderer extends Component {
 			address: "",
 			facilityId: "",
 			physicianDetails:[],
-			physicianId:props.data._id,
+			physicianId: props.data._id,
 			errors: [],
 		};
-	}
+	};
+
+	componentDidMount() {
+		this.loadPhysicianDetails();
+	};
 
 	handleShow = () => {
 		this.setState({ show: true });
