@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import FacilityDetails from "./facilityDetails";
 import { Modal, Button } from "react-bootstrap";
-import { getFacilityDataById } from "../../../../clinicPortalServices/facilityServices";
+import {
+	getFacilityData,
+	getFacilityDataById,
+} from "../../../../clinicPortalServices/facilityServices";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -38,18 +41,26 @@ export default class EditBtnCellRenderer extends Component {
 		</Tooltip>
 	);
 
+	componentDidMount() {
+		this.loadFacilityDetails();
+	}
+
+	loadFacilityDetails = () => {
+		getFacilityDataById(this.state.facilityId)
+			.then((response) => {
+				this.setState({ facilityDetails: response.data[0] });
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
 	handleShow = () => {
 		this.setState({ show: true });
 	};
 
 	handleClose = () => {
 		this.setState({ show: false });
-	};
-
-	loadFacilityDetails = () => {
-		getFacilityDataById(this.state.facilityId).then((response) => {
-			this.setState({ facilityDetails: response.data[0] });
-		});
 	};
 
 	render() {
@@ -64,7 +75,33 @@ export default class EditBtnCellRenderer extends Component {
 						<i class="fas fa-pen"></i>
 					</button>
 				</OverlayTrigger>
-				<FacilityDetails facilityDetails={this.state.facilityDetails} />
+				<Modal
+					size="lg"
+					aria-labelledby="contained-modal-title-vcenter"
+					centered
+					show={this.state.show}
+					onHide={this.handleClose}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>Update Facility Information</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<FacilityDetails
+							facilityDetails={this.state.facilityDetails}
+							facilityId={this.state.facilityId}
+							handleClose={this.handleClose}
+							// show={this.state.show}
+						/>
+					</Modal.Body>
+					{/* <Modal.Footer>
+						<Button variant="secondary" onClick={this.handleClose}>
+							Close
+						</Button>
+						<Button variant="primary" onClick={this.updateAndCreateFacility}>
+							Save Changes
+						</Button>
+					</Modal.Footer> */}
+				</Modal>
 			</div>
 		);
 	}

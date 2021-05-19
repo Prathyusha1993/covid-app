@@ -13,7 +13,7 @@ import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
-export default class AddPhysician extends Component {
+export default class PhysicianDetails extends Component {
 	constructor(props) {
 		super(props);
 		//console.log(props);
@@ -47,59 +47,7 @@ export default class AddPhysician extends Component {
 		return this.state.errors.indexOf(key) !== -1;
 	};
 
-	// handleOrderEditChanges = () => {
-	// 	const editParams = {
-	// 		description: this.state.description,
-	// 		testType: this.state.testType,
-	// 		sample: this.state.sample,
-	// 		result: this.state.result,
-	// 		collectedDate: this.state.collectedDate
-	// 			? moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
-	// 					"YYYYMMDDHHmmss"
-	// 			  )
-	// 			: "",
-	// 		provider: this.state.provider,
-	// 		receivedDate: this.state.receivedDate
-	// 			? moment(this.state.receivedDate, "MM/DD/YYYY hh:mm A").format(
-	// 					"YYYYMMDDHHmmss"
-	// 			  )
-	// 			: "",
-	// 		requisition: this.state.requisition,
-	// 		patientName: this.state.patientName,
-	// 		orderId: this.state.orderId,
-	// 		email: this.state.email,
-	// 		mobile: this.state.mobile,
-	// 		facilitySource: this.state.facilitySource,
-	// 		mrn: this.state.mrn,
-	// 		dob: this.state.dob,
-	// 		pdfPath: this.state.pdfPath,
-	// 		released: this.state.released,
-	// 		releasedBy: this.state.releasedBy,
-	// 	};
-	// 	saveOrderEditData(editParams).then((userDetails) => {
-	// 		this.setState({
-	// 			editParams: userDetails,
-	// 			show: false,
-	// 		});
-
-	// 		// call refresh grid function
-	// 		//this.props.data.refreshGrid();
-	// 		this.state.refreshGrid();
-
-	// 		editParams.collectedDate = editParams.collectedDate
-	// 			? moment(editParams.collectedDate, "YYYYMMDDHHmmss").format(
-	// 					"MM/DD/YYYY hh:mm A"
-	// 			  )
-	// 			: "";
-	// 		editParams.receivedDate = editParams.receivedDate
-	// 			? moment(editParams.receivedDate, "YYYYMMDDHHmmss").format(
-	// 					"MM/DD/YYYY hh:mm A"
-	// 			  )
-	// 			: "";
-	// 		//call this method to generate/update the result letter pdf
-	// 		updateResultPDF(editParams).then((data) => {});
-	// 	});
-	// };
+	
 
     handleNewPhysician = () => {
 		let errors = [];

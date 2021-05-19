@@ -11,7 +11,7 @@ import {
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import {getPhysicianDataById} from "../../../../clinicPortalServices/physicianServices";
 
-export default class EditPhysician extends Component {
+export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
 		//console.log(props);

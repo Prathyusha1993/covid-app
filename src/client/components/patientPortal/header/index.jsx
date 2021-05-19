@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
-import { isUserLoggedIn, isSuperAdminLoggedIn } from "../../../utils/util";
+import {
+	isUserLoggedIn,
+	isSuperAdminLoggedIn,
+	getUserRole,
+} from "../../../utils/util";
 import Dropdown from "react-bootstrap/Dropdown";
 import { logout } from "../../../clinicPortalServices/loginService";
 
@@ -24,6 +28,8 @@ class PatientPortalHeader extends Component {
 		window.localStorage.removeItem("AUTH-TOKEN");
 	};
 	render() {
+		let userRole = getUserRole();
+		let role = userRole && userRole.toLowerCase().trim() === "superadmin";
 		return (
 			<div>
 				<Navbar bg="light">
@@ -42,8 +48,46 @@ class PatientPortalHeader extends Component {
 								alt=""
 							/>
 						</a>
-
-						{isUserLoggedIn() && 
+						{isUserLoggedIn() && this.state.showClinicMenu && role ? (
+							<Navbar.Brand>
+								<div className="row">
+									<ul className="main-nav">
+										<li>
+											<a href="/clinic/patients"> Patients </a>
+										</li>
+										<li>
+											<a href="/clinic/orders"> Orders </a>
+										</li>
+										<li>
+											<a href="/clinic/audit"> Audit </a>
+										</li>
+										<li>
+											<a href="/clinic/facility"> Facility </a>
+										</li>
+										<li>
+											<a href="/clinic/physician"> Physician </a>
+										</li>
+									</ul>
+								</div>
+							</Navbar.Brand>
+						) : (
+							<Navbar.Brand>
+								<div className="row">
+									<ul className="main-nav">
+										<li>
+											<a href="/clinic/patients"> Patients </a>
+										</li>
+										<li>
+											<a href="/clinic/orders"> Orders </a>
+										</li>
+										<li>
+											<a href="/clinic/audit"> Audit </a>
+										</li>
+									</ul>
+								</div>
+							</Navbar.Brand>
+						)}
+						{/* {isUserLoggedIn() && 
 							this.state.showClinicMenu && (
 								<Navbar.Brand>
 									<div className="row">
@@ -66,52 +110,11 @@ class PatientPortalHeader extends Component {
 										</ul>
 									</div>
 								</Navbar.Brand>
-							) }
-
-						{/* {isSuperAdminLoggedIn() && 
-							this.state.showClinicMenu ? (
-								<Navbar.Brand>
-									<div className="row">
-										<ul className="main-nav">
-											<li>
-												<a href="/clinic/patients"> Patients </a>
-											</li>
-											<li>
-												<a href="/clinic/orders"> Orders </a>
-											</li>
-											<li>
-												<a href="/clinic/audit"> Audit </a>
-											</li>
-											<li>
-												<a href="/clinic/facility"> Facility </a>
-											</li>
-											<li>
-												<a href="/clinic/physician"> Physician </a>
-											</li>
-										</ul>
-									</div>
-								</Navbar.Brand>
-							) : (
-								<Navbar.Brand>
-									<div className="row">
-										<ul className="main-nav">
-											<li>
-												<a href="/clinic/patients"> Patients </a>
-											</li>
-											<li>
-												<a href="/clinic/orders"> Orders </a>
-											</li>
-											<li>
-												<a href="/clinic/audit"> Audit </a>
-											</li>
-										</ul>
-									</div>
-								</Navbar.Brand>
-							)} */}
+							) } */}
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
-						{isUserLoggedIn() && this.state.showClinicMenu && (
+						{isUserLoggedIn() && this.state.showClinicMenu && role ? (
 							<Navbar.Brand style={{ marginRight: "50px" }}>
 								<>
 									<Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
@@ -124,9 +127,6 @@ class PatientPortalHeader extends Component {
 										</Dropdown.Toggle>
 
 										<Dropdown.Menu>
-											{/* <Dropdown.Item href="/doctor/profile-setting">
-												Profile Settings
-											</Dropdown.Item> */}
 											<Dropdown.Item onClick={this.logout} href="/clinic">
 												Logout
 											</Dropdown.Item>
@@ -134,7 +134,7 @@ class PatientPortalHeader extends Component {
 									</Dropdown>
 								</>
 							</Navbar.Brand>
-						)}
+						) : ''}
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

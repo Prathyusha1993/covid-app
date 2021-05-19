@@ -13,11 +13,11 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
 import TextField from "@material-ui/core/TextField";
-import EditPhysician from "./editPhysician";
+import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
 import { getPhysicianData } from "../../../../clinicPortalServices/physicianServices";
-import AddPhysician from "./addPhysician";
+import PhysicianDetails from "./physicianDetails";
 
 class ClinicPhysicianGrid extends Component {
 	constructor(props) {
@@ -41,7 +41,7 @@ class ClinicPhysicianGrid extends Component {
 					minWidth: 100,
                     maxWidth: 100,
 					cellStyle: { textAlign: "center" },
-					cellRenderer: "editPhysician",
+					cellRenderer: "editBtnCellRenderer",
 				},
 				{
 					headerName: "Name",
@@ -113,7 +113,7 @@ class ClinicPhysicianGrid extends Component {
 				},
 			],
             frameworkComponents: {
-                editPhysician: EditPhysician,
+                editBtnCellRenderer: EditBtnCellRenderer,
               },
 
 			defaultColDef: {
@@ -208,7 +208,7 @@ class ClinicPhysicianGrid extends Component {
 							>
 								<i class="fas fa-user-plus"></i> Add Facility
 							</button> */}
-                            <AddPhysician />
+                            {/* <AddPhysician /> */}
 						</div>
 						<div>
 							<button
