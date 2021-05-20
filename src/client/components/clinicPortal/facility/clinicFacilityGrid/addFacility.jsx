@@ -63,7 +63,6 @@ export default class AddFacility extends Component {
 					<Modal.Body>
 						<FacilityDetails
 							handleClose={this.handleClose}
-							// show={this.state.show}
 						/>
 					</Modal.Body>
 				</Modal>

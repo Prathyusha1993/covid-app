@@ -18,7 +18,7 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 //service calls
 import { getPhysicianData } from "../../../../clinicPortalServices/physicianServices";
 import PhysicianDetails from "./physicianDetails";
-import AddPhysician from './addPhysician';
+import AddPhysician from "./addPhysician";
 
 class ClinicPhysicianGrid extends Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ class ClinicPhysicianGrid extends Component {
 				{
 					headerName: "Actions",
 					minWidth: 100,
-                    maxWidth: 100,
+					maxWidth: 100,
 					cellStyle: { textAlign: "center" },
 					cellRenderer: "editBtnCellRenderer",
 				},
@@ -49,11 +49,7 @@ class ClinicPhysicianGrid extends Component {
 					minWidth: 150,
 					resizable: true,
 					valueGetter: function addColumns(params) {
-							return (
-								params.data.first_name +
-								" " +
-								params.data.last_name 
-							);
+						return params.data.first_name + " " + params.data.last_name;
 					},
 				},
 				{
@@ -62,24 +58,20 @@ class ClinicPhysicianGrid extends Component {
 					field: "npi",
 					resizable: true,
 				},
-                {
+				{
 					headerName: "Address",
 					minWidth: 200,
 					resizable: true,
 					valueGetter: function addColumns(params) {
 						if (params.data.address) {
 							return (
-								params.data.address && params.data.address.address1 +
-								" " +
-								params.data.address && params.data.address.address2 +
-								" " +
-								params.data.address && params.data.address.city +
-								" " +
-								params.data.address && params.data.address.state +
-								" " +
-								params.data.address && params.data.address.zip +
-								" " +
-								params.data.address && params.data.address.country
+								params.data.address &&
+								params.data.address.address1 + " " + params.data.address &&
+								params.data.address.address2 + " " + params.data.address &&
+								params.data.address.city + " " + params.data.address &&
+								params.data.address.state + " " + params.data.address &&
+								params.data.address.zip + " " + params.data.address &&
+								params.data.address.country
 							);
 						} else {
 							return "";
@@ -98,13 +90,13 @@ class ClinicPhysicianGrid extends Component {
 					field: "mobile",
 					minWidth: 150,
 					resizable: true,
-                    cellRenderer: function (params) {
+					cellRenderer: function (params) {
 						return params.data.mobile
-						  ? '<span><i class="fas fa-phone-alt"></i> ' +
-							  params.data.mobile +
-							  "</span>"
-						  : "";
-					  },
+							? '<span><i class="fas fa-phone-alt"></i> ' +
+									params.data.mobile +
+									"</span>"
+							: "";
+					},
 				},
 				{
 					headerName: "Facility",
@@ -113,9 +105,9 @@ class ClinicPhysicianGrid extends Component {
 					resizable: true,
 				},
 			],
-            frameworkComponents: {
-                editBtnCellRenderer: EditBtnCellRenderer,
-              },
+			frameworkComponents: {
+				editBtnCellRenderer: EditBtnCellRenderer,
+			},
 
 			defaultColDef: {
 				flex: 1,
@@ -203,7 +195,7 @@ class ClinicPhysicianGrid extends Component {
 					</div>
 					<div className="col grid-buttons">
 						<div>
-                            <AddPhysician />
+							<AddPhysician />
 						</div>
 						<div>
 							<button
@@ -239,7 +231,7 @@ class ClinicPhysicianGrid extends Component {
 							rowData={this.state.rowData}
 							pagination={true}
 							paginationAutoPageSize={true}
-                            frameworkComponents={this.state.frameworkComponents}
+							frameworkComponents={this.state.frameworkComponents}
 						/>
 					</div>
 				</div>

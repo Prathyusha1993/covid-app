@@ -48,36 +48,6 @@ class PatientPortalHeader extends Component {
 								alt=""
 							/>
 						</a>
-						{/* <React.Fragment>
-							{
-								[
-									isUserLoggedIn() && this.state.showClinicMenu && role ? (
-										<Navbar.Brand>
-											<div className="row">
-												<ul className="main-nav">
-													<li>
-														<a href="/clinic/patients"> Patients </a>
-													</li>
-													<li>
-														<a href="/clinic/orders"> Orders </a>
-													</li>
-													<li>
-														<a href="/clinic/audit"> Audit </a>
-													</li>
-													<li>
-														<a href="/clinic/facility"> Facility </a>
-													</li>
-													<li>
-														<a href="/clinic/physician"> Physician </a>
-													</li>
-												</ul>
-											</div>
-										</Navbar.Brand>
-									) : null,
-								]
-							}
-						</React.Fragment> */}
-
 						{isUserLoggedIn() && this.state.showClinicMenu && role ? (
 							<Navbar.Brand>
 								<div className="row">
@@ -121,31 +91,6 @@ class PatientPortalHeader extends Component {
 								) : null}
 							</div>
 						)}
-
-						{/* {isUserLoggedIn() && 
-							this.state.showClinicMenu && (
-								<Navbar.Brand>
-									<div className="row">
-										<ul className="main-nav">
-											<li>
-												<a href="/clinic/patients"> Patients </a>
-											</li>
-											<li>
-												<a href="/clinic/orders"> Orders </a>
-											</li>
-											<li>
-												<a href="/clinic/audit"> Audit </a>
-											</li>
-											<li>
-												<a href="/clinic/facility"> Facility </a>
-											</li>
-											<li>
-												<a href="/clinic/physician"> Physician </a>
-											</li>
-										</ul>
-									</div>
-								</Navbar.Brand>
-							) } */}
 					</Navbar>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">

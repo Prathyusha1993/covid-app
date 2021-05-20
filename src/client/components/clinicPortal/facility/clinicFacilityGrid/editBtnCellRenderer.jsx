@@ -10,7 +10,6 @@ import {
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		this.state = {
 			show: false,
 			facilityId: props.data._id,
@@ -90,17 +89,8 @@ export default class EditBtnCellRenderer extends Component {
 							facilityDetails={this.state.facilityDetails}
 							facilityId={this.state.facilityId}
 							handleClose={this.handleClose}
-							// show={this.state.show}
 						/>
 					</Modal.Body>
-					{/* <Modal.Footer>
-						<Button variant="secondary" onClick={this.handleClose}>
-							Close
-						</Button>
-						<Button variant="primary" onClick={this.updateAndCreateFacility}>
-							Save Changes
-						</Button>
-					</Modal.Footer> */}
 				</Modal>
 			</div>
 		);

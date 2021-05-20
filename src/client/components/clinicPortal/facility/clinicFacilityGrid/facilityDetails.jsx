@@ -19,7 +19,6 @@ export default class FacilityDetails extends Component {
 				? this.props.facilityDetails
 				: "";
 		//console.log(props);
-		// facility id is avaliable in props whnr edit btn is clicked and facilty id is empty when add btn is clicked.
 		this.state = {
 			show: this.props.show,
 			showMessage: false,
@@ -67,11 +66,8 @@ export default class FacilityDetails extends Component {
 				this.props && this.props.facilityId ? this.props.facilityId : "",
 			errors: [],
 		};
-	}
+	};
 
-	// handleShow = () => {
-	// 	this.setState({ show: true });
-	// };
 
 	handleClose = () => {
 		this.setState({ show: false });
@@ -397,16 +393,6 @@ export default class FacilityDetails extends Component {
 						</Button>
 					</div>
 				</form>
-				{/* </Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={this.handleClose}>
-							Close
-						</Button>
-						<Button variant="primary" onClick={this.updateAndCreateFacility}>
-							Save Changes
-						</Button>
-					</Modal.Footer> 
-				</Modal> */}
 			</div>
 		);
 	}

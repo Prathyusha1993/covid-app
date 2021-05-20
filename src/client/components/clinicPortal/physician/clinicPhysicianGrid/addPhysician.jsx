@@ -39,7 +39,6 @@ export default class AddPhysician extends Component {
 	handleClose = () => {
 		this.setState({ show: false });
 	};
-	
 
 	render() {
 		return (
@@ -50,7 +49,7 @@ export default class AddPhysician extends Component {
 				>
 					<i class="fas fa-user-plus"></i> Add Facility
 				</button>
-                <Modal
+				<Modal
 					size="lg"
 					aria-labelledby="contained-modal-title-vcenter"
 					centered
@@ -61,10 +60,7 @@ export default class AddPhysician extends Component {
 						<Modal.Title>Add Physician Information</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<PhysicianDetails
-							handleClose={this.handleClose}
-							// show={this.state.show}
-						/>
+						<PhysicianDetails handleClose={this.handleClose} />
 					</Modal.Body>
 				</Modal>
 			</div>

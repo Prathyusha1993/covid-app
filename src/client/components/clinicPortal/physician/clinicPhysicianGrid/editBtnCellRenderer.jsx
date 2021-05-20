@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import {getPhysicianDataById} from "../../../../clinicPortalServices/physicianServices";
-import PhysicianDetails from './physicianDetails';
+import { getPhysicianDataById } from "../../../../clinicPortalServices/physicianServices";
+import PhysicianDetails from "./physicianDetails";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -18,15 +18,15 @@ export default class EditBtnCellRenderer extends Component {
 			mobile: "",
 			address: "",
 			facilityId: "",
-			physicianDetails:[],
+			physicianDetails: [],
 			physicianId: props.data._id,
 			errors: [],
 		};
-	};
+	}
 
 	componentDidMount() {
 		this.loadPhysicianDetails();
-	};
+	}
 
 	handleShow = () => {
 		this.setState({ show: true });
@@ -44,9 +44,9 @@ export default class EditBtnCellRenderer extends Component {
 
 	loadPhysicianDetails = () => {
 		getPhysicianDataById(this.state.physicianId).then((response) => {
-			this.setState({physicianDetails: response.data[0]})
-		})
-	}
+			this.setState({ physicianDetails: response.data[0] });
+		});
+	};
 
 	render() {
 		return (

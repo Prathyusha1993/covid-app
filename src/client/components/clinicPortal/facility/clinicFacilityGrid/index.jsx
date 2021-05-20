@@ -18,7 +18,7 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 //service calls
 import { getFacilityData } from "../../../../clinicPortalServices/facilityServices";
 //import FacilityDetails from "./facilityDetails";
-import AddFacility from './addFacility';
+import AddFacility from "./addFacility";
 
 class ClinicFacilityGrid extends Component {
 	constructor(props) {
@@ -113,11 +113,11 @@ class ClinicFacilityGrid extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						return params.data.phone_no
-						  ? '<span><i class="fas fa-phone-alt"></i> ' +
-							  params.data.phone_no +
-							  "</span>"
-						  : "";
-					  },
+							? '<span><i class="fas fa-phone-alt"></i> ' +
+									params.data.phone_no +
+									"</span>"
+							: "";
+					},
 				},
 				{
 					headerName: "Email",
@@ -126,11 +126,11 @@ class ClinicFacilityGrid extends Component {
 					resizable: true,
 					cellRenderer: function (params) {
 						return params.data.contact_email
-						  ? '<span><i class="fas fa-envelope"></i> ' +
-							  params.data.contact_email +
-							  "</span>"
-						  : "";
-					  },
+							? '<span><i class="fas fa-envelope"></i> ' +
+									params.data.contact_email +
+									"</span>"
+							: "";
+					},
 				},
 				{
 					headerName: "Fax #",
@@ -157,9 +157,9 @@ class ClinicFacilityGrid extends Component {
 					resizable: true,
 				},
 			],
-            frameworkComponents: {
-                editBtnCellRenderer: EditBtnCellRenderer,
-              },
+			frameworkComponents: {
+				editBtnCellRenderer: EditBtnCellRenderer,
+			},
 
 			defaultColDef: {
 				flex: 1,
@@ -255,7 +255,7 @@ class ClinicFacilityGrid extends Component {
 					</div>
 					<div className="col grid-buttons">
 						<div>
-                            <AddFacility />
+							<AddFacility />
 						</div>
 						<div>
 							<button
@@ -265,10 +265,6 @@ class ClinicFacilityGrid extends Component {
 								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
 							</button>
 						</div>
-						{/* <EditBtnCellRenderer 
-						show={this.state.show}
-						handleShow={this.handleShow}
-						handleClose={this.handleClose}/> */}
 					</div>
 				</div>
 				<div
@@ -295,7 +291,7 @@ class ClinicFacilityGrid extends Component {
 							rowData={this.state.rowData}
 							pagination={true}
 							paginationAutoPageSize={true}
-                            frameworkComponents={this.state.frameworkComponents}
+							frameworkComponents={this.state.frameworkComponents}
 						/>
 					</div>
 				</div>
