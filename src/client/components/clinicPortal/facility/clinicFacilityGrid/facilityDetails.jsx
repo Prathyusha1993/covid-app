@@ -63,6 +63,8 @@ export default class FacilityDetails extends Component {
 				: "",
 			faxType: facilityDetails ? facilityDetails.fax_type : "",
 			isActive: facilityDetails ? facilityDetails.isActive : "",
+			facilityId:
+				this.props && this.props.facilityId ? this.props.facilityId : "",
 			errors: [],
 		};
 	}
@@ -72,8 +74,6 @@ export default class FacilityDetails extends Component {
 	// };
 
 	handleClose = () => {
-		// this.props.show = false;
-		// this.props.handleClose();
 		this.setState({ show: false });
 	};
 
@@ -82,6 +82,12 @@ export default class FacilityDetails extends Component {
 		const target = e.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
+
+		if (name === "phoneNum") {
+			this.setState((prevState) => ({
+				phoneNum: phoneNumberFormatter(value, prevState.phoneNum)
+			}));
+		}
 
 		this.setState({
 			[name]: value,
@@ -126,9 +132,9 @@ export default class FacilityDetails extends Component {
 			faxType: this.state.faxType,
 			isActive: this.state.isActive,
 		};
-		// console.log(facilityInfo);
+		console.log(facilityInfo);
 		// return;
-		if (this.props && this.state.id) {
+		if (this.state.facilityId !== "") {
 			updateFacility(facilityInfo)
 				.then((response) => {
 					this.setState({
@@ -354,29 +360,39 @@ export default class FacilityDetails extends Component {
 									style={{ margin: "13px", width: "20px", height: "20px" }}
 									type="checkbox"
 									name="emailNotification"
-									value={this.state.emailNotification}
+									checked={this.state.emailNotification}
 									onChange={this.handleChange}
 								/>
 								<label>Email Notification </label>
-								<br/>
+								<br />
 								<input
 									style={{ margin: "13px", width: "20px", height: "20px" }}
 									type="checkbox"
 									name="environmentalMonitoring"
-									value={this.state.environmentalMonitoring}
+									checked={this.state.environmentalMonitoring}
 									onChange={this.handleChange}
 								/>
 								<label>Envirnomental Monitoring</label>
 							</div>
-							
 						</div>
-						
 					</div>
-					<div className="row col-12" style={{float:'right', paddingTop: '10px', borderTop:'1px solid black'}}>
-						<Button variant="secondary" onClick={this.props.handleClose}>
+					<div
+						className=" col-12"
+						style={{ paddingTop: "10px", borderTop: "1px solid rgba(0,0,0,.2" }}
+					>
+						<Button
+							style={{ marginLeft: "500px" }}
+							variant="secondary"
+							onClick={this.props.handleClose}
+						>
 							Close
 						</Button>
-						<Button style={{marginLeft:'10px'}} variant="primary" onClick={this.updateAndCreateFacility}>
+						<Button
+							type="submit"
+							style={{ marginLeft: "10px" }}
+							variant="primary"
+							onClick={this.updateAndCreateFacility}
+						>
 							Save Changes
 						</Button>
 					</div>

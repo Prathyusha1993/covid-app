@@ -4,6 +4,7 @@ import { states } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import {updatePhysician, createPhysician} from '../../../../clinicPortalServices/physicianServices';
 import {fetchFacilitiesForOrders} from '../../../../clinicPortalServices/facilityServices';
+import {phoneNumberFormatter} from '../../../../utils/util';
 
 export default class PhysicianDetails extends Component {
 	constructor(props) {
@@ -17,7 +18,7 @@ export default class PhysicianDetails extends Component {
 			show: false,
 			showMessage: false,
 			message: "",
-			physicianId: this.props.physicianId,
+			physicianId: this.props && this.props.physicianId ? this.props.physicianId : '',
 			firstName: physicianDetails ? physicianDetails.first_name : "",
 			lastName: physicianDetails ? physicianDetails.last_name : "",
 			code: physicianDetails ? physicianDetails.code : "",
@@ -65,6 +66,11 @@ export default class PhysicianDetails extends Component {
 	};
 
 	handleChange = (e) => {
+		if(e.target.name === 'mobile'){
+			this.setState((prevState) => ({
+				mobile: phoneNumberFormatter(e.target.value, prevState.mobile)
+			}));
+		}
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
@@ -104,9 +110,9 @@ export default class PhysicianDetails extends Component {
 			country: this.state.country,
 			facilityId: this.state.facilityId,
 		};
-		// console.log(facilityInfo);
+		console.log(physicianInfo);
 		// return;
-		if ( this.state.physicianId) {
+		if ( this.state.physicianId !== '') {
 			updatePhysician(physicianInfo)
 				.then((response) => {
 					this.setState({
@@ -235,10 +241,11 @@ export default class PhysicianDetails extends Component {
 							<div className="form-group">
 								<label>Phone Number</label>
 								<input
-									type="number"
+									type="tel"
 									name="mobile"
 									value={this.state.mobile}
 									onChange={this.handleChange}
+									placeholder="(XXX) XXX-XXXX"
 									className="form-control order-edit-formstyle"
 								/>
 							</div>
@@ -289,7 +296,7 @@ export default class PhysicianDetails extends Component {
 									onChange={this.handleChange}
 								>
 									{states.map((state) => {
-										return <option value={state.value}>{state.state}</option>;
+										return <option key={state.value} value={state.value}>{state.state}</option>;
 									})}
 								</select>
 							</div>
@@ -323,7 +330,7 @@ export default class PhysicianDetails extends Component {
 									onChange={this.handleChange}
 								>
 									{this.state.facilities.map((facility) => {
-										return <option value={facility._id}>{facility.name}</option>;
+										return <option key={facility._id} value={facility._id} selected={this.state.facilityId === facility.name}>{facility.name}</option>;
 									})}
 								</select>
 							</div>
@@ -334,10 +341,10 @@ export default class PhysicianDetails extends Component {
 						style={{
 							float: "right",
 							paddingTop: "10px",
-							borderTop: "1px solid black",
+							borderTop:'1px solid rgba(0,0,0,.2',
 						}}
 					>
-						<Button variant="secondary" onClick={this.props.handleClose}>
+						<Button style={{marginLeft:'500px'}} variant="secondary" onClick={this.props.handleClose}>
 							Close
 						</Button>
 						<Button
