@@ -170,7 +170,29 @@ class PatientPortalHeader extends Component {
 								</>
 							</Navbar.Brand>
 						) : (
-							""
+							<div>
+								{this.state.showClinicMenu && isUserLoggedIn() ? (
+									<Navbar.Brand style={{ marginRight: "50px" }}>
+									<>
+										<Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
+											<Dropdown.Toggle variant="success" id="dropdown-basic">
+												<i
+													className="fa fa-user-circle fa-2x"
+													style={{ color: "#0369b3" }}
+													aria-hidden="true"
+												></i>
+											</Dropdown.Toggle>
+	
+											<Dropdown.Menu>
+												<Dropdown.Item onClick={this.logout} href="/clinic">
+													Logout
+												</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
+									</>
+								</Navbar.Brand>
+								) : null}
+							</div>
 						)}
 					</Navbar.Collapse>
 				</Navbar>
