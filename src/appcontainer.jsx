@@ -20,6 +20,7 @@ import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
 import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/clinicPatientGrid/index";
 import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
 import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDetails/index.jsx";
+import ClinicFacilityGrid from "./client/components/clinicPortal/facility/clinicFacilityGrid/index";
 
 //import UnassignedPatientGridDetails from "./client/components/clinicPortal/unassignedPatient/unassignedPatientGridDetails/index.jsx";
 
@@ -27,6 +28,7 @@ import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDe
 import SignUp from "./client/components/patientSignup/signup/index.jsx";
 import PatientQrComponent from "./client/components/patientSignup/signup/patientQrComponent/index.jsx";
 import PatientConfirmation from "./client/components/patientSignup/signup/patientConfirmation/index.jsx";
+import ClinicPhysicianGrid from "./client/components/clinicPortal/physician/clinicPhysicianGrid/index.jsx";
 
 //import AppUniversal from "./admin/app-universal";
 
@@ -71,11 +73,9 @@ const AppContainer = function (props) {
             />
             <Route path="/clinic/orders" exact component={OrderGridDetails} />
             <Route path="/clinic/audit" exact component={AuditGridDetails} />
-            {/* <Route
-              path="/clinic/unassignedpatients"
-              exact
-              component={UnassignedPatientGridDetails}
-            /> */}
+            <Route path="/clinic/facility" exact component={ClinicFacilityGrid} />
+            <Route path="/clinic/physician" exact component={ClinicPhysicianGrid} />
+            
             <Route path="/patientsignup" exact component={SignUp} />
 
             <Route path="/patientsignup/confirmation" exact component={PatientConfirmation} />

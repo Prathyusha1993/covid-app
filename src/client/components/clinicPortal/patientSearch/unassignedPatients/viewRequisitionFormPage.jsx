@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import moment from "moment";
-import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import Barcode from "../barcode";
-import { fetchPhysicians } from "../../../../clinicPortalServices/physicianService";
+import { fetchPhysicians } from "../../../../clinicPortalServices/physicianServices";
 import {
   saveRequisitionChanges,
   generateUniqueKey,

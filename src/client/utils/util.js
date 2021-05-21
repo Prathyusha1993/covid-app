@@ -1,22 +1,30 @@
 export const isUserLoggedIn = () => {
-    var token = window.localStorage.getItem('AUTH-TOKEN');
+    const token = window.localStorage.getItem('AUTH-TOKEN');
     return (token != null && token.length > 0) ? true : false;
+};
+
+
+// window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
+// window.localStorage.setItem("USER_ROLE", userInfo.user.role);
+export const isSuperAdminLoggedIn = () => {
+    return window.localStorage.getItem('USER_ROLE');
 }
 
 export const getUserAuthToken = () => {
     return window.localStorage.getItem('AUTH-TOKEN');
-}
+};
 
 export const getUserRole = () => {
     return window.localStorage.getItem('USER_ROLE');
-}
+};
+
 export const getUserID = () => {
     return window.localStorage.getItem('USER_ID');
-}
+};
 
 export const getPatientAuthToken = () => {
     return window.localStorage.getItem('PATIENT-AUTH-TOKEN');
-}
+};
 
 export const phoneNumberFormatter = (value, previousValue) => {
     // return nothing if no value
