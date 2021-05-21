@@ -5,7 +5,7 @@ import { Modal, Button } from "react-bootstrap";
 import {
 	getFacilityData,
 	getFacilityDataById,
-} from "../../../../clinicPortalServices/facilityServices";
+} from "../../../../services/clinicPortalServices/facilityServices";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {

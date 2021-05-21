@@ -37,7 +37,7 @@ import {
 import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
 import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService"; //fetchFacilities
-import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
+import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../patientPortalServices/constants";
 import { results } from "./../../patientSearch/clinicPatientGrid/optionsData";
 import { getUserRole } from "../../../../utils/util";

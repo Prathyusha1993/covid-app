@@ -6,7 +6,7 @@ import {
 	updatePhysician,
 	createPhysician,
 } from "../../../../clinicPortalServices/physicianServices";
-import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
+import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { phoneNumberFormatter } from "../../../../utils/util";
 
 export default class PhysicianDetails extends Component {

@@ -31,7 +31,7 @@ import { savePatientSettings } from "../../../../clinicPortalServices/saveStateS
 import QrScanReader from "../qrScanReader/index.jsx";
 import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
-import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
+import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 
 const getPatientInfo = (patientData, patientId) => {
   if (patientData && patientData.length > 0) {

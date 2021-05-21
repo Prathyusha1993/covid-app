@@ -16,7 +16,7 @@ import TextField from "@material-ui/core/TextField";
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
-import { getFacilityData } from "../../../../clinicPortalServices/facilityServices";
+import { getFacilityData } from "../../../../services/clinicPortalServices/facilityServices";
 //import FacilityDetails from "./facilityDetails";
 import AddFacility from "./addFacility";
 

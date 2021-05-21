@@ -9,7 +9,7 @@ import { phoneNumberFormatter } from "../../../../utils/util";
 import {
 	createFacility,
 	updateFacility,
-} from "../../../../clinicPortalServices/facilityServices";
+} from "../../../../services/clinicPortalServices/facilityServices";
 import PhoneInput from "react-phone-number-input";
 
 export default class FacilityDetails extends Component {
