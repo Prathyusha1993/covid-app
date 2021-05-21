@@ -1,6 +1,6 @@
 
-import { serviceConstants } from "../patientPortalServices/constants";
-import { getUserAuthToken } from "../utils/util";
+import { serviceConstants } from "../../patientPortalServices/constants";
+import { getUserAuthToken } from "../../utils/util";
 
 export const patientSignup = (patientDetails) => {
     //console.log("patientSignup",patientDetails);
@@ -70,9 +70,3 @@ export const fetchPatientQrResponse = (patientId) => {
     })
     .then((response) => response.json());
 };
-
-// TODO: this is for testing, comment this later
-// export const fetchPatientQrResponse = () => {
-//     const sampleDataStream = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAAK4SURBVO3BQW7sWAwEwSxC979yjpdcPUCQur/NYUT8wRqjWKMUa5RijVKsUYo1SrFGKdYoxRqlWKMUa5RijVKsUYo1SrFGKdYoFw8l4ZtUuiR0KidJOFHpkvBNKk8Ua5RijVKsUS5epvKmJJyodEnoVDqVJ1TelIQ3FWuUYo1SrFEuPiwJd6g8odIloVPpktCp3JGEO1Q+qVijFGuUYo1y8ccloVO5Q2WSYo1SrFGKNcrFMEm4Iwmdyl9WrFGKNUqxRrn4MJVvUumS0CWhU3lC5Tcp1ijFGqVYo1y8LAm/mUqXhE7lJAm/WbFGKdYoxRol/uAPS8KbVP6yYo1SrFGKNcrFQ0noVO5IQqfSJeEJlS4JnUqXhDepnCShU3miWKMUa5RijRJ/8EAS3qRyRxI6lZMknKicJKFT6ZJwovJJxRqlWKMUa5SLh1S6JHQqJ0nokvBNKidJOElCp3JHEjqVJ4o1SrFGKdYoFw8loVPpktCpdCpdEjqVLgl3JKFTOUnCiUqXhC4J/1KxRinWKMUaJf7gRUm4Q6VLwh0qTyThDpU3JaFTeaJYoxRrlGKNcvEylSdU7kjCicq/lIRvKtYoxRqlWKNcPJSEb1I5UXmTyh1J6FS6JHQqbyrWKMUapVijXLxM5U1JOFG5IwknKidJ6FR+k2KNUqxRijXKxYcl4Q6VO5LQqdyhcpKEkyR0Kl0STpLQqTxRrFGKNUqxRrn441ROknCShE6lU+mS0Kl0SehUuiR8UrFGKdYoxRrl4n9O5SQJJ0k4SUKn8knFGqVYoxRrlIsPU/lNVE6ScKLSJaFT6ZLQJaFTeVOxRinWKMUa5eJlSfimJJyonCThCZUnktCpPFGsUYo1SrFGiT9YYxRrlGKNUqxRijVKsUYp1ijFGqVYoxRrlGKNUqxRijVKsUYp1ijFGuU/cykK+iZHUNEAAAAASUVORK5CYII=';
-//     return Promise.resolve(sampleDataStream);
-// };

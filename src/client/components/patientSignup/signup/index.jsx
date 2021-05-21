@@ -5,8 +5,8 @@ import PatientInsuranceInfo from "./patientInsuranceInfo";
 import PatientPhotoUploadInfo from "./patientPhotoUploadInfo";
 import { phoneNumberFormatter } from "../../../utils/util";
 import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
-import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
-import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
+import { patientSignup } from "../../../services/patientSignupServices/patientSignupFormService";
+import { patientUploadImages } from "../../../services/patientSignupServices/patientSignupFormService";
 import moment from "moment";
 import { Redirect } from "react-router";
 

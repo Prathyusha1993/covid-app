@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { getUserAuthToken } from "../../../../utils/util";
-import { fetchPatientQrResponse } from "../../../../patientSignupServices/patientSignupFormService";
+import { fetchPatientQrResponse } from "../../../../services/patientSignupServices/patientSignupFormService";
 import { fetchUnassignedPatientDetails } from "../../../../clinicPortalServices/unassignedPatientService";
 
 class PatientQrComponent extends Component {
