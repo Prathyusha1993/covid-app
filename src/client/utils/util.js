@@ -46,3 +46,14 @@ export const phoneNumberFormatter = (value, previousValue) => {
         return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`;
     }
 };
+
+export const parseDate = (dateString) => {
+    //expected input format yyyyMMdd or yyyyMMddhhmmss
+    //ouput - Mon dd yyyy
+    var year =dateString.substring(0,4);
+    var month = dateString.substring(4,6);
+    var day = dateString.substring(6,8);
+    
+    var d = new Date(year + "/" + month + "/" + day);
+    return d.toDateString().substring(3);
+};

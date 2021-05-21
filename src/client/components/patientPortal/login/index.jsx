@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { authenticateAndFetchUserDetails } from "../../../patientPortalServices/loginService";
+import { authenticateAndFetchUserDetails } from "../../../services/patientPortalServices/loginService";
 
 class PatientPortalLoginContainer extends Component {
 	constructor(props) {
@@ -10,7 +10,7 @@ class PatientPortalLoginContainer extends Component {
 			id: "",
 			isAuthenticationfailed: "UNKNOWN",
 		};
-	}
+	};
 
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });

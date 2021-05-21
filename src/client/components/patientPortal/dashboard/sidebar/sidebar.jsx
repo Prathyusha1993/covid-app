@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import SocialShare from "./../../../socialShare";
-import {logout} from "../../../../patientPortalServices/loginService";
+import {logout} from "../../../../services/patientPortalServices/loginService";
 
 export const DashboardSidebar = () => {
   const dob = window.localStorage.getItem("USER_DOB");

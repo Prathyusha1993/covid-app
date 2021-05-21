@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { parseDate } from "../../../../../util";
+import { parseDate } from "../../../../utils/util";
 
 class Dates extends Component {
 	constructor(props) {

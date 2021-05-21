@@ -4,7 +4,7 @@ import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
 import { serviceConstants } from "../../../patientPortalServices/constants";
-import { fetchDashboardDetails,resultsViewed } from "../../../patientPortalServices/dashboardService";
+import { fetchDashboardDetails,resultsViewed } from "../../../services/patientPortalServices/dashboardService";
 
 class PatientPortalDashboard extends Component {
   constructor(props) {

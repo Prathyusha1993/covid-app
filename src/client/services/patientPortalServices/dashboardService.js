@@ -1,5 +1,5 @@
-import {serviceConstants} from './constants';
-import { getPatientAuthToken } from "../utils/util";
+import {serviceConstants} from '../../patientPortalServices/constants';
+import { getPatientAuthToken } from "../../utils/util";
 
 export const fetchDashboardDetails = (patientInfo) => {
    //console.log('patientInfo from index' , patientInfo);
