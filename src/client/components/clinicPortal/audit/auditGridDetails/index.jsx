@@ -12,7 +12,7 @@ import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import TextField from "@material-ui/core/TextField";
 
 //service calls
-import { getAuditData } from "../../../../clinicPortalServices/auditService";
+import { getAuditData } from "../../../../services/clinicPortalServices/auditService";
 import moment from "moment";
 
 class AuditGridDetails extends Component {

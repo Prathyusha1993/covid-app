@@ -1,4 +1,4 @@
-import { serviceConstants } from "../patientPortalServices/constants";
+import { serviceConstants } from "../../patientPortalServices/constants";
 
 export const getInTouchDetails = (toEmail, subject, body) =>  {
     
