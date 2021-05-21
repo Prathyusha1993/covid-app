@@ -10,6 +10,7 @@ import {
 	createFacility,
 	updateFacility,
 } from "../../../../clinicPortalServices/facilityServices";
+import PhoneInput from "react-phone-number-input";
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
@@ -66,8 +67,7 @@ export default class FacilityDetails extends Component {
 				this.props && this.props.facilityId ? this.props.facilityId : "",
 			errors: [],
 		};
-	};
-
+	}
 
 	handleClose = () => {
 		this.setState({ show: false });
@@ -79,11 +79,15 @@ export default class FacilityDetails extends Component {
 		const value = target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
 
-		if (name === "phoneNum") {
-			this.setState((prevState) => ({
-				phoneNum: phoneNumberFormatter(value, prevState.phoneNum)
-			}));
-		}
+		// if (name === "phoneNum") {
+		// 	this.setState({
+		// 		phoneNum: phoneNumberFormatter(e.target.value)
+		// 	});
+		// }
+
+		this.setState((prevState) => ({
+			phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
+		}));
 
 		this.setState({
 			[name]: value,
@@ -246,6 +250,13 @@ export default class FacilityDetails extends Component {
 									placeholder="(XXX) XXX-XXXX"
 									className="form-control order-edit-formstyle"
 								/>
+								{/* <PhoneInput
+									country="US"
+									name="phoneNum"
+									placeholder="(XXX) XXX-XXXX"
+									value={this.state.phoneNum}
+									onChange={this.handleChange}
+								/> */}
 							</div>
 						</div>
 						<div className="col-12 col-md-6">

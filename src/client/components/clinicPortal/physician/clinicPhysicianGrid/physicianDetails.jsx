@@ -337,12 +337,14 @@ export default class PhysicianDetails extends Component {
 									value={this.state.facilityId}
 									onChange={this.handleChange}
 								>
+									<option selected>{this.state.facilityId}</option>
 									{this.state.facilities.map((facility) => {
 										return (
 											<option
 												key={facility._id}
 												value={facility._id}
-												selected={this.state.facilityId === facility.name}
+												selected
+												// {this.state.facilityId === facility.name}
 											>
 												{facility.name}
 											</option>
