@@ -1,17 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import {
-	saveOrderEditData,
-	updateResultPDF,
-} from "../../../../clinicPortalServices/orderEditService";
-import moment from "moment";
-import {
-	faxTypes,
-	results,
-} from "../../patientSearch/clinicPatientGrid/optionsData";
-import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import PhysicianDetails from "./physicianDetails";
 
 export default class AddPhysician extends Component {

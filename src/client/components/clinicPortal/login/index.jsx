@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { authenticateAndFetchUserDetails } from "../../../clinicPortalServices/loginService";
+import { authenticateAndFetchUserDetails } from "../../../services/clinicPortalServices/loginService";
 
 class ClinicPortalLoginContainer extends Component {
   constructor(props) {

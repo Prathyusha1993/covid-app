@@ -3,11 +3,11 @@ import { Modal, Button } from "react-bootstrap";
 import {
   saveOrderEditData,
   updateResultPDF,
-} from "../../../../clinicPortalServices/orderEditService";
+} from "../../../../services/clinicPortalServices/orderEditService";
 import moment from "moment";
 import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
+import { fetchOrderFaxData } from "../../../../services/clinicPortalServices/orderEditService";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 export default class EditBtnCellRenderer extends Component {

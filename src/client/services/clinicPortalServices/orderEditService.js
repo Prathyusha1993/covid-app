@@ -1,5 +1,5 @@
-import { serviceConstants } from "../patientPortalServices/constants";
-import { getUserAuthToken } from "../utils/util";
+import { serviceConstants } from "../../patientPortalServices/constants";
+import { getUserAuthToken } from "../../utils/util";
 
 export const saveOrderEditData = (editParams) => {
 	if(! editParams) throw "Order obj is null";
@@ -65,7 +65,6 @@ export const updateResultPDF = (params) => {
 	}).then((response) => response.json());
 };
 
-//need to pass the url after coming
 export const fetchOrderFaxData = (orderId) => {
 	var token  = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/fax/`, {

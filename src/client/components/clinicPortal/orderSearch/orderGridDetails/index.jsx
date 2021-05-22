@@ -33,7 +33,7 @@ import {
   fetchOrderMasterData,
   exportOrders,
   searchOrders,
-} from "../../../../clinicPortalServices/orderSearchService";
+} from "../../../../services/clinicPortalServices/orderSearchService";
 import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
 import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
 import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService"; //fetchFacilities

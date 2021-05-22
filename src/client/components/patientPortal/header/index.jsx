@@ -7,7 +7,7 @@ import {
 	getUserRole,
 } from "../../../utils/util";
 import Dropdown from "react-bootstrap/Dropdown";
-import { logout } from "../../../clinicPortalServices/loginService";
+import { logout } from "../../../services/clinicPortalServices/loginService";
 
 let pathnames = window.location.pathname;
 const url = pathnames.split("/").slice(0, -1).join("/");
