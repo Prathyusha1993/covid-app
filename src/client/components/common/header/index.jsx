@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { AGT_LOGO, AGT_MCN_LOGO } from "./img.jsx";
+import { AGT_MCN_LOGO } from "./img.jsx";
 import { Navbar } from "react-bootstrap";
-import {
-	isUserLoggedIn,
-	isSuperAdminLoggedIn,
-	getUserRole,
-} from "../../../services/common/util";
-import Dropdown from "react-bootstrap/Dropdown";
+import HeaderWrapper from "./headerWrapper";
+import { isUserLoggedIn, getUserRole } from "../../../services/common/util";
+import HeaderMenuDropdown from "./headerMenuDropdown";
 import { logout } from "../../../services/clinicPortalServices/loginService";
+import Dropdown from "react-bootstrap/Dropdown";
+import HeaderMenuNav from "./headerMenuNav";
 
 let pathnames = window.location.pathname;
 const url = pathnames.split("/").slice(0, -1).join("/");
@@ -22,6 +21,16 @@ class PatientPortalHeader extends Component {
 		};
 	}
 
+	onHandleMobileMenu = () => {
+		let root = document.getElementsByTagName("html")[0];
+		root.classList.add("menu-opened");
+	};
+
+	onhandleCloseMenu = () => {
+		let root = document.getElementsByTagName("html")[0];
+		root.classList.remove("menu-opened");
+	};
+
 	logout = () => {
 		logout();
 		window.localStorage.removeItem("FACILITY_ID");
@@ -34,6 +43,17 @@ class PatientPortalHeader extends Component {
 			<div>
 				<Navbar bg="light">
 					<Navbar bg="light">
+						<a
+							href="#0"
+							id="mobile_btn"
+							onClick={() => this.onHandleMobileMenu()}
+						>
+							<span className="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</a>
 						<a
 							href="/home"
 							className="navbar-brand "
@@ -48,6 +68,8 @@ class PatientPortalHeader extends Component {
 								alt=""
 							/>
 						</a>
+						<HeaderWrapper onhandleCloseMenu={this.onhandleCloseMenu} />
+
 						{isUserLoggedIn() && this.state.showClinicMenu && role ? (
 							<Navbar.Brand>
 								<div className="row">
@@ -74,19 +96,7 @@ class PatientPortalHeader extends Component {
 							<div>
 								{this.state.showClinicMenu && isUserLoggedIn() ? (
 									<Navbar.Brand>
-										<div className="row">
-											<ul className="main-nav">
-												<li>
-													<a href="/clinic/patients"> Patients </a>
-												</li>
-												<li>
-													<a href="/clinic/orders"> Orders </a>
-												</li>
-												<li>
-													<a href="/clinic/audit"> Audit </a>
-												</li>
-											</ul>
-										</div>
+										<HeaderMenuNav />
 									</Navbar.Brand>
 								) : null}
 							</div>
@@ -118,24 +128,8 @@ class PatientPortalHeader extends Component {
 							<div>
 								{this.state.showClinicMenu && isUserLoggedIn() ? (
 									<Navbar.Brand style={{ marginRight: "50px" }}>
-									<>
-										<Dropdown className="user-drop nav-item dropdown has-arrow logged-item">
-											<Dropdown.Toggle variant="success" id="dropdown-basic">
-												<i
-													className="fa fa-user-circle fa-2x"
-													style={{ color: "#0369b3" }}
-													aria-hidden="true"
-												></i>
-											</Dropdown.Toggle>
-	
-											<Dropdown.Menu>
-												<Dropdown.Item onClick={this.logout} href="/clinic">
-													Logout
-												</Dropdown.Item>
-											</Dropdown.Menu>
-										</Dropdown>
-									</>
-								</Navbar.Brand>
+										<HeaderMenuDropdown logout={this.logout} />
+									</Navbar.Brand>
 								) : null}
 							</div>
 						)}

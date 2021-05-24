@@ -187,7 +187,6 @@ class AuditGridDetails extends Component {
 							rowData={this.state.rowData}
 							pagination={true}
 							paginationAutoPageSize={true}
-							//paginationPageSize={20}
 						/>
 					</div>
 				</div>

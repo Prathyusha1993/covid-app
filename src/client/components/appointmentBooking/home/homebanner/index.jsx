@@ -18,10 +18,6 @@ class HomeBookAppoinment extends Component {
                     Results within 24 hours <br />
                     <span>Four step process</span>
                   </h1>
-                  {/* <p>
-										Book an appointment with a physician at one of our partner
-										locations and you will have your results within 24 hours!
-									</p> */}
                   <p>
                     <i
                       class="fa fa-check"
