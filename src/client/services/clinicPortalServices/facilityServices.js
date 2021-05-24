@@ -1,5 +1,5 @@
 import { serviceConstants } from "../common/constants";
-import { getUserAuthToken,getUserRole,getUserID } from "../../utils/util";
+import { getUserAuthToken,getUserRole,getUserID } from "../common/util";
 
 export const fetchFacilitiesForOrders = () => {	
 	var token  = getUserAuthToken();

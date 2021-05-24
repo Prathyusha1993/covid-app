@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 import { Form, Button, Col } from "react-bootstrap";
 import { states } from "../../../clinicPortal/patientSearch/clinicPatientGrid/optionsData";
 

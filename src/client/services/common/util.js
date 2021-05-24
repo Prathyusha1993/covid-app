@@ -3,19 +3,16 @@ export const isUserLoggedIn = () => {
     return (token != null && token.length > 0) ? true : false;
 };
 
+export const getUserRole = () => {
+    return window.localStorage.getItem('USER_ROLE');
+};
 
-// window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
-// window.localStorage.setItem("USER_ROLE", userInfo.user.role);
 export const isSuperAdminLoggedIn = () => {
     return window.localStorage.getItem('USER_ROLE');
-}
+};
 
 export const getUserAuthToken = () => {
     return window.localStorage.getItem('AUTH-TOKEN');
-};
-
-export const getUserRole = () => {
-    return window.localStorage.getItem('USER_ROLE');
 };
 
 export const getUserID = () => {
@@ -46,6 +43,7 @@ export const phoneNumberFormatter = (value, previousValue) => {
         return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)}-${currentValue.slice(6, 10)}`;
     }
 };
+
 
 export const parseDate = (dateString) => {
     //expected input format yyyyMMdd or yyyyMMddhhmmss

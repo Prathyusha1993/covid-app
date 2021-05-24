@@ -5,7 +5,7 @@ import {
 	isUserLoggedIn,
 	isSuperAdminLoggedIn,
 	getUserRole,
-} from "../../../utils/util";
+} from "../../../services/common/util";
 import Dropdown from "react-bootstrap/Dropdown";
 import { logout } from "../../../services/clinicPortalServices/loginService";
 

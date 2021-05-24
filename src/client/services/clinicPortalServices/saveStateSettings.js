@@ -1,5 +1,5 @@
 import { serviceConstants } from "../common/constants";
-import { getUserAuthToken } from "../../utils/util";
+import { getUserAuthToken } from "../common/util";
 export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 	var saveObject = {
 		//user_id: "6062151112591a26d4bb6685",

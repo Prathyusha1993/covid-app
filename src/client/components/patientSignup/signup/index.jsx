@@ -3,7 +3,7 @@ import PatientBirthInfo from "./patientBirthInfo";
 import PatientInfo from "./patientInfo";
 import PatientInsuranceInfo from "./patientInsuranceInfo";
 import PatientPhotoUploadInfo from "./patientPhotoUploadInfo";
-import { phoneNumberFormatter } from "../../../utils/util";
+import { phoneNumberFormatter } from "../../../services/common/util";
 import { updateUnassignedPatientDetails } from "../../../services/clinicPortalServices/unassignedPatientService";
 import { patientSignup } from "../../../services/patientSignupServices/patientSignupFormService";
 import { patientUploadImages } from "../../../services/patientSignupServices/patientSignupFormService";

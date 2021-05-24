@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { getInTouchDetails } from "../../../../services/appointmentBookingServices/emailService";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 
 class FormInfo extends Component {
   constructor(props) {

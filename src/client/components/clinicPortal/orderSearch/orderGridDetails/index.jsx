@@ -40,7 +40,7 @@ import { fetchPatientMasterData } from "../../../../services/clinicPortalService
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../services/common/constants";
 import { results } from "./../../patientSearch/clinicPatientGrid/optionsData";
-import { getUserRole } from "../../../../utils/util";
+import { getUserRole } from "../../../../services/common/util";
 import { FacebookIcon } from "react-share";
 
 var enterprise = require("@ag-grid-enterprise/core");

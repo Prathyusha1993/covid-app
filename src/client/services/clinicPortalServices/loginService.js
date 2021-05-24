@@ -1,5 +1,5 @@
 import { serviceConstants } from "../common/constants";
-import { getUserAuthToken } from "../../utils/util";
+import { getUserAuthToken } from "../common/util";
 
 export const authenticateAndFetchUserDetails = (username, password) => {
 	return fetch(`${serviceConstants.API_HOST_NAME}/user/v1/authenticate`, {

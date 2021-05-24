@@ -5,7 +5,7 @@ import {
 	states,
 } from "../../patientSearch/clinicPatientGrid/optionsData";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,
 	updateFacility,

@@ -1,5 +1,5 @@
 import { serviceConstants } from "../common/constants";
-import { getUserAuthToken } from "../../utils/util";
+import { getUserAuthToken } from "../common/util";
 
 export const saveOrderEditData = (editParams) => {
 	if(! editParams) throw "Order obj is null";

@@ -1,5 +1,5 @@
 import { serviceConstants } from "../common/constants";
-import { getPatientAuthToken } from "../../utils/util";
+import { getPatientAuthToken } from "../common/util";
 
 export const authenticateAndFetchUserDetails = (loginInfo) => {
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/authenticate`, {

@@ -7,7 +7,7 @@ import {
 	createPhysician,
 } from "../../../../services/clinicPortalServices/physicianServices";
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 
 export default class PhysicianDetails extends Component {
 	constructor(props) {

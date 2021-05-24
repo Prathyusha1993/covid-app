@@ -1,4 +1,4 @@
-import { getUserAuthToken } from "../../utils/util";
+import { getUserAuthToken } from "../common/util";
 import { serviceConstants } from "../common/constants";
 
 export const generateUniqueKey = () => {
