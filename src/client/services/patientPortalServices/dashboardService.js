@@ -1,4 +1,4 @@
-import {serviceConstants} from '../../patientPortalServices/constants';
+import {serviceConstants} from '../common/constants';
 import { getPatientAuthToken } from "../../utils/util";
 
 export const fetchDashboardDetails = (patientInfo) => {

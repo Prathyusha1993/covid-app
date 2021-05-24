@@ -1,5 +1,5 @@
 //import { NormalModuleReplacementPlugin } from "webpack";
-import { serviceConstants } from "../../patientPortalServices/constants";
+import { serviceConstants } from "../common/constants";
 import { getUserAuthToken } from "../../utils/util";
 
 export const fetchOrderMasterData = (facilityId) => {

@@ -1,5 +1,5 @@
-import { getUserAuthToken } from "../utils/util";
-import { serviceConstants } from "../patientPortalServices/constants";
+import { getUserAuthToken } from "../../utils/util";
+import { serviceConstants } from "../common/constants";
 
 export const generateUniqueKey = () => {
 	var token  = getUserAuthToken();

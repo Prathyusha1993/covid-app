@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FileBrowse from "./fileBrowse";
 import { Form, Col, Button } from "react-bootstrap";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../services/common/constants";
 
 class PatientPhotoUploadInfo extends Component {
   constructor(props) {

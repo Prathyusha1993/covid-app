@@ -5,7 +5,7 @@ import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import {
 	updatePhysician,
 	createPhysician,
-} from "../../../../clinicPortalServices/physicianServices";
+} from "../../../../services/clinicPortalServices/physicianServices";
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { phoneNumberFormatter } from "../../../../utils/util";
 

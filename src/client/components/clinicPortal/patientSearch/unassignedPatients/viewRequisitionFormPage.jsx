@@ -3,11 +3,11 @@ import { Modal, Button } from "react-bootstrap";
 import moment from "moment";
 import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
 import Barcode from "../barcode";
-import { fetchPhysicians } from "../../../../clinicPortalServices/physicianServices";
+import { fetchPhysicians } from "../../../../services/clinicPortalServices/physicianServices";
 import {
   saveRequisitionChanges,
   generateUniqueKey,
-} from "../../../../clinicPortalServices/requisitionService";
+} from "../../../../services/clinicPortalServices/requisitionService";
 import Picker from "./picker";
 
 export default class ViewRequisitionFormpage extends Component {

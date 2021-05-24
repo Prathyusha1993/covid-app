@@ -4,7 +4,7 @@ import PatientInfo from "./patientInfo";
 import PatientInsuranceInfo from "./patientInsuranceInfo";
 import PatientPhotoUploadInfo from "./patientPhotoUploadInfo";
 import { phoneNumberFormatter } from "../../../utils/util";
-import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
+import { updateUnassignedPatientDetails } from "../../../services/clinicPortalServices/unassignedPatientService";
 import { patientSignup } from "../../../services/patientSignupServices/patientSignupFormService";
 import { patientUploadImages } from "../../../services/patientSignupServices/patientSignupFormService";
 import moment from "moment";

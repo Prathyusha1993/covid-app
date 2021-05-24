@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../services/common/constants";
 
 export default class PdfResultRenderer extends Component {
   constructor(props) {

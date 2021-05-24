@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { getPhysicianDataById } from "../../../../clinicPortalServices/physicianServices";
+import { getPhysicianDataById } from "../../../../services/clinicPortalServices/physicianServices";
 import PhysicianDetails from "./physicianDetails";
 
 export default class EditBtnCellRenderer extends Component {

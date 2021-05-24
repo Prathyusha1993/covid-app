@@ -34,11 +34,11 @@ import {
   exportOrders,
   searchOrders,
 } from "../../../../services/clinicPortalServices/orderSearchService";
-import { getOrderUserSettings } from "../../../../clinicPortalServices/userGridSettings";
-import { saveOrderSettings } from "../../../../clinicPortalServices/saveStateSettings";
-import { fetchPatientMasterData } from "../../../../clinicPortalServices/patientSearchService"; //fetchFacilities
+import { getOrderUserSettings } from "../../../../services/clinicPortalServices/userGridSettings";
+import { saveOrderSettings } from "../../../../services/clinicPortalServices/saveStateSettings";
+import { fetchPatientMasterData } from "../../../../services/clinicPortalServices/patientSearchService"; //fetchFacilities
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../services/common/constants";
 import { results } from "./../../patientSearch/clinicPatientGrid/optionsData";
 import { getUserRole } from "../../../../utils/util";
 import { FacebookIcon } from "react-share";

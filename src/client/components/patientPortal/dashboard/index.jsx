@@ -3,7 +3,7 @@ import { DashboardSidebar } from "./sidebar/sidebar.jsx";
 import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
-import { serviceConstants } from "../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../services/common/constants";
 import { fetchDashboardDetails,resultsViewed } from "../../../services/patientPortalServices/dashboardService";
 
 class PatientPortalDashboard extends Component {

@@ -1,4 +1,4 @@
-import { serviceConstants } from "../../patientPortalServices/constants";
+import { serviceConstants } from "../common/constants";
 import { getUserAuthToken,getUserRole,getUserID } from "../../utils/util";
 
 export const fetchFacilitiesForOrders = () => {	

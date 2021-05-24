@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { fetchPatientQrResponse } from "../../../../services/patientSignupServices/patientSignupFormService";
-import { fetchUnassignedPatientDetails } from "../../../../clinicPortalServices/unassignedPatientService";
+import { fetchUnassignedPatientDetails } from "../../../../services/clinicPortalServices/unassignedPatientService";
 
 class PatientQrComponent extends Component {
   constructor(props) {

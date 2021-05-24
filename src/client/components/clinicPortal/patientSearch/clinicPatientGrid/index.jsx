@@ -25,9 +25,9 @@ import {
   fetchPatientMasterData,
   fetchPatientExpandableData,
   exportPatients,
-} from "../../../../clinicPortalServices/patientSearchService";
-import { getPatientUserSettings } from "../../../../clinicPortalServices/userGridSettings";
-import { savePatientSettings } from "../../../../clinicPortalServices/saveStateSettings";
+} from "../../../../services/clinicPortalServices/patientSearchService";
+import { getPatientUserSettings } from "../../../../services/clinicPortalServices/userGridSettings";
+import { savePatientSettings } from "../../../../services/clinicPortalServices/saveStateSettings";
 import QrScanReader from "../qrScanReader/index.jsx";
 import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";

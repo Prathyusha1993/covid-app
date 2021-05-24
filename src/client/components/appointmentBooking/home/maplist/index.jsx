@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import InfoWindowEx from "./InfoWindowEx";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../services/common/constants";
 import { locations } from "./data";
 
 export class GoogleMapsContainer extends Component {
