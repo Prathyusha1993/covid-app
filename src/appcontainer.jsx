@@ -13,7 +13,8 @@ import BlankPage from "./client/components/blankpage";
 //Patient Portal
 import PatientPortalDashboard from "./client/components/patientPortal/dashboard";
 import PatientPortalLoginContainer from "./client/components/patientPortal/login";
-import PatientPortalHeader from "./client/components/patientPortal/header";
+//import PatientPortalHeader from "./client/components/patientPortal/header";
+import PatientPortalHeader from "./client/components/common/header"
 
 //Clinic Portal
 import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
