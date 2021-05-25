@@ -22,15 +22,14 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { resultsSearch } from "../../patientSearch/clinicPatientGrid/optionsData";
+import { Tooltip } from "react-bootstrap";
+import { resultsSearch } from "../../../common/optionsData";
 
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
 
 //service calls
 import {
-  fetchOrderMasterData,
   exportOrders,
   searchOrders,
 } from "../../../../services/clinicPortalServices/orderSearchService";
@@ -39,9 +38,8 @@ import { saveOrderSettings } from "../../../../services/clinicPortalServices/sav
 import { fetchPatientMasterData } from "../../../../services/clinicPortalServices/patientSearchService"; //fetchFacilities
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../services/common/constants";
-import { results } from "./../../patientSearch/clinicPatientGrid/optionsData";
+import { results } from "../../../common/optionsData";
 import { getUserRole } from "../../../../services/common/util";
-import { FacebookIcon } from "react-share";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -200,7 +198,6 @@ class OrderGridDetails extends Component {
 
   loadFacilities = () => {
     fetchFacilitiesForOrders().then((response) => {
-      //console.log("orders-facilities", response);
       this.setState({ facilities: response.data });
     });
   };
@@ -234,20 +231,17 @@ class OrderGridDetails extends Component {
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    //console.log(params.columnApi);
     this.loadGridData();
     this.loadGridSchema();
   };
 
   loadGridData = () => {
     var facilityID = window.localStorage.getItem("FACILITY_ID");
-    //var facilityID = "";
     Promise.all([
       //fetchOrderMasterData(facilityID),
       searchOrders(this.state.searchFilters),
       fetchPatientMasterData(facilityID),
     ]).then(([orderData, patientData]) => {
-      //console.log(orderData);
       if (orderData && orderData.data && orderData.data.length > 0) {
         const formattedData = orderData.data.map((item) => {
           const returnData = {
@@ -335,7 +329,6 @@ class OrderGridDetails extends Component {
 
           return returnData;
         });
-        //console.log(formattedData);
         this.setState({ rowData: formattedData });
       } else this.setState({ rowData: [] });
     });
@@ -358,15 +351,12 @@ class OrderGridDetails extends Component {
   loadGridSchema = () => {
     var userId = window.localStorage.getItem("USER_ID");
     getOrderUserSettings(userId, this.state.gridName).then((orderUserInfo) => {
-      //console.log("getSettings", orderUserInfo);
-      // const columnState = userInfo.data.grid_state[0].columns;
 
       const columnState =
         orderUserInfo.data &&
         orderUserInfo.data.grid_state.find((item) => {
           return item.grid_name === "Order";
         }).columns;
-      //console.log("columnState-retrieved", columnState);
       if (columnState) {
         this.gridColumnApi.applyColumnState({
           state: columnState,
@@ -391,11 +381,9 @@ class OrderGridDetails extends Component {
     var userId = window.localStorage.getItem("USER_ID");
     const columnState = this.gridColumnApi.getColumnState();
     var pageSize = document.getElementById("page-size").value;
-    //console.log("columnState", columnState);
 
     saveOrderSettings(userId, this.state.gridName, columnState, pageSize).then(
       () => {
-        //console.log("saveSettings success");
         alert("Settings saved successfully !!");
       }
     );
@@ -428,12 +416,6 @@ class OrderGridDetails extends Component {
     </Tooltip>
   );
   render() {
-    const formStyle = {
-      borderTop: "none",
-      borderLeft: "none",
-      borderRight: "none",
-      borderRadius: "0px",
-    };
     return (
       <div>
         <div className="breadcrumb-bar">
@@ -481,13 +463,6 @@ class OrderGridDetails extends Component {
                       return (
                         <MenuItem
                           key={fac._id}
-                          // value={
-                          //   this.state.user_role &&
-                          //   this.state.user_role.toLowerCase().trim() ==
-                          //     "superadmin"
-                          //     ? fac._id
-                          //     : fac.facility
-                          // }
                           value={fac._id}
                         >
                           {fac.name}
@@ -503,7 +478,6 @@ class OrderGridDetails extends Component {
                   label="From Date"
                   type="date"
                   name="from_date"
-                  //defaultValue={this.state.searchFilters.from_date}
                   value={this.state.searchFilters.from_date}
                   className="form-control"
                   InputLabelProps={{
@@ -518,7 +492,6 @@ class OrderGridDetails extends Component {
                   label="To Date"
                   type="date"
                   name="to_date"
-                  //defaultValue={this.state.searchFilters.to_date}
                   value={this.state.searchFilters.to_date}
                   className="form-control"
                   InputLabelProps={{
@@ -567,11 +540,6 @@ class OrderGridDetails extends Component {
                   </RadioGroup>
                 </FormControl>
                 <span>
-                  {/* <OverlayTrigger
-                    placement="top"
-                    delay={{ show: 100, hide: 400 }}
-                    overlay={this.renderTooltipClearFilters}
-                  > */}
                   <button
                     Tooltip="Clear Filters"
                     className="btn btn-primary submit-btn button-info-grid"
@@ -579,7 +547,6 @@ class OrderGridDetails extends Component {
                   >
                     <i class="fa fa-times" aria-hidden="true"></i> Clear Filters
                   </button>
-                  {/* </OverlayTrigger> */}
                 </span>
               </div>
             </div>
@@ -593,7 +560,6 @@ class OrderGridDetails extends Component {
                   variant="outlined"
                   className="form-control"
                   id="page-size"
-                  //size="small"
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -628,9 +594,6 @@ class OrderGridDetails extends Component {
             </div>
           </div>
         </div>
-        {/* <div className="row" style={{ padding: " 12px" }}>
-          
-        </div> */}
         <div
           style={{
             width: "100%",
@@ -655,13 +618,9 @@ class OrderGridDetails extends Component {
               rowData={this.state.rowData}
               frameworkComponents={this.state.frameworkComponents}
               pagination={true}
-              //paginationAutoPageSize={true}
               paginationPageSize={20}
               paginationNumberFormatter={this.state.paginationNumberFormatter}
               excelStyles={this.state.excelStyles}
-              // sideBar={this.state.sideBar}
-              // rowGroupPanelShow={this.state.rowGroupPanelShow}
-              // pivotPanelShow={this.state.pivotPanelShow}
             />
           </div>
         </div>

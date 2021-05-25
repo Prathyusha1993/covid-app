@@ -17,7 +17,6 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
 import { getFacilityData } from "../../../../services/clinicPortalServices/facilityServices";
-//import FacilityDetails from "./facilityDetails";
 import AddFacility from "./addFacility";
 
 class ClinicFacilityGrid extends Component {
@@ -61,7 +60,6 @@ class ClinicFacilityGrid extends Component {
 					minWidth: 150,
 					field: "code",
 					resizable: true,
-					//hide: true,
 				},
 				{
 					headerName: "Name",

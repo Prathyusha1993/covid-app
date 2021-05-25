@@ -2,7 +2,7 @@ import { serviceConstants } from "../common/constants";
 import { getUserAuthToken } from "../common/util";
 
 export const saveOrderEditData = (editParams) => {
-	if(! editParams) throw "Order obj is null";
+	if(! editParams) throw new Error("Order obj is null");
 	var token  = getUserAuthToken();
 	var updatedOrder  = {
 		test_info: {		   
@@ -20,7 +20,6 @@ export const saveOrderEditData = (editParams) => {
 		lab_order_id: editParams.requisition
 	   
 	};
-	//console.log(updatedOrder);	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/`, {
 		method: "POST",
 		headers: {
@@ -33,7 +32,7 @@ export const saveOrderEditData = (editParams) => {
 };
 
 export const updateResultPDF = (params) => {
-	if(! params) throw "Order obj is null";
+	if(! params) throw new Error("Order obj is null");
 	var token  = getUserAuthToken();
 	var updatedOrder= {
 		patient_name:params.patientName,
@@ -52,8 +51,7 @@ export const updateResultPDF = (params) => {
 		released_date:params.released,
 		released_by:params.releasedBy,
 		test_type: params.testType,
-	};
-	//console.log(updatedOrder);	
+	};	
 	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/update/`, {
 		method: "POST",
 		headers: {

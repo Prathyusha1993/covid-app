@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { phoneNumberFormatter } from "../../../../services/common/util";
 import { Form, Button, Col } from "react-bootstrap";
-import { states } from "../../../clinicPortal/patientSearch/clinicPatientGrid/optionsData";
+import { states } from "../../../common/optionsData";
 
 class PatientInfo extends Component {
   constructor(props) {

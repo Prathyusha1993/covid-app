@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { states } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { states } from "../../../common/optionsData";
 import {
 	updatePhysician,
 	createPhysician,
@@ -12,7 +11,6 @@ import { phoneNumberFormatter } from "../../../../services/common/util";
 export default class PhysicianDetails extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		let physicianDetails =
 			this.props && this.props.physicianDetails
 				? this.props.physicianDetails
@@ -60,7 +58,6 @@ export default class PhysicianDetails extends Component {
 
 	componentDidMount() {
 		fetchFacilitiesForOrders().then((response) => {
-			//console.log("orders-facilities", response);
 			this.setState({ facilities: response.data });
 		});
 	}
@@ -378,16 +375,6 @@ export default class PhysicianDetails extends Component {
 						</Button>
 					</div>
 				</form>
-				{/* </Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={this.handleClose}>
-							Close
-						</Button>
-						<Button variant="primary" onClick={this.handleNewPhysician}>
-							Save Changes
-						</Button>
-					</Modal.Footer>
-				</Modal> */}
 			</div>
 		);
 	}

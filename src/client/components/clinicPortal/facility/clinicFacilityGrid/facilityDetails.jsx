@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Button, Tooltip } from "react-bootstrap";
 import {
 	faxTypes,
 	states,
-} from "../../patientSearch/clinicPatientGrid/optionsData";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+} from "../../../common/optionsData";
 import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,
@@ -19,7 +18,6 @@ export default class FacilityDetails extends Component {
 			this.props && this.props.facilityDetails
 				? this.props.facilityDetails
 				: "";
-		//console.log(props);
 		this.state = {
 			show: this.props.show,
 			showMessage: false,

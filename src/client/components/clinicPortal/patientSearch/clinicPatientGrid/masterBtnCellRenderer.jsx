@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { updatePatientData } from "../../../../services/clinicPortalServices/patientEditService";
-import { states, identity } from "./optionsData";
+import { states, identity } from "../../../common/optionsData";
 
 export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
-		// console.log('BtnCellRenderer',BtnCellRenderer.getValueToDisplay(props));
 
 		this.state = {
 			show: false,
@@ -97,7 +95,6 @@ export default class MasterBtnCellRenderer extends Component {
 	};
 
 	handlePatientEditChanges = (e) => {
-		//api edit changes here
 		e.preventDefault();
 
 		const editParams = {
@@ -121,9 +118,6 @@ export default class MasterBtnCellRenderer extends Component {
 				editParams: userDetails,
 				show: false,
 			});
-
-			// call refresh grid function
-			//this.props.data.refreshGrid();
 		});
 	};
 

@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import {
   saveOrderEditData,
   updateResultPDF,
+  fetchOrderFaxData
 } from "../../../../services/clinicPortalServices/orderEditService";
 import moment from "moment";
-import { results } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { fetchOrderFaxData } from "../../../../services/clinicPortalServices/orderEditService";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { testTypes, results } from "../../../common/optionsData";
 
 export default class EditBtnCellRenderer extends Component {
   constructor(props) {
     super(props);
-    //console.log(props);
     this.state = {
       show: false,
       orderId: props.data.orderId,
