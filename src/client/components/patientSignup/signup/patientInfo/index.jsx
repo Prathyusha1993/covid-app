@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { phoneNumberFormatter } from "../../../../services/common/util";
 import { Form, Button, Col } from "react-bootstrap";
-import { states } from "../../../common/optionsData";
+import { states } from "../../../../services/common/optionsData";
 
 class PatientInfo extends Component {
   constructor(props) {

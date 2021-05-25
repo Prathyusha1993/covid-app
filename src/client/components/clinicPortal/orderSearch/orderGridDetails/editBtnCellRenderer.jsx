@@ -6,7 +6,7 @@ import {
   fetchOrderFaxData
 } from "../../../../services/clinicPortalServices/orderEditService";
 import moment from "moment";
-import { testTypes, results } from "../../../common/optionsData";
+import { testTypes, results } from "../../../../services/common/optionsData";
 
 export default class EditBtnCellRenderer extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import moment from "moment";
-import { testTypes } from "../../../common/optionsData";
+import { testTypes } from "../../../../services/common/optionsData";
 import Barcode from "../barcode";
 import { fetchPhysicians } from "../../../../services/clinicPortalServices/physicianServices";
 import {

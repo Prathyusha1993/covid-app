@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import SignUp from "../../../patientSignup/signup";
 import ViewRequisitionFormpage from "../unassignedPatients/viewRequisitionFormPage";
-import { insuranceProvider } from "../../../patientSignup/signup/selectOptionsData";
+import { insuranceProvider } from "../../../../services/common/optionsData";
 import { fetchUnassignedPatientDetails } from "../../../../services/clinicPortalServices/unassignedPatientService";
 
 class ViewPatientSignUp extends Component {

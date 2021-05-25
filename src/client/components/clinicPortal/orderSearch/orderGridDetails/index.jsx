@@ -23,7 +23,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Tooltip } from "react-bootstrap";
-import { resultsSearch } from "../../../common/optionsData";
+import { resultsSearch } from "../../../../services/common/optionsData";
 
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 import PdfResultRenderer from "./pdfResultRenderer";
@@ -38,7 +38,7 @@ import { saveOrderSettings } from "../../../../services/clinicPortalServices/sav
 import { fetchPatientMasterData } from "../../../../services/clinicPortalServices/patientSearchService"; //fetchFacilities
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../services/common/constants";
-import { results } from "../../../common/optionsData";
+import { results } from "../../../../services/common/optionsData";
 import { getUserRole } from "../../../../services/common/util";
 
 var enterprise = require("@ag-grid-enterprise/core");

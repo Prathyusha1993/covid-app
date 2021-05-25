@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { updatePatientData } from "../../../../services/clinicPortalServices/patientEditService";
-import { states, identity } from "../../../common/optionsData";
+import { states, identity } from "../../../../services/common/optionsData";
 
 export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {

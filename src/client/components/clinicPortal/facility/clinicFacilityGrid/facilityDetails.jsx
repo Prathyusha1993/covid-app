@@ -3,7 +3,7 @@ import { Button, Tooltip } from "react-bootstrap";
 import {
 	faxTypes,
 	states,
-} from "../../../common/optionsData";
+} from "../../../../services/common/optionsData";
 import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,

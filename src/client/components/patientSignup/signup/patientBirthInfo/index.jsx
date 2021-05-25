@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { identity, symptoms } from "../selectOptionsData";
-import { ethnicity } from "../selectOptionsData";
-import { race } from "../selectOptionsData";
+import { identity, symptoms, ethnicity, race } from "../../../../services/common/optionsData";
 import { Form, Button, Col, FormCheck } from "react-bootstrap";
 
 class PatientBirthInfo extends Component {

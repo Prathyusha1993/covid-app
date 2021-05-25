@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
-import { states } from "../../../common/optionsData";
+import { states } from "../../../../services/common/optionsData";
 import {
 	updatePhysician,
 	createPhysician,
