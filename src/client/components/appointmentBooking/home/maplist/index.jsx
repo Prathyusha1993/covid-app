@@ -30,8 +30,6 @@ export class GoogleMapsContainer extends Component {
 		});
 	};
 
-	showDetails = (place) => {};
-
 	markerBounce = (id) => {
 		var element = this.state.markerObjects.find((i) => {
 			return i.marker.id == id;

@@ -122,12 +122,6 @@ export default class MasterBtnCellRenderer extends Component {
 	};
 
 	render() {
-		const formStyle = {
-			borderTop: "none",
-			borderLeft: "none",
-			borderRight: "none",
-			borderRadius: "0px",
-		};
 		return (
 			<div>
 				<button
@@ -154,9 +148,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label style={{ fontWeight: "100" }}>First Name</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="firstName"
 											value={this.state.firstName}
 											onChange={this.handleChange}
@@ -167,9 +160,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Last Name</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="lastName"
 											value={this.state.lastName}
 											onChange={this.handleChange}
@@ -180,9 +172,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Date of Birth</label>
 										<input
-											style={formStyle}
 											type="date"
-											className="form-control "
+											className="form-control order-edit-formstyle"
 											name="dob"
 											value={this.state.dob}
 											onChange={this.handleChange}
@@ -193,8 +184,7 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Gender</label>
 										<select
-											style={formStyle}
-											className="form-control select"
+											className="form-control select order-edit-formstyle"
 											name="gender"
 											value={this.state.gender}
 											onChange={this.handleChange}
@@ -213,9 +203,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>MRN</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="mrn"
 											value={this.state.mrn}
 											onChange={this.handleChange}
@@ -227,9 +216,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Email ID</label>
 										<input
-											style={formStyle}
 											type="email"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="email"
 											value={this.state.email}
 											onChange={this.handleChange}
@@ -240,9 +228,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Mobile</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="mobile"
 											value={this.state.mobile}
 											onChange={this.handleChange}
@@ -253,9 +240,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Address Line 1</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="address1"
 											value={this.state.address1}
 											onChange={this.handleChange}
@@ -266,9 +252,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Address Line 2</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="address2"
 											value={this.state.address2}
 											onChange={this.handleChange}
@@ -279,9 +264,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>City</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="city"
 											value={this.state.city}
 											onChange={this.handleChange}
@@ -292,8 +276,7 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>State</label>
 										<select
-											style={formStyle}
-											className="form-control select"
+											className="form-control select order-edit-formstyle"
 											name="state"
 											value={this.state.state}
 											onChange={this.handleChange}
@@ -313,9 +296,8 @@ export default class MasterBtnCellRenderer extends Component {
 									<div className="form-group">
 										<label>Zip Code</label>
 										<input
-											style={formStyle}
 											type="text"
-											className="form-control"
+											className="form-control order-edit-formstyle"
 											name="zip"
 											value={this.state.zip}
 											onChange={this.handleChange}

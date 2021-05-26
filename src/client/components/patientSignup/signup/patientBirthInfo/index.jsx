@@ -16,10 +16,6 @@ class PatientBirthInfo extends Component {
 
 	continue = (e) => {
 		const form = document.getElementById("patientBirthForm");
-		// if(!this.props.values.race) {
-		// 	alert('select race');
-		// }
-
 		if (form.checkValidity() === false) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -42,10 +38,6 @@ class PatientBirthInfo extends Component {
 			<div>
 				<div className="content">
 					<div className="row" style={{ justifyContent: "center" }}>
-						{/* <div className="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-								<DoctorSidebar />
-							</div> */}
-						{/* <div className="col-md-6 col-lg-7 col-xl-7"> */}
 						<div className={values.classStyle}>
 							<div className="card  row-bg-color">
 								<div className="card-body">

@@ -27,9 +27,6 @@ class Barcode extends Component {
         {this.state.scanSuccess ? (
           <ScanBarResult key="scanResult" text={this.state.scanCode} />
         ) : null}
-        {/* <input id="scanner_result" type="text" value={this.state.scanCode} />
-        <input id="scanner_result" type="text" value={this.state.result} />
-        <input id="scanner_result" type="text" value={this.state.scanSuccess} /> */}
 
         <Modal show={this.state.modal} onHide={this._toggle}>
           <Modal.Header closeButton="true" />

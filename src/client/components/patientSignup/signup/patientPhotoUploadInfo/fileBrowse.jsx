@@ -5,13 +5,6 @@ import Dropzone from "react-dropzone";
 class FileBrowse extends Component {
   constructor(props) {
     super(props);
-    // this.onDrop = (files) => {
-    //   this.setState({
-    //     files,
-    //     showFile: true,
-
-    //   });
-    // };
     this.state = {
       files: [],
       showFile: false,
@@ -27,10 +20,6 @@ class FileBrowse extends Component {
       files,
       showFile: true,
     });
-    //console.log('fileName', files[0].name);
-    // moment(this.state.collectedDate, "MM/DD/YYYY hh:mm A").format(
-    //   "YYYYMMDDHHmmss"
-    // )
     this.props.handleFileChange(files[0]);
   };
 

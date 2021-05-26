@@ -2,8 +2,7 @@ import {serviceConstants} from '../common/constants';
 import { getPatientAuthToken } from "../common/util";
 
 export const fetchDashboardDetails = (patientInfo) => {
-   //console.log('patientInfo from index' , patientInfo);
-   var token  = getPatientAuthToken();
+   const token  = getPatientAuthToken();
     return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/patient/results`, {
         method: 'POST',
         headers: {
@@ -16,9 +15,7 @@ export const fetchDashboardDetails = (patientInfo) => {
   }
 
   export const resultsViewed = (orderInfo) => {
-    //console.log("resultsViewed");
-    //console.log(orderInfo);
-    var token  = getPatientAuthToken();
+    const token  = getPatientAuthToken();
      return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/patient/resultsviewed`, {
          method: 'POST',
          headers: {

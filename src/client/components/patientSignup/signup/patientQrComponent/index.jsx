@@ -18,14 +18,11 @@ class PatientQrComponent extends Component {
     fetchPatientQrResponse(this.props.patientId).then((response) => {
       this.setState({ dataStream: response.data });
     });
-    //this.fetchPatientDetails();
   }
 
   fetchPatientDetails = () => {
-    //console.log("enter");
     fetchUnassignedPatientDetails(this.state.patientId)
       .then((data) => {
-        //console.log("response data", data);
         let patientDetails = data.data[0];
         let patientFullName =
           patientDetails.first_name + " " + patientDetails.last_name;

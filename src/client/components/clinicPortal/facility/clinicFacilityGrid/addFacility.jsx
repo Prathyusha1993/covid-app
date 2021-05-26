@@ -5,7 +5,6 @@ import FacilityDetails from "./facilityDetails";
 export default class AddFacility extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		this.state = {
 			show: false,
 			firstName: "",

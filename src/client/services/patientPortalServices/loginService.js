@@ -22,9 +22,7 @@ export const authenticateAndFetchUserDetails = (loginInfo) => {
 };
 
 export const logout = () => {
-	//debugger;
-	//console.log('patient logout');
-	var token = getPatientAuthToken();
+	const token = getPatientAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/logout`, {
 		method: "POST",
 		headers: {

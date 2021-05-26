@@ -43,7 +43,6 @@ class Profile extends Component {
 													<div className="form-group">
 														<div className="change-avatar">
 															<div className="profile-img">
-																{/* <img src={IMG01} alt="User" /> */}
 															</div>
 															<div className="upload-img">
 																<div className="change-photo-btn">

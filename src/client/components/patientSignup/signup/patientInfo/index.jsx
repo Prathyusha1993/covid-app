@@ -18,7 +18,6 @@ class PatientInfo extends Component {
   }
 
   continue = (e) => {
-    // const form = e.currentTarget;
 
     const form = document.getElementById("patientInfoForm");
     if (form.checkValidity() === false) {
@@ -34,12 +33,10 @@ class PatientInfo extends Component {
 
   render() {
     const { values } = this.props;
-    //console.log("values", values);
     return (
       <div>
         <div className="content">
           <div className="row" style={{ justifyContent: "center" }}>
-            {/* <div className="col-md-12 col-lg-7 col-xl-7"> */}
             <div className={values.classStyle}>
               <div className="card row-bg-color ">
                 <div className="card-body">

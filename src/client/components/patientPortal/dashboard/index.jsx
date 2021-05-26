@@ -54,7 +54,6 @@ class PatientPortalDashboard extends Component {
 
   handleDateClick = (pdfPath, dateId, dataValue) => {
     resultsViewed({"_id": dateId});
-    // const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
     var constructedUrl = "";
 
     if (pdfPath != null && pdfPath.trim().length > 0)

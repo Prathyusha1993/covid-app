@@ -65,7 +65,6 @@ export default class ViewRequisitionFormpage extends Component {
 			resultDesc: "",
 			errors: [],
 		};
-		// this.setComponentState(this.props);
 	}
 
 	componentWillReceiveProps(nextProps) {

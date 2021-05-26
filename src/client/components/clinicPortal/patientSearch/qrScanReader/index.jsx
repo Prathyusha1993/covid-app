@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import QrReader from "react-qr-reader";
 import { Modal, Button } from "react-bootstrap";
-import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 
 class QrScanReader extends Component {
 	constructor(props) {
@@ -38,13 +37,6 @@ class QrScanReader extends Component {
 									onScan={this.props.onQrCodeScanHandler}
 									className="qrscan-reader"
 								/>
-                {/* comment this decode qr code button once qr code works fine */}
-								{/* <button
-									className="qrscn-reader-btn btn btn-primary submit-btn button-info-grid"
-									onClick={this.props.showPatientSignupHandler}
-								>
-									Decoded QR Code: {this.props.scannedPatientId}
-								</button> */}
 							</div>
 						) : null}
 					</Modal.Body>

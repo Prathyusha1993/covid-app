@@ -23,7 +23,6 @@ class PdfViewer extends Component {
 							<i class="fa fa-download" aria-hidden="true"></i>
 						</div>
 						<div
-							//style={{overflowX:"scroll"}}
 							className="pdfWebView"
 						>
 							<label>If you are unable to see your results on the page,</label>

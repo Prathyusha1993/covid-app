@@ -52,8 +52,7 @@ export const saveRequisitionChanges = (reqInfo) => {
         facility_source: reqInfo.facilitySource,
         lab_order_id: reqInfo.labOrderId,
         lab_source: reqInfo.labSource
-	};
-	//console.log("updatedRequisition",JSON.stringify(updatedRequisition));	
+	};	
     
 	return fetch(` ${serviceConstants.API_HOST_NAME}/order/v1/requisition`, {
 		method: "POST",

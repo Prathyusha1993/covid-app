@@ -1,7 +1,7 @@
 import { serviceConstants } from "../common/constants";
 import { getUserAuthToken } from "../common/util";
 export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
-	var saveObject = {
+	let saveObject = {
 		//user_id: "6062151112591a26d4bb6685",
 		user_id: userId,
 		grid_state: [
@@ -12,8 +12,7 @@ export const saveOrderSettings = (userId, gridName, columnState, pageSize) => {
 			},
 		],
 	};
-	//console.log(saveObject);
-	var token = getUserAuthToken();
+	let token = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,
 		{
@@ -33,7 +32,7 @@ export const savePatientSettings = (
 	columnState,
 	pageSize
 ) => {
-	var saveObject = {
+	let saveObject = {
 		//user_id: "6062151112591a26d4bb6685",
 		user_id: userId,
 		grid_state: [
@@ -44,8 +43,7 @@ export const savePatientSettings = (
 			},
 		],
 	};
-	//console.log(saveObject);
-	var token = getUserAuthToken();
+	let token = getUserAuthToken();
 	return fetch(
 		`${serviceConstants.API_HOST_NAME}/usersettings/v1/gridstate/save`,
 		{

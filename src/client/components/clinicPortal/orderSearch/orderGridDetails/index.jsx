@@ -38,7 +38,6 @@ import { saveOrderSettings } from "../../../../services/clinicPortalServices/sav
 import { fetchPatientMasterData } from "../../../../services/clinicPortalServices/patientSearchService"; //fetchFacilities
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../services/common/constants";
-import { results } from "../../../../services/common/optionsData";
 import { getUserRole } from "../../../../services/common/util";
 
 var enterprise = require("@ag-grid-enterprise/core");

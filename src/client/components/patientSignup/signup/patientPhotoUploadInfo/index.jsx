@@ -38,7 +38,6 @@ class PatientPhotoUploadInfo extends Component {
     const url1 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.driverLicFileName}`;
     const url2 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.insuranceFrontPageFileName}`;
     const url3 = `${serviceConstants.HOST_NAME}/files/patient/images/${values.insuranceBackPageFileName}`;
-    //console.log(url1);
 
     return (
       <div>
@@ -68,11 +67,6 @@ class PatientPhotoUploadInfo extends Component {
                           Upload a photo of your driver's license{" "}
                           <span className="text-danger"> *</span>
                         </Form.Label>
-                        {/* {values.driverLicFile.length > 0 ? (
-                          <a href={this.state.driverLicFile} target="_blank">
-                            {values.driverLicFileName}</a>
-                        ) : ""
-                        } */}
 
                         {values.patientId &&
                         values.driverLicFileName &&
@@ -229,14 +223,6 @@ class PatientPhotoUploadInfo extends Component {
                             Submit
                           </Button>
                         </div>
-
-                        {/* <div>
-													{this.props.values.showMessage && (
-														<p className="submit-success-msg">
-															{this.props.values.message}
-														</p>
-													)}
-												</div> */}
                       </div>
                     </div>
                   </Form>

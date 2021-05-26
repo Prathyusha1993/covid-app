@@ -13,6 +13,7 @@ class ClinicPortalLoginContainer extends Component {
 			id: "",
 			token: "",
 			isAuthenticationfailed: "UNKNOWN",
+			loading: false
 		};
 	}
 
@@ -22,6 +23,7 @@ class ClinicPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
+		this.setState({ loading: true });
 		authenticateAndFetchUserDetails(this.state.userName, this.state.password)
 			.then((userInfo) => {
 				if (!userInfo || (userInfo && userInfo.token.length === 0)) {
@@ -32,6 +34,7 @@ class ClinicPortalLoginContainer extends Component {
 				}
 				this.setState({
 					isAuthenticationfailed: "NO",
+					loading: false
 				});
 				window.localStorage.setItem("USER_ID", userInfo.user._id);
 				window.localStorage.setItem("AUTH-TOKEN", userInfo.token);
@@ -44,6 +47,7 @@ class ClinicPortalLoginContainer extends Component {
 				window.location.href = "/clinic/orders";
 			})
 			.catch((err) => {
+				console.log(err);
 				this.setState({
 					isAuthenticationfailed: "YES",
 				});
@@ -124,9 +128,11 @@ class ClinicPortalLoginContainer extends Component {
 											)}
 											<button
 												className="btn btn-primary btn-block btn-lg login-btn"
-												type="submit"
+												type="submit" disabled={this.state.loading}
 											>
-												Login
+												{this.state.loading && <i className="fa fa-refresh fa-spin"></i>}
+												{this.state.loading && <span>Authenticating Please wait</span>}
+												{!this.state.loading && <span>Login</span>}
 											</button>
 										</form>
 									</div>

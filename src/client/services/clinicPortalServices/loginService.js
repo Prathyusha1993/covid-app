@@ -27,7 +27,6 @@ export const authenticateAndFetchUserDetails = (username, password) => {
 };
 
 export const logout = () => {
-	//console.log("calling logout api");
 	var token = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/user/v1/logout`, {
 		method: "POST",

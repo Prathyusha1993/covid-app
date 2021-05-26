@@ -9,6 +9,7 @@ class PatientPortalLoginContainer extends Component {
 			contactInfo: "",
 			id: "",
 			isAuthenticationfailed: "UNKNOWN",
+			loading: false
 		};
 	};
 
@@ -18,6 +19,7 @@ class PatientPortalLoginContainer extends Component {
 
 	handleLogin = (e) => {
 		e.preventDefault();
+		this.setState({loading: true});
 		var loginInfo = {};
 		if (
 			Number.isInteger(+this.state.contactInfo) === true &&
@@ -43,6 +45,7 @@ class PatientPortalLoginContainer extends Component {
 				}
 				this.setState({
 					isAuthenticationfailed: "NO",
+					loading: false
 				});
 				if(res.data && res.data.patients && res.data.patients.length > 0){
 					window.localStorage.setItem("PATIENT_ID", res.data.patients[0]._id);
@@ -161,9 +164,11 @@ class PatientPortalLoginContainer extends Component {
 											)}
 											<button
 												className="btn btn-primary btn-block btn-lg login-btn"
-												type="submit"
+												type="submit" disabled={this.state.loading}
 											>
-												Login
+												{this.state.loading && <i className="fa fa-refresh fa-spin"></i>}
+												{this.state.loading && <span>Authenticating Please wait</span>}
+												{!this.state.loading && <span>Login</span>}
 											</button>
 										</form>
 									</div>

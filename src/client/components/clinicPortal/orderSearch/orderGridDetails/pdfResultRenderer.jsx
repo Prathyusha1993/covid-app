@@ -4,7 +4,6 @@ import { serviceConstants } from "../../../../services/common/constants";
 export default class PdfResultRenderer extends Component {
   constructor(props) {
     super(props);
-    //console.log(this.props);
     this.state = {
       pdfPath:
         props.data &&
@@ -15,9 +14,7 @@ export default class PdfResultRenderer extends Component {
           : "",
       result: props.data && props.data.result ? props.data.result : "",
     };
-  }
-
-  pdfResult = () => {};
+  };
 
   render() {
     return (

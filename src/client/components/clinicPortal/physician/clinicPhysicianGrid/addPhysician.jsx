@@ -5,10 +5,8 @@ import PhysicianDetails from "./physicianDetails";
 export default class AddPhysician extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		this.state = {
 			show: false,
-			//refreshGrid: props.data.refreshGrid,
 			firstName: "",
 			lastName: "",
 			code: "",

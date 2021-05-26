@@ -2,7 +2,7 @@ import { serviceConstants } from "../common/constants";
 import { getUserAuthToken } from "../common/util";
 
 export const fetchUnassignedPatientData = (facilityId) => {
-	var token = getUserAuthToken();
+	const token = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/unassigned`, {
 		method: "POST",
 		headers: {
@@ -14,7 +14,7 @@ export const fetchUnassignedPatientData = (facilityId) => {
 };
 
 export const fetchUnassignedPatientDetails = (patientId) => {
-	var token = getUserAuthToken();
+	const token = getUserAuthToken();
 	return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/details`, {
 		method: "POST",
 		headers: {
@@ -27,8 +27,8 @@ export const fetchUnassignedPatientDetails = (patientId) => {
 };
 
 export const updateUnassignedPatientDetails = (patientDetails) => {
-	var token = getUserAuthToken();
-	var patientInfo = {
+	const token = getUserAuthToken();
+	let patientInfo = {
 		_id: patientDetails.patientId,
 		first_name: patientDetails.firstName,
 		last_name: patientDetails.lastName,

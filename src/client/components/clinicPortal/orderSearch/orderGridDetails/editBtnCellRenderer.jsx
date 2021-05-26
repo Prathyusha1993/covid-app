@@ -200,13 +200,6 @@ export default class EditBtnCellRenderer extends Component {
   );
 
   render() {
-    const formStyle = {
-      borderTop: "none",
-      borderLeft: "none",
-      borderRight: "none",
-      borderRadius: "0px",
-    };
-
     return (
       <div>
         <OverlayTrigger

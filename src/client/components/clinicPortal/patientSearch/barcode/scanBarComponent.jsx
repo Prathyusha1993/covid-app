@@ -24,9 +24,7 @@ class ScanBarComponent extends Component {
             width: { min: 200, max: 500 },
             height: { min: 100, max: 300 },
             aspectRatio: { min: 4 / 3, max: 16 / 9 },
-            //width: 800,
-            //height: 600,
-            //aspectRatio: 4 / 3,
+          
             facingMode: 'environment' // or user
           },
           area: {
@@ -49,11 +47,7 @@ class ScanBarComponent extends Component {
             'ean_reader',
             'ean_8_reader',
             'code_128_reader',
-            //'code_39_vin_reader'
-            //'codabar_reader',
             'upc_reader'
-            //'upc_e_reader',
-            //'i2of5_reader'
           ]
         },
         locate: true
@@ -78,30 +72,6 @@ class ScanBarComponent extends Component {
 
     Quagga.stop();
     return this.props.handleScan(code);
-    // The code below does not execute fast enough before the next scan occurs
-    /*
-    if (!(Object.keys(code).length === 0) && code !== '') {
-      const errors = result.codeResult.decodedCodes
-        .filter(_ => _.error !== undefined)
-        .map(_ => _.error);
-      const median = this._getMedian(errors);
-      if (median < 0.08) {
-        // probably correct
-        Quagga.stop();
-        console.log(code);
-        console.log(median);
-        return this.props.handleScan(code);
-      } else {
-        // probably wrong
-        console.log(code);
-        console.log(median);
-      }
-    } else {
-      Quagga.stop();
-      console.log(code);
-      return this.props.handleScan(code);
-    }
-    */
   }
 
   _getMedian(arr) {

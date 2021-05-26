@@ -9,7 +9,6 @@ import {
 	createFacility,
 	updateFacility,
 } from "../../../../services/clinicPortalServices/facilityServices";
-import PhoneInput from "react-phone-number-input";
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
@@ -72,20 +71,19 @@ export default class FacilityDetails extends Component {
 	};
 
 	handleChange = (e) => {
-		// this.setState({ [e.target.name]: e.target.value });
 		const target = e.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
 
-		// if (name === "phoneNum") {
-		// 	this.setState({
-		// 		phoneNum: phoneNumberFormatter(e.target.value)
-		// 	});
-		// }
+		if (name === "phoneNum") {
+			this.setState({
+				phoneNum: phoneNumberFormatter(value)
+			});
+		}
 
-		this.setState((prevState) => ({
-			phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
-		}));
+		// this.setState((prevState) => ({
+		// 	phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
+		// }));
 
 		this.setState({
 			[name]: value,
@@ -96,7 +94,6 @@ export default class FacilityDetails extends Component {
 		return this.state.errors.indexOf(key) !== -1;
 	};
 
-	//change it to save facility check for props.faciltyid !== '', update facility else craete facility.
 	updateAndCreateFacility = () => {
 		let errors = [];
 
@@ -179,7 +176,6 @@ export default class FacilityDetails extends Component {
 									value={this.state.name}
 									onChange={this.handleChange}
 									required
-									// className="form-control order-edit-formstyle"
 									className={
 										this.hasError("name")
 											? "form-control is-invalid"
@@ -248,13 +244,6 @@ export default class FacilityDetails extends Component {
 									placeholder="(XXX) XXX-XXXX"
 									className="form-control order-edit-formstyle"
 								/>
-								{/* <PhoneInput
-									country="US"
-									name="phoneNum"
-									placeholder="(XXX) XXX-XXXX"
-									value={this.state.phoneNum}
-									onChange={this.handleChange}
-								/> */}
 							</div>
 						</div>
 						<div className="col-12 col-md-6">

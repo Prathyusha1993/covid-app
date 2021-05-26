@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Tooltip, OverlayTrigger, Modal } from "react-bootstrap";
 import FacilityDetails from "./facilityDetails";
-import { Modal, Button } from "react-bootstrap";
 import {
-	getFacilityData,
 	getFacilityDataById,
 } from "../../../../services/clinicPortalServices/facilityServices";
 

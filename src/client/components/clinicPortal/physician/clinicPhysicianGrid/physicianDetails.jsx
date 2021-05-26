@@ -112,7 +112,6 @@ export default class PhysicianDetails extends Component {
 			facilityId: this.state.facilityId,
 		};
 		console.log(physicianInfo);
-		// return;
 		if (this.state.physicianId !== "") {
 			updatePhysician(physicianInfo)
 				.then((response) => {
@@ -321,13 +320,6 @@ export default class PhysicianDetails extends Component {
 						<div className="col-12 col-md-6">
 							<div className="form-group">
 								<label>Facility Id</label>
-								{/* <input
-									type="text"
-									name="facilityId"
-									value={this.state.facilityId}
-									onChange={this.handleChange}
-									className="form-control order-edit-formstyle"
-								/> */}
 								<select
 									className="form-control select order-edit-formstyle"
 									name="facilityId"

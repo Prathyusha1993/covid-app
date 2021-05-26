@@ -1,9 +1,7 @@
 
 import { serviceConstants } from "../common/constants";
-import { getUserAuthToken } from "../common/util";
 
 export const patientSignup = (patientDetails) => {
-    //console.log("patientSignup",patientDetails);
     let patientInfo = {
         "first_name":patientDetails.firstName,
         "last_name":patientDetails.lastName,
@@ -44,7 +42,6 @@ export const patientSignup = (patientDetails) => {
             }
         },
     };
-    //console.log("patientSignup-patientInfo",JSON.stringify(patientInfo));
     return fetch(`${serviceConstants.API_HOST_NAME}/patient/v1/insurance`, {
         method: 'POST',
         headers: {
