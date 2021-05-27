@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { authenticateAndFetchUserDetails } from "../../../services/clinicPortalServices/loginService";
+import {handleError} from '../../../services/common/errorHandler';
 
 class ClinicPortalLoginContainer extends Component {
 	constructor(props) {
@@ -46,8 +47,8 @@ class ClinicPortalLoginContainer extends Component {
 					);
 				window.location.href = "/clinic/orders";
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch((error) => {
+				handleError(error);
 				this.setState({
 					isAuthenticationfailed: "YES",
 				});

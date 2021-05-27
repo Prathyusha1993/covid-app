@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { getPhysicianDataById } from "../../../../services/clinicPortalServices/physicianServices";
+import { handleError } from "../../../../services/common/errorHandler";
 import PhysicianDetails from "./physicianDetails";
 
 export default class EditBtnCellRenderer extends Component {
@@ -43,7 +44,9 @@ export default class EditBtnCellRenderer extends Component {
 	loadPhysicianDetails = () => {
 		getPhysicianDataById(this.state.physicianId).then((response) => {
 			this.setState({ physicianDetails: response.data[0] });
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	render() {

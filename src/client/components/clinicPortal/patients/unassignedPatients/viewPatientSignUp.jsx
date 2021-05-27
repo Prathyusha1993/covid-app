@@ -4,6 +4,7 @@ import SignUp from "../../../patientSignup/signup";
 import ViewRequisitionFormpage from "../unassignedPatients/viewRequisitionFormPage";
 import { insuranceProvider } from "../../../../services/common/optionsData";
 import { fetchUnassignedPatientDetails } from "../../../../services/clinicPortalServices/unassignedPatientService";
+import {handleError} from '../../../../services/common/errorHandler';
 
 class ViewPatientSignUp extends Component {
 	constructor(props) {
@@ -116,7 +117,9 @@ class ViewPatientSignUp extends Component {
 					this.setState({ patientDetails: patientInfo });
 					this.props.setPatientDetails(patientInfo);
 				}
-			});
+			}).catch((error) => {
+				handleError(error);
+			})
 		}
 	};
 

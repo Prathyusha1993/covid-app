@@ -9,6 +9,7 @@ import {
 	createFacility,
 	updateFacility,
 } from "../../../../services/clinicPortalServices/facilityServices";
+import {handleError} from '../../../../services/common/errorHandler';
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
@@ -141,8 +142,8 @@ export default class FacilityDetails extends Component {
 						message: "Updated the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		} else {
 			createFacility(facilityInfo)
@@ -152,8 +153,8 @@ export default class FacilityDetails extends Component {
 						message: "Thank you.",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		}
 	};

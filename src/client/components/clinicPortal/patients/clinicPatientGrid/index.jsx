@@ -28,6 +28,7 @@ import QrScanReader from "../qrScanReader/index.jsx";
 import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
+import { handleError } from "../../../../services/common/errorHandler";
 
 const getPatientInfo = (patientData, patientId) => {
 	if (patientData && patientData.length > 0) {
@@ -382,6 +383,8 @@ class ClinicPatientGrid extends Component {
 					? this.facilities[0]._id
 					: "";
 			this.setState({ searchFilters: filters });
+		}).catch((error) => {
+			handleError(error);
 		});
 	};
 
@@ -410,7 +413,9 @@ class ClinicPatientGrid extends Component {
 				: this.state.searchFilters.facility_id;
 		fetchPatientMasterData(facility_id).then((data) => {
 			this.setState({ rowData: data.data });
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	onFilterTextChange = (e) => {
@@ -454,7 +459,9 @@ class ClinicPatientGrid extends Component {
 					pageSize && pageSize > 0 ? pageSize : 20;
 				this.onPageSizeChanged();
 			}
-		);
+		).catch(error => {
+			handleError(error);
+		})
 	};
 
 	saveState = () => {
@@ -469,7 +476,9 @@ class ClinicPatientGrid extends Component {
 			pageSize
 		).then(() => {
 			alert("Settings saved successfully !!");
-		});
+		}).catch((error) =>{
+			handleError(error);
+		})
 	};
 
 	resetState = () => {

@@ -9,6 +9,7 @@ import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import AuditSearchMenu from "./auditSearchMenu";
+import {handleError} from '../../../../services/common/errorHandler';
 
 //service calls
 import { getAuditData } from "../../../../services/clinicPortalServices/auditService";
@@ -105,7 +106,7 @@ class ClinicAuditGrid extends Component {
 				this.setState({ rowData: data.data });
 			})
 			.catch((error) => {
-				console.log(error);
+				handleError(error);
 			});
 	};
 

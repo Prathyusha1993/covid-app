@@ -7,6 +7,7 @@ import {
 } from "../../../../services/clinicPortalServices/physicianServices";
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { phoneNumberFormatter } from "../../../../services/common/util";
+import {handleError} from '../../../../services/common/errorHandler';
 
 export default class PhysicianDetails extends Component {
 	constructor(props) {
@@ -122,8 +123,8 @@ export default class PhysicianDetails extends Component {
 						message: "Updated the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		} else {
 			createPhysician(physicianInfo)
@@ -133,8 +134,8 @@ export default class PhysicianDetails extends Component {
 						message: "Thank you.",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		}
 	};

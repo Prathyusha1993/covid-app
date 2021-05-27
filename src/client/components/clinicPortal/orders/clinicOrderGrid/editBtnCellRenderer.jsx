@@ -7,6 +7,7 @@ import {
 } from "../../../../services/clinicPortalServices/orderEditService";
 import moment from "moment";
 import { testTypes, results } from "../../../../services/common/optionsData";
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class EditBtnCellRenderer extends Component {
   constructor(props) {
@@ -173,8 +174,13 @@ export default class EditBtnCellRenderer extends Component {
           )
         : "";
       //call this method to generate/update the result letter pdf
-      updateResultPDF(editParams).then((data) => {});
-    });
+      updateResultPDF(editParams).then((data) => {})
+      .catch((error) => {
+        handleError(error);
+      });
+    }).catch((error) => {
+      handleError(error);
+    })
   };
 
   handleFax = () => {
@@ -182,8 +188,8 @@ export default class EditBtnCellRenderer extends Component {
       .then((response) => {
         alert(response.message);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        handleError(error);
         alert("Error. Unable to send the fax.");
       });
   };

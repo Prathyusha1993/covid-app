@@ -30,6 +30,7 @@ import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServi
 import { serviceConstants } from "../../../../services/common/constants";
 import { getUserRole } from "../../../../services/common/util";
 import OrderSearchMenu from "./orderSearchMenu";
+import { handleError } from "../../../../services/common/errorHandler";
 
 var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
@@ -189,7 +190,9 @@ class clinicOrderGrid extends Component {
 	loadFacilities = () => {
 		fetchFacilitiesForOrders().then((response) => {
 			this.setState({ facilities: response.data });
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	handleFiltersChange = (e) => {
@@ -321,7 +324,9 @@ class clinicOrderGrid extends Component {
 				});
 				this.setState({ rowData: formattedData });
 			} else this.setState({ rowData: [] });
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	onFilterTextChange = (e) => {
@@ -363,7 +368,9 @@ class clinicOrderGrid extends Component {
 			document.getElementById("page-size").value =
 				pageSize && pageSize > 0 ? pageSize : 20;
 			this.onPageSizeChanged();
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	saveState = () => {
@@ -375,7 +382,9 @@ class clinicOrderGrid extends Component {
 			() => {
 				alert("Settings saved successfully !!");
 			}
-		);
+		).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	resetState = () => {

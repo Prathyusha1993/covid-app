@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { updatePatientData } from "../../../../services/clinicPortalServices/patientEditService";
+import { handleError } from "../../../../services/common/errorHandler";
 import { states, identity } from "../../../../services/common/optionsData";
 
 export default class MasterBtnCellRenderer extends Component {
@@ -118,7 +119,9 @@ export default class MasterBtnCellRenderer extends Component {
 				editParams: userDetails,
 				show: false,
 			});
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	render() {

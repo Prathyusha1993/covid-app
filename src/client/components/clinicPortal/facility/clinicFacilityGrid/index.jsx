@@ -17,6 +17,7 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 //service calls
 import { getFacilityData } from "../../../../services/clinicPortalServices/facilityServices";
 import FacilitySearchMenu from "./facilitySearchMenu";
+import {handleError} from '../../../../services/common/errorHandler';
 
 class ClinicFacilityGrid extends Component {
 	constructor(props) {
@@ -179,7 +180,7 @@ class ClinicFacilityGrid extends Component {
 				this.setState({ rowData: response.data });
 			})
 			.catch((error) => {
-				console.log(error);
+				handleError(error);
 			});
 	};
 

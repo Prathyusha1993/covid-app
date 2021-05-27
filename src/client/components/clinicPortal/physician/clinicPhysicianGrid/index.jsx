@@ -11,6 +11,7 @@ import { AllModules } from "@ag-grid-enterprise/all-modules";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
+import {handleError} from '../../../../services/common/errorHandler';
 
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
@@ -128,7 +129,7 @@ class ClinicPhysicianGrid extends Component {
 				this.setState({ rowData: response.data });
 			})
 			.catch((error) => {
-				console.log(error);
+				handleError(error);
 			});
 	};
 

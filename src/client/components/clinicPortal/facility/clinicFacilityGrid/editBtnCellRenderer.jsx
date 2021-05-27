@@ -4,6 +4,7 @@ import FacilityDetails from "./facilityDetails";
 import {
 	getFacilityDataById,
 } from "../../../../services/clinicPortalServices/facilityServices";
+import {handleError} from '../../../../services/common/errorHandler';
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -47,8 +48,8 @@ export default class EditBtnCellRenderer extends Component {
 			.then((response) => {
 				this.setState({ facilityDetails: response.data[0] });
 			})
-			.catch((err) => {
-				console.log(err);
+			.catch((error) => {
+				handleError(error);
 			});
 	};
 

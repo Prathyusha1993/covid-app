@@ -9,6 +9,7 @@ import {
 	generateUniqueKey,
 } from "../../../../services/clinicPortalServices/requisitionService";
 import Picker from "./picker";
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class ViewRequisitionFormpage extends Component {
 	constructor(props) {
@@ -169,7 +170,9 @@ export default class ViewRequisitionFormpage extends Component {
 
 		fetchPhysicians(facilityId).then((response) => {
 			this.setState({ providers: response.data });
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	autoGenerateKey = () => {
@@ -178,7 +181,9 @@ export default class ViewRequisitionFormpage extends Component {
 				uniqueKey: response.data,
 				sample: response.data,
 			});
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	handleRequisitionChanges = () => {
@@ -244,7 +249,9 @@ export default class ViewRequisitionFormpage extends Component {
 				reqInfo: changedReqDetails,
 				showMessage: true,
 			});
-		});
+		}).catch((error) => {
+			handleError(error);
+		})
 	};
 
 	render() {
