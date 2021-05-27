@@ -15,9 +15,9 @@ import PatientPortalHeader from "./client/components/common/header"
 
 //Clinic Portal
 import ClinicPortalLoginContainer from "./client/components/clinicPortal/login";
-import ClinicPatientGrid from "./client/components/clinicPortal/patientSearch/clinicPatientGrid/index";
-import OrderGridDetails from "./client/components/clinicPortal/orderSearch/orderGridDetails/index";
-import AuditGridDetails from "./client/components/clinicPortal/audit/auditGridDetails/index.jsx";
+import ClinicPatientGrid from "./client/components/clinicPortal/patients/clinicPatientGrid/index";
+import ClinicOrderGrid from "./client/components/clinicPortal/orders/clinicOrderGrid/index";
+import ClinicAuditGrid from "./client/components/clinicPortal/audit/clinicAuditGrid/index.jsx";
 import ClinicFacilityGrid from "./client/components/clinicPortal/facility/clinicFacilityGrid/index";
 
 //Patient Signup
@@ -65,8 +65,8 @@ const AppContainer = function (props) {
               exact
               component={ClinicPatientGrid}
             />
-            <Route path="/clinic/orders" exact component={OrderGridDetails} />
-            <Route path="/clinic/audit" exact component={AuditGridDetails} />
+            <Route path="/clinic/orders" exact component={ClinicOrderGrid} />
+            <Route path="/clinic/audit" exact component={ClinicAuditGrid} />
             <Route path="/clinic/facility" exact component={ClinicFacilityGrid} />
             <Route path="/clinic/physician" exact component={ClinicPhysicianGrid} />
             

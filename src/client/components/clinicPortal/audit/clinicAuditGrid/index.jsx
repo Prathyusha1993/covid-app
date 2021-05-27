@@ -8,14 +8,13 @@ import { SetFilterModule } from "@ag-grid-enterprise/set-filter";
 import { FiltersToolPanelModule } from "@ag-grid-enterprise/filter-tool-panel";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
-
-import TextField from "@material-ui/core/TextField";
+import AuditSearchMenu from "./auditSearchMenu";
 
 //service calls
 import { getAuditData } from "../../../../services/clinicPortalServices/auditService";
 import moment from "moment";
 
-class AuditGridDetails extends Component {
+class ClinicAuditGrid extends Component {
 	constructor(props) {
 		super(props);
 
@@ -34,7 +33,7 @@ class AuditGridDetails extends Component {
 					minWidth: 150,
 					field: "action",
 					resizable: true,
-					hide:true
+					hide: true,
 				},
 				{
 					headerName: "Identifier",
@@ -78,14 +77,16 @@ class AuditGridDetails extends Component {
 					minWidth: 200,
 					resizable: true,
 					cellRenderer: (params) => {
-						return moment(params.data.createdAt).format('MM/DD/YYYY hh:mm:ss A')
-					}
+						return moment(params.data.createdAt).format(
+							"MM/DD/YYYY hh:mm:ss A"
+						);
+					},
 				},
 			],
 
 			defaultColDef: {
 				flex: 1,
-				filter:true,
+				filter: true,
 				sortable: true,
 			},
 			rowData: null,
@@ -99,12 +100,13 @@ class AuditGridDetails extends Component {
 	};
 
 	loadAuditGridData = () => {
-		getAuditData().then((data) => {
-			this.setState({ rowData: data.data });
-		})
-		.catch((error) => {
-			console.log(error);
-		})
+		getAuditData()
+			.then((data) => {
+				this.setState({ rowData: data.data });
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	onFilterTextChange = (e) => {
@@ -114,55 +116,16 @@ class AuditGridDetails extends Component {
 	clearFilter = () => {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
-		document.getElementById("reset-form").value="";
+		document.getElementById("reset-form").value = "";
 	};
 
 	render() {
 		return (
 			<div>
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item">
-											<a href="/">Home</a>
-										</li>
-										<li className="breadcrumb-item active" aria-current="page">
-											Audit
-										</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Audit</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row" style={{padding: "12px"}}>
-					<div className="col-md-3">
-						<TextField
-							label="Quick Search"
-							variant="outlined"
-							className="form-control"
-							id="reset-form"
-							InputLabelProps={{
-								shrink: true,
-							  }}
-							type="string"
-							margin="dense"
-							onChange={this.onFilterTextChange}
-						/>
-					</div>
-					<div>
-						<button
-							className="btn btn-primary submit-btn button-info-grid"
-							onClick={() => this.clearFilter()}
-						>
-							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
-						</button>
-					</div>
-				</div>
+				<AuditSearchMenu
+					onFilterTextChange={this.onFilterTextChange}
+					clearFilter={this.clearFilter}
+				/>
 				<div
 					style={{
 						width: "100%",
@@ -195,4 +158,4 @@ class AuditGridDetails extends Component {
 	}
 }
 
-export default AuditGridDetails;
+export default ClinicAuditGrid;

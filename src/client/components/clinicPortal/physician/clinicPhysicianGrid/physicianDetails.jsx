@@ -99,17 +99,19 @@ export default class PhysicianDetails extends Component {
 		}
 
 		let physicianInfo = {
-			firstName: this.state.firstName,
-			lastName: this.state.lastName,
+			first_name: this.state.firstName,
+			last_name: this.state.lastName,
 			code: this.state.code,
 			npi: this.state.npi,
 			mobile: this.state.mobile,
-			address1: this.state.address1,
-			address2: this.state.address2,
-			city: this.state.city,
-			state: this.state.state,
-			country: this.state.country,
-			facilityId: this.state.facilityId,
+			address:{
+				address1: this.state.address1,
+				address2: this.state.address2,
+				city: this.state.city,
+				state: this.state.state,
+				country: this.state.country,
+			},
+			facility_id: this.state.facilityId,
 		};
 		console.log(physicianInfo);
 		if (this.state.physicianId !== "") {
@@ -319,7 +321,7 @@ export default class PhysicianDetails extends Component {
 						</div>
 						<div className="col-12 col-md-6">
 							<div className="form-group">
-								<label>Facility Id</label>
+								<label>Facility</label>
 								<select
 									className="form-control select order-edit-formstyle"
 									name="facilityId"

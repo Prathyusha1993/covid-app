@@ -11,39 +11,40 @@ import { testTypes, results } from "../../../../services/common/optionsData";
 export default class EditBtnCellRenderer extends Component {
   constructor(props) {
     super(props);
+    let orderDetails = props && props.data ? props.data : '';
     this.state = {
       show: false,
-      orderId: props.data.orderId,
-      gender: props.data.gender ? props.data.gender : "",
-      dob: props.data.dob ? props.data.dob : "",
-      mrn: props.data.mrn ? props.data.mrn : "",
-      provider: props.data && props.data.provider ? props.data.provider : "",
-      facilitySource: props.data.facilitySource
-        ? props.data.facilitySource
+      orderId: orderDetails.orderId,
+      gender: orderDetails.gender ? orderDetails.gender : "",
+      dob: orderDetails.dob ? orderDetails.dob : "",
+      mrn: orderDetails.mrn ? orderDetails.mrn : "",
+      provider: orderDetails && orderDetails.provider ? orderDetails.provider : "",
+      facilitySource: orderDetails.facilitySource
+        ? orderDetails.facilitySource
         : "",
       receivedDate:
-        props.data && props.data.receivedDate ? props.data.receivedDate : "",
+      orderDetails && orderDetails.receivedDate ? orderDetails.receivedDate : "",
       description:
-        props.data && props.data.description ? props.data.description : "",
-      testType: props.data && props.data.testType ? props.data.testType : "",
-      sample: props.data && props.data.sample ? props.data.sample : "",
-      result: props.data && props.data.result ? props.data.result : "",
+      orderDetails && orderDetails.description ? orderDetails.description : "",
+      testType: orderDetails && orderDetails.testType ? orderDetails.testType : "",
+      sample: orderDetails && orderDetails.sample ? orderDetails.sample : "",
+      result: orderDetails && orderDetails.result ? orderDetails.result : "",
       collectedDate:
-        props.data && props.data.collectedDate ? props.data.collectedDate : "",
+      orderDetails && orderDetails.collectedDate ? orderDetails.collectedDate : "",
 
       requisition:
-        props.data && props.data.requisition ? props.data.requisition : "",
-      code: props.data && props.data.code ? props.data.code : "",
-      codeType: props.data && props.data.codeType ? props.data.codeType : "",
+      orderDetails && orderDetails.requisition ? orderDetails.requisition : "",
+      code: orderDetails && orderDetails.code ? orderDetails.code : "",
+      codeType: orderDetails && orderDetails.codeType ? orderDetails.codeType : "",
       patientName:
-        props.data && props.data.patientName ? props.data.patientName : "",
-      email: props.data && props.data.email ? props.data.email : "",
-      mobile: props.data && props.data.mobile ? props.data.mobile : "",
-      pdfPath: props.data && props.data.pdfPath ? props.data.pdfPath : "",
-      released: props.data && props.data.released ? props.data.released : "",
+      orderDetails && orderDetails.patientName ? orderDetails.patientName : "",
+      email: orderDetails && orderDetails.email ? orderDetails.email : "",
+      mobile: orderDetails && orderDetails.mobile ? orderDetails.mobile : "",
+      pdfPath: orderDetails && orderDetails.pdfPath ? orderDetails.pdfPath : "",
+      released: orderDetails && orderDetails.released ? orderDetails.released : "",
       releasedBy:
-        props.data && props.data.releasedBy ? props.data.releasedBy : "",
-      refreshGrid: props.data.refreshGrid,
+      orderDetails && orderDetails.releasedBy ? orderDetails.releasedBy : "",
+      refreshGrid: orderDetails.refreshGrid,
     };
   }
 
@@ -328,24 +329,12 @@ export default class EditBtnCellRenderer extends Component {
                 <div className="col-12 col-md-6">
                   <div className="form-group">
                     <label>Test Type</label>
-                    {/* <input
-											
-											type="text"
-											disabled
-											className="form-control"
-											name="testType"
-											value={this.state.testType}
-											onChange={this.handleChange}
-										/> */}
                     <select
                       className="form-control select order-edit-formstyle"
                       name="testType"
                       value={this.state.testType}
                       onChange={this.handleChange}
                     >
-                      {/* <option>Select</option>
-                      <option>Nasal Swab</option>
-                      <option>Nasopharyngeal Swab</option> */}
                       {testTypes.map((test) => {
                         return <option>{test.testType}</option>;
                       })}

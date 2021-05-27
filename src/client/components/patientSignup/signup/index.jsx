@@ -7,6 +7,7 @@ import { phoneNumberFormatter } from "../../../services/common/util";
 import { updateUnassignedPatientDetails } from "../../../services/clinicPortalServices/unassignedPatientService";
 import { patientSignup, patientUploadImages } from "../../../services/patientSignupServices/patientSignupFormService";
 import moment from "moment";
+import {handleError} from '../.././../services/common/errorHandler';
 
 class SignUp extends Component {
   constructor(props) {
@@ -232,17 +233,17 @@ class SignUp extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
+        handleError(error);
       });
     }
     //new patient sign up
     else {
-      patientSignup(patientInfo).then((data) => {
+      patientSignup(patientInfo).then((response) => {
         this.handleFileUpload();
         window.location.href = "/patientsignup/confirmation";
       })
       .catch((error) => {
-        console.log(error);
+        handleError(error);
       });
     }
   };

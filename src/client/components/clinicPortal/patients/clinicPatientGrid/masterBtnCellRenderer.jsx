@@ -6,42 +6,42 @@ import { states, identity } from "../../../../services/common/optionsData";
 export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-
+		let patientDetails = props && props.data ? props.data : '';
 		this.state = {
 			show: false,
-			firstName: props.data.first_name ? props.data.first_name : " ",
-			lastName: props.data.last_name ? props.data.last_name : " ",
-			dob: props.data.date_of_birth ? props.data.date_of_birth : " ",
-			gender: props.data.gender ? props.data.gender : " ",
-			mrn: props.data.mrn ? props.data.mrn : " ",
-			email: props.data.email ? props.data.email : " ",
-			mobile: props.data.mobile ? props.data.mobile : " ",
+			firstName: patientDetails.first_name ? patientDetails.first_name : " ",
+			lastName: patientDetails.last_name ? patientDetails.last_name : " ",
+			dob: patientDetails.date_of_birth ? patientDetails.date_of_birth : " ",
+			gender: patientDetails.gender ? patientDetails.gender : " ",
+			mrn: patientDetails.mrn ? patientDetails.mrn : " ",
+			email: patientDetails.email ? patientDetails.email : " ",
+			mobile: patientDetails.mobile ? patientDetails.mobile : " ",
 			address1:
-				props.data.address && props.data.address.address1
-					? props.data.address.address1
+			patientDetails.address && patientDetails.address.address1
+					? patientDetails.address.address1
 					: "",
 			address2:
-				props.data.address && props.data.address.address2
-					? props.data.address.address2
+			patientDetails.address && patientDetails.address.address2
+					? patientDetails.address.address2
 					: "",
 			city:
-				props.data.address && props.data.address.city
-					? props.data.address.city
+			patientDetails.address && patientDetails.address.city
+					? patientDetails.address.city
 					: "",
 			state:
-				props.data.address && props.data.address.state
-					? props.data.address.state
+			patientDetails.address && patientDetails.address.state
+					? patientDetails.address.state
 					: "",
 			zip:
-				props.data.address && props.data.address.zip
-					? props.data.address.zip
+			patientDetails.address && patientDetails.address.zip
+					? patientDetails.address.zip
 					: "",
 			country:
-				props.data.address && props.data.address.country
-					? props.data.address.country
+			patientDetails.address && patientDetails.address.country
+					? patientDetails.address.country
 					: "",
 
-			_id: props.data._id,
+			_id: patientDetails._id,
 			loading: false,
 			stateOptions: "",
 		};

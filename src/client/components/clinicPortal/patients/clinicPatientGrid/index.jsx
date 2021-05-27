@@ -11,15 +11,11 @@ import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import moment from "moment";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
 
 import MasterBtnCellRenderer from "./masterBtnCellRenderer";
-import EditBtnCellRenderer from "../../orderSearch/orderGridDetails/editBtnCellRenderer";
-import PdfResultRenderer from "../../orderSearch/orderGridDetails/pdfResultRenderer";
+import EditBtnCellRenderer from "../../orders/clinicOrderGrid/editBtnCellRenderer";
+import PdfResultRenderer from "../../orders/clinicOrderGrid/pdfResultRenderer";
+import PatientSearchMenu from "./patientSearchMenu";
 
 import {
 	fetchPatientMasterData,
@@ -192,9 +188,7 @@ class ClinicPatientGrid extends Component {
 			rowGroupPanelShow: "always",
 			pivotPanelShow: "always",
 			detailCellRendererParams: {
-				//refreshStrategy: 'everything',
 				detailGridOptions: {
-					//enableCellChangeFlash: true,
 					columnDefs: [
 						{
 							headerName: "Edit",
@@ -544,144 +538,37 @@ class ClinicPatientGrid extends Component {
 	render() {
 		return (
 			<div>
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item">
-											<a href="/">Home</a>
-										</li>
-										<li className="breadcrumb-item active" aria-current="page">
-											Patients
-										</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Patients</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="row" style={{ padding: " 12px" }}>
-					<div className="col-md-3">
-						<FormControl
-							variant="outlined"
-							style={{ width: "100%", marginTop: "5px" }}
-						>
-							<InputLabel id="facility-label">Select Facility</InputLabel>
-							<Select
-								labelId="facility-label"
-								id="facility-select"
-								value={this.state.searchFilters.facility_id}
-								onChange={this.handleFiltersChange}
-								label="Select Facility"
-								className="form-Control"
-								name="facility_id"
-							>
-								<MenuItem value=""> Select Facility </MenuItem>
-								{this.state.facilities.map((fac) => {
-									return (
-										<MenuItem key={fac._id} value={fac._id}>
-											{fac.name}
-										</MenuItem>
-									);
-								})}
-							</Select>
-						</FormControl>
-					</div>
-					<div className="col-md-2">
-						<TextField
-							label="Quick Search"
-							variant="outlined"
-							className="form-control"
-							id="reset-form"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							type="string"
-							margin="dense"
-							onChange={this.onFilterTextChange}
-						/>
-					</div>
-					<div>
-						<button
-							className="btn btn-primary submit-btn button-info-grid"
-							onClick={() => this.clearFilter()}
-						>
-							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
-						</button>
-					</div>
-					<div>
-						<button
-							onClick={this.showQrScannerHandler}
-							className="btn btn-primary submit-btn button-info-grid"
-						>
-							<i className="fa fa-qrcode" aria-hidden="true"></i> Scan QR Code
-						</button>
-					</div>
-					<QrScanReader
-						show={this.state.showQrScanner}
-						onQrCodeScanHandler={this.onQrCodeScanHandler}
-						hideQrScannerHandler={this.hideQrScannerHandler}
-						scannedPatientId={this.state.scannedPatientId}
-						showPatientSignupHandler={this.showPatientSignupHandler}
-					/>
-					<ViewPatientSignUp
-						patientId={this.state.scannedPatientId}
-						show={this.state.showPatientSignup}
-						hidePatientSignupHandler={this.hidePatientSignupHandler}
-						showCreateRequisitionHandler={this.showCreateRequisitionHandler}
-						setPatientDetails={this.setPatientDetails}
-					/>
-					<ViewRequisitionFormPage
-						show={this.state.showCreateRequisition}
-						hideCreateRequisitionHandler={this.hideCreateRequisitionHandler}
-						patientDetails={this.state.patientDetails}
-					/>
-					<div className="col grid-buttons">
-						<div>
-							<TextField
-								style={{ width: "100px", height: "40px" }}
-								label="Page Size"
-								variant="outlined"
-								className="form-control"
-								id="page-size"
-								InputLabelProps={{
-									shrink: true,
-								}}
-								type="number"
-								margin="dense"
-								onChange={this.onPageSizeChanged}
-							/>
-						</div>
-						<div>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.saveState()}
-							>
-								<i class="far fa-save"></i> Save
-							</button>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.resetState()}
-							>
-								{" "}
-								<i class="fa fa-repeat"></i> Default
-							</button>
-						</div>
-						<div>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.onBtExport()}
-							>
-								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to
-								Excel
-							</button>
-						</div>
-					</div>
-				</div>
+				<PatientSearchMenu
+					facility_id={this.state.searchFilters.facility_id}
+					handleFiltersChange={this.handleFiltersChange}
+					facilities={this.state.facilities}
+					onFilterTextChange={this.onFilterTextChange}
+					clearFilter={this.clearFilter}
+					showQrScannerHandler={this.showQrScannerHandler}
+					onPageSizeChanged={this.onPageSizeChanged}
+					saveState={this.saveState}
+					resetState={this.resetState}
+					onBtExport={this.onBtExport}
+				/>
+				<QrScanReader
+					show={this.state.showQrScanner}
+					onQrCodeScanHandler={this.onQrCodeScanHandler}
+					hideQrScannerHandler={this.hideQrScannerHandler}
+					scannedPatientId={this.state.scannedPatientId}
+					showPatientSignupHandler={this.showPatientSignupHandler}
+				/>
+				<ViewPatientSignUp
+					patientId={this.state.scannedPatientId}
+					show={this.state.showPatientSignup}
+					hidePatientSignupHandler={this.hidePatientSignupHandler}
+					showCreateRequisitionHandler={this.showCreateRequisitionHandler}
+					setPatientDetails={this.setPatientDetails}
+				/>
+				<ViewRequisitionFormPage
+					show={this.state.showCreateRequisition}
+					hideCreateRequisitionHandler={this.hideCreateRequisitionHandler}
+					patientDetails={this.state.patientDetails}
+				/>
 
 				<div
 					style={{

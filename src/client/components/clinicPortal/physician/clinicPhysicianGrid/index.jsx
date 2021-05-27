@@ -12,12 +12,11 @@ import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
-import TextField from "@material-ui/core/TextField";
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
 import { getPhysicianData } from "../../../../services/clinicPortalServices/physicianServices";
-import AddPhysician from "./addPhysician";
+import PhysicianSearchMenu from "./physicianSearchMenu";
 
 class ClinicPhysicianGrid extends Component {
 	constructor(props) {
@@ -150,62 +149,11 @@ class ClinicPhysicianGrid extends Component {
 	render() {
 		return (
 			<div>
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item">
-											<a href="/">Home</a>
-										</li>
-										<li className="breadcrumb-item active" aria-current="page">
-											Physician
-										</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Physician</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row" style={{ padding: "12px" }}>
-					<div className="col-md-3">
-						<TextField
-							label="Quick Search"
-							variant="outlined"
-							className="form-control"
-							id="reset-form"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							type="string"
-							margin="dense"
-							onChange={this.onFilterTextChange}
-						/>
-					</div>
-					<div>
-						<button
-							className="btn btn-primary submit-btn button-info-grid"
-							onClick={() => this.clearFilter()}
-						>
-							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
-						</button>
-					</div>
-					<div className="col grid-buttons">
-						<div>
-							<AddPhysician />
-						</div>
-						<div>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.onBtExport()}
-							>
-								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
-							</button>
-						</div>
-					</div>
-				</div>
+				<PhysicianSearchMenu
+					onFilterTextChange={this.onFilterTextChange}
+					clearFilter={this.clearFilter}
+					onBtExport={this.onBtExport}
+				/>
 				<div
 					style={{
 						width: "100%",

@@ -94,7 +94,8 @@ export default class FacilityDetails extends Component {
 		return this.state.errors.indexOf(key) !== -1;
 	};
 
-	updateAndCreateFacility = () => {
+	updateAndCreateFacility = (e) => {
+		e.preventDefault();
 		let errors = [];
 
 		if (this.state.name === "") {
@@ -110,21 +111,24 @@ export default class FacilityDetails extends Component {
 		}
 
 		let facilityInfo = {
+			_id: this.state.id,
 			name: this.state.name,
 			code: this.state.code,
-			contactName: this.state.contactName,
-			phoneNum: this.state.phoneNum,
-			contactEmail: this.state.contactEmail,
-			faxNum: this.state.faxNum,
-			address1: this.state.address1,
-			address2: this.state.address2,
-			city: this.state.city,
-			state: this.state.state,
-			zip: this.state.zip,
-			country: this.state.country,
-			emailNotification: this.state.emailNotification,
-			environmentalMonitoring: this.state.environmentalMonitoring,
-			faxType: this.state.faxType,
+			contact_name: this.state.contactName,
+			phone_no: this.state.phoneNum,
+			contact_email: this.state.contactEmail,
+			fax_no: this.state.faxNum,
+			address:{
+				address1: this.state.address1,
+				address2: this.state.address2,
+				city: this.state.city,
+				state: this.state.state,
+				zip: this.state.zip,
+				country: this.state.country,
+			},
+			email_notifications_enabled: this.state.emailNotification,
+			environmental_monitoring_enabled: this.state.environmentalMonitoring,
+			fax_type: this.state.faxType,
 			isActive: this.state.isActive,
 		};
 		console.log(facilityInfo);
@@ -382,7 +386,7 @@ export default class FacilityDetails extends Component {
 							Close
 						</Button>
 						<Button
-							type="submit"
+							type="button"
 							style={{ marginLeft: "10px" }}
 							variant="primary"
 							onClick={this.updateAndCreateFacility}
