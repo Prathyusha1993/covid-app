@@ -67,7 +67,7 @@ export const createFacility = (facilityDetails) => {
         'contact_name':facilityDetails.contactName,
         'contact_email':facilityDetails.contactEmail,
         'fax_no':facilityDetails.faxNum,
-        'email_notifications_enabled':facilityDetails.emailNotifications,
+        'email_notifications_enabled':facilityDetails.emailNotification,
         'environmental_monitoring_enabled':facilityDetails.environmentalMonitoring,
         'fax_type': facilityDetails.faxType
     };
@@ -100,10 +100,11 @@ export const updateFacility = (update) => {
         'contact_name':update.contactName,
         'contact_email':update.contactEmail,
         'fax_no':update.faxNum,
-        'email_notifications_enabled':update.emailNotifications,
+        'email_notifications_enabled':update.emailNotification,
         'environmental_monitoring_enabled':update.environmentalMonitoring,
         'fax_type': update.faxType
     };
+    console.log(JSON.stringify(updateFacilityInfo));
     return fetch(`${serviceConstants.API_HOST_NAME}/facility/v1/`, {
         method: 'PUT',
         headers: {

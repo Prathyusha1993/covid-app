@@ -7,13 +7,6 @@ export default class AddFacility extends Component {
 		super(props);
 		this.state = {
 			show: false,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address: "",
-			facilityId: "",
 			errors: [],
 		};
 	}

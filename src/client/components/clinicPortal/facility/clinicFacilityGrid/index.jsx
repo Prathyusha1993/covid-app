@@ -17,7 +17,7 @@ import EditBtnCellRenderer from "./editBtnCellRenderer";
 //service calls
 import { getFacilityData } from "../../../../services/clinicPortalServices/facilityServices";
 import FacilitySearchMenu from "./facilitySearchMenu";
-import {handleError} from '../../../../services/common/errorHandler';
+import { handleError } from "../../../../services/common/errorHandler";
 
 class ClinicFacilityGrid extends Component {
 	constructor(props) {
@@ -147,12 +147,18 @@ class ClinicFacilityGrid extends Component {
 					field: "email_notifications_enabled",
 					minWidth: 170,
 					resizable: true,
+					cellRenderer: function (params) {
+						return params.data.email_notifications_enabled ? "Yes" : "No";
+					},
 				},
 				{
 					headerName: "Environmental Monitoring",
 					field: "environmental_monitoring_enabled",
 					minWidth: 200,
 					resizable: true,
+					cellRenderer: function (params) {
+						return params.data.environmental_monitoring_enabled ? "Yes" : "No";
+					},
 				},
 			],
 			frameworkComponents: {

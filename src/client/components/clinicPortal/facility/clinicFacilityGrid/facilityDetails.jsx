@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Button, Tooltip } from "react-bootstrap";
-import {
-	faxTypes,
-	states,
-} from "../../../../services/common/optionsData";
+import { faxTypes, states } from "../../../../services/common/optionsData";
 import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,
 	updateFacility,
 } from "../../../../services/clinicPortalServices/facilityServices";
-import {handleError} from '../../../../services/common/errorHandler';
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
@@ -54,7 +51,7 @@ export default class FacilityDetails extends Component {
 					? facilityDetails.address.country
 					: "",
 			emailNotification: facilityDetails
-				? facilityDetails.email_notification_enabled
+				? facilityDetails.email_notifications_enabled
 				: "",
 			environmentalMonitoring: facilityDetails
 				? facilityDetails.environmental_monitoring_enabled
@@ -67,6 +64,25 @@ export default class FacilityDetails extends Component {
 		};
 	}
 
+
+	// componentDidMount() {
+	// 	this.loadFacilityDetails();
+	// }
+
+	// loadFacilityDetails = () => {
+	// 	getFacilityDataById(this.state.facilityId)
+	// 		.then((response) => {
+	// 			let facilityDetails = response.data[0];
+	// 			this.setState({
+	// 				name:  facilityDetails.name, 
+	// 			})
+	// 			this.setState({ facilityDetails: response.data[0] });
+	// 		})
+	// 		.catch((error) => {
+	// 			handleError(error);
+	// 		});
+	// };
+
 	handleClose = () => {
 		this.setState({ show: false });
 	};
@@ -77,9 +93,12 @@ export default class FacilityDetails extends Component {
 		const name = target.name;
 
 		if (name === "phoneNum") {
-			this.setState({
-				phoneNum: phoneNumberFormatter(value)
-			});
+			// 	this.setState({
+			// 		phoneNum: phoneNumberFormatter(e.target.value)
+			// 	});
+			this.setState((prevState) => ({
+				phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
+			}));
 		}
 
 		// this.setState((prevState) => ({
@@ -112,24 +131,22 @@ export default class FacilityDetails extends Component {
 		}
 
 		let facilityInfo = {
-			_id: this.state.id,
+			id: this.state.id,
 			name: this.state.name,
 			code: this.state.code,
-			contact_name: this.state.contactName,
-			phone_no: this.state.phoneNum,
-			contact_email: this.state.contactEmail,
-			fax_no: this.state.faxNum,
-			address:{
-				address1: this.state.address1,
-				address2: this.state.address2,
-				city: this.state.city,
-				state: this.state.state,
-				zip: this.state.zip,
-				country: this.state.country,
-			},
-			email_notifications_enabled: this.state.emailNotification,
-			environmental_monitoring_enabled: this.state.environmentalMonitoring,
-			fax_type: this.state.faxType,
+			contactName: this.state.contactName,
+			phoneNum: this.state.phoneNum,
+			contactEmail: this.state.contactEmail,
+			faxNum: this.state.faxNum,
+			address1: this.state.address1,
+			address2: this.state.address2,
+			city: this.state.city,
+			state: this.state.state,
+			zip: this.state.zip,
+			country: this.state.country,
+			emailNotification: this.state.emailNotification,
+			environmentalMonitoring: this.state.environmentalMonitoring,
+			faxType: this.state.faxType,
 			isActive: this.state.isActive,
 		};
 		console.log(facilityInfo);
@@ -150,7 +167,7 @@ export default class FacilityDetails extends Component {
 				.then((response) => {
 					this.setState({
 						showMessage: true,
-						message: "Thank you.",
+						message: "Saved the changes successfully!!",
 					});
 				})
 				.catch((error) => {
@@ -375,25 +392,37 @@ export default class FacilityDetails extends Component {
 							</div>
 						</div>
 					</div>
-					<div
-						className=" col-12"
-						style={{ paddingTop: "10px", borderTop: "1px solid rgba(0,0,0,.2" }}
-					>
-						<Button
-							style={{ marginLeft: "500px" }}
-							variant="secondary"
-							onClick={this.props.handleClose}
+					<div className="row">
+						<div
+							className="col-12"
+							style={{
+								paddingTop: "10px",
+								borderTop: "1px solid rgba(0,0,0,.2",
+							}}
 						>
-							Close
-						</Button>
-						<Button
-							type="button"
-							style={{ marginLeft: "10px" }}
-							variant="primary"
-							onClick={this.updateAndCreateFacility}
-						>
-							Save Changes
-						</Button>
+							<Button
+								style={{ float: "right", marginLeft: "10px" }}
+								variant="primary"
+								onClick={this.updateAndCreateFacility}
+							>
+								Save Changes
+							</Button>
+							<Button
+								style={{ float: "right" }}
+								variant="secondary"
+								onClick={this.props.handleClose}
+							>
+								Close
+							</Button>
+						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-12">
+							<label style={{ float: "right", marginTop: "10px" }}>
+								{this.state.message}
+							</label>
+						</div>
 					</div>
 				</form>
 			</div>

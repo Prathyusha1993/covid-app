@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger, Modal } from "react-bootstrap";
 import FacilityDetails from "./facilityDetails";
-import {
-	getFacilityDataById,
-} from "../../../../services/clinicPortalServices/facilityServices";
-import {handleError} from '../../../../services/common/errorHandler';
+import { getFacilityDataById } from "../../../../services/clinicPortalServices/facilityServices";
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -14,22 +12,6 @@ export default class EditBtnCellRenderer extends Component {
 			facilityId: props.data._id,
 			errors: [],
 			facilityDetails: {},
-			name: "",
-			code: "",
-			contactName: "",
-			phoneNum: "",
-			contactEmail: "",
-			faxNum: "",
-			address1: "",
-			address2: "",
-			city: "",
-			state: "",
-			zip: "",
-			country: "",
-			emailNotification: "",
-			environmentalMonitoring: "",
-			faxType: "",
-			isActive: true,
 		};
 	}
 
@@ -41,7 +23,7 @@ export default class EditBtnCellRenderer extends Component {
 
 	componentDidMount() {
 		this.loadFacilityDetails();
-	};
+	}
 
 	loadFacilityDetails = () => {
 		getFacilityDataById(this.state.facilityId)
