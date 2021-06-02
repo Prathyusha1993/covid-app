@@ -32,7 +32,7 @@ class QrScanReader extends Component {
 						{this.props.show ? (
 							<div>
 								<QrReader
-									delay={300}
+									delay={200}
 									onError={this.handleError}
 									onScan={this.props.onQrCodeScanHandler}
 									className="qrscan-reader"

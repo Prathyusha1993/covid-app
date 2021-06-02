@@ -9045,6 +9045,20 @@ html {
   margin-left: 30%;
 }
 
+@media only screen and (max-width:600px){
+  .qrscan-reader{
+    width: 100%;
+    margin-left: 0%;
+   }
+}
+
+@media only screen and (max-width:1024px){
+  .qrscan-reader{
+    width: 100%;
+    margin-left: 0%;
+   }
+}
+
 .qrscn-reader-btn {
   padding-top: 10px;
   margin-left: 35%;
