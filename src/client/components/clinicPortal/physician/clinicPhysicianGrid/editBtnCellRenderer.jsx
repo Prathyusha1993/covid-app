@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Modal, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { getPhysicianDataById } from "../../../../services/clinicPortalServices/physicianServices";
 import { handleError } from "../../../../services/common/errorHandler";
 import PhysicianDetails from "./physicianDetails";
@@ -10,14 +9,7 @@ export default class EditBtnCellRenderer extends Component {
 		super(props);
 		this.state = {
 			show: false,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address: "",
-			facilityId: "",
-			physicianDetails: [],
+			physicianDetails: {},
 			physicianId: props.data._id,
 			errors: [],
 		};
@@ -69,7 +61,7 @@ export default class EditBtnCellRenderer extends Component {
 					onHide={this.handleClose}
 				>
 					<Modal.Header closeButton>
-						<Modal.Title>Update Facility Information</Modal.Title>
+						<Modal.Title>Update Physician Information</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<PhysicianDetails

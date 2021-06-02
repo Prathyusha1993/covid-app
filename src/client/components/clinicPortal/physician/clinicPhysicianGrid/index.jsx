@@ -11,7 +11,7 @@ import { AllModules } from "@ag-grid-enterprise/all-modules";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
-import {handleError} from '../../../../services/common/errorHandler';
+import { handleError } from "../../../../services/common/errorHandler";
 
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
@@ -64,13 +64,21 @@ class ClinicPhysicianGrid extends Component {
 					valueGetter: function addColumns(params) {
 						if (params.data.address) {
 							return (
-								params.data.address &&
-								params.data.address.address1 + " " + params.data.address &&
-								params.data.address.address2 + " " + params.data.address &&
-								params.data.address.city + " " + params.data.address &&
-								params.data.address.state + " " + params.data.address &&
-								params.data.address.zip + " " + params.data.address &&
-								params.data.address.country
+								(params.data.address.address1
+									? params.data.address.address1
+									: "") +
+								" " +
+								(params.data.address.address2
+									? params.data.address.address2
+									: "") +
+								" " +
+								(params.data.address.city ? params.data.address.city : "") +
+								" " +
+								(params.data.address.state ? params.data.address.state : "") +
+								" " +
+								(params.data.address.zip ? params.data.address.zip : "") +
+								" " +
+								(params.data.address.country ? params.data.address.country : "")
 							);
 						} else {
 							return "";

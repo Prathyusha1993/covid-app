@@ -7,13 +7,6 @@ export default class AddPhysician extends Component {
 		super(props);
 		this.state = {
 			show: false,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address: "",
-			facilityId: "",
 			errors: [],
 		};
 	}
@@ -33,7 +26,7 @@ export default class AddPhysician extends Component {
 					className="btn btn-primary submit-btn button-info-grid"
 					onClick={() => this.handleShow()}
 				>
-					<i class="fas fa-user-plus"></i> Add Facility
+					<i class="fas fa-user-plus"></i> Add Physician
 				</button>
 				<Modal
 					size="lg"

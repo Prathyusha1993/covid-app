@@ -43,14 +43,17 @@ export default class PhysicianDetails extends Component {
 				physicianDetails && physicianDetails.address
 					? physicianDetails.address.state
 					: "",
-			// zip: physicianDetails && physicianDetails.address ? physicianDetails.address.zip:"",
+			zip:
+        physicianDetails && physicianDetails.address
+          ? physicianDetails.address.zip
+          : "",
 			country:
 				physicianDetails && physicianDetails.address
 					? physicianDetails.address.country
 					: "",
 			facilityId:
 				physicianDetails && physicianDetails.facility_id
-					? physicianDetails.facility_id.name
+					? physicianDetails.facility_id._id
 					: "",
 			errors: [],
 			facilities: [],
@@ -99,21 +102,21 @@ export default class PhysicianDetails extends Component {
 			return false;
 		}
 
-		let physicianInfo = {
-			first_name: this.state.firstName,
-			last_name: this.state.lastName,
-			code: this.state.code,
-			npi: this.state.npi,
-			mobile: this.state.mobile,
-			address:{
-				address1: this.state.address1,
-				address2: this.state.address2,
-				city: this.state.city,
-				state: this.state.state,
-				country: this.state.country,
-			},
-			facility_id: this.state.facilityId,
-		};
+		 let physicianInfo = {
+      id: this.state.physicianId,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      code: this.state.code,
+      npi: this.state.npi,
+      mobile: this.state.mobile,
+      address1: this.state.address1,
+      address2: this.state.address2,
+      city: this.state.city,
+      state: this.state.state,
+      country: this.state.country,
+      zip: this.state.zip,
+      facilityId: this.state.facilityId,
+    };
 		console.log(physicianInfo);
 		if (this.state.physicianId !== "") {
 			updatePhysician(physicianInfo)
@@ -131,7 +134,7 @@ export default class PhysicianDetails extends Component {
 				.then((response) => {
 					this.setState({
 						showMessage: true,
-						message: "Thank you.",
+						message: "Saved the changes successfully!!",
 					});
 				})
 				.catch((error) => {
@@ -322,14 +325,14 @@ export default class PhysicianDetails extends Component {
 						</div>
 						<div className="col-12 col-md-6">
 							<div className="form-group">
-								<label>Facility</label>
+								<label>Facility Id</label>
 								<select
 									className="form-control select order-edit-formstyle"
 									name="facilityId"
 									value={this.state.facilityId}
 									onChange={this.handleChange}
 								>
-									<option selected>{this.state.facilityId}</option>
+									
 									{this.state.facilities.map((facility) => {
 										return (
 											<option
@@ -346,29 +349,37 @@ export default class PhysicianDetails extends Component {
 							</div>
 						</div>
 					</div>
-					<div
-						className="row col-12"
-						style={{
-							float: "right",
-							paddingTop: "10px",
-							borderTop: "1px solid rgba(0,0,0,.2",
-						}}
-					>
-						<Button
-							style={{ marginLeft: "500px" }}
-							variant="secondary"
-							onClick={this.props.handleClose}
-						>
-							Close
-						</Button>
-						<Button
-							style={{ marginLeft: "10px" }}
-							variant="primary"
-							onClick={this.updateAndCreatePhysician}
-						>
-							Save Changes
-						</Button>
-					</div>
+					<div className="row">
+            <div
+              className="col-12"
+              style={{
+                paddingTop: "10px",
+                borderTop: "1px solid rgba(0,0,0,.2",
+              }}
+            >
+              <Button
+                style={{ float: "right", marginLeft: "10px" }}
+                variant="primary"
+                onClick={this.updateAndCreatePhysician}
+              >
+                Save Changes
+              </Button>
+              <Button
+                style={{ float: "right" }}
+                variant="secondary"
+                onClick={this.props.handleClose}
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <label style={{ float: "right", marginTop: "10px" }}>
+                {this.state.message}
+              </label>
+            </div>
+          </div>
 				</form>
 			</div>
 		);
