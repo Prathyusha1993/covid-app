@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Tooltip, OverlayTrigger, Modal } from "react-bootstrap";
 import FacilityDetails from "./facilityDetails";
-import { getFacilityDataById } from "../../../../services/clinicPortalServices/facilityServices";
-import { handleError } from "../../../../services/common/errorHandler";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -20,20 +18,6 @@ export default class EditBtnCellRenderer extends Component {
 			Edit Facility
 		</Tooltip>
 	);
-
-	componentDidMount() {
-		this.loadFacilityDetails();
-	}
-
-	loadFacilityDetails = () => {
-		getFacilityDataById(this.state.facilityId)
-			.then((response) => {
-				this.setState({ facilityDetails: response.data[0] });
-			})
-			.catch((error) => {
-				handleError(error);
-			});
-	};
 
 	handleShow = () => {
 		this.setState({ show: true });
@@ -67,7 +51,6 @@ export default class EditBtnCellRenderer extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<FacilityDetails
-							facilityDetails={this.state.facilityDetails}
 							facilityId={this.state.facilityId}
 							handleClose={this.handleClose}
 						/>

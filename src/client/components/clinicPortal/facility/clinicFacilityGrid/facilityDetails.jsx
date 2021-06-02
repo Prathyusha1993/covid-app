@@ -5,83 +5,96 @@ import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,
 	updateFacility,
+	getFacilityDataById,
 } from "../../../../services/clinicPortalServices/facilityServices";
 import { handleError } from "../../../../services/common/errorHandler";
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
 		super(props);
-		let facilityDetails =
-			this.props && this.props.facilityDetails
-				? this.props.facilityDetails
-				: "";
 		this.state = {
 			show: this.props.show,
 			showMessage: false,
 			message: "",
-			id: facilityDetails ? facilityDetails._id : "",
-			name: facilityDetails ? facilityDetails.name : "",
-			code: facilityDetails ? facilityDetails.code : "",
-			contactName: facilityDetails ? facilityDetails.contact_name : "",
-			phoneNum: facilityDetails ? facilityDetails.phone_no : "",
-			contactEmail: facilityDetails ? facilityDetails.contact_email : "",
-			faxNum: facilityDetails ? facilityDetails.fax_no : "",
-			address1:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.address1
-					: "",
-			address2:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.address2
-					: "",
-			city:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.city
-					: "",
-			state:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.state
-					: "",
-			zip:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.zip
-					: "",
-			country:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.country
-					: "",
-			emailNotification: facilityDetails
-				? facilityDetails.email_notifications_enabled
-				: "",
-			environmentalMonitoring: facilityDetails
-				? facilityDetails.environmental_monitoring_enabled
-				: "",
-			faxType: facilityDetails ? facilityDetails.fax_type : "",
-			isActive: facilityDetails ? facilityDetails.isActive : "",
+			id: "",
+			name: "",
+			code: "",
+			contactName: "",
+			phoneNum: "",
+			contactEmail: "",
+			faxNum: "",
+			address1: "",
+			address2: "",
+			city: "",
+			state: "",
+			zip: "",
+			country: "",
+			emailNotification: "",
+			environmentalMonitoring: "",
+			faxType: "",
+			isActive: "",
 			facilityId:
 				this.props && this.props.facilityId ? this.props.facilityId : "",
 			errors: [],
 		};
 	}
 
+	componentDidMount() {
+		if (this.state.facilityId !== "") {
+			this.loadFacilityDetails();
+		}
+	}
 
-	// componentDidMount() {
-	// 	this.loadFacilityDetails();
-	// }
-
-	// loadFacilityDetails = () => {
-	// 	getFacilityDataById(this.state.facilityId)
-	// 		.then((response) => {
-	// 			let facilityDetails = response.data[0];
-	// 			this.setState({
-	// 				name:  facilityDetails.name, 
-	// 			})
-	// 			this.setState({ facilityDetails: response.data[0] });
-	// 		})
-	// 		.catch((error) => {
-	// 			handleError(error);
-	// 		});
-	// };
+	loadFacilityDetails = () => {
+		getFacilityDataById(this.state.facilityId)
+			.then((response) => {
+				let facilityDetails = response.data[0];
+				this.setState({
+					id: facilityDetails ? facilityDetails._id : "",
+					name: facilityDetails ? facilityDetails.name : "",
+					code: facilityDetails ? facilityDetails.code : "",
+					contactName: facilityDetails ? facilityDetails.contact_name : "",
+					phoneNum: facilityDetails ? facilityDetails.phone_no : "",
+					contactEmail: facilityDetails ? facilityDetails.contact_email : "",
+					faxNum: facilityDetails ? facilityDetails.fax_no : "",
+					address1:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.address1
+							: "",
+					address2:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.address2
+							: "",
+					city:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.city
+							: "",
+					state:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.state
+							: "",
+					zip:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.zip
+							: "",
+					country:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.country
+							: "",
+					emailNotification: facilityDetails
+						? facilityDetails.email_notifications_enabled
+						: "",
+					environmentalMonitoring: facilityDetails
+						? facilityDetails.environmental_monitoring_enabled
+						: "",
+					faxType: facilityDetails ? facilityDetails.fax_type : "",
+					isActive: facilityDetails ? facilityDetails.isActive : "",
+				});
+			})
+			.catch((error) => {
+				handleError(error);
+			});
+	};
 
 	handleClose = () => {
 		this.setState({ show: false });
@@ -100,10 +113,6 @@ export default class FacilityDetails extends Component {
 				phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
 			}));
 		}
-
-		// this.setState((prevState) => ({
-		// 	phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
-		// }));
 
 		this.setState({
 			[name]: value,

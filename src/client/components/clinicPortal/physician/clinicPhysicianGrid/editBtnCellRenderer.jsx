@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Modal, Tooltip, OverlayTrigger } from "react-bootstrap";
-import { getPhysicianDataById } from "../../../../services/clinicPortalServices/physicianServices";
-import { handleError } from "../../../../services/common/errorHandler";
 import PhysicianDetails from "./physicianDetails";
 
 export default class EditBtnCellRenderer extends Component {
@@ -13,10 +11,6 @@ export default class EditBtnCellRenderer extends Component {
 			physicianId: props.data._id,
 			errors: [],
 		};
-	}
-
-	componentDidMount() {
-		this.loadPhysicianDetails();
 	}
 
 	handleShow = () => {
@@ -32,14 +26,6 @@ export default class EditBtnCellRenderer extends Component {
 			Edit Physician
 		</Tooltip>
 	);
-
-	loadPhysicianDetails = () => {
-		getPhysicianDataById(this.state.physicianId).then((response) => {
-			this.setState({ physicianDetails: response.data[0] });
-		}).catch((error) => {
-			handleError(error);
-		})
-	};
 
 	render() {
 		return (
@@ -65,7 +51,6 @@ export default class EditBtnCellRenderer extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<PhysicianDetails
-							physicianDetails={this.state.physicianDetails}
 							physicianId={this.state.physicianId}
 							handleClose={this.handleClose}
 						/>
