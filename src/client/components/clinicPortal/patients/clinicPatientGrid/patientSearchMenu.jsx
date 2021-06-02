@@ -4,7 +4,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import PatientBreadcrumb from './patientBreadcrumb';
+import PatientBreadcrumb from "./patientBreadcrumb";
 
 class PatientSearchMenu extends Component {
 	constructor(props) {
@@ -32,11 +32,31 @@ class PatientSearchMenu extends Component {
 								className="form-Control"
 								name="facility_id"
 							>
-								<MenuItem value=""> Select Facility </MenuItem>
+								<MenuItem value="-1"> Select Facility </MenuItem>
 								{this.props.facilities.map((fac) => {
 									return (
-										<MenuItem key={fac._id} value={fac._id}>
-											{fac.name}
+										<MenuItem
+											key={
+												this.props.user_role &&
+												this.props.user_role.toLowerCase().trim() ==
+													"superadmin"
+													? fac._id
+													: fac.facility._id
+											}
+											value={
+												this.props.user_role &&
+												this.props.user_role.toLowerCase().trim() ==
+													"superadmin"
+													? fac._id
+													: fac.facility._id
+											}
+											//value={fac._id}
+										>
+											{/* {fac.facility.name} */}
+											{this.props.user_role &&
+											this.props.user_role.toLowerCase().trim() == "superadmin"
+												? fac.name
+												: fac.facility.name}
 										</MenuItem>
 									);
 								})}

@@ -53,7 +53,7 @@ const getPatientInfo = (patientData, patientId) => {
 	}
 };
 
-class clinicOrderGrid extends Component {
+class ClinicOrderGrid extends Component {
 	constructor(props) {
 		super(props);
 
@@ -188,11 +188,24 @@ class clinicOrderGrid extends Component {
 	}
 
 	loadFacilities = () => {
-		fetchFacilitiesForOrders().then((response) => {
-			this.setState({ facilities: response.data });
-		}).catch((error) => {
-			handleError(error);
-		})
+		fetchFacilitiesForOrders()
+			.then((response) => {
+				console.log("orders-facilities", response);
+				this.setState({ facilities: response.data });
+				const filters = this.state.searchFilters;
+				filters.facility_id =
+					this.state.facilities &&
+					this.state.facilities.length > 0 &&
+					this.state.user_role &&
+					this.state.user_role.toLowerCase().trim() == "superadmin"
+						? ""
+						: this.state.facilities[0].facility._id;
+				this.setState({ searchFilters: filters });
+				this.loadGridData();
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	handleFiltersChange = (e) => {
@@ -224,7 +237,6 @@ class clinicOrderGrid extends Component {
 	onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
-		this.loadGridData();
 		this.loadGridSchema();
 	};
 
@@ -234,99 +246,101 @@ class clinicOrderGrid extends Component {
 			//fetchOrderMasterData(facilityID),
 			searchOrders(this.state.searchFilters),
 			fetchPatientMasterData(facilityID),
-		]).then(([orderData, patientData]) => {
-			if (orderData && orderData.data && orderData.data.length > 0) {
-				const formattedData = orderData.data.map((item) => {
-					const returnData = {
-						orderId: item._id,
-						patientName: item.patient_id
-							? item.patient_id.first_name + " " + item.patient_id.last_name
-							: "",
-						description:
-							item.test_info && item.test_info.description
-								? item.test_info.description
+		])
+			.then(([orderData, patientData]) => {
+				if (orderData && orderData.data && orderData.data.length > 0) {
+					const formattedData = orderData.data.map((item) => {
+						const returnData = {
+							orderId: item._id,
+							patientName: item.patient_id
+								? item.patient_id.first_name + " " + item.patient_id.last_name
 								: "",
-						testType:
-							item.test_info && item.test_info.test_type
-								? item.test_info.test_type
-								: "",
-						sample:
-							item.test_info && item.test_info.sample
-								? item.test_info.sample
-								: "",
-						result:
-							item.test_info && item.test_info.covid_detected
-								? item.test_info.covid_detected
-								: "",
-						collectedDate:
-							item.test_info && item.test_info.collected
-								? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A"
-								  )
-								: "",
-						facilitySource:
-							item.facility_id && item.facility_id.name
-								? item.facility_id.name
-								: item.facility_source,
-						provider:
-							(item.provider && item.provider.first_name
-								? item.provider.first_name
-								: "") +
-							" " +
-							(item.provider && item.provider.last_name
-								? item.provider.last_name
-								: ""),
-						receivedDate:
-							item.test_info && item.test_info.received
-								? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A"
-								  )
-								: "",
-						requisition:
-							item.lab_order_id && item.lab_order_id ? item.lab_order_id : "",
+							description:
+								item.test_info && item.test_info.description
+									? item.test_info.description
+									: "",
+							testType:
+								item.test_info && item.test_info.test_type
+									? item.test_info.test_type
+									: "",
+							sample:
+								item.test_info && item.test_info.sample
+									? item.test_info.sample
+									: "",
+							result:
+								item.test_info && item.test_info.covid_detected
+									? item.test_info.covid_detected
+									: "",
+							collectedDate:
+								item.test_info && item.test_info.collected
+									? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
+											"MM/DD/YYYY hh:mm A"
+									  )
+									: "",
+							facilitySource:
+								item.facility_id && item.facility_id.name
+									? item.facility_id.name
+									: item.facility_source,
+							provider:
+								(item.provider && item.provider.first_name
+									? item.provider.first_name
+									: "") +
+								" " +
+								(item.provider && item.provider.last_name
+									? item.provider.last_name
+									: ""),
+							receivedDate:
+								item.test_info && item.test_info.received
+									? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
+											"MM/DD/YYYY hh:mm A"
+									  )
+									: "",
+							requisition:
+								item.lab_order_id && item.lab_order_id ? item.lab_order_id : "",
 
-						code: item.code ? item.code : "",
-						codeType: item.code_type ? item.code_type : "",
-						pdfPath:
-							item.results && item.results.pdf_path
-								? item.results.pdf_path
-								: "",
-						released:
-							item.results && item.results.released
-								? moment(item.results.released, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A"
-								  )
-								: "",
-						releasedBy:
-							item.results && item.results.releasedBy
-								? item.results.releasedBy
-								: "",
+							code: item.code ? item.code : "",
+							codeType: item.code_type ? item.code_type : "",
+							pdfPath:
+								item.results && item.results.pdf_path
+									? item.results.pdf_path
+									: "",
+							released:
+								item.results && item.results.released
+									? moment(item.results.released, "YYYYMMDDHHmmss").format(
+											"MM/DD/YYYY hh:mm A"
+									  )
+									: "",
+							releasedBy:
+								item.results && item.results.releasedBy
+									? item.results.releasedBy
+									: "",
 
-						refreshGrid: this.loadGridData,
-					};
+							refreshGrid: this.loadGridData,
+						};
 
-					if (item.patient_id && item.patient_id._id) {
-						const patientInfo = getPatientInfo(
-							patientData.data,
-							item.patient_id._id
-						);
-						returnData.gender = patientInfo ? patientInfo.gender || "" : "";
-						returnData.mrn = patientInfo ? patientInfo.mrn : "";
-						returnData.dob =
-							patientInfo && patientInfo.dob
-								? moment(patientInfo.dob, "YYYY-MM-DD").format("MM/DD/YYYY")
-								: "";
-						returnData.email = patientInfo ? patientInfo.email : "";
-						returnData.mobile = patientInfo ? patientInfo.mobile : "";
-					}
+						if (item.patient_id && item.patient_id._id) {
+							const patientInfo = getPatientInfo(
+								patientData.data,
+								item.patient_id._id
+							);
+							returnData.gender = patientInfo ? patientInfo.gender || "" : "";
+							returnData.mrn = patientInfo ? patientInfo.mrn : "";
+							returnData.dob =
+								patientInfo && patientInfo.dob
+									? moment(patientInfo.dob, "YYYY-MM-DD").format("MM/DD/YYYY")
+									: "";
+							returnData.email = patientInfo ? patientInfo.email : "";
+							returnData.mobile = patientInfo ? patientInfo.mobile : "";
+						}
 
-					return returnData;
-				});
-				this.setState({ rowData: formattedData });
-			} else this.setState({ rowData: [] });
-		}).catch((error) => {
-			handleError(error);
-		})
+						return returnData;
+					});
+					this.setState({ rowData: formattedData });
+				} else this.setState({ rowData: [] });
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	onFilterTextChange = (e) => {
@@ -345,32 +359,34 @@ class clinicOrderGrid extends Component {
 
 	loadGridSchema = () => {
 		var userId = window.localStorage.getItem("USER_ID");
-		getOrderUserSettings(userId, this.state.gridName).then((orderUserInfo) => {
-			const columnState =
-				orderUserInfo.data &&
-				orderUserInfo.data.grid_state.find((item) => {
-					return item.grid_name === "Order";
-				}).columns;
-			if (columnState) {
-				this.gridColumnApi.applyColumnState({
-					state: columnState,
-					applyOrder: true,
-				});
-			} else {
-				this.gridColumnApi.resetColumnState();
-			}
+		getOrderUserSettings(userId, this.state.gridName)
+			.then((orderUserInfo) => {
+				const columnState =
+					orderUserInfo.data &&
+					orderUserInfo.data.grid_state.find((item) => {
+						return item.grid_name === "Order";
+					}).columns;
+				if (columnState) {
+					this.gridColumnApi.applyColumnState({
+						state: columnState,
+						applyOrder: true,
+					});
+				} else {
+					this.gridColumnApi.resetColumnState();
+				}
 
-			const pageSize =
-				orderUserInfo.data &&
-				orderUserInfo.data.grid_state.find((item) => {
-					return item.grid_name === "Order";
-				}).page_size;
-			document.getElementById("page-size").value =
-				pageSize && pageSize > 0 ? pageSize : 20;
-			this.onPageSizeChanged();
-		}).catch((error) => {
-			handleError(error);
-		})
+				const pageSize =
+					orderUserInfo.data &&
+					orderUserInfo.data.grid_state.find((item) => {
+						return item.grid_name === "Order";
+					}).page_size;
+				document.getElementById("page-size").value =
+					pageSize && pageSize > 0 ? pageSize : 20;
+				this.onPageSizeChanged();
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	saveState = () => {
@@ -378,13 +394,13 @@ class clinicOrderGrid extends Component {
 		const columnState = this.gridColumnApi.getColumnState();
 		var pageSize = document.getElementById("page-size").value;
 
-		saveOrderSettings(userId, this.state.gridName, columnState, pageSize).then(
-			() => {
+		saveOrderSettings(userId, this.state.gridName, columnState, pageSize)
+			.then(() => {
 				alert("Settings saved successfully !!");
-			}
-		).catch((error) => {
-			handleError(error);
-		})
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	resetState = () => {
@@ -429,6 +445,7 @@ class clinicOrderGrid extends Component {
 					saveState={this.saveState}
 					resetState={this.resetState}
 					onBtExport={this.onBtExport}
+					user_role={this.state.user_role}
 				/>
 				<div
 					style={{
@@ -465,4 +482,4 @@ class clinicOrderGrid extends Component {
 	}
 }
 
-export default clinicOrderGrid;
+export default ClinicOrderGrid;

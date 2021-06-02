@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -9,19 +9,19 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import { resultsSearch } from "../../../../services/common/optionsData";
-import OrderBreadcrumb from './orderBreadcrumb';
+import OrderBreadcrumb from "./orderBreadcrumb";
 
 class OrderSearchMenu extends Component {
-    constructor(props){
-        super(props);
-        this.state={}
-    };
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
 
-    render() {
-        return(
-            <div>
-                <OrderBreadcrumb />
-                <div className="row" style={{ padding: "12px" }}>
+	render() {
+		return (
+			<div>
+				<OrderBreadcrumb />
+				<div className="row" style={{ padding: "12px" }}>
 					<div
 						className="col-md-8"
 						style={{ borderRight: "2px solid lightGray" }}
@@ -42,11 +42,32 @@ class OrderSearchMenu extends Component {
 										className="form-Control"
 										name="facility_id"
 									>
-										<MenuItem value=""> Select Facility </MenuItem>
+										<MenuItem value="-1"> Select Facility </MenuItem>
 										{this.props.facilities.map((fac) => {
 											return (
-												<MenuItem key={fac._id} value={fac._id}>
-													{fac.name}
+												<MenuItem
+													key={
+														this.props.user_role &&
+														this.props.user_role.toLowerCase().trim() ==
+															"superadmin"
+															? fac._id
+															: fac.facility._id
+													}
+													value={
+														this.props.user_role &&
+														this.props.user_role.toLowerCase().trim() ==
+															"superadmin"
+															? fac._id
+															: fac.facility._id
+													}
+													//value={fac._id}
+												>
+													{/* {fac.facility.name} */}
+													{this.props.user_role &&
+													this.props.user_role.toLowerCase().trim() ==
+														"superadmin"
+														? fac.name
+														: fac.facility.name}
 												</MenuItem>
 											);
 										})}
@@ -175,9 +196,9 @@ class OrderSearchMenu extends Component {
 						</div>
 					</div>
 				</div>
-            </div>
-        );
-    }
+			</div>
+		);
+	}
 }
 
 export default OrderSearchMenu;

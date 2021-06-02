@@ -29,6 +29,7 @@ import ViewPatientSignUp from "../unassignedPatients/viewPatientSignUp";
 import ViewRequisitionFormPage from "../unassignedPatients/viewRequisitionFormPage";
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { handleError } from "../../../../services/common/errorHandler";
+import { getUserRole } from "../../../../services/common/util";
 
 const getPatientInfo = (patientData, patientId) => {
 	if (patientData && patientData.length > 0) {
@@ -50,6 +51,7 @@ class ClinicPatientGrid extends Component {
 		super(props);
 
 		this.state = {
+			user_role: getUserRole(),
 			searchFilters: {
 				facility_id: "",
 			},
@@ -375,17 +377,31 @@ class ClinicPatientGrid extends Component {
 	}
 
 	loadFacilities = () => {
-		fetchFacilitiesForOrders().then((response) => {
-			this.setState({ facilities: response.data });
-			const filters = this.state.searchFilters;
-			filters.facility_id =
-				this.facilities && this.facilities.length > 0
-					? this.facilities[0]._id
-					: "";
-			this.setState({ searchFilters: filters });
-		}).catch((error) => {
-			handleError(error);
-		});
+		fetchFacilitiesForOrders()
+			.then((response) => {
+				console.log("facilities", response);
+				this.setState({ facilities: response.data });
+				/*const filters = this.state.searchFilters;
+      filters.facility_id =
+        this.facilities && this.facilities.length > 0
+          ? this.facilities[0]._id
+          : "";
+      this.setState({ searchFilters: filters });*/
+
+				const filters = this.state.searchFilters;
+				filters.facility_id =
+					this.state.facilities &&
+					this.state.facilities.length > 0 &&
+					this.state.user_role &&
+					this.state.user_role.toLowerCase().trim() == "superadmin"
+						? ""
+						: this.state.facilities[0].facility._id;
+				this.setState({ searchFilters: filters });
+				this.loadGridData();
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	handleFiltersChange = (e) => {
@@ -402,7 +418,6 @@ class ClinicPatientGrid extends Component {
 	onGridReady = (params) => {
 		this.gridApi = params.api;
 		this.gridColumnApi = params.columnApi;
-		this.loadGridData();
 		this.loadGridSchema();
 	};
 
@@ -411,11 +426,13 @@ class ClinicPatientGrid extends Component {
 			this.state.searchFilters.facility_id == ""
 				? window.localStorage.getItem("FACILITY_ID")
 				: this.state.searchFilters.facility_id;
-		fetchPatientMasterData(facility_id).then((data) => {
-			this.setState({ rowData: data.data });
-		}).catch((error) => {
-			handleError(error);
-		})
+		fetchPatientMasterData(facility_id)
+			.then((data) => {
+				this.setState({ rowData: data.data });
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	onFilterTextChange = (e) => {
@@ -434,8 +451,8 @@ class ClinicPatientGrid extends Component {
 
 	loadGridSchema = () => {
 		var userId = window.localStorage.getItem("USER_ID");
-		getPatientUserSettings(userId, this.state.gridName).then(
-			(patientUserInfo) => {
+		getPatientUserSettings(userId, this.state.gridName)
+			.then((patientUserInfo) => {
 				const columnState =
 					patientUserInfo.data &&
 					patientUserInfo.data.grid_state.find((item) => {
@@ -458,10 +475,10 @@ class ClinicPatientGrid extends Component {
 				document.getElementById("page-size").value =
 					pageSize && pageSize > 0 ? pageSize : 20;
 				this.onPageSizeChanged();
-			}
-		).catch(error => {
-			handleError(error);
-		})
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	saveState = () => {
@@ -469,16 +486,13 @@ class ClinicPatientGrid extends Component {
 		const columnState = this.gridColumnApi.getColumnState();
 		var pageSize = document.getElementById("page-size").value;
 
-		savePatientSettings(
-			userId,
-			this.state.gridName,
-			columnState,
-			pageSize
-		).then(() => {
-			alert("Settings saved successfully !!");
-		}).catch((error) =>{
-			handleError(error);
-		})
+		savePatientSettings(userId, this.state.gridName, columnState, pageSize)
+			.then(() => {
+				alert("Settings saved successfully !!");
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	resetState = () => {
@@ -489,6 +503,10 @@ class ClinicPatientGrid extends Component {
 		this.gridApi.setFilterModel(null);
 		this.gridApi.setQuickFilter(null);
 		document.getElementById("reset-form").value = "";
+		const filters = this.state.searchFilters;
+		filters.facility_id = "";
+		this.setState({ searchFilters: filters });
+		this.loadGridData();
 	};
 
 	showQrScannerHandler = () => {
@@ -558,6 +576,7 @@ class ClinicPatientGrid extends Component {
 					saveState={this.saveState}
 					resetState={this.resetState}
 					onBtExport={this.onBtExport}
+					user_role={this.state.user_role}
 				/>
 				<QrScanReader
 					show={this.state.showQrScanner}
