@@ -73,20 +73,20 @@ class PatientPortalHeader extends Component {
 						{isUserLoggedIn() && this.state.showClinicMenu && role ? (
 							<Navbar.Brand>
 								<div className="row">
-									<ul className="main-nav">
-										<li>
+									<ul className="main-nav header-navbar-rht">
+										<li className="nav-item">
 											<a href="/clinic/patients"> Patients </a>
 										</li>
-										<li>
+										<li style={{marginLeft: '-20px'}} className="nav-item">
 											<a href="/clinic/orders"> Orders </a>
 										</li>
-										<li>
+										<li style={{marginLeft: '-20px'}} className="nav-item">
 											<a href="/clinic/audit"> Audit </a>
 										</li>
-										<li>
+										<li style={{marginLeft: '-20px'}} className="nav-item">
 											<a href="/clinic/facility"> Facility </a>
 										</li>
-										<li>
+										<li style={{marginLeft: '-20px'}} className="nav-item">
 											<a href="/clinic/physician"> Physician </a>
 										</li>
 									</ul>

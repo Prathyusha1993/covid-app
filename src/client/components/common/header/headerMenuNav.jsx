@@ -9,14 +9,14 @@ class HeaderWrapper extends Component {
 	render() {
 		return (
 			<div className="row">
-				<ul className="main-nav">
-					<li>
+				<ul className="main-nav header-navbar-rht">
+					<li  className="nav-item">
 						<a href="/clinic/patients"> Patients </a>
 					</li>
-					<li>
+					<li className="nav-item">
 						<a href="/clinic/orders"> Orders </a>
 					</li>
-					<li>
+					<li className="nav-item">
 						<a href="/clinic/audit"> Audit </a>
 					</li>
 				</ul>

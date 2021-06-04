@@ -18,7 +18,7 @@ class HeaderWrapper extends Component {
 					<a
 						id="menu_close"
 						className="menu-close"
-						onClick={() => this.onhandleCloseMenu()}
+						onClick={() => this.props.onhandleCloseMenu()}
 					>
 						<i className="fas fa-times"></i>
 					</a>
