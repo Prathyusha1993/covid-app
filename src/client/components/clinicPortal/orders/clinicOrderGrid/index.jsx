@@ -37,21 +37,21 @@ enterprise.LicenseManager.setLicenseKey(
 	`${serviceConstants.AG_GRID_LICENSE_KEY}`
 );
 
-const getPatientInfo = (patientData, patientId) => {
-	if (patientData && patientData.length > 0) {
-		const foundPatientInfo = patientData.find((item) => {
-			return item._id === patientId;
-		});
-		if (foundPatientInfo == null) return {};
-		return {
-			gender: foundPatientInfo.gender || "",
-			mrn: foundPatientInfo.mrn,
-			dob: foundPatientInfo.date_of_birth,
-			email: foundPatientInfo.email,
-			mobile: foundPatientInfo.mobile,
-		};
-	}
-};
+// const getPatientInfo = (patientData, patientId) => {
+// 	if (patientData && patientData.length > 0) {
+// 		const foundPatientInfo = patientData.find((item) => {
+// 			return item._id === patientId;
+// 		});
+// 		if (foundPatientInfo == null) return {};
+// 		return {
+// 			gender: foundPatientInfo.gender || "",
+// 			mrn: foundPatientInfo.mrn,
+// 			dob: foundPatientInfo.date_of_birth,
+// 			email: foundPatientInfo.email,
+// 			mobile: foundPatientInfo.mobile,
+// 		};
+// 	}
+// };
 
 class ClinicOrderGrid extends Component {
 	constructor(props) {
@@ -89,29 +89,39 @@ class ClinicOrderGrid extends Component {
 				{
 					headerName: "Patient Name",
 					minWidth: 200,
-					field: "patientName",
+					// field: "patientName",
 					resizable: true,
+                    valueGetter: function addColumns(params){
+                        if(params.data.patient_id){
+                            return (
+                                params.data.patient_id.first_name + " " +
+                                params.data.patient_id.last_name
+                            );
+                        }else{
+                            return "";
+                        }
+                    },
 				},
 				{
 					headerName: "Test",
 					minWidth: 150,
-					field: "description",
+					field: "test_info.description",
 				},
 
 				{
 					headerName: "Test Type",
 					minWidth: 150,
-					field: "testType",
+					field: "test_info.test_type",
 					filter: "agSetColumnFilter",
 				},
 				{
 					headerName: "Sample",
 					minWidth: 150,
-					field: "sample",
+					field: "test_info.sample",
 				},
 				{
 					headerName: "Result",
-					field: "result",
+					field: "test_info.covid_detected",
 					minWidth: 150,
 					resizable: true,
 					cellRenderer: "pdfResultRenderer",
@@ -119,32 +129,56 @@ class ClinicOrderGrid extends Component {
 				},
 				{
 					headerName: "Specimen Collected Date",
-					field: "collectedDate",
+					field: "collected",
 					minWidth: 200,
 					resizable: true,
+                    cellRenderer: function (params) {
+						return params.data.test_info && params.data.test_info.collected
+							? moment(params.data.test_info.collected, "YYYYMMDDHHmmss").format(
+                                "MM/DD/YYYY hh:mm A"
+                          )
+							: "";
+					},
 				},
 				{
 					headerName: "Facility Source",
 					minWidth: 150,
 					resizable: true,
-					field: "facilitySource",
+					field: "facility_id.name",
 				},
 				{
 					headerName: "Physician",
 					minWidth: 150,
 					resizable: true,
-					field: "provider",
+					// field: "provider",
+                    valueGetter: function addColumns(params){
+                        if(params.data.provider){
+                            return (
+                                params.data.provider.first_name + " " +
+                                params.data.provider.last_name
+                            );
+                        }else{
+                            return "";
+                        }
+                    },
 				},
 				{
 					headerName: "Received Date",
-					field: "receivedDate",
+					field: "received",
 					minWidth: 200,
 					resizable: true,
+                    cellRenderer: function (params) {
+						return params.data.test_info && params.data.test_info.received
+							? moment(params.data.test_info.received, "YYYYMMDDHHmmss").format(
+                                "MM/DD/YYYY hh:mm A"
+                          )
+							: "";
+					},
 				},
 				{
 					headerName: "Requisition",
 					minWidth: 150,
-					field: "requisition",
+					field: "lab_order_id",
 				},
 			],
 			frameworkComponents: {
@@ -157,15 +191,9 @@ class ClinicOrderGrid extends Component {
 			defaultColDef: {
 				flex: 1,
 				filter: true,
-				//enableRowGroup: true,
-				//enablePivot: true,
-				//enableValue: true,
 				sortable: true,
 			},
 			rowData: null,
-			//sideBar: { toolPanels: ["columns"] },
-			//rowGroupPanelShow: "always",
-			//pivotPanelShow: "always",
 			excelStyles: [
 				{
 					id: "header",
@@ -241,106 +269,12 @@ class ClinicOrderGrid extends Component {
 	};
 
 	loadGridData = () => {
-		var facilityID = window.localStorage.getItem("FACILITY_ID");
-		Promise.all([
-			//fetchOrderMasterData(facilityID),
-			searchOrders(this.state.searchFilters),
-			fetchPatientMasterData(facilityID),
-		])
-			.then(([orderData, patientData]) => {
-				if (orderData && orderData.data && orderData.data.length > 0) {
-					const formattedData = orderData.data.map((item) => {
-						const returnData = {
-							orderId: item._id,
-							patientName: item.patient_id
-								? item.patient_id.first_name + " " + item.patient_id.last_name
-								: "",
-							description:
-								item.test_info && item.test_info.description
-									? item.test_info.description
-									: "",
-							testType:
-								item.test_info && item.test_info.test_type
-									? item.test_info.test_type
-									: "",
-							sample:
-								item.test_info && item.test_info.sample
-									? item.test_info.sample
-									: "",
-							result:
-								item.test_info && item.test_info.covid_detected
-									? item.test_info.covid_detected
-									: "",
-							collectedDate:
-								item.test_info && item.test_info.collected
-									? moment(item.test_info.collected, "YYYYMMDDHHmmss").format(
-											"MM/DD/YYYY hh:mm A"
-									  )
-									: "",
-							facilitySource:
-								item.facility_id && item.facility_id.name
-									? item.facility_id.name
-									: item.facility_source,
-							provider:
-								(item.provider && item.provider.first_name
-									? item.provider.first_name
-									: "") +
-								" " +
-								(item.provider && item.provider.last_name
-									? item.provider.last_name
-									: ""),
-							receivedDate:
-								item.test_info && item.test_info.received
-									? moment(item.test_info.received, "YYYYMMDDHHmmss").format(
-											"MM/DD/YYYY hh:mm A"
-									  )
-									: "",
-							requisition:
-								item.lab_order_id && item.lab_order_id ? item.lab_order_id : "",
-
-							code: item.code ? item.code : "",
-							codeType: item.code_type ? item.code_type : "",
-							pdfPath:
-								item.results && item.results.pdf_path
-									? item.results.pdf_path
-									: "",
-							released:
-								item.results && item.results.released
-									? moment(item.results.released, "YYYYMMDDHHmmss").format(
-											"MM/DD/YYYY hh:mm A"
-									  )
-									: "",
-							releasedBy:
-								item.results && item.results.releasedBy
-									? item.results.releasedBy
-									: "",
-
-							refreshGrid: this.loadGridData,
-						};
-
-						if (item.patient_id && item.patient_id._id) {
-							const patientInfo = getPatientInfo(
-								patientData.data,
-								item.patient_id._id
-							);
-							returnData.gender = patientInfo ? patientInfo.gender || "" : "";
-							returnData.mrn = patientInfo ? patientInfo.mrn : "";
-							returnData.dob =
-								patientInfo && patientInfo.dob
-									? moment(patientInfo.dob, "YYYY-MM-DD").format("MM/DD/YYYY")
-									: "";
-							returnData.email = patientInfo ? patientInfo.email : "";
-							returnData.mobile = patientInfo ? patientInfo.mobile : "";
-						}
-
-						return returnData;
-					});
-					this.setState({ rowData: formattedData });
-				} else this.setState({ rowData: [] });
-			})
-			.catch((error) => {
-				handleError(error);
-			});
+		searchOrders(this.state.searchFilters)
+        .then((response) => {
+            this.setState({ rowData: response.data })
+        }).catch((error) => {
+            handleError(error);
+        })
 	};
 
 	onFilterTextChange = (e) => {

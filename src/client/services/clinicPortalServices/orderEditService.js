@@ -75,3 +75,14 @@ export const fetchOrderFaxData = (orderId) => {
 		body: JSON.stringify({order_id : orderId}),
 	}).then((response) => response.json());
 };
+
+export const getOrderDataById = (orderId) => {
+	let token = getUserAuthToken();
+	return fetch(`${serviceConstants.API_HOST_NAME}/order/v1/${orderId}`, {
+		method: 'GET',
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization" : "Bearer " + token
+		},
+	}).then((response) => response.json());
+};

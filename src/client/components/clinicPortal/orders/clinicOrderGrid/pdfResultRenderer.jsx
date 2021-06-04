@@ -6,15 +6,15 @@ export default class PdfResultRenderer extends Component {
     super(props);
     this.state = {
       pdfPath:
+        props.data && props.data.results &&
+        props.data.results.pdf_path &&
         props.data &&
-        props.data.pdfPath &&
-        props.data &&
-        props.data.pdfPath.length > 0
-          ? `${serviceConstants.HOST_NAME}${props.data && props.data.pdfPath}`
+        props.data.results.pdf_path.length > 0
+          ? `${serviceConstants.HOST_NAME}${props.data && props.data.results.pdf_path}`
           : "",
-      result: props.data && props.data.result ? props.data.result : "",
+      result: props.data && props.data.test_info && props.data.test_info.covid_detected ? props.data.test_info.covid_detected : "",
     };
-  };
+  }
 
   render() {
     return (

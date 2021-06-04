@@ -3,7 +3,8 @@ import { Modal, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 import {
   saveOrderEditData,
   updateResultPDF,
-  fetchOrderFaxData
+  fetchOrderFaxData,
+  getOrderDataById
 } from "../../../../services/clinicPortalServices/orderEditService";
 import moment from "moment";
 import { testTypes, results } from "../../../../services/common/optionsData";
@@ -12,41 +13,78 @@ import { handleError } from "../../../../services/common/errorHandler";
 export default class EditBtnCellRenderer extends Component {
   constructor(props) {
     super(props);
-    let orderDetails = props && props.data ? props.data : '';
     this.state = {
       show: false,
-      orderId: orderDetails.orderId,
-      gender: orderDetails.gender ? orderDetails.gender : "",
-      dob: orderDetails.dob ? orderDetails.dob : "",
-      mrn: orderDetails.mrn ? orderDetails.mrn : "",
-      provider: orderDetails && orderDetails.provider ? orderDetails.provider : "",
-      facilitySource: orderDetails.facilitySource
-        ? orderDetails.facilitySource
-        : "",
-      receivedDate:
-      orderDetails && orderDetails.receivedDate ? orderDetails.receivedDate : "",
-      description:
-      orderDetails && orderDetails.description ? orderDetails.description : "",
-      testType: orderDetails && orderDetails.testType ? orderDetails.testType : "",
-      sample: orderDetails && orderDetails.sample ? orderDetails.sample : "",
-      result: orderDetails && orderDetails.result ? orderDetails.result : "",
-      collectedDate:
-      orderDetails && orderDetails.collectedDate ? orderDetails.collectedDate : "",
-
-      requisition:
-      orderDetails && orderDetails.requisition ? orderDetails.requisition : "",
-      code: orderDetails && orderDetails.code ? orderDetails.code : "",
-      codeType: orderDetails && orderDetails.codeType ? orderDetails.codeType : "",
-      patientName:
-      orderDetails && orderDetails.patientName ? orderDetails.patientName : "",
-      email: orderDetails && orderDetails.email ? orderDetails.email : "",
-      mobile: orderDetails && orderDetails.mobile ? orderDetails.mobile : "",
-      pdfPath: orderDetails && orderDetails.pdfPath ? orderDetails.pdfPath : "",
-      released: orderDetails && orderDetails.released ? orderDetails.released : "",
-      releasedBy:
-      orderDetails && orderDetails.releasedBy ? orderDetails.releasedBy : "",
-      refreshGrid: orderDetails.refreshGrid,
+      orderId: props.data._id,
+      gender: "",
+      dob: "",
+      mrn: "",
+      provider: "",
+      facilitySource: "",
+      receivedDate: "",
+      description: "",
+      testType: "",
+      sample: "",
+      result: "",
+      collectedDate: "",
+      requisition:"",
+      code: "",
+      codeType: "",
+      patientName:"",
+      email: "",
+      mobile: "",
+      pdfPath: "",
+      released: "",
+      releasedBy:"",
     };
+  }
+
+  componentDidMount() {
+    if (this.state.orderId !== "") {
+        this.loadOrderDetails();
+    }
+  }
+
+  loadOrderDetails = () => {
+    getOrderDataById(this.state.orderId)
+    .then((response) => {
+        let orderDetails = response.data;
+        this.setState({
+            patientName: orderDetails && orderDetails.patient_id ? 
+             orderDetails.patient_id.first_name + " " + orderDetails.patient_id.last_name : '',
+            mrn: orderDetails && orderDetails.patient_id ? 
+                orderDetails.patient_id.mrn : '',
+            dob: orderDetails && orderDetails.patient_id ? 
+                orderDetails.patient_id.date_of_birth : '',
+            gender: orderDetails && orderDetails.patient_id ? 
+                orderDetails.patient_id.gender : '',
+            provider: orderDetails && orderDetails.provider ? 
+             orderDetails.provider.first_name + ' ' + orderDetails.provider.last_name : '',
+            facilitySource:  orderDetails ?  orderDetails.facility_source : '',
+            description: orderDetails && orderDetails.test_info ? orderDetails.test_info.description : '',
+            testType: orderDetails && orderDetails.test_info ? orderDetails.test_info.test_type : '',
+            requisition: orderDetails && orderDetails.test_info ? orderDetails.test_info.requisition : '',
+            sample: orderDetails && orderDetails.test_info ? orderDetails.test_info.sample : '',
+            collectedDate: orderDetails && orderDetails.test_info ? 
+                moment(orderDetails.test_info.collected, "YYYYMMDDHHmmss").format(
+                "MM/DD/YYYY hh:mm A"
+          ) : '',
+          receivedDate: orderDetails && orderDetails.test_info ? 
+          moment(orderDetails.test_info.collected, "YYYYMMDDHHmmss").format(
+          "MM/DD/YYYY hh:mm A"
+    ) : '',
+    result:  orderDetails && orderDetails.test_info ? orderDetails.test_info.covid_detected : '',
+    released: orderDetails && orderDetails.results ? 
+       moment(orderDetails.results.released, "YYYYMMDDHHmmss").format(
+        "MM/DD/YYYY hh:mm A"
+  ): '',
+    releasedBy: orderDetails && orderDetails.results ? orderDetails.results.releasedBy : '',
+    pdfPath: orderDetails && orderDetails.results ? orderDetails.results.pdf_path : '',
+
+        });
+    }).catch((error) => {
+        handleError(error);
+    });
   }
 
   handleShow = () => {
@@ -54,70 +92,7 @@ export default class EditBtnCellRenderer extends Component {
   };
 
   handleClose = () => {
-    const intialState = {
-      orderId: this.props.data.orderId,
-      gender: this.props.data.gender ? this.props.data.gender : "",
-      dob: this.props.data.dob ? this.props.data.dob : "",
-      mrn: this.props.data.mrn ? this.props.data.mrn : "",
-      provider:
-        this.props.data && this.props.data.provider
-          ? this.props.data.provider
-          : "",
-      facilitySource: this.props.data.facilitySource
-        ? this.props.data.facilitySource
-        : "",
-      receivedDate:
-        this.props.data && this.props.data.receivedDate
-          ? this.props.data.receivedDate
-          : "",
-      description:
-        this.props.data && this.props.data.description
-          ? this.props.data.description
-          : "",
-      testType:
-        this.props.data && this.props.data.testType
-          ? this.props.data.testType
-          : "",
-      sample:
-        this.props.data && this.props.data.sample ? this.props.data.sample : "",
-      result:
-        this.props.data && this.props.data.result ? this.props.data.result : "",
-      collectedDate:
-        this.props.data && this.props.data.collectedDate
-          ? this.props.data.collectedDate
-          : "",
-
-      requisition:
-        this.props.data && this.props.data.requisition
-          ? this.props.data.requisition
-          : "",
-      code: this.props.data && this.props.data.code ? this.props.data.code : "",
-      codeType:
-        this.props.data && this.props.data.codeType
-          ? this.props.data.codeType
-          : "",
-      patientName:
-        this.props.data && this.props.data.patientName
-          ? this.props.data.patientName
-          : "",
-      email:
-        this.props.data && this.props.data.email ? this.props.data.email : "",
-      mobile:
-        this.props.data && this.props.data.mobile ? this.props.data.mobile : "",
-      pdfPath:
-        this.props.data && this.props.data.pdfPath
-          ? this.props.data.pdfPath
-          : "",
-      released:
-        this.props.data && this.props.data.released
-          ? this.props.data.released
-          : "",
-      releasedBy:
-        this.props.data && this.props.data.releasedBy
-          ? this.props.data.releasedBy
-          : "",
-    };
-    this.setState({ show: false, ...intialState });
+    this.setState({ show: false });
   };
 
   handleChange = (e) => {
@@ -448,3 +423,4 @@ export default class EditBtnCellRenderer extends Component {
     );
   }
 }
+
