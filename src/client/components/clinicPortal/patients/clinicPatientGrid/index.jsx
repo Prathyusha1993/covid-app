@@ -199,50 +199,73 @@ class ClinicPatientGrid extends Component {
 							maxWidth: 80,
 							cellStyle: { textAlign: "center" },
 							cellRenderer: "editBtnCellRenderer",
-							// hide: true
 						},
 						{
 							headerName: "Test",
-							field: "description",
+							field: "test_info.description",
 							resizable: true,
 						},
 						{
 							headerName: "Test Type",
-							field: "testType",
+							field: "test_info.test_type",
 							resizable: true,
 						},
 						{
 							headerName: "Sample",
 							resizable: true,
-							field: "sample",
+							field: "test_info.sample",
 						},
 						{
 							headerName: "Result",
 							resizable: true,
-							field: "result",
+							field: "test_info.covid_detected",
 							cellRenderer: "pdfResultRenderer",
 						},
 						{
 							headerName: "Specimen Collected Date",
-							field: "collectedDate",
+							field: "test_info.collected",
 							minWidth: 200,
 							resizable: true,
+							cellRenderer: function (params) {
+								return params.data.test_info && params.data.test_info.collected
+									? moment(params.data.test_info.collected, "YYYYMMDDHHmmss").format(
+										"MM/DD/YYYY hh:mm A"
+								  )
+									: "";
+							},
 						},
 						{
 							headerName: "Physician",
 							minWidth: 150,
 							resizable: true,
-							field: "provider",
+							// field: "provider",
+                            valueGetter: function addColumns(params){
+                                if(params.data.provider){
+                                    return (
+                                        params.data.provider.first_name + " " +
+                                        params.data.provider.last_name
+                                    );
+                                }else{
+                                    return "";
+                                }
+                            },
 						},
 						{
 							headerName: "Received Date",
-							field: "receivedDate",
+							field: "test_info.received",
 							minWidth: 200,
 							resizable: true,
+							cellRenderer: function (params) {
+								return params.data.test_info && params.data.test_info.received
+									? moment(params.data.test_info.received, "YYYYMMDDHHmmss").format(
+										"MM/DD/YYYY hh:mm A"
+								  )
+									: "";
+							},
 						},
 						{
 							headerName: "Requisition",
-							field: "requisition",
+							field: "test_info.requisition",
 							resizable: true,
 						},
 					],
@@ -254,103 +277,13 @@ class ClinicPatientGrid extends Component {
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
-					Promise.all([
-						fetchPatientExpandableData(params.data._id),
-						fetchPatientMasterData(window.localStorage.getItem("FACILITY_ID")),
-					]).then(([patientExpandableData, patientData]) => {
-						if (
-							patientExpandableData &&
-							patientExpandableData.data &&
-							patientExpandableData.data.length > 0
-						) {
-							const formattedData = patientExpandableData.data.map((item) => {
-								const returnData = {
-									orderId: item._id,
-									patientName: item.patient_id
-										? item.patient_id.first_name +
-										  " " +
-										  item.patient_id.last_name
-										: "",
-									description:
-										item.test_info && item.test_info.description
-											? item.test_info.description
-											: "",
-									testType:
-										item.test_info && item.test_info.test_type
-											? item.test_info.test_type
-											: "",
-									sample:
-										item.test_info && item.test_info.sample
-											? item.test_info.sample
-											: "",
-									result:
-										item.test_info && item.test_info.covid_detected
-											? item.test_info.covid_detected
-											: "",
-									collectedDate:
-										item.test_info && item.test_info.collected
-											? moment(
-													item.test_info.collected,
-													"YYYYMMDDHHmmss"
-											  ).format("MM/DD/YYYY hh:mm A")
-											: "",
-									provider:
-										(item.provider && item.provider.first_name
-											? item.provider.first_name
-											: "") +
-										" " +
-										(item.provider && item.provider.last_name
-											? item.provider.last_name
-											: ""),
-									receivedDate:
-										item.test_info && item.test_info.received
-											? moment(
-													item.test_info.received,
-													"YYYYMMDDHHmmss"
-											  ).format("MM/DD/YYYY hh:mm A")
-											: "",
-									requisition:
-										item.lab_order_id && item.lab_order_id
-											? item.lab_order_id
-											: "",
-									facilitySource:
-										item.facility_id && item.facility_id.name
-											? item.facility_id.name
-											: item.facility_source,
-									code: item.code ? item.code : "",
-									codeType: item.code_type ? item.code_type : "",
-									pdfPath:
-										item.results && item.results.pdf_path
-											? item.results.pdf_path
-											: "",
-								};
-
-								if (item.patient_id && item.patient_id._id) {
-									const patientInfo = getPatientInfo(
-										patientData.data,
-										item.patient_id._id
-									);
-									returnData.gender = patientInfo
-										? patientInfo.gender || ""
-										: "";
-									returnData.mrn = patientInfo ? patientInfo.mrn : "";
-									returnData.dob =
-										patientInfo && patientInfo.dob
-											? moment(patientInfo.dob, "YYYY-MM-DD").format(
-													"MM/DD/YYYY"
-											  )
-											: "";
-									returnData.email = patientInfo ? patientInfo.email : "";
-									returnData.mobile = patientInfo ? patientInfo.mobile : "";
-								}
-
-								return returnData;
-							});
-							params.successCallback(formattedData);
-						} else {
-							params.successCallback([]);
-						}
-					});
+						fetchPatientExpandableData(params.data._id)
+                        .then((response) => {
+                            params.successCallback(response.data);
+							
+                        }).catch((error) => {
+                            handleError(error);
+                        });
 				},
 			},
 			excelStyles: [

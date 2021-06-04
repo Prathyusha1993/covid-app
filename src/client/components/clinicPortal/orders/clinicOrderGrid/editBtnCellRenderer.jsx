@@ -70,7 +70,7 @@ export default class EditBtnCellRenderer extends Component {
                 "MM/DD/YYYY hh:mm A"
           ) : '',
           receivedDate: orderDetails && orderDetails.test_info ? 
-          moment(orderDetails.test_info.collected, "YYYYMMDDHHmmss").format(
+          moment(orderDetails.test_info.received, "YYYYMMDDHHmmss").format(
           "MM/DD/YYYY hh:mm A"
     ) : '',
     result:  orderDetails && orderDetails.test_info ? orderDetails.test_info.covid_detected : '',

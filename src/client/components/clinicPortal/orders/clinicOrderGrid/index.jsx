@@ -129,7 +129,7 @@ class ClinicOrderGrid extends Component {
 				},
 				{
 					headerName: "Specimen Collected Date",
-					field: "collected",
+					field: "test_info.collected",
 					minWidth: 200,
 					resizable: true,
                     cellRenderer: function (params) {
@@ -164,7 +164,7 @@ class ClinicOrderGrid extends Component {
 				},
 				{
 					headerName: "Received Date",
-					field: "received",
+					field: "test_info.received",
 					minWidth: 200,
 					resizable: true,
                     cellRenderer: function (params) {
