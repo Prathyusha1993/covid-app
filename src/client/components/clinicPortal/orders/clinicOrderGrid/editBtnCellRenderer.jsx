@@ -39,11 +39,12 @@ export default class EditBtnCellRenderer extends Component {
 		};
 	}
 
-	componentDidMount() {
-		if (this.state.orderId !== "") {
-			this.loadOrderDetails();
-		}
-	}
+	// componentDidMount() {
+	// 	console.log("componentDidMount", this.state.orderId);
+	// 	if (this.state.orderId !== "") {
+	// 		this.loadOrderDetails();
+	// 	}
+	// }
 
 	loadOrderDetails = () => {
 		getOrderDataById(this.state.orderId)
@@ -92,14 +93,14 @@ export default class EditBtnCellRenderer extends Component {
 							? orderDetails.test_info.sample
 							: "",
 					collectedDate:
-						orderDetails && orderDetails.test_info
+						orderDetails && orderDetails.test_info && orderDetails.test_info.collected
 							? moment(
-									orderDetails.test_info.collected,
+								 orderDetails.test_info.collected,
 									"YYYYMMDDHHmmss"
 							  ).format("MM/DD/YYYY hh:mm A")
 							: "",
 					receivedDate:
-						orderDetails && orderDetails.test_info
+						orderDetails && orderDetails.test_info && orderDetails.test_info.received
 							? moment(
 									orderDetails.test_info.received,
 									"YYYYMMDDHHmmss"
@@ -110,7 +111,7 @@ export default class EditBtnCellRenderer extends Component {
 							? orderDetails.test_info.covid_detected
 							: "",
 					released:
-						orderDetails && orderDetails.results
+						orderDetails && orderDetails.results && orderDetails.results.released
 							? moment(orderDetails.results.released, "YYYYMMDDHHmmss").format(
 									"MM/DD/YYYY hh:mm A"
 							  )
@@ -131,6 +132,9 @@ export default class EditBtnCellRenderer extends Component {
 	};
 
 	handleShow = () => {
+		if (this.state.orderId !== "") {
+			this.loadOrderDetails();
+		}
 		this.setState({ show: true });
 	};
 

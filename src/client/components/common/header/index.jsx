@@ -56,7 +56,7 @@ class PatientPortalHeader extends Component {
 						</a>
 						<a
 							href="/home"
-							className="navbar-brand "
+							className="navbar-brand logo"
 							style={{ marginRight: "150px" }}
 						>
 							<img
@@ -77,16 +77,16 @@ class PatientPortalHeader extends Component {
 										<li className="nav-item">
 											<a href="/clinic/patients"> Patients </a>
 										</li>
-										<li style={{marginLeft: '-20px'}} className="nav-item">
+										<li className="nav-item">
 											<a href="/clinic/orders"> Orders </a>
 										</li>
-										<li style={{marginLeft: '-20px'}} className="nav-item">
+										<li className="nav-item">
 											<a href="/clinic/audit"> Audit </a>
 										</li>
-										<li style={{marginLeft: '-20px'}} className="nav-item">
+										<li className="nav-item">
 											<a href="/clinic/facility"> Facility </a>
 										</li>
-										<li style={{marginLeft: '-20px'}} className="nav-item">
+										<li className="nav-item">
 											<a href="/clinic/physician"> Physician </a>
 										</li>
 									</ul>

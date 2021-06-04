@@ -47,6 +47,9 @@ export const results = [
 		result: "SARS-CoV-2 Inconclusive",
 	},
 	{
+		result: "Positive SARS-CoV-2",
+	},
+	{
 		result: " "
 	}
 ];
