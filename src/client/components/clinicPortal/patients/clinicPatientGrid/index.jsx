@@ -228,9 +228,10 @@ class ClinicPatientGrid extends Component {
 							resizable: true,
 							cellRenderer: function (params) {
 								return params.data.test_info && params.data.test_info.collected
-									? moment(params.data.test_info.collected, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A"
-								  )
+									? moment(
+											params.data.test_info.collected,
+											"YYYYMMDDHHmmss"
+									  ).format("MM/DD/YYYY hh:mm A")
 									: "";
 							},
 						},
@@ -239,16 +240,17 @@ class ClinicPatientGrid extends Component {
 							minWidth: 150,
 							resizable: true,
 							// field: "provider",
-                            valueGetter: function addColumns(params){
-                                if(params.data.provider){
-                                    return (
-                                        params.data.provider.first_name + " " +
-                                        params.data.provider.last_name
-                                    );
-                                }else{
-                                    return "";
-                                }
-                            },
+							valueGetter: function addColumns(params) {
+								if (params.data.provider) {
+									return (
+										params.data.provider.first_name +
+										" " +
+										params.data.provider.last_name
+									);
+								} else {
+									return "";
+								}
+							},
 						},
 						{
 							headerName: "Received Date",
@@ -257,9 +259,10 @@ class ClinicPatientGrid extends Component {
 							resizable: true,
 							cellRenderer: function (params) {
 								return params.data.test_info && params.data.test_info.received
-									? moment(params.data.test_info.received, "YYYYMMDDHHmmss").format(
-										"MM/DD/YYYY hh:mm A"
-								  )
+									? moment(
+											params.data.test_info.received,
+											"YYYYMMDDHHmmss"
+									  ).format("MM/DD/YYYY hh:mm A")
 									: "";
 							},
 						},
@@ -277,13 +280,13 @@ class ClinicPatientGrid extends Component {
 					defaultColDef: { flex: 1, filter: true },
 				},
 				getDetailRowData: function (params) {
-						fetchPatientExpandableData(params.data._id)
-                        .then((response) => {
-                            params.successCallback(response.data);
-							
-                        }).catch((error) => {
-                            handleError(error);
-                        });
+					fetchPatientExpandableData(params.data._id)
+						.then((response) => {
+							params.successCallback(response.data);
+						})
+						.catch((error) => {
+							handleError(error);
+						});
 				},
 			},
 			excelStyles: [
@@ -314,12 +317,6 @@ class ClinicPatientGrid extends Component {
 			.then((response) => {
 				console.log("facilities", response);
 				this.setState({ facilities: response.data });
-				/*const filters = this.state.searchFilters;
-      filters.facility_id =
-        this.facilities && this.facilities.length > 0
-          ? this.facilities[0]._id
-          : "";
-      this.setState({ searchFilters: filters });*/
 
 				const filters = this.state.searchFilters;
 				filters.facility_id =

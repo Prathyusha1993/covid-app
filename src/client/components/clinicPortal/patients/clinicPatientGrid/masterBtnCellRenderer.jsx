@@ -7,7 +7,7 @@ import { states, identity } from "../../../../services/common/optionsData";
 export default class MasterBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-		let patientDetails = props && props.data ? props.data : '';
+		let patientDetails = props && props.data ? props.data : "";
 		this.state = {
 			show: false,
 			firstName: patientDetails.first_name ? patientDetails.first_name : " ",
@@ -18,27 +18,27 @@ export default class MasterBtnCellRenderer extends Component {
 			email: patientDetails.email ? patientDetails.email : " ",
 			mobile: patientDetails.mobile ? patientDetails.mobile : " ",
 			address1:
-			patientDetails.address && patientDetails.address.address1
+				patientDetails.address && patientDetails.address.address1
 					? patientDetails.address.address1
 					: "",
 			address2:
-			patientDetails.address && patientDetails.address.address2
+				patientDetails.address && patientDetails.address.address2
 					? patientDetails.address.address2
 					: "",
 			city:
-			patientDetails.address && patientDetails.address.city
+				patientDetails.address && patientDetails.address.city
 					? patientDetails.address.city
 					: "",
 			state:
-			patientDetails.address && patientDetails.address.state
+				patientDetails.address && patientDetails.address.state
 					? patientDetails.address.state
 					: "",
 			zip:
-			patientDetails.address && patientDetails.address.zip
+				patientDetails.address && patientDetails.address.zip
 					? patientDetails.address.zip
 					: "",
 			country:
-			patientDetails.address && patientDetails.address.country
+				patientDetails.address && patientDetails.address.country
 					? patientDetails.address.country
 					: "",
 
@@ -114,14 +114,16 @@ export default class MasterBtnCellRenderer extends Component {
 			zip: this.state.zip,
 			country: this.state.country,
 		};
-		updatePatientData(editParams).then((userDetails) => {
-			this.setState({
-				editParams: userDetails,
-				show: false,
+		updatePatientData(editParams)
+			.then((userDetails) => {
+				this.setState({
+					editParams: userDetails,
+					show: false,
+				});
+			})
+			.catch((error) => {
+				handleError(error);
 			});
-		}).catch((error) => {
-			handleError(error);
-		})
 	};
 
 	render() {
@@ -286,9 +288,7 @@ export default class MasterBtnCellRenderer extends Component {
 										>
 											{states.map((state) => {
 												return (
-													<option value={state.value}>
-														{state.state}
-													</option>
+													<option value={state.value}>{state.state}</option>
 												);
 											})}
 										</select>

@@ -25,7 +25,6 @@ import {
 } from "../../../../services/clinicPortalServices/orderSearchService";
 import { getOrderUserSettings } from "../../../../services/clinicPortalServices/userGridSettings";
 import { saveOrderSettings } from "../../../../services/clinicPortalServices/saveStateSettings";
-import { fetchPatientMasterData } from "../../../../services/clinicPortalServices/patientSearchService"; //fetchFacilities
 import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
 import { serviceConstants } from "../../../../services/common/constants";
 import { getUserRole } from "../../../../services/common/util";
@@ -36,22 +35,6 @@ var enterprise = require("@ag-grid-enterprise/core");
 enterprise.LicenseManager.setLicenseKey(
 	`${serviceConstants.AG_GRID_LICENSE_KEY}`
 );
-
-// const getPatientInfo = (patientData, patientId) => {
-// 	if (patientData && patientData.length > 0) {
-// 		const foundPatientInfo = patientData.find((item) => {
-// 			return item._id === patientId;
-// 		});
-// 		if (foundPatientInfo == null) return {};
-// 		return {
-// 			gender: foundPatientInfo.gender || "",
-// 			mrn: foundPatientInfo.mrn,
-// 			dob: foundPatientInfo.date_of_birth,
-// 			email: foundPatientInfo.email,
-// 			mobile: foundPatientInfo.mobile,
-// 		};
-// 	}
-// };
 
 class ClinicOrderGrid extends Component {
 	constructor(props) {
@@ -91,16 +74,17 @@ class ClinicOrderGrid extends Component {
 					minWidth: 200,
 					// field: "patientName",
 					resizable: true,
-                    valueGetter: function addColumns(params){
-                        if(params.data.patient_id){
-                            return (
-                                params.data.patient_id.first_name + " " +
-                                params.data.patient_id.last_name
-                            );
-                        }else{
-                            return "";
-                        }
-                    },
+					valueGetter: function addColumns(params) {
+						if (params.data.patient_id) {
+							return (
+								params.data.patient_id.first_name +
+								" " +
+								params.data.patient_id.last_name
+							);
+						} else {
+							return "";
+						}
+					},
 				},
 				{
 					headerName: "Test",
@@ -132,11 +116,12 @@ class ClinicOrderGrid extends Component {
 					field: "test_info.collected",
 					minWidth: 200,
 					resizable: true,
-                    cellRenderer: function (params) {
+					cellRenderer: function (params) {
 						return params.data.test_info && params.data.test_info.collected
-							? moment(params.data.test_info.collected, "YYYYMMDDHHmmss").format(
-                                "MM/DD/YYYY hh:mm A"
-                          )
+							? moment(
+									params.data.test_info.collected,
+									"YYYYMMDDHHmmss"
+							  ).format("MM/DD/YYYY hh:mm A")
 							: "";
 					},
 				},
@@ -151,27 +136,28 @@ class ClinicOrderGrid extends Component {
 					minWidth: 150,
 					resizable: true,
 					// field: "provider",
-                    valueGetter: function addColumns(params){
-                        if(params.data.provider){
-                            return (
-                                params.data.provider.first_name + " " +
-                                params.data.provider.last_name
-                            );
-                        }else{
-                            return "";
-                        }
-                    },
+					valueGetter: function addColumns(params) {
+						if (params.data.provider) {
+							return (
+								params.data.provider.first_name +
+								" " +
+								params.data.provider.last_name
+							);
+						} else {
+							return "";
+						}
+					},
 				},
 				{
 					headerName: "Received Date",
 					field: "test_info.received",
 					minWidth: 200,
 					resizable: true,
-                    cellRenderer: function (params) {
+					cellRenderer: function (params) {
 						return params.data.test_info && params.data.test_info.received
 							? moment(params.data.test_info.received, "YYYYMMDDHHmmss").format(
-                                "MM/DD/YYYY hh:mm A"
-                          )
+									"MM/DD/YYYY hh:mm A"
+							  )
 							: "";
 					},
 				},
@@ -270,11 +256,12 @@ class ClinicOrderGrid extends Component {
 
 	loadGridData = () => {
 		searchOrders(this.state.searchFilters)
-        .then((response) => {
-            this.setState({ rowData: response.data })
-        }).catch((error) => {
-            handleError(error);
-        })
+			.then((response) => {
+				this.setState({ rowData: response.data });
+			})
+			.catch((error) => {
+				handleError(error);
+			});
 	};
 
 	onFilterTextChange = (e) => {
