@@ -3,8 +3,8 @@ import { DashboardSidebar } from "./sidebar/sidebar.jsx";
 import StickyBox from "react-sticky-box";
 import Dates from "./dates/index";
 import PdfViewer from "./pdfViewer/index";
-import { serviceConstants } from "../../../patientPortalServices/constants";
-import { fetchDashboardDetails,resultsViewed } from "../../../patientPortalServices/dashboardService";
+import { serviceConstants } from "../../../services/common/constants";
+import { fetchDashboardDetails,resultsViewed } from "../../../services/patientPortalServices/dashboardService";
 
 class PatientPortalDashboard extends Component {
   constructor(props) {
@@ -54,7 +54,6 @@ class PatientPortalDashboard extends Component {
 
   handleDateClick = (pdfPath, dateId, dataValue) => {
     resultsViewed({"_id": dateId});
-    // const constructedUrl = `${serviceConstants.HOST_NAME}${pdfPath}`;
     var constructedUrl = "";
 
     if (pdfPath != null && pdfPath.trim().length > 0)

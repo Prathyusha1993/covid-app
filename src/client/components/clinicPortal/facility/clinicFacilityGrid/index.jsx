@@ -12,13 +12,12 @@ import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
 
-import TextField from "@material-ui/core/TextField";
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
-import { getFacilityData } from "../../../../clinicPortalServices/facilityServices";
-//import FacilityDetails from "./facilityDetails";
-import AddFacility from "./addFacility";
+import { getFacilityData } from "../../../../services/clinicPortalServices/facilityServices";
+import FacilitySearchMenu from "./facilitySearchMenu";
+import { handleError } from "../../../../services/common/errorHandler";
 
 class ClinicFacilityGrid extends Component {
 	constructor(props) {
@@ -61,7 +60,6 @@ class ClinicFacilityGrid extends Component {
 					minWidth: 150,
 					field: "code",
 					resizable: true,
-					//hide: true,
 				},
 				{
 					headerName: "Name",
@@ -149,12 +147,18 @@ class ClinicFacilityGrid extends Component {
 					field: "email_notifications_enabled",
 					minWidth: 170,
 					resizable: true,
+					cellRenderer: function (params) {
+						return params.data.email_notifications_enabled ? "Yes" : "No";
+					},
 				},
 				{
 					headerName: "Environmental Monitoring",
 					field: "environmental_monitoring_enabled",
 					minWidth: 200,
 					resizable: true,
+					cellRenderer: function (params) {
+						return params.data.environmental_monitoring_enabled ? "Yes" : "No";
+					},
 				},
 			],
 			frameworkComponents: {
@@ -182,7 +186,7 @@ class ClinicFacilityGrid extends Component {
 				this.setState({ rowData: response.data });
 			})
 			.catch((error) => {
-				console.log(error);
+				handleError(error);
 			});
 	};
 
@@ -211,62 +215,12 @@ class ClinicFacilityGrid extends Component {
 	render() {
 		return (
 			<div>
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item">
-											<a href="/">Home</a>
-										</li>
-										<li className="breadcrumb-item active" aria-current="page">
-											Facility
-										</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Facility</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row" style={{ padding: "12px" }}>
-					<div className="col-md-3">
-						<TextField
-							label="Quick Search"
-							variant="outlined"
-							className="form-control"
-							id="reset-form"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							type="string"
-							margin="dense"
-							onChange={this.onFilterTextChange}
-						/>
-					</div>
-					<div>
-						<button
-							className="btn btn-primary submit-btn button-info-grid"
-							onClick={() => this.clearFilter()}
-						>
-							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
-						</button>
-					</div>
-					<div className="col grid-buttons">
-						<div>
-							<AddFacility />
-						</div>
-						<div>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.onBtExport()}
-							>
-								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
-							</button>
-						</div>
-					</div>
-				</div>
+				<FacilitySearchMenu
+					onFilterTextChange={this.onFilterTextChange}
+					clearFilter={this.clearFilter}
+					onBtExport={this.onBtExport}
+				/>
+
 				<div
 					style={{
 						width: "100%",

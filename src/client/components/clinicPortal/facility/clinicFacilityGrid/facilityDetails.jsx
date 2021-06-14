@@ -1,93 +1,118 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import {
-	faxTypes,
-	states,
-} from "../../patientSearch/clinicPatientGrid/optionsData";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { Button, Tooltip } from "react-bootstrap";
+import { faxTypes, states } from "../../../../services/common/optionsData";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 import {
 	createFacility,
 	updateFacility,
-} from "../../../../clinicPortalServices/facilityServices";
-import PhoneInput from "react-phone-number-input";
+	getFacilityDataById,
+} from "../../../../services/clinicPortalServices/facilityServices";
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class FacilityDetails extends Component {
 	constructor(props) {
 		super(props);
-		let facilityDetails =
-			this.props && this.props.facilityDetails
-				? this.props.facilityDetails
-				: "";
-		//console.log(props);
 		this.state = {
 			show: this.props.show,
 			showMessage: false,
 			message: "",
-			id: facilityDetails ? facilityDetails._id : "",
-			name: facilityDetails ? facilityDetails.name : "",
-			code: facilityDetails ? facilityDetails.code : "",
-			contactName: facilityDetails ? facilityDetails.contact_name : "",
-			phoneNum: facilityDetails ? facilityDetails.phone_no : "",
-			contactEmail: facilityDetails ? facilityDetails.contact_email : "",
-			faxNum: facilityDetails ? facilityDetails.fax_no : "",
-			address1:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.address1
-					: "",
-			address2:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.address2
-					: "",
-			city:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.city
-					: "",
-			state:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.state
-					: "",
-			zip:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.zip
-					: "",
-			country:
-				facilityDetails && facilityDetails.address
-					? facilityDetails.address.country
-					: "",
-			emailNotification: facilityDetails
-				? facilityDetails.email_notification_enabled
-				: "",
-			environmentalMonitoring: facilityDetails
-				? facilityDetails.environmental_monitoring_enabled
-				: "",
-			faxType: facilityDetails ? facilityDetails.fax_type : "",
-			isActive: facilityDetails ? facilityDetails.isActive : "",
+			id: "",
+			name: "",
+			code: "",
+			contactName: "",
+			phoneNum: "",
+			contactEmail: "",
+			faxNum: "",
+			address1: "",
+			address2: "",
+			city: "",
+			state: "",
+			zip: "",
+			country: "",
+			emailNotification: "",
+			environmentalMonitoring: "",
+			faxType: "",
+			isActive: "",
 			facilityId:
 				this.props && this.props.facilityId ? this.props.facilityId : "",
 			errors: [],
 		};
 	}
 
+	componentDidMount() {
+		if (this.state.facilityId !== "") {
+			this.loadFacilityDetails();
+		}
+	}
+
+	loadFacilityDetails = () => {
+		getFacilityDataById(this.state.facilityId)
+			.then((response) => {
+				let facilityDetails = response.data[0];
+				this.setState({
+					id: facilityDetails ? facilityDetails._id : "",
+					name: facilityDetails ? facilityDetails.name : "",
+					code: facilityDetails ? facilityDetails.code : "",
+					contactName: facilityDetails ? facilityDetails.contact_name : "",
+					phoneNum: facilityDetails ? facilityDetails.phone_no : "",
+					contactEmail: facilityDetails ? facilityDetails.contact_email : "",
+					faxNum: facilityDetails ? facilityDetails.fax_no : "",
+					address1:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.address1
+							: "",
+					address2:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.address2
+							: "",
+					city:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.city
+							: "",
+					state:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.state
+							: "",
+					zip:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.zip
+							: "",
+					country:
+						facilityDetails && facilityDetails.address
+							? facilityDetails.address.country
+							: "",
+					emailNotification: facilityDetails
+						? facilityDetails.email_notifications_enabled
+						: "",
+					environmentalMonitoring: facilityDetails
+						? facilityDetails.environmental_monitoring_enabled
+						: "",
+					faxType: facilityDetails ? facilityDetails.fax_type : "",
+					isActive: facilityDetails ? facilityDetails.isActive : "",
+				});
+			})
+			.catch((error) => {
+				handleError(error);
+			});
+	};
+
 	handleClose = () => {
 		this.setState({ show: false });
 	};
 
 	handleChange = (e) => {
-		// this.setState({ [e.target.name]: e.target.value });
 		const target = e.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
 
-		// if (name === "phoneNum") {
-		// 	this.setState({
-		// 		phoneNum: phoneNumberFormatter(e.target.value)
-		// 	});
-		// }
-
-		this.setState((prevState) => ({
-			phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
-		}));
+		if (name === "phoneNum") {
+			// 	this.setState({
+			// 		phoneNum: phoneNumberFormatter(e.target.value)
+			// 	});
+			this.setState((prevState) => ({
+				phoneNum: phoneNumberFormatter(value, prevState.phoneNum),
+			}));
+		}
 
 		this.setState({
 			[name]: value,
@@ -98,8 +123,8 @@ export default class FacilityDetails extends Component {
 		return this.state.errors.indexOf(key) !== -1;
 	};
 
-	//change it to save facility check for props.faciltyid !== '', update facility else craete facility.
-	updateAndCreateFacility = () => {
+	updateAndCreateFacility = (e) => {
+		e.preventDefault();
 		let errors = [];
 
 		if (this.state.name === "") {
@@ -115,6 +140,7 @@ export default class FacilityDetails extends Component {
 		}
 
 		let facilityInfo = {
+			id: this.state.id,
 			name: this.state.name,
 			code: this.state.code,
 			contactName: this.state.contactName,
@@ -142,19 +168,19 @@ export default class FacilityDetails extends Component {
 						message: "Updated the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		} else {
 			createFacility(facilityInfo)
 				.then((response) => {
 					this.setState({
 						showMessage: true,
-						message: "Thank you.",
+						message: "Saved the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		}
 	};
@@ -181,7 +207,6 @@ export default class FacilityDetails extends Component {
 									value={this.state.name}
 									onChange={this.handleChange}
 									required
-									// className="form-control order-edit-formstyle"
 									className={
 										this.hasError("name")
 											? "form-control is-invalid"
@@ -250,13 +275,6 @@ export default class FacilityDetails extends Component {
 									placeholder="(XXX) XXX-XXXX"
 									className="form-control order-edit-formstyle"
 								/>
-								{/* <PhoneInput
-									country="US"
-									name="phoneNum"
-									placeholder="(XXX) XXX-XXXX"
-									value={this.state.phoneNum}
-									onChange={this.handleChange}
-								/> */}
 							</div>
 						</div>
 						<div className="col-12 col-md-6">
@@ -383,25 +401,37 @@ export default class FacilityDetails extends Component {
 							</div>
 						</div>
 					</div>
-					<div
-						className=" col-12"
-						style={{ paddingTop: "10px", borderTop: "1px solid rgba(0,0,0,.2" }}
-					>
-						<Button
-							style={{ marginLeft: "500px" }}
-							variant="secondary"
-							onClick={this.props.handleClose}
+					<div className="row">
+						<div
+							className="col-12"
+							style={{
+								paddingTop: "10px",
+								borderTop: "1px solid rgba(0,0,0,.2",
+							}}
 						>
-							Close
-						</Button>
-						<Button
-							type="submit"
-							style={{ marginLeft: "10px" }}
-							variant="primary"
-							onClick={this.updateAndCreateFacility}
-						>
-							Save Changes
-						</Button>
+							<Button
+								style={{ float: "right", marginLeft: "10px" }}
+								variant="primary"
+								onClick={this.updateAndCreateFacility}
+							>
+								Save Changes
+							</Button>
+							<Button
+								style={{ float: "right" }}
+								variant="secondary"
+								onClick={this.props.handleClose}
+							>
+								Close
+							</Button>
+						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-12">
+							<label style={{ float: "right", marginTop: "10px" }}>
+								{this.state.message}
+							</label>
+						</div>
 					</div>
 				</form>
 			</div>

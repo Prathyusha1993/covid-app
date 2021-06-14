@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import AppRouter from "./approuter";
-// import * as serviceWorker from './client/serviceWorker';
 
 // boostrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,7 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 //carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-//import AppResults from "./appresults";
 
 // if (
 // 	!window.location.pathname.includes("admin") ||
@@ -29,9 +27,6 @@ import "slick-carousel/slick/slick-theme.css";
  //}
 
   ReactDOM.render(<AppRouter />, document.getElementById("root"));   
-
-
-// ReactDOM.render(<AppResults />, document.getElementById("root"));
 
 if (module.hot) {
 	// enables hot module replacement if plugin is installed

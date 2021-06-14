@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import HomeBanner from "./homebanner";
-import PopularSection from "./popularsection";
-import Features from "./feature";
 import SearchTestLoc from "./searchtestloc";
 import SalesTeam from "./salesTeam";
 import MapList from "./maplist";

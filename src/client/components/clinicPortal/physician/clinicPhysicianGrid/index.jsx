@@ -11,14 +11,13 @@ import { AllModules } from "@ag-grid-enterprise/all-modules";
 import { ExcelExportModule } from "@ag-grid-enterprise/excel-export";
 import "@ag-grid-community/core/dist/styles/ag-grid.css";
 import "@ag-grid-community/core/dist/styles/ag-theme-alpine.css";
+import { handleError } from "../../../../services/common/errorHandler";
 
-import TextField from "@material-ui/core/TextField";
 import EditBtnCellRenderer from "./editBtnCellRenderer";
 
 //service calls
-import { getPhysicianData } from "../../../../clinicPortalServices/physicianServices";
-import PhysicianDetails from "./physicianDetails";
-import AddPhysician from "./addPhysician";
+import { getPhysicianData } from "../../../../services/clinicPortalServices/physicianServices";
+import PhysicianSearchMenu from "./physicianSearchMenu";
 
 class ClinicPhysicianGrid extends Component {
 	constructor(props) {
@@ -65,13 +64,21 @@ class ClinicPhysicianGrid extends Component {
 					valueGetter: function addColumns(params) {
 						if (params.data.address) {
 							return (
-								params.data.address &&
-								params.data.address.address1 + " " + params.data.address &&
-								params.data.address.address2 + " " + params.data.address &&
-								params.data.address.city + " " + params.data.address &&
-								params.data.address.state + " " + params.data.address &&
-								params.data.address.zip + " " + params.data.address &&
-								params.data.address.country
+								(params.data.address.address1
+									? params.data.address.address1
+									: "") +
+								" " +
+								(params.data.address.address2
+									? params.data.address.address2
+									: "") +
+								" " +
+								(params.data.address.city ? params.data.address.city : "") +
+								" " +
+								(params.data.address.state ? params.data.address.state : "") +
+								" " +
+								(params.data.address.zip ? params.data.address.zip : "") +
+								" " +
+								(params.data.address.country ? params.data.address.country : "")
 							);
 						} else {
 							return "";
@@ -130,7 +137,7 @@ class ClinicPhysicianGrid extends Component {
 				this.setState({ rowData: response.data });
 			})
 			.catch((error) => {
-				console.log(error);
+				handleError(error);
 			});
 	};
 
@@ -151,62 +158,11 @@ class ClinicPhysicianGrid extends Component {
 	render() {
 		return (
 			<div>
-				<div className="breadcrumb-bar">
-					<div className="container-fluid">
-						<div className="row align-items-center">
-							<div className="col-md-12 col-12">
-								<nav aria-label="breadcrumb" className="page-breadcrumb">
-									<ol className="breadcrumb">
-										<li className="breadcrumb-item">
-											<a href="/">Home</a>
-										</li>
-										<li className="breadcrumb-item active" aria-current="page">
-											Physician
-										</li>
-									</ol>
-								</nav>
-								<h2 className="breadcrumb-title">Physician</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row" style={{ padding: "12px" }}>
-					<div className="col-md-3">
-						<TextField
-							label="Quick Search"
-							variant="outlined"
-							className="form-control"
-							id="reset-form"
-							InputLabelProps={{
-								shrink: true,
-							}}
-							type="string"
-							margin="dense"
-							onChange={this.onFilterTextChange}
-						/>
-					</div>
-					<div>
-						<button
-							className="btn btn-primary submit-btn button-info-grid"
-							onClick={() => this.clearFilter()}
-						>
-							<i class="fa fa-times" aria-hidden="true"></i> Clear Filter
-						</button>
-					</div>
-					<div className="col grid-buttons">
-						<div>
-							<AddPhysician />
-						</div>
-						<div>
-							<button
-								className="btn btn-primary submit-btn button-info-grid"
-								onClick={() => this.onBtExport()}
-							>
-								<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export
-							</button>
-						</div>
-					</div>
-				</div>
+				<PhysicianSearchMenu
+					onFilterTextChange={this.onFilterTextChange}
+					clearFilter={this.clearFilter}
+					onBtExport={this.onBtExport}
+				/>
 				<div
 					style={{
 						width: "100%",

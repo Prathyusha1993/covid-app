@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-import { getInTouchDetails } from "../../../../appointmentBookingServices/getInTouch";
-import { phoneNumberFormatter } from "../../../../utils/util";
+import { getInTouchDetails } from "../../../../services/appointmentBookingServices/emailService";
+import { phoneNumberFormatter } from "../../../../services/common/util";
 
 class FormInfo extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class FormInfo extends Component {
     } else {
       e.preventDefault();
 
-      var body =
+      let body =
         "First Name - " +
         this.state.firstName +
         "\n" +
@@ -48,7 +48,6 @@ class FormInfo extends Component {
         this.state.testingNeeds +
         "\n";
 
-      //console.log("body", body);
       getInTouchDetails(this.state.toEmail, this.state.subject, body);
       this.setState({
         firstName: "",

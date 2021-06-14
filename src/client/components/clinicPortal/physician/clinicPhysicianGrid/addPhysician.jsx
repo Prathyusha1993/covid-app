@@ -1,33 +1,12 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import {
-	saveOrderEditData,
-	updateResultPDF,
-} from "../../../../clinicPortalServices/orderEditService";
-import moment from "moment";
-import {
-	faxTypes,
-	results,
-} from "../../patientSearch/clinicPatientGrid/optionsData";
-import { testTypes } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { fetchOrderFaxData } from "../../../../clinicPortalServices/orderEditService";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import PhysicianDetails from "./physicianDetails";
 
 export default class AddPhysician extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		this.state = {
 			show: false,
-			//refreshGrid: props.data.refreshGrid,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address: "",
-			facilityId: "",
 			errors: [],
 		};
 	}
@@ -47,7 +26,7 @@ export default class AddPhysician extends Component {
 					className="btn btn-primary submit-btn button-info-grid"
 					onClick={() => this.handleShow()}
 				>
-					<i class="fas fa-user-plus"></i> Add Facility
+					<i class="fas fa-user-plus"></i> Add Physician
 				</button>
 				<Modal
 					size="lg"

@@ -1,9 +1,7 @@
 import React from "react";
-import { NonceProvider } from "react-select";
 import AGT_LOGO from "../assets/images/results/agt-logo.png";
 
 const Footer = (props) => {
-	//const url = props.location.pathname;
 	return (
 		<footer className="footer footer-changes">
 			<div className="footer-bottom">

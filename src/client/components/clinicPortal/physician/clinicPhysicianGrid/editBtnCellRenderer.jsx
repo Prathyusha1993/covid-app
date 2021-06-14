@@ -1,31 +1,16 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { getPhysicianDataById } from "../../../../clinicPortalServices/physicianServices";
+import { Modal, Tooltip, OverlayTrigger } from "react-bootstrap";
 import PhysicianDetails from "./physicianDetails";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
 		this.state = {
 			show: false,
-			//refreshGrid: props.data.refreshGrid,
-			firstName: "",
-			lastName: "",
-			code: "",
-			npi: "",
-			mobile: "",
-			address: "",
-			facilityId: "",
-			physicianDetails: [],
+			physicianDetails: {},
 			physicianId: props.data._id,
 			errors: [],
 		};
-	}
-
-	componentDidMount() {
-		this.loadPhysicianDetails();
 	}
 
 	handleShow = () => {
@@ -41,12 +26,6 @@ export default class EditBtnCellRenderer extends Component {
 			Edit Physician
 		</Tooltip>
 	);
-
-	loadPhysicianDetails = () => {
-		getPhysicianDataById(this.state.physicianId).then((response) => {
-			this.setState({ physicianDetails: response.data[0] });
-		});
-	};
 
 	render() {
 		return (
@@ -68,11 +47,10 @@ export default class EditBtnCellRenderer extends Component {
 					onHide={this.handleClose}
 				>
 					<Modal.Header closeButton>
-						<Modal.Title>Update Facility Information</Modal.Title>
+						<Modal.Title>Update Physician Information</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<PhysicianDetails
-							physicianDetails={this.state.physicianDetails}
 							physicianId={this.state.physicianId}
 							handleClose={this.handleClose}
 						/>

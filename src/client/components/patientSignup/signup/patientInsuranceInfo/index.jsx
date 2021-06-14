@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Col, Button } from "react-bootstrap";
-import { insuranceProvider } from "../selectOptionsData";
-import { relation } from "../selectOptionsData";
+import { insuranceProvider, relation } from "../../../../services/common/optionsData";
 
 class PatientInsuranceInfo extends Component {
   constructor(props) {

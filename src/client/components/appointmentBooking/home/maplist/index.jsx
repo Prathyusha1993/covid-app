@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import InfoWindowEx from "./InfoWindowEx";
-import { serviceConstants } from "../../../../patientPortalServices/constants";
+import { serviceConstants } from "../../../../services/common/constants";
 import { locations } from "./data";
 
 export class GoogleMapsContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
-      markerObjects: [],
-    };
-    this.markerBounce = this.markerBounce.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			showingInfoWindow: false,
+			activeMarker: {},
+			selectedPlace: {},
+			markerObjects: [],
+		};
+		this.markerBounce = this.markerBounce.bind(this);
+	}
 
 	onMarkerMounted = (element) => {
 		this.setState((prevState) => ({
@@ -30,14 +30,10 @@ export class GoogleMapsContainer extends Component {
 		});
 	};
 
-	showDetails = (place) => {};
-
-  markerBounce = (id) => {
-    var element = this.state.markerObjects.find((i) => {
-      return i.marker.id == id;
-      //return i.marker.id == this.props.places.id;
-    });
-    //console.log(element);
+	markerBounce = (id) => {
+		var element = this.state.markerObjects.find((i) => {
+			return i.marker.id == id;
+		});
 
 		this.setState({
 			selectedPlace: element.marker.place_,
@@ -120,13 +116,6 @@ export class GoogleMapsContainer extends Component {
 							<div className="right">
 								<div id="map" className="map-listing">
 									<div style={{ height: "100vh", width: "100%" }}>
-										{/* <Map
-                      places={locations}
-                      center={{
-                        lat: 38.91266781734994,
-                        lng: -77.0380624604176,
-                      }}
-                    /> */}
 										<div className="map-container">
 											<Map
 												google={this.props.google}

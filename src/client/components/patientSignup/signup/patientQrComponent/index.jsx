@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { getUserAuthToken } from "../../../../utils/util";
-import { fetchPatientQrResponse } from "../../../../patientSignupServices/patientSignupFormService";
-import { fetchUnassignedPatientDetails } from "../../../../clinicPortalServices/unassignedPatientService";
+import { fetchPatientQrResponse } from "../../../../services/patientSignupServices/patientSignupFormService";
+import { fetchUnassignedPatientDetails } from "../../../../services/clinicPortalServices/unassignedPatientService";
 
 class PatientQrComponent extends Component {
   constructor(props) {
@@ -19,14 +18,11 @@ class PatientQrComponent extends Component {
     fetchPatientQrResponse(this.props.patientId).then((response) => {
       this.setState({ dataStream: response.data });
     });
-    //this.fetchPatientDetails();
   }
 
   fetchPatientDetails = () => {
-    //console.log("enter");
     fetchUnassignedPatientDetails(this.state.patientId)
       .then((data) => {
-        //console.log("response data", data);
         let patientDetails = data.data[0];
         let patientFullName =
           patientDetails.first_name + " " + patientDetails.last_name;

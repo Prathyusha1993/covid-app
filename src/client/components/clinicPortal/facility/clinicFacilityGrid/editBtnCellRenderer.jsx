@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Tooltip, OverlayTrigger, Modal } from "react-bootstrap";
 import FacilityDetails from "./facilityDetails";
-import { Modal, Button } from "react-bootstrap";
-import {
-	getFacilityData,
-	getFacilityDataById,
-} from "../../../../clinicPortalServices/facilityServices";
 
 export default class EditBtnCellRenderer extends Component {
 	constructor(props) {
@@ -15,22 +10,6 @@ export default class EditBtnCellRenderer extends Component {
 			facilityId: props.data._id,
 			errors: [],
 			facilityDetails: {},
-			name: "",
-			code: "",
-			contactName: "",
-			phoneNum: "",
-			contactEmail: "",
-			faxNum: "",
-			address1: "",
-			address2: "",
-			city: "",
-			state: "",
-			zip: "",
-			country: "",
-			emailNotification: "",
-			environmentalMonitoring: "",
-			faxType: "",
-			isActive: true,
 		};
 	}
 
@@ -39,20 +18,6 @@ export default class EditBtnCellRenderer extends Component {
 			Edit Facility
 		</Tooltip>
 	);
-
-	componentDidMount() {
-		this.loadFacilityDetails();
-	};
-
-	loadFacilityDetails = () => {
-		getFacilityDataById(this.state.facilityId)
-			.then((response) => {
-				this.setState({ facilityDetails: response.data[0] });
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
 
 	handleShow = () => {
 		this.setState({ show: true });
@@ -86,7 +51,6 @@ export default class EditBtnCellRenderer extends Component {
 					</Modal.Header>
 					<Modal.Body>
 						<FacilityDetails
-							facilityDetails={this.state.facilityDetails}
 							facilityId={this.state.facilityId}
 							handleClose={this.handleClose}
 						/>

@@ -3,12 +3,11 @@ import PatientBirthInfo from "./patientBirthInfo";
 import PatientInfo from "./patientInfo";
 import PatientInsuranceInfo from "./patientInsuranceInfo";
 import PatientPhotoUploadInfo from "./patientPhotoUploadInfo";
-import { phoneNumberFormatter } from "../../../utils/util";
-import { updateUnassignedPatientDetails } from "../../../clinicPortalServices/unassignedPatientService";
-import { patientSignup } from "../../../patientSignupServices/patientSignupFormService";
-import { patientUploadImages } from "../../../patientSignupServices/patientSignupFormService";
+import { phoneNumberFormatter } from "../../../services/common/util";
+import { updateUnassignedPatientDetails } from "../../../services/clinicPortalServices/unassignedPatientService";
+import { patientSignup, patientUploadImages } from "../../../services/patientSignupServices/patientSignupFormService";
 import moment from "moment";
-import { Redirect } from "react-router";
+import {handleError} from '../.././../services/common/errorHandler';
 
 class SignUp extends Component {
   constructor(props) {
@@ -55,56 +54,8 @@ class SignUp extends Component {
       insuranceBackPageFileName: patientDetails
         ? patientDetails.insuranceBackPageFile
         : "",
-      driverLicFile: "",
-      insuranceFrontPageFile: "",
-      insuranceBackPageFile: "",
-      driverLicFileName: patientDetails ? patientDetails.driverLicFile : "",
-      insuranceFrontPageFileName: patientDetails
-        ? patientDetails.insuranceFrontPageFile
-        : "",
-      insuranceBackPageFileName: patientDetails
-        ? patientDetails.insuranceBackPageFile
-        : "",
     };
-
-    // TODO: temp code for dev purpose, remove later
-
-    // this.state = {
-    //   step: 1,
-    //   patientId: -1,
-    //   firstName: "John",
-    //   lastName: "Grisham1310",
-    //   email: "example@something.com",
-    //   phone: "1234567890",
-    //   address: "12 bell st",
-    //   city: "San Jose",
-    //   state: "CA",
-    //   zipCode: "95134",
-    //   sex: "M",
-    //   dob: "1990-01-01",
-    //   ethnicity: "Hispanic or Latino",
-    //   race: "White",
-    //   symptoms: ["Fever or chills", "Cough"],
-    //   insuranceId: -1,
-    //   insuranceProv1: "Other",
-    //   insuranceProv2: "Oth Ins",
-    //   memberId: "mem123",
-    //   groupNum: "grp456",
-    //   relation: "Adult",
-    //   insuredFirstName: "InsFirst",
-    //   insuredLastName: "InsLast",
-    //   driverLic: "DL789",
-    //   classStyle: "col-md-12 col-lg-7 col-xl-7",
-    //   driverLicFile:"",
-    //     insuranceFrontPageFile:"",
-    //     insuranceBackPageFile:"",
-    //     driverLicFileName: "",
-    // 	 insuranceFrontPageFileName: "",
-    // 	 insuranceBackPageFileName:  "",
-    // };
-
-    // this.getPatientDetails();
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     this.getPatientDetails(nextProps);
@@ -147,7 +98,6 @@ class SignUp extends Component {
   };
 
   handleReadFile = (input) => (file) => {
-    //console.log("signupFileName", input, file);
     this.setState({ [input]: file });
     switch (input) {
       case "driverLicFile":
@@ -197,16 +147,11 @@ class SignUp extends Component {
     }
   };
 
-  handleRaceChange = () => {};
-
-  handleSymptomsChange = () => {};
-
   nextStep = (e) => {
     const { step } = this.state;
     this.setState({
       step: step + 1,
     });
-    //console.log("state", this.state);
   };
 
   prevStep = () => {
@@ -225,7 +170,6 @@ class SignUp extends Component {
         this.state.driverLicFileName
       );
     }
-    //console.log("check", this.state.driverLicFile);
     if (
       this.state.insuranceFrontPageFile &&
       this.state.insuranceFrontPageFileName
@@ -247,12 +191,10 @@ class SignUp extends Component {
       );
     }
     patientUploadImages(formData).then((success) => {
-      //console.log("success");
     });
   };
 
   handleSubmit = () => {
-    //console.log("handlesubmit");
 
     var patientInfo = {
       patientId: this.state.patientId,
@@ -291,17 +233,17 @@ class SignUp extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
+        handleError(error);
       });
     }
     //new patient sign up
     else {
-      patientSignup(patientInfo).then((data) => {
+      patientSignup(patientInfo).then((response) => {
         this.handleFileUpload();
         window.location.href = "/patientsignup/confirmation";
       })
       .catch((error) => {
-        console.log(error);
+        handleError(error);
       });
     }
   };
@@ -414,8 +356,6 @@ class SignUp extends Component {
       insuranceBackPageFileName,
     };
     switch (step) {
-      default:
-        return <h1>User Forms not working.</h1>;
       case 1:
         return (
           <PatientInfo
@@ -452,6 +392,8 @@ class SignUp extends Component {
             handleReadFile={this.handleReadFile}
           />
         );
+        default:
+        return <h1>User Forms not working.</h1>;
     }
   }
 }

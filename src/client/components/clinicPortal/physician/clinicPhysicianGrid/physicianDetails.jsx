@@ -1,69 +1,95 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { states } from "../../patientSearch/clinicPatientGrid/optionsData";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { states } from "../../../../services/common/optionsData";
 import {
 	updatePhysician,
 	createPhysician,
-} from "../../../../clinicPortalServices/physicianServices";
-import { fetchFacilitiesForOrders } from "../../../../clinicPortalServices/facilityServices";
-import { phoneNumberFormatter } from "../../../../utils/util";
+	getPhysicianDataById,
+} from "../../../../services/clinicPortalServices/physicianServices";
+import { fetchFacilitiesForOrders } from "../../../../services/clinicPortalServices/facilityServices";
+import { phoneNumberFormatter } from "../../../../services/common/util";
+import { handleError } from "../../../../services/common/errorHandler";
 
 export default class PhysicianDetails extends Component {
 	constructor(props) {
 		super(props);
-		//console.log(props);
-		let physicianDetails =
-			this.props && this.props.physicianDetails
-				? this.props.physicianDetails
-				: "";
 		this.state = {
 			show: false,
 			showMessage: false,
 			message: "",
 			physicianId:
 				this.props && this.props.physicianId ? this.props.physicianId : "",
-			firstName: physicianDetails ? physicianDetails.first_name : "",
-			lastName: physicianDetails ? physicianDetails.last_name : "",
-			code: physicianDetails ? physicianDetails.code : "",
-			npi: physicianDetails ? physicianDetails.npi : "",
-			mobile: physicianDetails ? physicianDetails.mobile : "",
-			address1:
-				physicianDetails && physicianDetails.address
-					? physicianDetails.address.address1
-					: "",
-			address2:
-				physicianDetails && physicianDetails.address
-					? physicianDetails.address.address2
-					: "",
-			city:
-				physicianDetails && physicianDetails.address
-					? physicianDetails.address.city
-					: "",
-			state:
-				physicianDetails && physicianDetails.address
-					? physicianDetails.address.state
-					: "",
-			// zip: physicianDetails && physicianDetails.address ? physicianDetails.address.zip:"",
-			country:
-				physicianDetails && physicianDetails.address
-					? physicianDetails.address.country
-					: "",
-			facilityId:
-				physicianDetails && physicianDetails.facility_id
-					? physicianDetails.facility_id.name
-					: "",
+			firstName: "",
+			lastName: "",
+			code: "",
+			npi: "",
+			mobile: "",
+			address1: "",
+			address2: "",
+			city: "",
+			state: "",
+			zip: "",
+			country: "",
+			facilityId: "",
 			errors: [],
 			facilities: [],
 		};
 	}
 
 	componentDidMount() {
+		if (this.state.physicianId !== "") {
+			this.loadPhysicianDetails();
+		}
+
 		fetchFacilitiesForOrders().then((response) => {
-			//console.log("orders-facilities", response);
 			this.setState({ facilities: response.data });
 		});
 	}
+
+	loadPhysicianDetails = () => {
+		getPhysicianDataById(this.state.physicianId)
+			.then((response) => {
+				let physicianDetails = response.data[0];
+				this.setState({
+					firstName: physicianDetails ? physicianDetails.first_name : "",
+					lastName: physicianDetails ? physicianDetails.last_name : "",
+					code: physicianDetails ? physicianDetails.code : "",
+					npi: physicianDetails ? physicianDetails.npi : "",
+					mobile: physicianDetails ? physicianDetails.mobile : "",
+					address1:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.address1
+							: "",
+					address2:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.address2
+							: "",
+					city:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.city
+							: "",
+					state:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.state
+							: "",
+					zip:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.zip
+							: "",
+					country:
+						physicianDetails && physicianDetails.address
+							? physicianDetails.address.country
+							: "",
+					facilityId:
+						physicianDetails && physicianDetails.facility_id
+							? physicianDetails.facility_id._id
+							: "",
+				});
+			})
+			.catch((error) => {
+				handleError(error);
+			});
+	};
 
 	handleClose = () => {
 		this.setState({ show: false });
@@ -102,6 +128,7 @@ export default class PhysicianDetails extends Component {
 		}
 
 		let physicianInfo = {
+			id: this.state.physicianId,
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			code: this.state.code,
@@ -112,10 +139,10 @@ export default class PhysicianDetails extends Component {
 			city: this.state.city,
 			state: this.state.state,
 			country: this.state.country,
+			zip: this.state.zip,
 			facilityId: this.state.facilityId,
 		};
 		console.log(physicianInfo);
-		// return;
 		if (this.state.physicianId !== "") {
 			updatePhysician(physicianInfo)
 				.then((response) => {
@@ -124,19 +151,19 @@ export default class PhysicianDetails extends Component {
 						message: "Updated the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		} else {
 			createPhysician(physicianInfo)
 				.then((response) => {
 					this.setState({
 						showMessage: true,
-						message: "Thank you.",
+						message: "Saved the changes successfully!!",
 					});
 				})
-				.catch((err) => {
-					console.log(err);
+				.catch((error) => {
+					handleError(error);
 				});
 		}
 	};
@@ -243,6 +270,25 @@ export default class PhysicianDetails extends Component {
 						</div>
 						<div className="col-12 col-md-6">
 							<div className="form-group">
+								<label>Facility</label>
+								<select
+									className="form-control select order-edit-formstyle"
+									name="facilityId"
+									value={this.state.facilityId}
+									onChange={this.handleChange}
+								>
+									{this.state.facilities.map((facility) => {
+										return (
+											<option key={facility._id} value={facility._id} selected>
+												{facility.name}
+											</option>
+										);
+									})}
+								</select>
+							</div>
+						</div>
+						<div className="col-12 col-md-6">
+							<div className="form-group">
 								<label>Phone Number</label>
 								<input
 									type="tel"
@@ -321,73 +367,39 @@ export default class PhysicianDetails extends Component {
 								/>
 							</div>
 						</div>
-						<div className="col-12 col-md-6">
-							<div className="form-group">
-								<label>Facility Id</label>
-								{/* <input
-									type="text"
-									name="facilityId"
-									value={this.state.facilityId}
-									onChange={this.handleChange}
-									className="form-control order-edit-formstyle"
-								/> */}
-								<select
-									className="form-control select order-edit-formstyle"
-									name="facilityId"
-									value={this.state.facilityId}
-									onChange={this.handleChange}
-								>
-									<option selected>{this.state.facilityId}</option>
-									{this.state.facilities.map((facility) => {
-										return (
-											<option
-												key={facility._id}
-												value={facility._id}
-												selected
-												// {this.state.facilityId === facility.name}
-											>
-												{facility.name}
-											</option>
-										);
-									})}
-								</select>
-							</div>
+					</div>
+					<div className="row">
+						<div
+							className="col-12"
+							style={{
+								paddingTop: "10px",
+								borderTop: "1px solid rgba(0,0,0,.2",
+							}}
+						>
+							<Button
+								style={{ float: "right", marginLeft: "10px" }}
+								variant="primary"
+								onClick={this.updateAndCreatePhysician}
+							>
+								Save Changes
+							</Button>
+							<Button
+								style={{ float: "right" }}
+								variant="secondary"
+								onClick={this.props.handleClose}
+							>
+								Close
+							</Button>
 						</div>
 					</div>
-					<div
-						className="row col-12"
-						style={{
-							float: "right",
-							paddingTop: "10px",
-							borderTop: "1px solid rgba(0,0,0,.2",
-						}}
-					>
-						<Button
-							style={{ marginLeft: "500px" }}
-							variant="secondary"
-							onClick={this.props.handleClose}
-						>
-							Close
-						</Button>
-						<Button
-							style={{ marginLeft: "10px" }}
-							variant="primary"
-							onClick={this.updateAndCreatePhysician}
-						>
-							Save Changes
-						</Button>
+					<div className="row">
+						<div className="col-12">
+							<label style={{ float: "right", marginTop: "10px" }}>
+								{this.state.message}
+							</label>
+						</div>
 					</div>
 				</form>
-				{/* </Modal.Body>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={this.handleClose}>
-							Close
-						</Button>
-						<Button variant="primary" onClick={this.handleNewPhysician}>
-							Save Changes
-						</Button>
-					</Modal.Footer>
-				</Modal> */}
 			</div>
 		);
 	}
